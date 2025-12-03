@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://vjlstakry448"]
+
+[ext_resource type="Script" uid="uid://dpbgr0qpu7mlw" path="res://Assets/goblin_lady.gd" id="1_5rlwc"]
+[ext_resource type="Script" uid="uid://de7pxl04qhaiy" path="res://Assets/camera_pivot.gd" id="2_sr5jk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr5jk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxmk6"]
+albedo_color = Color(6.016344e-07, 0.71068347, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2w2fh"]
+material = SubResource("StandardMaterial3D_gxmk6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rlwc"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_sr5jk"]
+material = SubResource("StandardMaterial3D_5rlwc")
+
+[node name="GoblinLady" type="CharacterBody3D"]
+script = ExtResource("1_5rlwc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sr5jk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_2w2fh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, -0.0030891916, 0.49999046, 0, -0.49999046, -0.0030891916, 0, 0.35932302, -0.5476701)
+mesh = SubResource("PrismMesh_sr5jk")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("2_sr5jk")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.179)
