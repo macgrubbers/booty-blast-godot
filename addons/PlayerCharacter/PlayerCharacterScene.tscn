@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://dvu58wf01wils" path="res://addons/PlayerCharacter/StateMachine/jump_state_script.gd" id="13_pdxi8"]
 [ext_resource type="Script" uid="uid://bh3rdvokmrar1" path="res://addons/PlayerCharacter/StateMachine/inair_state_script.gd" id="14_8rpwc"]
 [ext_resource type="LabelSettings" uid="uid://sescerp70o6b" path="res://addons/Arts/Fonts/LabelFontSettings.tres" id="17_c1i0s"]
-[ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Assets/Actor Components/HealthComponent.tscn" id="17_mx8g3"]
+[ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Actor Components/HealthComponent.tscn" id="17_mx8g3"]
 [ext_resource type="Script" uid="uid://d2tif6xsjkwnw" path="res://addons/PlayerCharacter/StateMachine/ragdoll_state_script.gd" id="17_pdxi8"]
 [ext_resource type="Script" uid="uid://chnbi4s1tf7pa" path="res://addons/PlayerCharacter/Debug/DebugHUDScript.gd" id="17_qmq2g"]
 
@@ -98,15 +98,15 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_ms4x1")
-walk_speed = 5.0
+walk_speed = 10.0
 walk_accel = 8.0
 walk_deccel = 7.5
-run_speed = 9.0
+run_speed = 15.0
 run_accel = 3.5
 run_deccel = 6.5
-jump_height = 3.0
-jump_time_to_peak = 0.35
-jump_time_to_descent = 0.29
+jump_height = 7.0
+jump_time_to_peak = 0.7
+jump_time_to_descent = 0.7
 jump_cut_multiplier = 0.5
 jump_cooldown = 0.2
 nb_jumps_in_air_allowed = 1

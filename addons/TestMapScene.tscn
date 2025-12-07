@@ -1,11 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene load_steps=21 format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="1_6f4by"]
+[ext_resource type="Script" uid="uid://g2c83seko2aw" path="res://addons/test_map_scene.gd" id="1_yffuu"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="2_d8mrn"]
-[ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Assets/Structures/MovingPlatform.tscn" id="3_d8mrn"]
-[ext_resource type="PackedScene" uid="uid://hnkl57lbc0un" path="res://Assets/Structures/Deadly Structures/HurtGround.tscn" id="3_guw0b"]
+[ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/MovingPlatform.tscn" id="3_d8mrn"]
+[ext_resource type="PackedScene" uid="uid://hnkl57lbc0un" path="res://Scenes/Structures/Deadly Structures/HurtGround.tscn" id="3_guw0b"]
 [ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="4_5lc62"]
 [ext_resource type="Script" uid="uid://bfo8g37pn7rpt" path="res://addons/hud.gd" id="4_fe2us"]
+[ext_resource type="PackedScene" uid="uid://ct0fq3bju8oq2" path="res://Scenes/Characters/Santa.tscn" id="6_5vr1x"]
+[ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="8_1xwdi"]
+[ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="8_qm1m0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f4by"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -69,7 +73,14 @@ font_size = 80
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_guw0b"]
+font = ExtResource("4_5lc62")
+font_size = 70
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="TestMap" type="Node3D"]
+script = ExtResource("1_yffuu")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -183,7 +194,9 @@ autoplay = "move"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.294795, 6.901273, -14.494587)
 
 [node name="Player" parent="." instance=ExtResource("1_6f4by")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, -18)
+
+[node name="Santa" parent="." instance=ExtResource("6_5vr1x")]
+transform = Transform3D(-0.8908646, 0, 1.7906313, 0, 2, 0, -1.7906313, 0, -0.8908646, -10.878275, 8.439957, -15.23942)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -214,3 +227,66 @@ offset_bottom = 297.52
 theme_override_colors/font_color = Color(0, 0.7934291, 7.70092e-07, 1)
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_fe2us")
+
+[node name="DeadScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 197.0
+offset_right = 959.0
+offset_bottom = 267.0
+text = "You got BOOTY BLASTED"
+label_settings = SubResource("LabelSettings_guw0b")
+
+[node name="RespawnButton" type="Button" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 294.0
+offset_right = 669.0
+offset_bottom = 360.0
+text = "Respawn"
+
+[node name="HealthBar" type="Control" parent="HUD"]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 91.0
+offset_top = 559.0
+offset_right = 459.0
+offset_bottom = 662.0
+script = ExtResource("8_1xwdi")
+
+[node name="Health1" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("8_qm1m0")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[node name="Health2" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(100, 0)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("8_qm1m0")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[node name="Health3" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(200, 0)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("8_qm1m0")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]
+[connection signal="animation_finished" from="HUD/HealthBar/Health1" to="HUD/HealthBar" method="_on_health_1_animation_finished"]

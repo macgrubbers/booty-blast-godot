@@ -1,8 +1,8 @@
 extends State
 
-class_name IdleState
+class_name DeadState
 
-var state_name : String = "Idle"
+var state_name : String = "Dead"
 
 var cR : CharacterBody3D
 

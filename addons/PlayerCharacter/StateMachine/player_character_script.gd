@@ -76,6 +76,7 @@ var coyote_jump_on : bool = false
 @onready var wave_audio = %WaveAudio
 @onready var collision_shape_3d = %CollisionShape3D
 @onready var floor_check : RayCast3D = %FloorRaycast
+@onready var health_component = $HealthComponent
 
 #particles variables
 @onready var movement_dust = %MovementDust
@@ -149,6 +150,12 @@ func gravity_apply(delta : float):
 	if velocity.y >= 0.0: velocity.y -= jump_gravity * delta
 	elif velocity.y < 0.0: velocity.y -= fall_gravity * delta
 	
+func knockback_apply(knockback_vector:Vector3, restart_gravity:bool):
+	# TODO: transition to grounded state maybe?
+	if restart_gravity:
+		velocity = Vector3.ZERO
+	velocity += knockback_vector
+	
 func squash_and_strech(value : float, timing : float):
 	#create a tween that simulate a compression of the model (squash and strech ones)
 	#maily used to accentuate game feel/juice
@@ -157,9 +164,6 @@ func squash_and_strech(value : float, timing : float):
 	sasTween.set_ease(Tween.EASE_OUT)
 	sasTween.tween_property(godot_plush_skin, "squash_and_stretch", value, timing)
 	sasTween.tween_property(godot_plush_skin, "squash_and_stretch", 1.0, timing * 1.8)
-	
-	
-	
-	
-	
-	
+
+func check_if_alive()->bool:
+	return health_component.is_alive

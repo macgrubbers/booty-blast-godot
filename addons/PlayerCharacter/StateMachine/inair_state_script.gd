@@ -49,7 +49,7 @@ func input_management():
 			transitioned.emit(self, "JumpState")
 		transitioned.emit(self, "JumpState")
 		
-	if Input.is_action_just_pressed("ragdoll"):
+	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll and !cR.ragdoll_on_floor_only:
 			transitioned.emit(self, "RagdollState")
 		

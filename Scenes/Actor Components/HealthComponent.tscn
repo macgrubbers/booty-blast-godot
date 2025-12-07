@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm2py1w0idspm"]
+
+[ext_resource type="Script" uid="uid://b3oivafuxug0e" path="res://Scenes/Actor Components/health_component.gd" id="1_hrf26"]
+
+[node name="HealthComponent" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_hrf26")

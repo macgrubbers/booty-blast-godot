@@ -47,22 +47,24 @@ func set_active(state : bool):
 func _input(event):
 	#free/capture mouse cursor
 	if event.is_action_pressed(mouse_mode_action):
-		emit_signal("paused")
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if get_parent().check_if_alive():
+			emit_signal("paused")
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	#if mouse cursor is free, can't rotate cam
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	
+	# TODO: Remove or uncomment out!
 	#change cam mode (default, aim)
-	if event.is_action_pressed("aim_cam"):
-		cam_aimed = !cam_aimed
-		
-	#change cam side when aimed (over left shoulder, or over right shoulder)
-	if event.is_action_pressed("aim_cam_side"):
-		aim_cam_pos_side = !aim_cam_pos_side
+	#if event.is_action_pressed("aim_cam"):
+		#cam_aimed = !cam_aimed
+		#
+	##change cam side when aimed (over left shoulder, or over right shoulder)
+	#if event.is_action_pressed("aim_cam_side"):
+		#aim_cam_pos_side = !aim_cam_pos_side
 		
 	#rotate cam according to the mouse
 	if event is InputEventMouseMotion: 

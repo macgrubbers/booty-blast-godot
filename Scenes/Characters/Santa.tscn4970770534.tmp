@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct0fq3bju8oq2"]
+
+[ext_resource type="Script" uid="uid://dcdo1lhmk7j5h" path="res://Scenes/Characters/santa.gd" id="1_jtxtl"]
+[ext_resource type="PackedScene" uid="uid://di4w8hhjlc02l" path="res://santa_import.tscn" id="2_3063e"]
+[ext_resource type="Script" uid="uid://dxppft1boom5d" path="res://Scenes/Characters/npc_state_machine.gd" id="3_3063e"]
+[ext_resource type="Script" uid="uid://dp11qbwb4rclx" path="res://Scenes/Characters/npc_idle_state.gd" id="3_sy7bg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_au0me"]
+animation = &"Santa_IdleLookAround"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3063e"]
+graph_offset = Vector2(-448.3747, 74.27368)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_au0me")
+nodes/Animation/position = Vector2(20, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vj5qs"]
+radius = 1.0
+
+[node name="Santa" type="CharacterBody3D"]
+collision_layer = 5
+script = ExtResource("1_jtxtl")
+
+[node name="Santa" parent="." instance=ExtResource("2_3063e")]
+
+[node name="AnimationTree" type="AnimationTree" parent="Santa"]
+tree_root = SubResource("AnimationNodeBlendTree_3063e")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_vj5qs")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_3063e")
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("3_sy7bg")

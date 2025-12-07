@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://hnkl57lbc0un"]
+
+[ext_resource type="Script" uid="uid://imddw6dl63bq" path="res://Scenes/Structures/Deadly Structures/hurt_ground.gd" id="1_j10ok"]
+[ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/MovingPlatform.tscn" id="2_ryngj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryngj"]
+size = Vector3(4.9, 0.5, 4.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqrkd"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r52pd"]
+material = SubResource("StandardMaterial3D_tqrkd")
+size = Vector3(4.9, 0.2, 4.9)
+
+[node name="HurtGround" type="Area3D"]
+collision_layer = 2
+collision_mask = 524288
+script = ExtResource("1_j10ok")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09496403, 0)
+shape = SubResource("BoxShape3D_ryngj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1609106, 0)
+mesh = SubResource("BoxMesh_r52pd")
+
+[node name="MovingPlatform" parent="." instance=ExtResource("2_ryngj")]
+collision_layer = 2
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

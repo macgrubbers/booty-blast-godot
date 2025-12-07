@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://blh0wmhqegscs"
+path="res://.godot/imported/peach.gif-388eac6affbb324fb7289755a5cb94c0.tres"
+
+[deps]
+
+source_file="res://addons/Arts/Images/peach.gif"
+dest_files=["res://.godot/imported/peach.gif-388eac6affbb324fb7289755a5cb94c0.tres"]
+
+[params]
+
+frames_per_second=30
