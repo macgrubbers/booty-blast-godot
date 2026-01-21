@@ -76,6 +76,7 @@ var coyote_jump_on : bool = false
 @onready var wave_audio = %WaveAudio
 @onready var collision_shape_3d = %CollisionShape3D
 @onready var floor_check : RayCast3D = %FloorRaycast
+@onready var interact_raycast : RayCast3D = $Raycasts/InteractRaycast
 @onready var health_component = $HealthComponent
 
 #particles variables
@@ -100,6 +101,7 @@ func _ready():
 		)
 		
 func _process(delta: float):
+	update_interact_raycast()
 	modify_model_orientation(delta)
 	
 	display_properties()
@@ -167,3 +169,11 @@ func squash_and_strech(value : float, timing : float):
 
 func check_if_alive()->bool:
 	return health_component.is_alive
+
+func update_interact_raycast():
+	interact_raycast.set_rotation(visual_root.rotation - Vector3(0,PI/2,0))
+
+func check_interact_raycast():
+	var collider = interact_raycast.get_collider()
+	if collider:
+		collider.interact(global_position)

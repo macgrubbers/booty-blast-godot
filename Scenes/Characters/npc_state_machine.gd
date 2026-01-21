@@ -6,19 +6,19 @@ var current_state : State
 var current_state_name  : String
 var States : Dictionary = {}
 
-@onready var character_ref : CharacterBody3D = $".."
+@onready var char_ref : CharacterBody3D = $".."
 
 func _ready():	
 	#get all the state childrens
 	for child in get_children():
 		if child is State:
-			States[child.name.to_upper()] = child
+			States[child.name.to_lower()] = child
 			child.transitioned.connect(on_state_child_transition)
 			
 	#if initial state, transition to it
 	if initial_state:
 		await get_tree().create_timer(0.1).timeout
-		initial_state.enter(character_ref)
+		initial_state.enter(char_ref)
 		current_state = initial_state
 		current_state_name = current_state.state_name
 		
@@ -33,14 +33,14 @@ func on_state_child_transition(state : State, new_state_name : String):
 	
 	if state != current_state: return
 	
-	var new_state = States.get(new_state_name.to_upper())
+	var new_state = States.get(new_state_name.to_lower())
 	if !new_state: return
 	
 	#exit the current state
 	if current_state: current_state.exit()
 	
 	#enter the new state
-	new_state.enter(character_ref)
+	new_state.enter(char_ref)
 	
 	current_state = new_state
 	current_state_name = current_state.state_name

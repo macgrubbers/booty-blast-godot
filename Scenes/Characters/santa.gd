@@ -15,27 +15,23 @@ var current_state = initial_state
 
 
 func _ready() -> void:
-	print(animation_player)
-	
-	transition_state(current_state, States.IDLE)
+	# Start in the idle state
+	transition_state(current_state)
+
 
 func _physics_process(delta: float) -> void:
-	state_physics_process()
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	move_and_slide()
 
-func transition_state(current_state:States, new_state:States)->void:
-	match new_state:
-		States.IDLE:
-			set_anim_state("Santa_IdleLookAround")
 
-func state_physics_process():
-	match current_state:
-		States.IDLE:
-			pass
+func transition_state(new_state:States)->void:
+	current_state = new_state
+	var state_name = States.keys()[current_state]
+	anim_state_machine.travel(state_name.to_lower())
 
-func set_anim_state(state:String):
-	anim_state_machine.travel(state)
+
+# Triggered when the player interacts with this NPC
+func interact(player_pos:Vector3):
+	transition_state(States.GREET)

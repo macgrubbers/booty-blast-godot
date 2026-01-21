@@ -1,6 +1,6 @@
 extends State
 
-class_name IdleState
+class_name InteractState
 
 var character_ref : CharacterBody3D
 
@@ -12,7 +12,8 @@ func enter(char_ref : CharacterBody3D):
 	
 func verifications():
 	#manage the appliements that need to be set at the start of the state
-	pass
+	character_ref.santa.set_state("idle")
+
 	
 func update(_delta : float):
 	pass

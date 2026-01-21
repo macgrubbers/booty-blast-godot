@@ -57,6 +57,9 @@ func input_management():
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
+			
+	if Input.is_action_just_pressed("f"):
+		cR.check_interact_raycast()
 		
 func move(delta : float):
 	#manage the character movement
