@@ -6,6 +6,9 @@ class_name HealthComponent
 @export var current_health : float
 @export var collision_shape : Node3D
 
+
+@onready var immunity_timer = $ImmunityTimer
+
 signal update_health(current_health:float)
 signal kill()
 
@@ -18,11 +21,17 @@ func _ready():
 	call_deferred("post_ready")
 
 func post_ready():
+	immunity_timer.set_wait_time(1.5)
 	emit_signal("update_health", current_health)
 
 
 func change_health(amount : float):
+	# ignore changing health if immune
+	if !immunity_timer.is_stopped():
+		return
+	
 	current_health += amount
+	immunity_timer.start()
 	emit_signal("update_health", current_health)
 	
 	if current_health <= 0:
@@ -32,6 +41,9 @@ func change_health(amount : float):
 		emit_signal("kill")
 
 func apply_knockback(amount:Vector3, restart_gravity:bool):
+	# ignore knockback if immune
+	if !immunity_timer.is_stopped():
+		return
 	get_parent().knockback_apply(amount,restart_gravity)
 
 func get_current_health()->float:

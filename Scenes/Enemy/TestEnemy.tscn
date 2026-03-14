@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2sjmmkrjsvvv"]
+
+[ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/test_enemy.gd" id="1_2kq5l"]
+[ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="2_tdukb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kq5l"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tdukb"]
+material = SubResource("StandardMaterial3D_2kq5l")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_psiqa"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o1tme"]
+
+[node name="TestEnemy" type="CharacterBody3D"]
+script = ExtResource("1_2kq5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_psiqa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_tdukb")
+
+[node name="AttackArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009164572, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24902344, 0)
+shape = SubResource("SphereShape3D_psiqa")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="NavigationTimer" type="Timer" parent="."]
+
+[node name="EnemyPerceptionComponent" parent="." instance=ExtResource("2_tdukb")]
+
+[node name="PerceptionCollisionShape3D" type="CollisionShape3D" parent="EnemyPerceptionComponent"]
+shape = SubResource("SphereShape3D_o1tme")
+
+[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]

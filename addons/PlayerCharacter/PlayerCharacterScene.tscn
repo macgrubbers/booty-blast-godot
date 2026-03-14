@@ -222,6 +222,9 @@ collision_shape = NodePath("CollisionShape3D2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_mx8g3")
 
+[node name="ImmunityTimer" type="Timer" parent="HealthComponent"]
+one_shot = true
+
 [node name="DebugHUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("17_qmq2g")
