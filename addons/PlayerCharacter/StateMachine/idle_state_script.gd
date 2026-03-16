@@ -1,8 +1,8 @@
 extends State
 
-class_name DeadState
+class_name IdleState
 
-var state_name : String = "Dead"
+var state_name : String = "Idle"
 
 var cR : CharacterBody3D
 
@@ -60,6 +60,9 @@ func input_management():
 			
 	if Input.is_action_just_pressed("f"):
 		cR.check_interact_raycast()
+		
+	if Input.is_action_just_pressed("lmb"):
+		transitioned.emit(self, "GroundAttack")
 		
 func move(delta : float):
 	#manage the character movement
