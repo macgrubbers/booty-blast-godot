@@ -32,6 +32,7 @@ func post_ready():
 func change_health(amount : float):
 	# ignore changing health if immune
 	if !damage_immunity_timer.is_stopped():
+		
 		return
 	
 	current_health += amount

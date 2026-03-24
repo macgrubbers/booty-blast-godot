@@ -5,9 +5,9 @@ class_name GroundAttackState
 var state_name : String = "GroundAttack"
 
 var cR : CharacterBody3D
+@onready var ground_attack_area : Area3D = %GroundAttackArea3D
 
 func enter(char_ref : CharacterBody3D):
-	print("tryna enter state")
 	#pass play char reference
 	cR = char_ref
 	
@@ -24,6 +24,8 @@ func verifications():
 	if cR.has_cut_jump: cR.has_cut_jump = false
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
+	# for the attack area
+	ground_attack_area.set_monitoring(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -31,11 +33,11 @@ func update(delta: float) -> void:
 
 
 func physics_update(delta : float):
-	check_if_floor()
-	
 	cR.gravity_apply(delta)
 	
 	input_management()
+	
+	check_if_floor()
 	
 	move(delta)
 	
@@ -54,7 +56,19 @@ func check_if_floor():
 func input_management():
 	pass
 
-
-# TODO: Add movement on this state later
+# TODO: add movement with attacking?
 func move(delta : float):
 	pass
+
+func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
+	if area is HealthComponent:
+		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
+		print(dir_vector)
+		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
+		area.change_health(-2)
+
+
+
+func _on_animation_finished():
+	ground_attack_area.set_monitoring(false)
+	transitioned.emit(self, "IdleState")

@@ -62,7 +62,7 @@ func input_management():
 		cR.check_interact_raycast()
 		
 	if Input.is_action_just_pressed("lmb"):
-		transitioned.emit(self, "GroundAttack")
+		transitioned.emit(self, "GroundAttackState")
 		
 func move(delta : float):
 	#manage the character movement
