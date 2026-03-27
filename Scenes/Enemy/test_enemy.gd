@@ -16,6 +16,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 func _ready() -> void:
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
+		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 		
 	if nav_timer:
 		nav_timer.connect("timeout", _on_nav_timer_timeout)
@@ -34,9 +35,9 @@ func _physics_process(delta: float) -> void:
 	# Knockback and navigation
 	var navigation_velocity = Vector3.ZERO
 	if knockback_vector.length() > 0:
-		knockback_vector = knockback_vector.move_toward(Vector3.ZERO, 50 * delta)
+		knockback_vector = knockback_vector.move_toward(Vector3.ZERO, 30 * delta)
 	
-	if is_on_floor():
+	if is_on_floor() and health_component.is_alive:
 		# only navigate if not knocked back
 		navigation_velocity = navigate()
 	
@@ -65,10 +66,6 @@ func knockback_apply(knockback_vec:Vector3, restart_gravity:bool):
 	print("knockback enemy")
 
 
-# Call on enemy death
-func kill():
-	queue_free()
-
 # On navigation timer timeout
 func _on_nav_timer_timeout()->void:
 	if perception_component.player_ref:
@@ -92,4 +89,7 @@ func _on_attack_area_area_entered(area: Area3D) -> void:
 		area.apply_knockback(knockback_vec, true)
 	
 func _on_enemy_dead():
-	kill()
+	health_component.start_kill_timer()
+
+func _on_kill_timer_timeout():
+	queue_free()

@@ -58,7 +58,14 @@ func input_management():
 
 # TODO: add movement with attacking?
 func move(delta : float):
-	pass
+	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
+	
+	if cR.move_dir and cR.is_on_floor():
+		#apply smooth move
+		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * cR.move_speed, cR.move_accel * delta)
+		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * cR.move_speed, cR.move_accel * delta)
+	else:
+		transitioned.emit(self, "IdleState")
 
 func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:

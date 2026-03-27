@@ -64,4 +64,7 @@ one_shot = true
 
 [node name="KnockbackImmunityTimer" type="Timer" parent="HealthComponent"]
 
+[node name="KillTimer" type="Timer" parent="HealthComponent"]
+wait_time = 2.0
+
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
