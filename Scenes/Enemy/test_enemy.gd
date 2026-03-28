@@ -82,9 +82,10 @@ func start_tracking_player()->void:
 
 func _on_attack_area_area_entered(area: Area3D) -> void:
 	if area.get_parent().is_in_group("Player"):
-		area.change_health(-1)
+		var player_pos = area.get_parent().get_global_position()
+		area.change_health(-1,player_pos.angle_to(global_position))
 		var k_scale = 10
-		var knockback_vec = global_position.direction_to(area.get_global_position()).normalized() * k_scale \
+		var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
 				 + Vector3(0,k_scale,0)
 		area.apply_knockback(knockback_vec, true)
 	

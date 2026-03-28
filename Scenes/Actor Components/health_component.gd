@@ -33,10 +33,7 @@ func change_health(amount : float):
 	# ignore changing health if immune
 	if !damage_immunity_timer.is_stopped():
 		return
-	
-	if amount <= 0:
-		if !can_damage():
-			return
+
 	
 	current_health += amount
 	damage_immunity_timer.start()
@@ -62,6 +59,3 @@ func set_max_health(new_max:float):
 	max_health = new_max
 	if current_health > max_health:
 		current_health = max_health
-
-func can_damage()->bool:
-	return true
