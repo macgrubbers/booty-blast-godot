@@ -4,7 +4,7 @@ class_name GroundAttackState
 
 var state_name : String = "GroundAttack"
 
-var cR : CharacterBody3D
+@onready var cR : CharacterBody3D
 @onready var ground_attack_area : Area3D = %GroundAttackArea3D
 
 func enter(char_ref : CharacterBody3D):
@@ -16,7 +16,7 @@ func enter(char_ref : CharacterBody3D):
 
 func verifications():
 	#manage the appliements that need to be set at the start of the state
-	cR.godot_plush_skin.set_state("wave")
+	cR.godot_plush_skin.set_state("gr_attack")
 	cR.floor_snap_length = 1.0
 	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
 	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
@@ -37,7 +37,7 @@ func physics_update(delta : float):
 	
 	input_management()
 	
-	check_if_floor()
+	#check_if_floor()
 	
 	move(delta)
 	
@@ -64,15 +64,15 @@ func move(delta : float):
 		#apply smooth move
 		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * cR.move_speed, cR.move_accel * delta)
 		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * cR.move_speed, cR.move_accel * delta)
-	else:
-		transitioned.emit(self, "IdleState")
+
+
 
 func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
+		print(cR)
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		print(dir_vector)
 		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
-		area.change_health(-2)
+		area.change_health(-1)
 
 
 

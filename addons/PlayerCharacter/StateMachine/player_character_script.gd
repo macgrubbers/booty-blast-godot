@@ -27,7 +27,7 @@ var walk_or_run : String = "WalkState" #keep in memory if play char was walking 
 @export var jump_height : float
 @export var jump_time_to_peak : float
 @export var jump_time_to_descent : float
-@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.000
 var has_cut_jump : bool = false
 @export var jump_cut_multiplier : float
 @export var jump_cooldown : float
@@ -49,6 +49,7 @@ var coyote_jump_on : bool = false
 #gravity variables
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+@onready var butt_slam_gravity_multiplier : float = 4.5
 
 @export_group("Keybinding variables")
 @export var moveForwardAction : String = ""
