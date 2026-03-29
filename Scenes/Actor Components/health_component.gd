@@ -6,7 +6,6 @@ class_name HealthComponent
 @export var current_health : float
 @export var collision_shape : Node3D
 
-
 @onready var damage_immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
 
@@ -30,10 +29,9 @@ func post_ready():
 
 
 func change_health(amount : float):
-	# ignore changing health if immune
-	if !damage_immunity_timer.is_stopped():
+	# ignore changing health if immune or dead
+	if !damage_immunity_timer.is_stopped() or !is_alive:
 		return
-
 	
 	current_health += amount
 	damage_immunity_timer.start()

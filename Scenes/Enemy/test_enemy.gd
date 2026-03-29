@@ -63,7 +63,6 @@ func knockback_apply(knockback_vec:Vector3, restart_gravity:bool):
 	if restart_gravity:
 		gravity_velocity = Vector3.ZERO
 	knockback_vector = knockback_vec
-	print("knockback enemy")
 
 
 # On navigation timer timeout
@@ -81,15 +80,20 @@ func start_tracking_player()->void:
 
 
 func _on_attack_area_area_entered(area: Area3D) -> void:
+	if !health_component.is_alive:
+		return
+	
 	if area.get_parent().is_in_group("Player"):
 		var player_pos = area.get_parent().get_global_position()
-		area.change_health(-1,player_pos.angle_to(global_position))
+		area.change_health(-1,global_position)
 		var k_scale = 10
 		var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
 				 + Vector3(0,k_scale,0)
 		area.apply_knockback(knockback_vec, true)
 	
 func _on_enemy_dead():
+	health_component.set_monitoring(false)
+	health_component.set_monitorable(false)
 	health_component.start_kill_timer()
 
 func _on_kill_timer_timeout():

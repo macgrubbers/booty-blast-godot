@@ -5,7 +5,7 @@ class_name GroundAttackState
 var state_name : String = "GroundAttack"
 
 @onready var cR : CharacterBody3D
-@onready var ground_attack_area : Area3D = %GroundAttackArea3D
+@onready var ground_attack_area : Area3D = %GroundAttackHitbox
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference

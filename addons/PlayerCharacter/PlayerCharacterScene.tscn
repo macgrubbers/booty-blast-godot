@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=41 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -100,6 +100,10 @@ radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
 radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_khnxt"]
+height = 1.0
+radius = 1.5
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 2
@@ -361,7 +365,7 @@ layout_mode = 2
 text = "....."
 label_settings = ExtResource("17_c1i0s")
 
-[node name="GroundAttackArea3D" type="Area3D" parent="."]
+[node name="GroundAttackHitbox" type="Area3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
 collision_layer = 0
@@ -369,14 +373,24 @@ collision_mask = 1048576
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
 shape = SubResource("SphereShape3D_h8602")
 
-[node name="ButtSlamAttackArea3D" type="Area3D" parent="."]
+[node name="ButtSlamLandHitbox" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 1048576
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamAttackArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamLandHitbox"]
 shape = SubResource("SphereShape3D_pi2tj")
+
+[node name="ButtSlamFallingHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43647325, 0)
+collision_layer = 0
+collision_mask = 1048576
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamFallingHitbox"]
+shape = SubResource("CylinderShape3D_khnxt")
