@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://du8vpkhaa0s6h"]
+[gd_scene load_steps=7 format=3 uid="uid://du8vpkhaa0s6h"]
+
+[ext_resource type="Script" uid="uid://dnqiqcxlcvjey" path="res://Scenes/Structures/Interactable Structures/button_script.gd" id="1_v5u43"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_55gt3"]
 height = 3.1
@@ -19,6 +21,9 @@ height = 5.0
 radius = 2.0
 
 [node name="Button" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_v5u43")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07283783, 0)
@@ -35,6 +40,8 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fttgw")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59208345, 0)

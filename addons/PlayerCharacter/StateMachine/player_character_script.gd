@@ -177,4 +177,4 @@ func update_interact_raycast():
 func check_interact_raycast():
 	var collider = interact_raycast.get_collider()
 	if collider:
-		collider.interact(global_position)
+		collider.get_parent().interact()

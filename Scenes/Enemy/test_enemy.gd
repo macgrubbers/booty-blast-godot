@@ -4,6 +4,8 @@ var perception_radius : float = 30
 
 const SPEED = 8.0
 
+var movement_acceleration : float = 0.4
+var movement_velocity : Vector3 = Vector3.ZERO
 var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
@@ -40,8 +42,11 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and health_component.is_alive:
 		# only navigate if not knocked back
 		navigation_velocity = navigate()
+		movement_velocity = movement_velocity.move_toward(navigation_velocity, movement_acceleration)
+	else:
+		movement_velocity = Vector3.ZERO
 	
-	velocity = navigation_velocity + knockback_vector + gravity_velocity
+	velocity = movement_velocity + knockback_vector + gravity_velocity
 	
 	move_and_slide()
 

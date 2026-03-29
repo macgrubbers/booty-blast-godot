@@ -5,7 +5,7 @@ class_name ButtSlamState
 var state_name : String = "ButtSlam"
 
 var cR : CharacterBody3D
-@onready var butt_slam_impact_hitbox : Area3D = $"../../ButtSlamLandHitbox"
+@onready var butt_slam_land_hitbox : Area3D = $"../../ButtSlamLandHitbox"
 @onready var butt_slam_falling_hitbox : Area3D = $"../../ButtSlamFallingHitbox"
 
 func enter(char_ref : CharacterBody3D):
@@ -76,9 +76,9 @@ func impact_audio_playing():
 # When landed, toggle the hitbox on for a start a timer
 # When the timer ends, hitbox is toggled off and state is transitioned
 func toggle_butt_slam_land_hitbox():
-	butt_slam_impact_hitbox.set_monitoring(true)
+	butt_slam_land_hitbox.set_monitoring(true)
 	await get_tree().create_timer(0.5).timeout
-	butt_slam_impact_hitbox.set_monitoring(false)
+	butt_slam_land_hitbox.set_monitoring(false)
 	
 	# Transition out of attack state
 	if cR.move_dir: 
@@ -103,6 +103,7 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 		if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
 		if cR.has_cut_jump: cR.has_cut_jump = false
 		
+		butt_slam_falling_hitbox.set_monitoring(false)
 		transitioned.emit(self, "InairState")
 
 

@@ -33,5 +33,5 @@ func transition_state(new_state:States)->void:
 
 
 # Triggered when the player interacts with this NPC
-func interact(player_pos:Vector3):
+func interact():
 	transition_state(States.GREET)

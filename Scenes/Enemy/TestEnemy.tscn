@@ -45,6 +45,7 @@ shape = SubResource("SphereShape3D_psiqa")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.3
 
 [node name="EnemyPerceptionComponent" parent="." instance=ExtResource("2_tdukb")]
 
