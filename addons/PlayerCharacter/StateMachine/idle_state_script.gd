@@ -59,7 +59,7 @@ func input_management():
 			transitioned.emit(self, "RagdollState")
 			
 	if Input.is_action_just_pressed("f"):
-		cR.check_interact_raycast()
+		pass
 		
 	if Input.is_action_just_pressed("lmb"):
 		transitioned.emit(self, "GroundAttackState")

@@ -25,4 +25,3 @@ func respawn_player():
 	var new_character = player_node.instantiate()
 	add_child(new_character)
 	player_ref = new_character
-	hud.connect_player_signals(new_character)

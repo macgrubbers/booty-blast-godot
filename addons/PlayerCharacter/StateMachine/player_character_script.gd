@@ -71,6 +71,7 @@ var coyote_jump_on : bool = false
 @onready var particles_manager = %ParticlesManager
 @onready var cam_holder = $OrbitView
 @onready var state_machine = $StateMachine
+@onready var hud = $HUD
 @onready var debug_hud = %DebugHUD
 @onready var foot_step_audio = %FootStepAudio
 @onready var impact_audio = %ImpactAudio
@@ -102,7 +103,7 @@ func _ready():
 		)
 		
 func _process(delta: float):
-	update_interact_raycast()
+	#update_interact_raycast()
 	modify_model_orientation(delta)
 	
 	display_properties()
@@ -171,10 +172,13 @@ func squash_and_strech(value : float, timing : float):
 func check_if_alive()->bool:
 	return health_component.is_alive
 
-func update_interact_raycast():
-	interact_raycast.set_rotation(visual_root.rotation - Vector3(0,PI/2,0))
-
-func check_interact_raycast():
-	var collider = interact_raycast.get_collider()
-	if collider:
-		collider.get_parent().interact()
+#func update_interact_raycast():
+	#pass
+#
+#func check_interact_raycast():
+	#var collider = interact_raycast.get_collider()
+	#if collider:
+		#collider.get_parent().interact()
+		#hud.set_interact_label(true)
+	#else:
+		#hud.set_interact_label(false)
