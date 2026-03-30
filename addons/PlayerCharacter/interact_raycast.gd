@@ -16,4 +16,3 @@ func _physics_process(delta: float) -> void:
 	if new_collider != old_collider:
 		old_collider = new_collider
 		emit_signal("new_collider_found",new_collider)
-		

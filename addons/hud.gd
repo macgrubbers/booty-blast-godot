@@ -4,7 +4,8 @@ extends CanvasLayer
 @onready var pause_screen = $PauseScreen
 @onready var dead_screen = $DeadScreen
 @onready var health_bar = $HealthBar
-@onready var interact_label = $Interact
+@onready var interact = $Interact
+@onready var interact_label = $Interact/Label
 
 @onready var player_ref : CharacterBody3D = $".."
 @onready var cam_holder = $"../OrbitView"
@@ -45,7 +46,7 @@ func on_health_updated(new_health:int)->void:
 
 func _on_new_collider_found(collider):
 	if collider:
-		interact_label.visible = true
-		interact_label.text = "[E] Interact with " + str(collider)
+		interact.visible = true
+		interact_label.text = "[F] Interact with " + collider.get_parent().get_name()
 	else:
-		interact_label.visible = false
+		interact.visible = false

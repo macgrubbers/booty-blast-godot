@@ -59,7 +59,8 @@ func input_management():
 			transitioned.emit(self, "RagdollState")
 			
 	if Input.is_action_just_pressed("f"):
-		pass
+		var interact_obj = $"../../Raycasts/InteractRaycast".get_collider().get_parent()
+		interact_obj.interact()
 		
 	if Input.is_action_just_pressed("lmb"):
 		transitioned.emit(self, "GroundAttackState")
