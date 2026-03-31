@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1ic50q4ujd6j"]
+
+[ext_resource type="Script" uid="uid://mgjf5n7l3gdl" path="res://Scenes/Actor Components/dialogue_manager_component.gd" id="1_wp1as"]
+
+[node name="DialogueComponent" type="Node"]
+process_mode = 4
+physics_interpolation_mode = 2
+script = ExtResource("1_wp1as")
