@@ -172,13 +172,8 @@ func squash_and_strech(value : float, timing : float):
 func check_if_alive()->bool:
 	return health_component.is_alive
 
-#func update_interact_raycast():
-	#pass
-#
-#func check_interact_raycast():
-	#var collider = interact_raycast.get_collider()
-	#if collider:
-		#collider.get_parent().interact()
-		#hud.set_interact_label(true)
-	#else:
-		#hud.set_interact_label(false)
+# Check to enable/disable Debug HUD
+#	TODO: maybe handle this per state? idk maybe it's fine
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("DebugView"):
+		debug_hud.visible = not debug_hud.visible

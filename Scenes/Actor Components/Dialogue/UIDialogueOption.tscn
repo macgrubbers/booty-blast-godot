@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d3jh2ot8np58q"]
+
+[node name="UiDialogueOption" type="Button"]
+offset_right = 700.0
+offset_bottom = 50.0
