@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=49 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://d2tif6xsjkwnw" path="res://addons/PlayerCharacter/StateMachine/ragdoll_state_script.gd" id="17_pdxi8"]
 [ext_resource type="Script" uid="uid://chnbi4s1tf7pa" path="res://addons/PlayerCharacter/Debug/DebugHUDScript.gd" id="17_qmq2g"]
 [ext_resource type="Script" uid="uid://dt5u7nsri8oli" path="res://addons/PlayerCharacter/butt_slam_state.gd" id="18_pi2tj"]
-[ext_resource type="Script" uid="uid://25pwfrpbe38o" path="res://addons/PlayerCharacter/talking_state.gd" id="19_20r42"]
 [ext_resource type="Script" uid="uid://c7k0dsuvb8jsk" path="res://addons/PlayerCharacter/interact_raycast.gd" id="19_qq7mp"]
 [ext_resource type="Script" uid="uid://c01c6ttt0dp22" path="res://Scenes/Actor Components/player_health_component.gd" id="20_khnxt"]
 [ext_resource type="Script" uid="uid://dn6ij0iia5tca" path="res://addons/PlayerCharacter/dialogue_hud.gd" id="22_tsatr"]
@@ -111,10 +110,6 @@ radius = 5.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_khnxt"]
 height = 1.0
 radius = 1.5
-
-[sub_resource type="LabelSettings" id="LabelSettings_tsatr"]
-font_size = 35
-font_color = Color(0.6052743, 0.6052743, 0.6052743, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_o2ynt"]
 font = ExtResource("24_qq7mp")
@@ -245,10 +240,6 @@ metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 script = ExtResource("18_pi2tj")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 
-[node name="TalkingState" type="Node" parent="StateMachine"]
-script = ExtResource("19_20r42")
-metadata/_custom_type_script = "uid://gjekmtw4eb1e"
-
 [node name="Raycasts" type="Node3D" parent="."]
 
 [node name="FloorRaycast" type="RayCast3D" parent="Raycasts"]
@@ -314,39 +305,54 @@ layer = 2
 script = ExtResource("22_tsatr")
 
 [node name="DialogueBox" type="Control" parent="DialogueHUD"]
-visible = false
 layout_mode = 3
-anchor_left = 0.064
-anchor_top = 0.42000002
-anchor_right = 0.93200004
-anchor_bottom = 0.883
-offset_left = 0.27199554
-offset_top = -0.16000366
-offset_right = 0.3359375
-offset_bottom = -0.184021
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_bottom = -127.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="DialogueHUD/DialogueBox"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.12225237, 0.1222522, 0.12225223, 0.74509805)
+modulate = Color(0.14693162, 0.15413272, 0.16742888, 0.5176471)
+layout_mode = 0
+offset_left = 102.0
+offset_top = 380.0
+offset_right = 1087.0
+offset_bottom = 620.0
 
 [node name="Label" type="Label" parent="DialogueHUD/DialogueBox/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 2.0
+anchor_bottom = 0.55700004
 theme_override_colors/font_color = Color(18.892002, 18.892002, 18.892002, 1)
 theme_override_font_sizes/font_size = 30
 text = "Sample Text"
-label_settings = SubResource("LabelSettings_tsatr")
 horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+
+[node name="VScrollBar" type="VScrollBar" parent="DialogueHUD/DialogueBox/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.537
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.11999512
+offset_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueHUD/DialogueBox/ColorRect/VScrollBar"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="DialogueHUD/DialogueBox/ColorRect/VScrollBar/VBoxContainer"]
+layout_mode = 2
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 3

@@ -5,10 +5,12 @@ class_name IdleState
 var state_name : String = "Idle"
 
 var cR : CharacterBody3D
+var player_dialogue_manager
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
+	player_dialogue_manager = char_ref.player_dialogue_manager
 	
 	verifications()
 	
@@ -57,10 +59,26 @@ func input_management():
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
-			
+	
+	# TODO: Maybe there's a better way to determine if we should start dialogue?
+	#	TODO: we cannot speak AND interact with an object with this implementation
+	#			(idk if we care about that tho frfr
 	if Input.is_action_just_pressed("f"):
-		var interact_obj = $"../../Raycasts/InteractRaycast".get_collider().get_parent()
-		interact_obj.interact()
+		var collider = $"../../Raycasts/InteractRaycast".get_collider()
+		if collider:
+			var interact_obj = collider.get_parent()
+			
+			# If we can talk to it, talk!
+			if interact_obj.has_method("get_dialogue_manager"):
+				var obj_dialogue_manager = interact_obj.get_dialogue_manager()
+				player_dialogue_manager.start_conversation(obj_dialogue_manager)
+			
+			# If we can interact with it, interact!
+			elif interact_obj.has_method("interact"):
+				interact_obj.interact()
+		else:
+			print("No collider!")
+		
 		
 	if Input.is_action_just_pressed("lmb"):
 		transitioned.emit(self, "GroundAttackState")

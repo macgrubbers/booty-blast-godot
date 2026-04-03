@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct0fq3bju8oq2"]
+[gd_scene load_steps=7 format=3 uid="uid://ct0fq3bju8oq2"]
 
 [ext_resource type="Script" uid="uid://dcdo1lhmk7j5h" path="res://Scenes/Characters/santa.gd" id="1_jtxtl"]
 [ext_resource type="PackedScene" uid="uid://di4w8hhjlc02l" path="res://santa_import.tscn" id="2_3063e"]
+[ext_resource type="Script" uid="uid://mgjf5n7l3gdl" path="res://Scenes/Actor Components/Dialogue/dialogue_manager_component.gd" id="3_sy7bg"]
+[ext_resource type="Script" uid="uid://c08wam0ismfqh" path="res://Scenes/Characters/santa_dialogue_node_start.gd" id="4_r1cu7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jtxtl"]
 height = 1.8
@@ -28,3 +30,12 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea3D"]
 shape = SubResource("SphereShape3D_jtxtl")
+
+[node name="Santa_DialogueManagerComponent" type="Node" parent="."]
+script = ExtResource("3_sy7bg")
+metadata/_custom_type_script = "uid://mgjf5n7l3gdl"
+
+[node name="Santa_DialogueNodeStart" type="Node" parent="Santa_DialogueManagerComponent"]
+script = ExtResource("4_r1cu7")
+dialogue_text = Array[String](["Hey what's up, it's me Santa. You've probably heard of me before.", "Sweet dear goblin, yes it is I.... The great Santa! What can I do for you my child?", "Ho ho ho! Santa's got lots of goodies for a good goblin like yourself!", "Ohohoho, Santa had strictly only professional discussions when with Jeffery! Santa never showed him his sacred Naughty and Nice List, why that would be such a naughty thing to do!"])
+metadata/_custom_type_script = "uid://dd5xkg8568uty"

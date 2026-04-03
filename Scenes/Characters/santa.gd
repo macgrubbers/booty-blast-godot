@@ -12,7 +12,7 @@ var current_state = initial_state
 @onready var animation_player = $Santa/AnimationPlayer
 @onready var animation_tree = $Santa/AnimationTree
 @onready var anim_state_machine : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
-
+@onready var dialogue_manager = $Santa_DialogueManagerComponent
 
 func _ready() -> void:
 	# Start in the idle state
@@ -35,3 +35,6 @@ func transition_state(new_state:States)->void:
 # Triggered when the player interacts with this NPC
 func interact():
 	transition_state(States.GREET)
+
+func get_dialogue_manager():
+	return dialogue_manager

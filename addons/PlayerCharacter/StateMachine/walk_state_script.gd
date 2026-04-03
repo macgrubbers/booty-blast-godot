@@ -5,6 +5,7 @@ class_name WalkState
 var state_name : String = "Walk"
 
 var cR : CharacterBody3D
+var player_dialogue_manager = $"../DialogueHUD"
 
 func enter(char_ref : CharacterBody3D):
 	cR = char_ref

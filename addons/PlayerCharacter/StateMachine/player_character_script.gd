@@ -71,6 +71,7 @@ var coyote_jump_on : bool = false
 @onready var particles_manager = %ParticlesManager
 @onready var cam_holder = $OrbitView
 @onready var state_machine = $StateMachine
+@onready var player_dialogue_manager = $DialogueHUD
 @onready var hud = $HUD
 @onready var debug_hud = %DebugHUD
 @onready var foot_step_audio = %FootStepAudio
