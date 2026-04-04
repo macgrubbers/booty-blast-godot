@@ -11,6 +11,7 @@ func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
 	player_dialogue_manager = char_ref.player_dialogue_manager
+	cR.velocity = Vector3.ZERO
 	
 	verifications()
 	
@@ -25,4 +26,5 @@ func physics_update(delta : float):
 			
 func input_management():
 	if Input.is_action_just_pressed("f"):
-		player_dialogue_manager.
+		player_dialogue_manager.end_conversation()
+		transitioned.emit(self,"IdleState")

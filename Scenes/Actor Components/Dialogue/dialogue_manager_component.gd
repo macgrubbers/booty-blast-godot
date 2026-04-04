@@ -2,25 +2,33 @@ extends Node
 class_name DialogueManagerComponent
 
 @export var starting_dialogue_node:DialogueNode
-@onready var current_dialogue_node:DialogueNode = starting_dialogue_node
+@onready var curr_dialogue_node:DialogueNode = starting_dialogue_node
 @onready var prev_dialogue_node:DialogueNode
 
-# Get the dialogue text of the current node
-func get_current_dialogue_node_text():
-	if current_dialogue_node.dialogue_text:
-		return current_dialogue_node.dialogue_text.pick_random()
-	else:
-		return "ERROR: NO TEXT FOUND ON NODE " + current_dialogue_node.get_name()
+signal transition_states(dialogue_state:String)
+
+# Check if we have a starting dialogue node, complain if there's not
+func _on_ready() -> void:
+	if !starting_dialogue_node:
+		print("ERROR: Starting dialogue node not set!")
+
+
+# Get the dialogue text and responses of the current node
+#	Emits a transition states signal with the desired new state string
+func get_current_dialogue_node():
+	var dialogue_state = curr_dialogue_node.dialogue_state
+	if dialogue_state:
+		transition_states.emit(dialogue_state)
+	var dialogue_text = curr_dialogue_node.dialogue_text
+	var dialogue_responses = curr_dialogue_node.dialogue_responses
+	var dialogue_node_array = [dialogue_text, dialogue_responses]
+	return dialogue_node_array
 	
-func get_current_dialogue_node_state():
-	return current_dialogue_node.dialogue_state
-
-# Get the responses of the current node
-func get_current_dialogue_node_responses():
-	return current_dialogue_node.dialogue_responses
-
- # Switch to a new dialogue node
-func switch_dialogue_nodes(new_node:DialogueNode):
-	prev_dialogue_node = current_dialogue_node
-	var first_key = current_dialogue_node.dialogue_responses.keys()[0]
-	current_dialogue_node = current_dialogue_node.dialogue_responses[first_key]
+# Switch to a new dialogue node
+#	Will revert to the old node if the new one cannot be found (and yell at you)
+func switch_dialogue_nodes(new_node:String):
+	prev_dialogue_node = curr_dialogue_node
+	curr_dialogue_node = self.find_child(new_node)
+	if !curr_dialogue_node:
+		print("ERROR: Switch to new dialogue node " + new_node +" failed!")
+		curr_dialogue_node = prev_dialogue_node

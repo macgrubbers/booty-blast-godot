@@ -72,6 +72,7 @@ func input_management():
 			if interact_obj.has_method("get_dialogue_manager"):
 				var obj_dialogue_manager = interact_obj.get_dialogue_manager()
 				player_dialogue_manager.start_conversation(obj_dialogue_manager)
+				transitioned.emit(self, "TalkingState")
 			
 			# If we can interact with it, interact!
 			elif interact_obj.has_method("interact"):

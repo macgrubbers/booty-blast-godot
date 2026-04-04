@@ -3,8 +3,9 @@ extends CanvasLayer
 @onready var player = $".."
 @onready var dialogue_box = $DialogueBox
 @onready var dialogue_holder_label = $DialogueBox/ColorRect/Label
-var speaker:DialogueManagerComponent
 
+var speaker:DialogueManagerComponent
+var dialogue_node_array: Array
 
 # Start a conversation with the speaker
 func start_conversation(speaker_component:DialogueManagerComponent):
@@ -15,12 +16,21 @@ func start_conversation(speaker_component:DialogueManagerComponent):
 
 func get_current_dialogue_node():
 	if speaker:
-		var speaker_dialogue = speaker.get_current_dialogue_node_text()
-		dialogue_holder_label.text = speaker_dialogue
+		dialogue_node_array = speaker.get_current_dialogue_node()
+		var dialogue = dialogue_node_array[0]
+		var responses = dialogue_node_array[1]
+		
+		# TODO: Determine if we should do a dialogue or response box!
+		#	TODO: OR maybe theyre the same idk
+		dialogue_holder_label.text = dialogue.pick_random()
 
-func get_next_dialogue_node():
-	if speaker:
-		speaker.switch_dialogue_nodes()
+
+
+
+#func get_next_dialogue_node():
+	#if speaker:
+		#speaker.switch_dialogue_nodes()
+
 
 # End a conversation with the speaker
 # Sets speaker to null

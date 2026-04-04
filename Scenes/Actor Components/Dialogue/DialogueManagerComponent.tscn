@@ -6,3 +6,5 @@
 process_mode = 4
 physics_interpolation_mode = 2
 script = ExtResource("1_0dxxw")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
