@@ -9,8 +9,7 @@ var ragdoll : bool = false : set = set_ragdoll
 var squash_and_stretch = 1.0 : set = set_squash_and_stretch
 
 signal footstep(intensity : float)
-signal waved
-signal ground_attack_done
+signal wave_done
 
 func _ready():
 	set_ragdoll(ragdoll)
@@ -39,5 +38,5 @@ func emit_footstep(intensity : float = 1.0) -> void:
 	footstep.emit(intensity)
 
 
-func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	ground_attack_done.emit()
+func _on_wave_animation_finished() -> void:
+	wave_done.emit()

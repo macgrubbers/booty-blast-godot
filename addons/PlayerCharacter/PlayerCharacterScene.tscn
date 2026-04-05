@@ -78,6 +78,9 @@ anim_offset_max = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_bw4i7"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_f3fy5"]
+radius = 1.5
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
 random_pitch = 1.2
 streams_count = 3
@@ -105,9 +108,6 @@ height = 2.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
 radius = 2.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_f3fy5"]
-radius = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
 radius = 5.0
@@ -182,6 +182,12 @@ cast_shadow = 0
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_dhnoe")
 draw_pass_1 = SubResource("QuadMesh_bw4i7")
+
+[node name="AirAttackHitbox" type="Area3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
+shape = SubResource("SphereShape3D_f3fy5")
 
 [node name="AudioRoot" type="Node3D" parent="."]
 
@@ -297,12 +303,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
 shape = SubResource("SphereShape3D_h8602")
-
-[node name="AirAttackHitbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AirAttackHitbox"]
-shape = SubResource("SphereShape3D_f3fy5")
 
 [node name="ButtSlamLandHitbox" type="Area3D" parent="."]
 collision_layer = 0

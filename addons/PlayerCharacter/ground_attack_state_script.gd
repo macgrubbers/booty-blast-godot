@@ -75,7 +75,9 @@ func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
 		area.change_health(-1)
 
 
-
+# Called when wave animation is complete
+#	TODO: remove toggle to check states
 func _on_animation_finished():
-	ground_attack_area.set_monitoring(false)
-	transitioned.emit(self, "IdleState")
+	if get_parent().curr_state is GroundAttackState:
+		ground_attack_area.set_monitoring(false)
+		transitioned.emit(self, "IdleState")

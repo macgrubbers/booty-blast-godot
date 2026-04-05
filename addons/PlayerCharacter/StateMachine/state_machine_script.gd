@@ -9,6 +9,7 @@ var states : Dictionary = {}
 @onready var char_ref : CharacterBody3D = $".."
 @onready var godot_plush_skin : Node3D = %GodotPlushSkin
 @onready var ground_attack_area : Area3D = %GroundAttackHitbox
+@onready var air_attack_area : Area3D = $"../VisualRoot/AirAttackHitbox"
 @onready var butt_slam_falling_hitbox : Area3D = $"../ButtSlamFallingHitbox"
 @onready var butt_slam_land_hitbox : Area3D = $"../ButtSlamLandHitbox"
 
@@ -21,12 +22,16 @@ func _ready():
 			
 			if child is GroundAttackState:
 				ground_attack_area.area_entered.connect(child._on_ground_attack_area_3d_area_entered)
-				godot_plush_skin.ground_attack_done.connect(child._on_animation_finished)
+				godot_plush_skin.wave_done.connect(child._on_animation_finished)
 				
 			if child is ButtSlamState:
 				butt_slam_land_hitbox.area_entered.connect(child._on_butt_slam_landing_hitbox_entered)
 				butt_slam_falling_hitbox.area_entered.connect(child._on_butt_slam_falling_hitbox_entered)
 
+			if child is AirAttackState:
+				air_attack_area.area_entered.connect(child._on_air_attack_area_entered)
+				godot_plush_skin.wave_done.connect(child._on_animation_finished)
+				
 
 	# Connect the dead state
 	char_ref.get_node("HealthComponent").connect("kill", on_player_dead)

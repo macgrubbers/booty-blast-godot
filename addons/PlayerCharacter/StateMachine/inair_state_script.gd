@@ -47,7 +47,9 @@ func input_management():
 		if cR.was_on_floor and cR.coyote_jump_cooldown > 0.0 and cR.last_frame_position.y > cR.position.y:
 			cR.coyote_jump_on = true
 			transitioned.emit(self, "JumpState")
-		transitioned.emit(self, "JumpState")
+		# jump if we have the jumps for it
+		if cR.nb_jumps_in_air_allowed > 0:
+			transitioned.emit(self, "JumpState")
 		
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll and !cR.ragdoll_on_floor_only:
@@ -55,6 +57,10 @@ func input_management():
 			
 	if Input.is_action_just_pressed("butt_slam"):
 		transitioned.emit(self, "ButtSlamState")
+		
+	if Input.is_action_just_pressed("lmb"):
+		transitioned.emit(self, "AirAttackState")
+		
 		
 func check_if_floor():
 	if cR.is_on_floor():
