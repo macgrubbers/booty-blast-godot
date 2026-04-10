@@ -295,6 +295,7 @@ one_shot = true
 [node name="KnockbackImmunityTimer" type="Timer" parent="HealthComponent"]
 
 [node name="AppliedRotationTimer" type="Timer" parent="HealthComponent"]
+wait_time = 0.3
 one_shot = true
 
 [node name="GroundAttackHitbox" type="Area3D" parent="."]

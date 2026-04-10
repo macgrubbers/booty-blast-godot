@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ih4mapwge63d"]
+
+[ext_resource type="PackedScene" uid="uid://d0qesc5gvqr64" path="res://Assets/low poly sword/scene.gltf" id="1_ndlra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndlra"]
+size = Vector3(1, 0.5, 3)
+
+[node name="EnemyWeapon" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_ndlra")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 524288
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.040323734, -5.297172e-08, 1.2118517)
+shape = SubResource("BoxShape3D_ndlra")

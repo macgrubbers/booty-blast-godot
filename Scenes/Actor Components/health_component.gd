@@ -43,12 +43,13 @@ func change_health(amount : float):
 		#get_parent().kill()
 		emit_signal("kill")
 
-func apply_knockback(amount:Vector3, restart_gravity:bool):
+func apply_knockback(amount:Vector3, restart_gravity:bool, start_timer:bool = false):
 	# ignore knockback if immune
 	if !knockback_immunity_timer.is_stopped():
 		return
 	get_parent().knockback_apply(amount,restart_gravity)
-	knockback_immunity_timer.start()
+	if start_timer:
+		knockback_immunity_timer.start()
 
 func get_current_health()->float:
 	return current_health

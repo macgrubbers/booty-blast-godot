@@ -34,11 +34,12 @@ func _physics_process(delta: float) -> void:
 	elif is_on_floor() and gravity_velocity.length() > 0:
 		gravity_velocity = Vector3.ZERO
 
-	# Knockback and navigation
-	var navigation_velocity = Vector3.ZERO
+	# Knockback
 	if knockback_vector.length() > 0:
 		knockback_vector = knockback_vector.move_toward(Vector3.ZERO, 30 * delta)
 	
+	# Navigation
+	var navigation_velocity = Vector3.ZERO
 	if is_on_floor() and health_component.is_alive:
 		# only navigate if not knocked back
 		navigation_velocity = navigate()

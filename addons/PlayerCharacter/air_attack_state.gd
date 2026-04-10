@@ -8,7 +8,7 @@ var state_name : String = "AirAttack"
 @onready var air_attack_area : Area3D = $"../../VisualRoot/AirAttackHitbox"
 @onready var forward_raycast : RayCast3D = $"../../Raycasts/InteractRaycast"
 @onready var health_component : HealthComponent = $"../../HealthComponent"
-#@onready var applied_rotation_timer : Timer
+@onready var applied_rotation_timer : Timer = $"../../HealthComponent/AppliedRotationTimer"
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
@@ -70,8 +70,11 @@ func check_if_floor():
 # Check if we should wall bounce 
 func check_if_wall():
 	var collider = forward_raycast.get_collider()
-	if collider:
-		cR.rotation_apply()
+	if collider and applied_rotation_timer.is_stopped():
+		var model_rotation = cR.visual_root.rotation.y
+		health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10, true,false)
+		cR.visual_root.rotation.y += PI
+		applied_rotation_timer.start()
 
 
 # Input that transitions states is not handled in this state
