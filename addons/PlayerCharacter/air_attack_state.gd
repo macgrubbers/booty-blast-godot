@@ -6,6 +6,9 @@ var state_name : String = "AirAttack"
 
 @onready var cR : CharacterBody3D
 @onready var air_attack_area : Area3D = $"../../VisualRoot/AirAttackHitbox"
+@onready var forward_raycast : RayCast3D = $"../../Raycasts/InteractRaycast"
+@onready var health_component : HealthComponent = $"../../HealthComponent"
+#@onready var applied_rotation_timer : Timer
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
@@ -37,6 +40,8 @@ func physics_update(delta : float):
 	
 	check_if_floor()
 	
+	check_if_wall()
+	
 	move(delta)
 
 
@@ -62,9 +67,17 @@ func check_if_floor():
 			cR.velocity.z = 0.0
 
 
+# Check if we should wall bounce 
+func check_if_wall():
+	var collider = forward_raycast.get_collider()
+	if collider:
+		cR.rotation_apply()
+
+
 # Input that transitions states is not handled in this state
 func input_management():
 	pass
+
 
 # TODO: add movement with attacking?
 func move(delta : float):
@@ -83,10 +96,10 @@ func move(delta : float):
 		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * in_air_move_speed_val, in_air_accel_val * delta)
 		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * in_air_move_speed_val, in_air_accel_val * delta)
 
-
+#	on an air attack
+#	used for hitting damageable entities that have a HealthComponent
 func _on_air_attack_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
-		print(cR)
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
 		area.change_health(-1)

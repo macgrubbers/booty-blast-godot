@@ -185,6 +185,8 @@ draw_pass_1 = SubResource("QuadMesh_bw4i7")
 
 [node name="AirAttackHitbox" type="Area3D" parent="VisualRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
 shape = SubResource("SphereShape3D_f3fy5")
@@ -273,10 +275,9 @@ collision_mask = 2
 [node name="InteractRaycast" type="RayCast3D" parent="Raycasts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(3, 0, 0)
-collision_mask = 4
+collision_mask = 6
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 script = ExtResource("19_qq7mp")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("17_mx8g3")]
@@ -292,6 +293,9 @@ shape = SubResource("CapsuleShape3D_mx8g3")
 one_shot = true
 
 [node name="KnockbackImmunityTimer" type="Timer" parent="HealthComponent"]
+
+[node name="AppliedRotationTimer" type="Timer" parent="HealthComponent"]
+one_shot = true
 
 [node name="GroundAttackHitbox" type="Area3D" parent="."]
 unique_name_in_owner = true

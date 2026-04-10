@@ -109,7 +109,7 @@ func _process(delta: float):
 	
 	display_properties()
 	
-func _physics_process(_delta : float):
+func _physics_process(delta : float):
 	modify_physics_properties()
 	
 	move_and_slide()
@@ -160,7 +160,11 @@ func knockback_apply(knockback_vector:Vector3, restart_gravity:bool):
 	if restart_gravity:
 		velocity = Vector3.ZERO
 	velocity += knockback_vector
-	
+
+# Set the rotation to apply
+func rotation_apply(final_rotation:Vector3, duration:float=1.0):
+	visual_root.rotation.y = -visual_root.rotation.y
+
 func squash_and_strech(value : float, timing : float):
 	#create a tween that simulate a compression of the model (squash and strech ones)
 	#maily used to accentuate game feel/juice
