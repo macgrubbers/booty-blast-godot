@@ -8,7 +8,6 @@ var knockback_vector : Vector3 = Vector3.ZERO
 
 @onready var perception_component = $EnemyPerceptionComponent
 @onready var nav_agent = $NavigationAgent3D
-@onready var nav_timer = $NavigationTimer
 @onready var health_component = $HealthComponent
 @onready var weapon = $EnemyWeapon
 @onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
@@ -25,6 +24,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	perception_component.check_player_raycast()
 	move_and_slide()
 
 

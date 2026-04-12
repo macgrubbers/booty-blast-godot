@@ -28,6 +28,7 @@ func physics_update(delta : float):
 	cR.velocity.x = move_toward(cR.velocity.x,0, delta*20)
 	cR.velocity.z = move_toward(cR.velocity.z,0, delta*20)
 	
+	
 func check_if_floor():
 	#manage the appliements and state transitions that needs to be sets/checked/performed
 	#every time the play char pass through one of the following : floor-inair-onwall
