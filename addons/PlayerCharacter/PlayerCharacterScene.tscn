@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=54 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://25pwfrpbe38o" path="res://addons/PlayerCharacter/talking_state.gd" id="19_20r42"]
 [ext_resource type="Script" uid="uid://c7k0dsuvb8jsk" path="res://addons/PlayerCharacter/interact_raycast.gd" id="19_qq7mp"]
 [ext_resource type="Script" uid="uid://c01c6ttt0dp22" path="res://Scenes/Actor Components/player_health_component.gd" id="20_khnxt"]
+[ext_resource type="Script" uid="uid://l0kqgude1gdr" path="res://addons/PlayerCharacter/hurt_state_script.gd" id="21_f3fy5"]
 [ext_resource type="Script" uid="uid://dn6ij0iia5tca" path="res://addons/PlayerCharacter/dialogue_hud.gd" id="22_tsatr"]
 [ext_resource type="Script" uid="uid://bfo8g37pn7rpt" path="res://addons/hud.gd" id="23_1gvdm"]
 [ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="24_qq7mp"]
@@ -265,6 +266,13 @@ metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 script = ExtResource("19_20r42")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 
+[node name="HurtState" type="Node" parent="StateMachine"]
+script = ExtResource("21_f3fy5")
+
+[node name="HurtTimer" type="Timer" parent="StateMachine/HurtState"]
+wait_time = 0.6
+one_shot = true
+
 [node name="Raycasts" type="Node3D" parent="."]
 
 [node name="FloorRaycast" type="RayCast3D" parent="Raycasts"]
@@ -302,7 +310,7 @@ one_shot = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
 collision_layer = 0
-collision_mask = 1048576
+collision_mask = 3145728
 monitoring = false
 monitorable = false
 
@@ -589,5 +597,6 @@ layout_mode = 2
 text = "....."
 label_settings = ExtResource("17_c1i0s")
 
+[connection signal="timeout" from="StateMachine/HurtState/HurtTimer" to="StateMachine/HurtState" method="_on_hurt_timer_timeout"]
 [connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]
 [connection signal="animation_finished" from="HUD/HealthBar/Health1" to="HUD/HealthBar" method="_on_health_1_animation_finished"]

@@ -12,6 +12,9 @@ var last_frame_velocity : Vector3
 var was_on_floor : bool = false
 var walk_or_run : String = "WalkState" #keep in memory if play char was walking or running before being in the air
 
+# Knockback
+var knockback_vector : Vector3
+
 @export_group("Walk variables")
 @export var walk_speed : float
 @export var walk_accel : float
@@ -154,12 +157,7 @@ func gravity_apply(delta : float):
 	#otherwise, apply fall gravity
 	if velocity.y >= 0.0: velocity.y -= jump_gravity * delta
 	elif velocity.y < 0.0: velocity.y -= fall_gravity * delta
-	
-func knockback_apply(knockback_vector:Vector3, restart_gravity:bool):
-	# TODO: transition to grounded state maybe?
-	if restart_gravity:
-		velocity = Vector3.ZERO
-	velocity += knockback_vector
+
 
 # Set the rotation to apply
 func rotation_apply(final_rotation:Vector3, duration:float=1.0):

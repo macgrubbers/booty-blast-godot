@@ -7,6 +7,7 @@ var curr_state_name  : String
 var states : Dictionary = {}
 
 @onready var char_ref : CharacterBody3D = $".."
+@onready var health_component : HealthComponent = $"../HealthComponent"
 
 
 func _ready():	
@@ -17,7 +18,7 @@ func _ready():
 			child.transitioned.connect(on_state_child_transition)
 
 	# Connect the dead state
-	char_ref.get_node("HealthComponent").connect("kill", on_player_dead)
+	health_component.connect("kill", on_player_dead)
 			
 	#if initial state, transition to it
 	if initial_state:
@@ -50,5 +51,7 @@ func on_state_child_transition(state : State, new_state_name : String):
 	curr_state_name = curr_state.state_name
 
 func on_player_dead():
-	print("player dead")
-	curr_state.transitioned.emit(curr_state, "RagdollState")
+	pass
+
+func on_player_hurt():
+	curr_state.transitioned.emit(curr_state, "Enemy_HurtState")

@@ -1,13 +1,16 @@
 extends State
 
+class_name Enemy_IdleState
+
 var state_name : String = "Idle"
 
 var cR : CharacterBody3D
+var perception_component
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
-	
+	perception_component = cR.perception_component
 	verifications()
 	
 func verifications():
@@ -21,6 +24,9 @@ func physics_update(delta : float):
 	check_if_floor()
 	
 	cR.gravity_apply(delta)
+	
+	cR.velocity.x = move_toward(cR.velocity.x,0, delta*20)
+	cR.velocity.z = move_toward(cR.velocity.z,0, delta*20)
 	
 func check_if_floor():
 	#manage the appliements and state transitions that needs to be sets/checked/performed

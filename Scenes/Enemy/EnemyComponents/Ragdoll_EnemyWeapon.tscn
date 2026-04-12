@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3m2nmcpv3okt"]
+
+[ext_resource type="PackedScene" uid="uid://d0qesc5gvqr64" path="res://Assets/low poly sword/scene.gltf" id="1_xjc7n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xjc7n"]
+size = Vector3(1, 0.4645996, 4.9090576)
+
+[node name="RagdollEnemyWeapon" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2097154
+mass = 0.01
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_xjc7n")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.010131836, 0.7728882)
+shape = SubResource("BoxShape3D_xjc7n")

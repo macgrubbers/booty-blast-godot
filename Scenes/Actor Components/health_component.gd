@@ -1,10 +1,13 @@
 extends Area3D
 class_name HealthComponent
 
+var last_applied_knockback:Vector3
+
 @export var is_alive = true
 @export var max_health : float = 3
 @export var current_health : float
 @export var collision_shape : Node3D
+
 
 @onready var damage_immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
@@ -41,13 +44,15 @@ func change_health(amount : float):
 		current_health = 0
 		is_alive = false
 		#get_parent().kill()
+		await get_tree().process_frame # TODO: added to let ragdolls be created after enemy death, maybe remove later
 		emit_signal("kill")
 
-func apply_knockback(amount:Vector3, restart_gravity:bool, start_timer:bool = false):
+func apply_knockback(amount:Vector3, start_timer:bool = false):
 	# ignore knockback if immune
 	if !knockback_immunity_timer.is_stopped():
 		return
-	get_parent().knockback_apply(amount,restart_gravity)
+	last_applied_knockback = amount
+	get_parent().velocity += amount
 	if start_timer:
 		knockback_immunity_timer.start()
 

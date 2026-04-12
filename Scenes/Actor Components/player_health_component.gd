@@ -7,6 +7,7 @@ func change_health(amount : float, attacker_position:Vector3=Vector3.ZERO):
 	if !can_damage(attacker_position):
 		return
 	super(amount)
+	state_machine.on_player_hurt()
 
 
 func can_damage(pos:Vector3)->bool:

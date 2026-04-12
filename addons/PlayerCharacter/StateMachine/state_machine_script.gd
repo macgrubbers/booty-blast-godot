@@ -67,5 +67,7 @@ func on_state_child_transition(state : State, new_state_name : String):
 	curr_state_name = curr_state.state_name
 
 func on_player_dead():
-	print("player dead")
 	curr_state.transitioned.emit(curr_state, "RagdollState")
+
+func on_player_hurt():
+	curr_state.transitioned.emit(curr_state, "HurtState")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdfuqoktr0slh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ctu1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kq5l"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uexwf"]
+material = SubResource("StandardMaterial3D_2kq5l")
+
+[sub_resource type="SphereMesh" id="SphereMesh_bab0i"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_5ft0w"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q3xv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="RagdollTestEnemy" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2097154
+angular_damp_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7ctu1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_uexwf")
+
+[node name="eye" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20229328, 0.7147931, 0.5339649)
+mesh = SubResource("SphereMesh_bab0i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+mesh = SubResource("SphereMesh_5ft0w")
+surface_material_override/0 = SubResource("StandardMaterial3D_6q3xv")
+
+[node name="eye2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25538063, 0.7147931, 0.5339649)
+mesh = SubResource("SphereMesh_bab0i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+mesh = SubResource("SphereMesh_5ft0w")
+surface_material_override/0 = SubResource("StandardMaterial3D_6q3xv")

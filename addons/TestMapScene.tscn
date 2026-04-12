@@ -179,6 +179,10 @@ size = Vector3(4, 6, 1)
 transform = Transform3D(-8.742278e-08, 0, 1, 0, 5, 0, -2, 0, -4.371139e-08, 5, 15, 50)
 size = Vector3(4, 6, 1)
 
+[node name="BeegWall" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-1.9999999, 0, -8.742277e-08, 0, 5, 0, 1.7484554e-07, 0, -0.99999994, 6.4064627, 18.85498, 54.46502)
+size = Vector3(25.4682, 7.541992, 1)
+
 [node name="MovingPlatform" parent="NavigationRegion3D/Structures" instance=ExtResource("3_d8mrn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4810085, 6.187948, -20.280872)
 collision_layer = 2

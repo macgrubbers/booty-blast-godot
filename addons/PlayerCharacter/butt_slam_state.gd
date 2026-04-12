@@ -111,5 +111,5 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.apply_knockback(dir_vector * 50 + Vector3(0,12,0), false)
+		area.apply_knockback(dir_vector * 15 + Vector3(0,12,0), false)
 		area.change_health(-3)
