@@ -2,10 +2,11 @@ extends Area3D
 
 var player_ref: CharacterBody3D
 var player_pos: Vector3
-
-var player_found:bool = false
+var player_found: bool
 var max_num_missed_pings:int = 3
 var missed_pings:int = 0
+
+@onready var start_tracking_on_area_entered:bool = true
 
 @export var los_length:float
 @export var los_vertical_angle:float
@@ -15,47 +16,57 @@ var missed_pings:int = 0
 @onready var nav_timer = $NavigationTimer
 
 
+signal player_just_found()
+signal player_lost
+
 # MCKAYS NOTES
-# On area entered:
-#	1. "ping" player, determine if they're within our LOS
-#	2. If within LOS, set player_found to true
+# On track started:
+#	1. Search for player within FOV
 
 
 # On three missed "pings"
 #	1. set player_found to false
 #	2. set player_ref to null
 
-
 func _ready() -> void:
 	pass
 
-func _on_body_entered(body: CharacterBody3D) -> void:
+# Call to start tracking
+# Check area when it's enabled too
+func start_tracking():
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		player_ref = body
+	nav_timer.start()
+	set_monitoring(true)
+
+# Call to stop tracking
+func stop_tracking():
+	nav_timer.stop()
+	set_monitoring(false)
+
+
+# When the player first enters area, save its reference
+func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		player_ref = body
-		nav_timer.start()
+		if start_tracking_on_area_entered:
+			start_tracking()
 
-func _on_body_exited(body: Node3D) -> void:
-	pass
-	#if body.is_in_group("Player"):
-		#player_ref = null
+# When the player leaves area, remove its reference
+func _on_body_exited(_body: Node3D) -> void:
+	if !player_found:
+		player_ref = null
+		stop_tracking()
 
+
+# Get the position of the player if we found them
 func get_player_position()->Vector3:
-	if player_ref:
-		return player_ref.get_position()
+	if player_ref and player_found:
+		return player_ref.get_global_position()
 	else:
-		print("Player was not detected, or ref was not found!")
+		print("Player not found or no ref!")
 		return Vector3.ZERO
-
-#func get_player_velocity()->Vector3:
-	#if player_ref:
-		#return player_ref.get_velocity()
-	#else:
-		#print("Player was not detected, or ref was not found!")
-		#return Vector3.ZERO
-
-func set_perception_radius(new_radius):
-	collision_shape.shape.set_radius(new_radius)
-
 
 
 # At a time interval, attempt a raycast
@@ -64,10 +75,25 @@ func _on_navigation_timer_timeout() -> void:
 
 
 func check_player_raycast():
-	# Perform raycast
+	# If we don't have a player ref, return
 	if !player_ref:
 		print("No player ref when trying to raycast")
 		return
+
+	# 1. Check if player is within FOV
+	var forward_vec = Vector3.FORWARD
+	var forward_vec_2d = Vector2(forward_vec.x, forward_vec.z)
+	var local_player_pos = to_local(player_ref.global_position)
+	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
+	var horiz_angle = fposmod(rad_to_deg(forward_vec_2d.angle_to(local_player_pos_2d)), 360.0)
+
+	# If we're not within the FOV, return
+	if (horiz_angle < (180 - los_horizontal_angle/2) or
+		horiz_angle > (180 + los_horizontal_angle/2)):
+		return
+
+
+	# 2. Check if we have LOS
 	var dir_to_player = global_position.direction_to(player_ref.get_global_position())
 	var space_state = get_world_3d().direct_space_state
 	var origin = get_global_position()
@@ -77,34 +103,14 @@ func check_player_raycast():
 	query.set_collision_mask(1 | 2 | 20)
 	var result = space_state.intersect_ray(query)
 	
-	# Process raycast result
-	# If we have found the player but fail to this iteration, add a strike
-	if player_found and (!result or !result.collider.is_in_group("Player")):
-		missed_pings += 1
-		if missed_pings >= max_num_missed_pings:
-			player_found = false
-			player_pos = Vector3.ZERO
-			nav_timer.stop()
+	# If we don't have LOS
+	if !result or !result.collider.is_in_group("Player"):
+		player_found = false
+		emit_signal("player_lost")
 		return
 	
-	# If we haven't found the player and there's no result, no consequence
-	if !player_found and !result:
-		print("player not found and no result")
-		return
-		
-	# Check if the player is within the FOV
-	var forward_vec = global_basis * Vector3.FORWARD
-	var forward_vec_2d = Vector2(forward_vec.x, forward_vec.z)
-	var local_player_pos = to_local(result.position)
-	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
-	var horiz_angle = fposmod(rad_to_deg(forward_vec_2d.angle_to(local_player_pos_2d)), 360.0)
-	
-	print(horiz_angle)
-	
-	if (horiz_angle > (360 - los_horizontal_angle/2) or
-		horiz_angle < (los_horizontal_angle/2)):
-		return
-	else:
-		print("player found!")
+	# We passed all checks and found the player
+	if !player_found:
+		print("We see player!")
 		player_found = true
-		player_pos = result.position
+		player_just_found.emit()

@@ -23,6 +23,7 @@ material = SubResource("StandardMaterial3D_pj6uk")
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_o1tme"]
+radius = 35.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7tq7j"]
 radius = 0.6
@@ -78,13 +79,16 @@ shape = SubResource("SphereShape3D_psiqa")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="EnemyPerceptionComponent" parent="." instance=ExtResource("2_tdukb")]
+collision_mask = 524291
+monitoring = false
+monitorable = false
 los_length = 50.0
 
 [node name="PerceptionCollisionShape3D" type="CollisionShape3D" parent="EnemyPerceptionComponent"]
 shape = SubResource("SphereShape3D_o1tme")
 
 [node name="NavigationTimer" type="Timer" parent="EnemyPerceptionComponent"]
-wait_time = 0.3
+wait_time = 0.5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_o1tme")]
 collision_layer = 1048576

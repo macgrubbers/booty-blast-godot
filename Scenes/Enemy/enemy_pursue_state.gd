@@ -14,15 +14,19 @@ var health_component : HealthComponent
 var nav_timer : Timer
 var nav_agent : NavigationAgent3D
 var perception_component
+var char_ref : CharacterBody3D
+
+
 
 func enter(char_ref : CharacterBody3D):
 	# 	Connect components
 	cR = char_ref
 	health_component = cR.health_component
-	nav_timer = cR.nav_timer
+	perception_component = cR.perception_component
+	nav_timer = perception_component.nav_timer
 	nav_timer.connect("timeout", _on_nav_timer_timeout)
 	nav_agent = cR.nav_agent
-	perception_component = cR.perception_component
+	char_ref = perception_component.player_ref
 	
 	verifications()
 	
@@ -33,6 +37,7 @@ func update(_delta : float):
 	pass
 	
 func physics_update(delta : float):
+	print(char_ref)
 	check_if_floor()
 	cR.gravity_apply(delta)
 	

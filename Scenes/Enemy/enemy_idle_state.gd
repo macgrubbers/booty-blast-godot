@@ -11,6 +11,8 @@ func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
 	perception_component = cR.perception_component
+	perception_component.connect("player_just_found", player_found)
+	perception_component.start_tracking()
 	verifications()
 	
 func verifications():
@@ -37,3 +39,6 @@ func check_if_floor():
 		#transitioned.emit(self, "InairState")
 		
 			
+func player_found():
+	print("tryna transition")
+	transitioned.emit(self, "Enemy_PursueState")

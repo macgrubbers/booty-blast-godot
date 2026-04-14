@@ -18,9 +18,6 @@ func _ready() -> void:
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
 		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
-	
-	if perception_component:
-		perception_component.set_perception_radius(perception_radius)
 
 
 func _physics_process(_delta: float) -> void:
@@ -33,10 +30,7 @@ func gravity_apply(delta):
 		velocity += get_gravity() * delta
 	#elif is_on_floor() and gravity_velocity.length() > 0:
 		#restart_gravity()
-#
-#
-#func restart_gravity():
-	#gravity_velocity = Vector3.ZERO
+
 
 
 # Start tracking the player by starting the timer
