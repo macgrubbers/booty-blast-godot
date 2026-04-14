@@ -24,7 +24,6 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	perception_component.check_player_raycast()
 	move_and_slide()
 
 

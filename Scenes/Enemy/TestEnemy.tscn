@@ -78,7 +78,7 @@ shape = SubResource("SphereShape3D_psiqa")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="EnemyPerceptionComponent" parent="." instance=ExtResource("2_tdukb")]
-fov_length = 50.0
+los_length = 50.0
 
 [node name="PerceptionCollisionShape3D" type="CollisionShape3D" parent="EnemyPerceptionComponent"]
 shape = SubResource("SphereShape3D_o1tme")
