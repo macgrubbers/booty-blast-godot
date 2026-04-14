@@ -10,24 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://ih4mapwge63d" path="res://Scenes/Enemy/EnemyComponents/EnemyWeapon.tscn" id="5_1laig"]
 [ext_resource type="Script" uid="uid://bl15tlcm1bggu" path="res://Scenes/Enemy/enemy_hurt_state_script.gd" id="5_pj6uk"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tdukb"]
 material = SubResource("StandardMaterial3D_pj6uk")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_psiqa"]
-radius = 1.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_o1tme"]
-radius = 35.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7tq7j"]
-radius = 0.6
-height = 2.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_1laig"]
 radius = 0.2
@@ -40,9 +28,47 @@ height = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_numi0"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_psiqa"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o1tme"]
+radius = 35.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7tq7j"]
+radius = 0.6
+height = 2.1
+
 [node name="TestEnemy" type="CharacterBody3D"]
 collision_mask = 3
 script = ExtResource("1_2kq5l")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
+mesh = SubResource("CapsuleMesh_tdukb")
+skeleton = NodePath("../..")
+
+[node name="eye" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20229328, 0.7147931, 0.5339649)
+mesh = SubResource("SphereMesh_1laig")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+mesh = SubResource("SphereMesh_vhmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
+
+[node name="eye2" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25538063, 0.7147931, 0.5339649)
+mesh = SubResource("SphereMesh_1laig")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+mesh = SubResource("SphereMesh_vhmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_vhmhe")
@@ -63,9 +89,6 @@ one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_psiqa")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_tdukb")
 
 [node name="AttackArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009164572, 0)
@@ -108,24 +131,6 @@ wait_time = 2.0
 
 [node name="EnemyWeapon" parent="." instance=ExtResource("5_1laig")]
 transform = Transform3D(-2.1855694e-08, 0.5, 2.1855694e-08, 0, -2.1855694e-08, 0.5, 0.5, 2.1855694e-08, 9.553427e-16, -0.7471614, 0.5462814, 0)
-
-[node name="eye" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20229328, 0.7147931, 0.5339649)
-mesh = SubResource("SphereMesh_1laig")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="eye"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
-mesh = SubResource("SphereMesh_vhmhe")
-surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
-
-[node name="eye2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25538063, 0.7147931, 0.5339649)
-mesh = SubResource("SphereMesh_1laig")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="eye2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
-mesh = SubResource("SphereMesh_vhmhe")
-surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
 
 [connection signal="timeout" from="EnemyStateMachine/Enemy_HurtState/HurtTimer" to="EnemyStateMachine/Enemy_HurtState" method="_on_hurt_timer_timeout"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
