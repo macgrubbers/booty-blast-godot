@@ -45,30 +45,34 @@ collision_mask = 3
 script = ExtResource("1_2kq5l")
 
 [node name="VisualRoot" type="Node3D" parent="."]
+top_level = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
 mesh = SubResource("CapsuleMesh_tdukb")
 skeleton = NodePath("../..")
 
 [node name="eye" type="MeshInstance3D" parent="VisualRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20229328, 0.7147931, 0.5339649)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202, 0.715, -0.534)
 mesh = SubResource("SphereMesh_1laig")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
 mesh = SubResource("SphereMesh_vhmhe")
 surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
 
 [node name="eye2" type="MeshInstance3D" parent="VisualRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25538063, 0.7147931, 0.5339649)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255, 0.715, -0.534)
 mesh = SubResource("SphereMesh_1laig")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11304939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
 mesh = SubResource("SphereMesh_vhmhe")
 surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
+
+[node name="EnemyWeapon" parent="VisualRoot" instance=ExtResource("5_1laig")]
+transform = Transform3D(-2.1855694e-08, -0.5, -2.1855694e-08, 0, -2.1855694e-08, 0.5, -0.5, 2.1855694e-08, 9.553427e-16, 0.60191965, 0.5462814, 0)
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_vhmhe")
@@ -100,6 +104,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24902344, 0)
 shape = SubResource("SphereShape3D_psiqa")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 1.5
+simplify_path = true
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 15.0
 
 [node name="EnemyPerceptionComponent" parent="." instance=ExtResource("2_tdukb")]
 collision_mask = 524291
@@ -128,9 +137,6 @@ one_shot = true
 
 [node name="KillTimer" type="Timer" parent="HealthComponent"]
 wait_time = 2.0
-
-[node name="EnemyWeapon" parent="." instance=ExtResource("5_1laig")]
-transform = Transform3D(-2.1855694e-08, 0.5, 2.1855694e-08, 0, -2.1855694e-08, 0.5, 0.5, 2.1855694e-08, 9.553427e-16, -0.7471614, 0.5462814, 0)
 
 [connection signal="timeout" from="EnemyStateMachine/Enemy_HurtState/HurtTimer" to="EnemyStateMachine/Enemy_HurtState" method="_on_hurt_timer_timeout"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]

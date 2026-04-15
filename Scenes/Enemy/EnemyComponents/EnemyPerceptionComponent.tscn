@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cy3uvrgnlamro"]
 
-[ext_resource type="Script" uid="uid://bsql0y3q7hwn2" path="res://DrunkAliens/Components/enemy_perception_component.gd" id="1_657ps"]
+[ext_resource type="Script" uid="uid://bsql0y3q7hwn2" path="res://Scenes/Enemy/EnemyComponents/perception_component_script.gd" id="1_657ps"]
 
 [node name="EnemyPerceptionComponent" type="Area3D"]
 collision_layer = 0

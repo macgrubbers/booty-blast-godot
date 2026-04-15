@@ -9,7 +9,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var perception_component = $EnemyPerceptionComponent
 @onready var nav_agent = $NavigationAgent3D
 @onready var health_component = $HealthComponent
-@onready var weapon = $EnemyWeapon
+@onready var weapon = $VisualRoot/EnemyWeapon
 @onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
 
@@ -21,6 +21,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	$VisualRoot.global_position = global_position
 	move_and_slide()
 
 

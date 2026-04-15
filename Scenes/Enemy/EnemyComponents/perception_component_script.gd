@@ -36,7 +36,8 @@ func _ready() -> void:
 func start_tracking():
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
-		player_ref = body
+		if body.is_in_group("Player"):
+			player_ref = body
 	nav_timer.start()
 	set_monitoring(true)
 
@@ -65,7 +66,6 @@ func get_player_position()->Vector3:
 	if player_ref and player_found:
 		return player_ref.get_global_position()
 	else:
-		print("Player not found or no ref!")
 		return Vector3.ZERO
 
 
@@ -77,7 +77,6 @@ func _on_navigation_timer_timeout() -> void:
 func check_player_raycast():
 	# If we don't have a player ref, return
 	if !player_ref:
-		print("No player ref when trying to raycast")
 		return
 
 	# 1. Check if player is within FOV
@@ -88,10 +87,9 @@ func check_player_raycast():
 	var horiz_angle = fposmod(rad_to_deg(forward_vec_2d.angle_to(local_player_pos_2d)), 360.0)
 
 	# If we're not within the FOV, return
-	if (horiz_angle < (180 - los_horizontal_angle/2) or
-		horiz_angle > (180 + los_horizontal_angle/2)):
+	if (horiz_angle < (360 - los_horizontal_angle/2) and
+		horiz_angle > (los_horizontal_angle/2)):
 		return
-
 
 	# 2. Check if we have LOS
 	var dir_to_player = global_position.direction_to(player_ref.get_global_position())
