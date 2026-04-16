@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2sjmmkrjsvvv"]
+[gd_scene load_steps=21 format=3 uid="uid://c2sjmmkrjsvvv"]
 
 [ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/test_enemy.gd" id="1_2kq5l"]
 [ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="2_tdukb"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://bq2jemi2tag5r" path="res://Scenes/Enemy/enemy_pursue_state.gd" id="4_vi1cq"]
 [ext_resource type="PackedScene" uid="uid://ih4mapwge63d" path="res://Scenes/Enemy/EnemyComponents/EnemyWeapon.tscn" id="5_1laig"]
 [ext_resource type="Script" uid="uid://bl15tlcm1bggu" path="res://Scenes/Enemy/enemy_hurt_state_script.gd" id="5_pj6uk"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
 vertex_color_use_as_albedo = true
@@ -137,6 +139,14 @@ one_shot = true
 
 [node name="KillTimer" type="Timer" parent="HealthComponent"]
 wait_time = 2.0
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("10_5wuto")
+blackboard = NodePath("@Node@24616")
+actor = NodePath("..")
+
+[node name="IsAliveSelector" type="Node" parent="BeehaveTree"]
+script = ExtResource("11_dttib")
 
 [connection signal="timeout" from="EnemyStateMachine/Enemy_HurtState/HurtTimer" to="EnemyStateMachine/Enemy_HurtState" method="_on_hurt_timer_timeout"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
