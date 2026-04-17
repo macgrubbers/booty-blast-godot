@@ -1,20 +1,12 @@
 extends Node3D
 
 # References
+@onready var blackboard:Blackboard = $EnemyBlackboard
 @onready var player_ref:CharacterBody3D = $Player
-@onready var hud = $HUD
 
 # Preloads
 @onready var player_node = preload("res://addons/PlayerCharacter/PlayerCharacterScene.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 # Respawn will:
 #	remove the old player

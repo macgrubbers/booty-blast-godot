@@ -20,6 +20,7 @@ func _ready() -> void:
 		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 
 
+
 func _physics_process(_delta: float) -> void:
 	$VisualRoot.global_position = global_position
 	move_and_slide()

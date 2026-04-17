@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c2sjmmkrjsvvv"]
+[gd_scene load_steps=24 format=3 uid="uid://c2sjmmkrjsvvv"]
 
 [ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/test_enemy.gd" id="1_2kq5l"]
 [ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="2_tdukb"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://ih4mapwge63d" path="res://Scenes/Enemy/EnemyComponents/EnemyWeapon.tscn" id="5_1laig"]
 [ext_resource type="Script" uid="uid://bl15tlcm1bggu" path="res://Scenes/Enemy/enemy_hurt_state_script.gd" id="5_pj6uk"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
-[ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="10_i6uyn"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="12_o4n5j"]
 [ext_resource type="Script" uid="uid://cpxdalujfwbfr" path="res://Scenes/Enemy/is_alive_condition.gd" id="13_o4n5j"]
@@ -144,15 +143,10 @@ one_shot = true
 [node name="KillTimer" type="Timer" parent="HealthComponent"]
 wait_time = 2.0
 
-[node name="Blackboard" type="Node" parent="."]
-script = ExtResource("10_i6uyn")
-blackboard = null
-metadata/_custom_type_script = "uid://dme5f24l0edsf"
-
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_5wuto")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@62290")
+blackboard = NodePath("@Node@28481")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
