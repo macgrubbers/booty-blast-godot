@@ -22,9 +22,6 @@ func _ready() -> void:
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
 		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
-		
-	if perception_component:
-		perception_component.connect("update_see_player", _on_see_player_update)
 
 
 func _physics_process(_delta: float) -> void:
@@ -67,5 +64,10 @@ func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
 func _on_kill_timer_timeout():
 	pass
 
-func _on_see_player_update(status:bool):
+func update_see_player(status:bool):
+	print("See player: ", status)
 	blackboard.set_value("see_player", status)
+
+func update_in_attack_range(status:bool):
+	print("In range: ", status)
+	blackboard.set_value("in_attack_range", status)

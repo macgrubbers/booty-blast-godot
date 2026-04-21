@@ -13,6 +13,7 @@ var ignore_fov_distance:float = 12
 @onready var nav_agent : NavigationAgent3D = $"../NavigationAgent3D"
 
 signal update_see_player
+signal update_can_attack
 
 
 func _ready() -> void:
@@ -26,14 +27,20 @@ func _on_perception_timer_timeout() -> void:
 	check_player_raycast(player_pos)
 
 
-# Emits the 'update_see_player' signal if:
+# Calls update_see_player if:
 #	1. We are within the Line-of-Sight area of the target (the player)
 #	2. We can "see" the player with a raycast
 #	3. We have not seen the player previously
+
+# Calls update_in_attack_range if:
+#	1. The distance to the player is within the parent's attack range
 func check_player_raycast(player_pos:Vector3):
 	var dist_to_player = (global_position - player_pos).length()
-	print(dist_to_player)
-	
+	if dist_to_player <= parent.attack_range:
+		parent.update_in_attack_range(true)
+	else:
+		parent.update_in_attack_range(false)
+
 	# 1. Check if player is within FOV
 	var forward_vec = Vector3.FORWARD
 	var forward_vec_2d = Vector2(forward_vec.x, forward_vec.z)
@@ -50,7 +57,7 @@ func check_player_raycast(player_pos:Vector3):
 		horiz_angle > (los_horizontal_angle/2)):
 		if player_found:
 			player_found = false
-			emit_signal("update_see_player",player_found)
+			parent.update_see_player(player_found)
 			print("Out of FOV")
 		return
 
@@ -68,14 +75,12 @@ func check_player_raycast(player_pos:Vector3):
 	if !result or !result.collider.is_in_group("Player"):
 		if player_found:
 			player_found = false
-			emit_signal("update_see_player",player_found)
-			print("Lost...")
+			parent.update_see_player(player_found)
 		return
 	
 	# We passed all checks and found the player
 	if !player_found:
 		player_found = true
-		print("I SEE YOU")
-		emit_signal("update_see_player",player_found)
+		parent.update_see_player(player_found)
 	
 	nav_agent.set_target_position(player_pos)
