@@ -6,10 +6,14 @@ const SPEED = 8.0
 var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
+@export var attack_range : float = 10
+
 @onready var perception_component = $EnemyPerceptionComponent
 @onready var nav_agent = $NavigationAgent3D
 @onready var health_component = $HealthComponent
+@onready var blackboard : Blackboard = $EnemyBlackboard
 @onready var weapon = $VisualRoot/EnemyWeapon
+@onready var visual_root = $VisualRoot
 @onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
 
@@ -18,11 +22,13 @@ func _ready() -> void:
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
 		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
-
+		
+	if perception_component:
+		perception_component.connect("update_see_player", _on_see_player_update)
 
 
 func _physics_process(_delta: float) -> void:
-	$VisualRoot.global_position = global_position
+	visual_root.global_position = global_position
 	move_and_slide()
 
 
@@ -37,10 +43,11 @@ func gravity_apply(delta):
 
 # Start tracking the player by starting the timer
 #	TODO: Timer must cycle start once before player is tracked, change this
+'''
 func start_tracking_player()->void:
 	if nav_agent.is_navigation_finished():
 		nav_agent.set_target_position(perception_component.player_ref.global_position)
-
+'''
 
 func _on_attack_area_area_entered(area: Area3D) -> void:
 	if !health_component.is_alive:
@@ -55,26 +62,10 @@ func _on_attack_area_area_entered(area: Area3D) -> void:
 		area.apply_knockback(knockback_vec, true)
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
-	# Create enemy ragdoll
-	var enemy_ragdoll:RigidBody3D = ragdoll.instantiate()
-	enemy_ragdoll.set_global_transform(get_global_transform())
-	var rand_hit = Vector3(randf_range(-50,50), randf_range(-50,50), randf_range(-50,50))
-	enemy_ragdoll.apply_impulse(health_component.last_applied_knockback*1.5)
-	enemy_ragdoll.apply_torque(rand_hit)
-	get_tree().current_scene.add_child(enemy_ragdoll)
-	
-	# Create enemy weapon ragdoll
-	var new_weapon_ragdoll = weapon_ragdoll.instantiate()
-	new_weapon_ragdoll.set_global_transform(weapon.get_global_transform())
-	var rand_hit2 = Vector3(randf_range(-50,50), randf_range(-50,50), randf_range(-50,50))
-	new_weapon_ragdoll.apply_impulse(health_component.last_applied_knockback*1.5)
-	new_weapon_ragdoll.apply_torque(rand_hit2)
-	get_tree().current_scene.add_child(new_weapon_ragdoll)
-	
-	queue_free()
-	#health_component.set_monitoring(false)
-	#health_component.set_monitorable(false)
-	#health_component.start_kill_timer()
+	blackboard.set_value("is_dead", true)
 
 func _on_kill_timer_timeout():
 	pass
+
+func _on_see_player_update(status:bool):
+	blackboard.set_value("see_player", status)

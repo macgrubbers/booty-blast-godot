@@ -24,8 +24,8 @@ func enter(char_ref : CharacterBody3D):
 	cR = char_ref
 	health_component = cR.health_component
 	perception_component = cR.perception_component
-	perception_component.connect("player_lost",on_player_lost)
-	perception_component.connect("navigation_finished", on_navigation_finished)
+	#perception_component.connect("player_lost",on_player_lost)
+	#perception_component.connect("navigation_finished", on_navigation_finished)
 	nav_timer = perception_component.nav_timer
 	nav_timer.connect("timeout", _on_nav_timer_timeout)
 	nav_agent = cR.nav_agent
@@ -82,13 +82,13 @@ func _on_nav_timer_timeout()->void:
 	if perception_component.player_ref:
 		nav_agent.set_target_position(perception_component.player_ref.global_position)
 
-func on_player_lost():
-	print("player lost!")
-	if nav_agent.is_navigation_finished():
-		
-		transitioned.emit(self, "Enemy_IdleState")
+#func on_player_lost():
+	#print("player lost!")
+	#if nav_agent.is_navigation_finished():
+		#
+		#transitioned.emit(self, "Enemy_IdleState")
 	
 
-func on_navigation_finished():
-	print("navigation finished!")
-	transitioned.emit(self, "Enemy_IdleState")
+#func on_navigation_finished():
+	#print("navigation finished!")
+	#transitioned.emit(self, "Enemy_IdleState")

@@ -28,6 +28,6 @@ func physics_update(delta : float):
 
 
 # TODO: determine if we should be grounded or inair
-func _on_hurt_timer_timeout() -> void:
-	print("leaving hurt state!")
-	transitioned.emit(self, "Enemy_IdleState")
+#func _on_hurt_timer_timeout() -> void:
+	#print("leaving hurt state!")
+	#transitioned.emit(self, "Enemy_IdleState")

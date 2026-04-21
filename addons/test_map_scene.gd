@@ -1,7 +1,6 @@
 extends Node3D
 
 # References
-@onready var blackboard:Blackboard = $EnemyBlackboard
 @onready var player_ref:CharacterBody3D = $Player
 
 # Preloads

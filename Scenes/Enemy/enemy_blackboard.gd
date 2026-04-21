@@ -1,7 +1,16 @@
-extends Blackboard
+class_name EnemyBlackboard extends Blackboard
+
 
 
 func _ready():
-	set_value("is_alive", health_component.is_alive, self.to_string())
-	set_value("node#", self)
-	blackboard = new_blackboard
+	set_value("is_dead", false)
+	set_value("just_attacked", false)
+	set_value("see_player", false)
+	set_value("can_attack", false)
+	set_value("has_task", false)
+	
+	set_value("delta", get_process_delta_time())
+	
+	for node in get_tree().current_scene.get_children():
+		if node.is_in_group("Player"):
+			set_value("player_ref", node)

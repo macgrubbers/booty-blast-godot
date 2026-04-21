@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bsql0y3q7hwn2" path="res://Scenes/Enemy/EnemyComponents/perception_component_script.gd" id="1_657ps"]
 
-[node name="EnemyPerceptionComponent" type="Area3D"]
-collision_layer = 0
+[node name="EnemyPerceptionComponent" type="Node3D"]
 script = ExtResource("1_657ps")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="PerceptionTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="PerceptionTimer" to="." method="_on_perception_timer_timeout"]

@@ -1,98 +1,61 @@
-extends Area3D
+extends Node3D
 
-var player_ref: CharacterBody3D
-var player_pos: Vector3
-var player_found: bool
-var max_num_missed_pings:int = 3
-var missed_pings:int = 0
-
-@onready var start_tracking_on_area_entered:bool = true
+var player_found:bool = false
+var player_ref:CharacterBody3D
+var ignore_fov_distance:float = 12
 
 @export var los_length:float
 @export var los_vertical_angle:float
 @export var los_horizontal_angle:float = 90
 
-@onready var collision_shape = $PerceptionCollisionShape3D
-@onready var nav_timer = $NavigationTimer
+@onready var parent : CharacterBody3D = get_parent()
+@onready var perception_timer : Timer = $PerceptionTimer
+@onready var nav_agent : NavigationAgent3D = $"../NavigationAgent3D"
 
+signal update_see_player
 
-signal player_just_found()
-signal player_lost
-
-# MCKAYS NOTES
-# On track started:
-#	1. Search for player within FOV
-
-
-# On three missed "pings"
-#	1. set player_found to false
-#	2. set player_ref to null
 
 func _ready() -> void:
-	pass
-
-# Call to start tracking
-# Check area when it's enabled too
-func start_tracking():
-	var bodies = get_overlapping_bodies()
-	for body in bodies:
-		if body.is_in_group("Player"):
-			player_ref = body
-	nav_timer.start()
-	set_monitoring(true)
-
-# Call to stop tracking
-func stop_tracking():
-	nav_timer.stop()
-	set_monitoring(false)
+	await parent.ready
+	player_ref = parent.blackboard.get_value("player_ref")
+	perception_timer.start()
 
 
-# When the player first enters area, save its reference
-func _on_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Player"):
-		player_ref = body
-		if start_tracking_on_area_entered:
-			start_tracking()
-
-# When the player leaves area, remove its reference
-func _on_body_exited(_body: Node3D) -> void:
-	if !player_found:
-		player_ref = null
-		stop_tracking()
+func _on_perception_timer_timeout() -> void:
+	var player_pos = player_ref.get_global_position()
+	check_player_raycast(player_pos)
 
 
-# Get the position of the player if we found them
-func get_player_position()->Vector3:
-	if player_ref and player_found:
-		return player_ref.get_global_position()
-	else:
-		return Vector3.ZERO
-
-
-# At a time interval, attempt a raycast
-func _on_navigation_timer_timeout() -> void:
-	check_player_raycast()
-
-
-func check_player_raycast():
-	# If we don't have a player ref, return
-	if !player_ref:
-		return
-
+# Emits the 'update_see_player' signal if:
+#	1. We are within the Line-of-Sight area of the target (the player)
+#	2. We can "see" the player with a raycast
+#	3. We have not seen the player previously
+func check_player_raycast(player_pos:Vector3):
+	var dist_to_player = (global_position - player_pos).length()
+	print(dist_to_player)
+	
 	# 1. Check if player is within FOV
 	var forward_vec = Vector3.FORWARD
 	var forward_vec_2d = Vector2(forward_vec.x, forward_vec.z)
-	var local_player_pos = to_local(player_ref.global_position)
+	var local_player_pos = to_local(player_pos)
 	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
 	var horiz_angle = fposmod(rad_to_deg(forward_vec_2d.angle_to(local_player_pos_2d)), 360.0)
 
-	# If we're not within the FOV, return
-	if (horiz_angle < (360 - los_horizontal_angle/2) and
+	# Check if:
+	#	1. We see the player
+	#	2. We're close enough to ignore FOV
+	#	3. We're inside our FOV
+	if (player_found and dist_to_player >= ignore_fov_distance and 
+		horiz_angle < (360 - los_horizontal_angle/2) and
 		horiz_angle > (los_horizontal_angle/2)):
+		if player_found:
+			player_found = false
+			emit_signal("update_see_player",player_found)
+			print("Out of FOV")
 		return
 
 	# 2. Check if we have LOS
-	var dir_to_player = global_position.direction_to(player_ref.get_global_position())
+	var dir_to_player = global_position.direction_to(player_pos)
 	var space_state = get_world_3d().direct_space_state
 	var origin = get_global_position()
 	var end = origin + dir_to_player * los_length
@@ -103,12 +66,16 @@ func check_player_raycast():
 	
 	# If we don't have LOS
 	if !result or !result.collider.is_in_group("Player"):
-		player_found = false
-		emit_signal("player_lost")
+		if player_found:
+			player_found = false
+			emit_signal("update_see_player",player_found)
+			print("Lost...")
 		return
 	
 	# We passed all checks and found the player
 	if !player_found:
-		print("We see player!")
 		player_found = true
-		player_just_found.emit()
+		print("I SEE YOU")
+		emit_signal("update_see_player",player_found)
+	
+	nav_agent.set_target_position(player_pos)
