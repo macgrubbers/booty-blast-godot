@@ -10,7 +10,6 @@ func _ready():
 	set_value("can_attack", false)
 	set_value("has_task", false)
 	
-	set_value("delta", get_process_delta_time())
 	
 	for node in get_tree().current_scene.get_children():
 		if node.is_in_group("Player"):

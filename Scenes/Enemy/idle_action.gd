@@ -1,10 +1,12 @@
 @tool
 class_name IdleAction extends ActionLeaf
 
+var delta:float
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	delta = get_physics_process_delta_time()
+
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	var delta = blackboard.get_value("delta")
-	#actor.check_if_floor()
-	
 	actor.gravity_apply(delta)
 	
 	actor.velocity.x = move_toward(actor.velocity.x,0, delta*20)

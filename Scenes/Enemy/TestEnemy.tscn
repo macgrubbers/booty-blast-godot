@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2sjmmkrjsvvv"]
+[gd_scene load_steps=32 format=3 uid="uid://c2sjmmkrjsvvv"]
 
 [ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/test_enemy.gd" id="1_2kq5l"]
 [ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="2_tdukb"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bs4kiuebjywjj" path="res://Scenes/Enemy/see_player_condition.gd" id="18_xjfrq"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="19_wjm2s"]
 [ext_resource type="Script" uid="uid://dywkt3y6favg5" path="res://Scenes/Enemy/attack_action.gd" id="19_xjfrq"]
+[ext_resource type="Script" uid="uid://bisg0lniauw7i" path="res://Scenes/Enemy/pause_action.gd" id="20_wtncq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
 vertex_color_use_as_albedo = true
@@ -176,9 +177,15 @@ script = ExtResource("18_wjm2s")
 
 [node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence"]
 script = ExtResource("19_wjm2s")
-wait_time = 1.0
+wait_time = 3.0
 
-[node name="AttackAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator"]
+[node name="AttackSequence" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator"]
+script = ExtResource("13_wtncq")
+
+[node name="PauseAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator/AttackSequence"]
+script = ExtResource("20_wtncq")
+
+[node name="AttackAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator/AttackSequence"]
 script = ExtResource("19_xjfrq")
 
 [node name="PursueAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite"]
