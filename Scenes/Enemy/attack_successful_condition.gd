@@ -1,9 +1,9 @@
 @tool
-class_name AttackSuccessful extends BlackboardHasCondition
+class_name AttackSuccessfulCondition extends ConditionLeaf
 
-func tick(_actor: Node, blackboard: Blackboard) -> int:
-	var just_attacked = blackboard.get_value("attack_successful")
-	if just_attacked:
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	var attack_successful = blackboard.get_value("attack_successful")
+	if attack_successful:
 		return SUCCESS
 	else:
 		return FAILURE

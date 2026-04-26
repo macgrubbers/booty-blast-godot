@@ -6,11 +6,13 @@ var ignore_fov_distance:float = 12
 
 @export var los_length:float
 @export var los_vertical_angle:float
-@export var los_horizontal_angle:float = 90
+@export var los_horizontal_angle:float = 70
 
 @onready var parent : CharacterBody3D = get_parent()
 @onready var perception_timer : Timer = $PerceptionTimer
 @onready var nav_agent : NavigationAgent3D = $"../NavigationAgent3D"
+@onready var visual_root = $"../VisualRoot"
+@onready var blackboard = $"../EnemyBlackboard"
 
 signal update_see_player
 signal update_can_attack
@@ -18,13 +20,21 @@ signal update_can_attack
 
 func _ready() -> void:
 	await parent.ready
-	player_ref = parent.blackboard.get_value("player_ref")
 	perception_timer.start()
 
 
 func _on_perception_timer_timeout() -> void:
-	var player_pos = player_ref.get_global_position()
-	check_player_raycast(player_pos)
+	player_ref = parent.blackboard.get_value("player_ref")
+	if player_ref:
+		var player_pos = player_ref.get_global_position()
+		check_player_raycast(player_pos)
+	else:
+		print("no player ref!")
+		player_found = false
+		parent.update_see_player(player_found)
+		#parent.update_in_attack_range(false)
+		
+		
 
 
 # Calls update_see_player if:
@@ -38,23 +48,22 @@ func check_player_raycast(player_pos:Vector3):
 	var dist_to_player = (global_position - player_pos).length()
 	if dist_to_player <= parent.attack_range:
 		parent.update_in_attack_range(true)
-	else:
-		parent.update_in_attack_range(false)
+	#else:
+		#parent.update_in_attack_range(false)
 
 	# 1. Check if player is within FOV
-	var forward_vec = Vector3.FORWARD
-	var forward_vec_2d = Vector2(forward_vec.x, forward_vec.z)
 	var local_player_pos = to_local(player_pos)
 	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
-	var horiz_angle = fposmod(rad_to_deg(forward_vec_2d.angle_to(local_player_pos_2d)), 360.0)
+	var facing_dir = -visual_root.global_transform.basis.z
+	var facing_dir_2d = Vector2(facing_dir.x,facing_dir.z)
+	var horiz_angle = abs(rad_to_deg(facing_dir_2d.angle_to(local_player_pos_2d)))
 
 	# Check if:
 	#	1. We see the player
 	#	2. We're close enough to ignore FOV
 	#	3. We're inside our FOV
-	if (player_found and dist_to_player >= ignore_fov_distance and 
-		horiz_angle < (360 - los_horizontal_angle/2) and
-		horiz_angle > (los_horizontal_angle/2)):
+	if (dist_to_player >= ignore_fov_distance and 
+		horiz_angle > los_horizontal_angle/2):
 		if player_found:
 			player_found = false
 			parent.update_see_player(player_found)
@@ -84,3 +93,4 @@ func check_player_raycast(player_pos:Vector3):
 		parent.update_see_player(player_found)
 	
 	nav_agent.set_target_position(player_pos)
+	blackboard.set_value("is_navigation_finished", false)

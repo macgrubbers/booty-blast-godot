@@ -16,3 +16,10 @@ func respawn_player():
 	var new_character = player_node.instantiate()
 	add_child(new_character)
 	player_ref = new_character
+	
+	update_blackboards()
+
+func update_blackboards():
+	for child in get_children():
+		if child.is_in_group("Enemies"):
+			child.blackboard.set_value("player_ref", player_ref)

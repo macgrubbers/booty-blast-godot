@@ -3,7 +3,6 @@ class_name DeadAction extends ActionLeaf
 
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	print("DEAD")
 	# Create enemy ragdoll
 	var enemy_ragdoll:RigidBody3D = actor.ragdoll.instantiate()
 	enemy_ragdoll.set_global_transform(actor.get_global_transform())

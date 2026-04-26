@@ -1,11 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://cla33c2qqx78a"]
+[gd_scene load_steps=18 format=3 uid="uid://cla33c2qqx78a"]
 
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="1_6f4by"]
 [ext_resource type="Script" uid="uid://g2c83seko2aw" path="res://addons/test_map_scene.gd" id="1_yffuu"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="2_d8mrn"]
 [ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/MovingPlatform.tscn" id="3_d8mrn"]
 [ext_resource type="PackedScene" uid="uid://hnkl57lbc0un" path="res://Scenes/Structures/Deadly Structures/HurtGround.tscn" id="3_guw0b"]
-[ext_resource type="Script" uid="uid://crhgdxs5dhm7p" path="res://addons/enemy_blackboard.gd" id="6_1xwdi"]
 [ext_resource type="PackedScene" uid="uid://ct0fq3bju8oq2" path="res://Scenes/Characters/Santa.tscn" id="6_5vr1x"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/TestEnemy.tscn" id="11_fb2ed"]
 [ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="12_gexyx"]
@@ -200,10 +199,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.294795, 6.901273, -14.49458
 
 [node name="Button" parent="NavigationRegion3D/Structures" instance=ExtResource("12_gexyx")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5637279, 0.43799877, 20.407766)
-
-[node name="EnemyBlackboard" type="Node" parent="."]
-script = ExtResource("6_1xwdi")
-metadata/_custom_type_script = "uid://dme5f24l0edsf"
 
 [node name="Player" parent="." instance=ExtResource("1_6f4by")]
 

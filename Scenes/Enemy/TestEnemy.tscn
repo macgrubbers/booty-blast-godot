@@ -2,12 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/test_enemy.gd" id="1_2kq5l"]
 [ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="2_tdukb"]
-[ext_resource type="Script" uid="uid://0t180l25p6yl" path="res://Scenes/Enemy/enemy_state_machine.gd" id="2_vhmhe"]
 [ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Actor Components/HealthComponent.tscn" id="3_o1tme"]
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="3_qedty"]
+[ext_resource type="Script" uid="uid://cxn8vgjdvt5a4" path="res://Scenes/Enemy/EnemyComponents/enemy_weapon.gd" id="3_xonbj"]
 [ext_resource type="Script" uid="uid://de6v6dugsheog" path="res://Scenes/Actor Components/test_enemy_health_component.gd" id="4_7tq7j"]
-[ext_resource type="Script" uid="uid://bq2jemi2tag5r" path="res://Scenes/Enemy/enemy_pursue_state.gd" id="4_vi1cq"]
 [ext_resource type="PackedScene" uid="uid://ih4mapwge63d" path="res://Scenes/Enemy/EnemyComponents/EnemyWeapon.tscn" id="5_1laig"]
-[ext_resource type="Script" uid="uid://bl15tlcm1bggu" path="res://Scenes/Enemy/enemy_hurt_state_script.gd" id="5_pj6uk"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="10_8hsvt"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
@@ -19,10 +18,11 @@
 [ext_resource type="Script" uid="uid://cs4nggulhq2hy" path="res://Scenes/Enemy/pursue_action.gd" id="17_bng0h"]
 [ext_resource type="Script" uid="uid://ctyouy4ubb6k7" path="res://Scenes/Enemy/idle_action.gd" id="17_pr2kt"]
 [ext_resource type="Script" uid="uid://bvpbgs22hxbgv" path="res://Scenes/Enemy/in_attack_range_condition.gd" id="18_wjm2s"]
+[ext_resource type="Script" uid="uid://dkwwxnv2urk3s" path="res://Scenes/Enemy/attack_successful_condition.gd" id="18_wogru"]
 [ext_resource type="Script" uid="uid://bs4kiuebjywjj" path="res://Scenes/Enemy/see_player_condition.gd" id="18_xjfrq"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="19_wjm2s"]
+[ext_resource type="Script" uid="uid://2qri6rrfv8ui" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="19_wjm2s"]
+[ext_resource type="Script" uid="uid://injr1nr1g0vj" path="res://Scenes/Enemy/taunt_action.gd" id="19_wogru"]
 [ext_resource type="Script" uid="uid://dywkt3y6favg5" path="res://Scenes/Enemy/attack_action.gd" id="19_xjfrq"]
-[ext_resource type="Script" uid="uid://bisg0lniauw7i" path="res://Scenes/Enemy/pause_action.gd" id="20_wtncq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
 vertex_color_use_as_albedo = true
@@ -42,16 +42,16 @@ height = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_numi0"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xonbj"]
+radius = 2.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_psiqa"]
-radius = 1.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7tq7j"]
 radius = 0.6
 height = 2.1
 
-[node name="TestEnemy" type="CharacterBody3D"]
+[node name="TestEnemy" type="CharacterBody3D" groups=["Enemies"]]
 collision_mask = 3
 script = ExtResource("1_2kq5l")
 
@@ -84,31 +84,27 @@ surface_material_override/0 = SubResource("StandardMaterial3D_numi0")
 
 [node name="EnemyWeapon" parent="VisualRoot" instance=ExtResource("5_1laig")]
 transform = Transform3D(-2.1855694e-08, -0.5, -2.1855694e-08, 0, -2.1855694e-08, 0.5, -0.5, 2.1855694e-08, 9.553427e-16, 0.60191965, 0.5462814, 0)
+script = ExtResource("3_xonbj")
+damage = 3
 
-[node name="EnemyStateMachine" type="Node" parent="."]
-script = ExtResource("2_vhmhe")
+[node name="WeaponHitbox" type="Area3D" parent="VisualRoot/EnemyWeapon" node_paths=PackedStringArray("duration_timer")]
+collision_layer = 0
+collision_mask = 524288
+monitoring = false
+monitorable = false
+script = ExtResource("3_qedty")
+duration_timer = NodePath("DurationTimer")
+metadata/_custom_type_script = "uid://bem514aj86eyo"
 
-[node name="Enemy_PursueState" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("4_vi1cq")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="VisualRoot/EnemyWeapon/WeaponHitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 3.7092903e-08, 0.84858656, 0)
+shape = SubResource("SphereShape3D_xonbj")
 
-[node name="Enemy_HurtState" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("5_pj6uk")
-
-[node name="HurtTimer" type="Timer" parent="EnemyStateMachine/Enemy_HurtState"]
-wait_time = 0.5
+[node name="DurationTimer" type="Timer" parent="VisualRoot/EnemyWeapon/WeaponHitbox"]
 one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_psiqa")
-
-[node name="AttackArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009164572, 0)
-collision_layer = 0
-collision_mask = 524288
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24902344, 0)
-shape = SubResource("SphereShape3D_psiqa")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 1.5
@@ -151,49 +147,56 @@ actor = NodePath("..")
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("11_dttib")
 
-[node name="IsDeadSequence" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="IsAliveSequence" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("13_wtncq")
 
-[node name="IsDeadCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsDeadSequence"]
+[node name="IsAliveCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
 script = ExtResource("14_nn124")
 
-[node name="DeadAction" type="Node" parent="BeehaveTree/SelectorComposite/IsDeadSequence"]
-script = ExtResource("17_8hsvt")
-
-[node name="SeePlayerSequence" type="Node" parent="BeehaveTree/SelectorComposite"]
-script = ExtResource("12_o4n5j")
-
-[node name="SeePlayerCondition" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence"]
-script = ExtResource("18_xjfrq")
-
-[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence"]
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
 script = ExtResource("17_aqwe8")
 
-[node name="InAttackRangeSequence" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite"]
+[node name="AttackSuccessfulSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
 script = ExtResource("12_o4n5j")
 
-[node name="InAttackRangeCondition" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence"]
-script = ExtResource("18_wjm2s")
+[node name="AttackSuccessfulCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence"]
+script = ExtResource("18_wogru")
 
-[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence"]
-script = ExtResource("19_wjm2s")
-wait_time = 3.0
+[node name="TauntAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence"]
+script = ExtResource("19_wogru")
 
-[node name="AttackSequence" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator"]
+[node name="SeePlayerReactiveSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
 script = ExtResource("13_wtncq")
 
-[node name="PauseAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator/AttackSequence"]
-script = ExtResource("20_wtncq")
+[node name="SeePlayerOrNavFinishedCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence"]
+script = ExtResource("18_xjfrq")
 
-[node name="AttackAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite/InAttackRangeSequence/CooldownDecorator/AttackSequence"]
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence"]
+script = ExtResource("17_aqwe8")
+
+[node name="InAttackRangeReactiveSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite"]
+script = ExtResource("13_wtncq")
+
+[node name="InAttackRangeCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence"]
+script = ExtResource("18_wjm2s")
+
+[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence"]
+script = ExtResource("19_wjm2s")
+wait_time = 5.0
+
+[node name="AttackAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence/CooldownDecorator"]
 script = ExtResource("19_xjfrq")
 
-[node name="PursueAction" type="Node" parent="BeehaveTree/SelectorComposite/SeePlayerSequence/SelectorReactiveComposite"]
+[node name="Timer" type="Timer" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence/CooldownDecorator/AttackAction"]
+one_shot = true
+
+[node name="PursueAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite"]
 script = ExtResource("17_bng0h")
 
-[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite"]
+[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
 script = ExtResource("17_pr2kt")
 
-[connection signal="timeout" from="EnemyStateMachine/Enemy_HurtState/HurtTimer" to="EnemyStateMachine/Enemy_HurtState" method="_on_hurt_timer_timeout"]
-[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
+[node name="DeadAction" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("17_8hsvt")
+
 [connection signal="timeout" from="EnemyPerceptionComponent/NavigationTimer" to="EnemyPerceptionComponent" method="_on_navigation_timer_timeout"]
