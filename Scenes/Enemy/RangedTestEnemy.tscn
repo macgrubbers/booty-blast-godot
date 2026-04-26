@@ -1,0 +1,208 @@
+[gd_scene load_steps=33 format=3 uid="uid://drjre5d2o6v1t"]
+
+[ext_resource type="Script" uid="uid://dlaqv4ulhm8bc" path="res://Scenes/Enemy/ranged_test_enemy.gd" id="1_x1oxd"]
+[ext_resource type="Script" uid="uid://cvm04xxkhc5eg" path="res://Scenes/Enemy/enemy_ranged_weapon.gd" id="2_2q5qt"]
+[ext_resource type="PackedScene" uid="uid://cy3uvrgnlamro" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="5_xkomw"]
+[ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Actor Components/HealthComponent.tscn" id="6_lxx2r"]
+[ext_resource type="Script" uid="uid://de6v6dugsheog" path="res://Scenes/Actor Components/test_enemy_health_component.gd" id="7_1yuem"]
+[ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="8_4d8qb"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_mwocq"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_x5cig"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="11_f324p"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="11_gt54a"]
+[ext_resource type="Script" uid="uid://brem0kkowevfx" path="res://Scenes/Enemy/is_dead_condition.gd" id="12_momj3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="13_cevqt"]
+[ext_resource type="Script" uid="uid://0eoucuud5j4a" path="res://Scenes/Enemy/search_for_player_action.gd" id="14_o70f3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="14_q5668"]
+[ext_resource type="Script" uid="uid://dkwwxnv2urk3s" path="res://Scenes/Enemy/attack_successful_condition.gd" id="15_3u4oq"]
+[ext_resource type="Script" uid="uid://cswn1t525iden" path="res://Scenes/Enemy/update_navigation_action.gd" id="15_jkion"]
+[ext_resource type="Script" uid="uid://injr1nr1g0vj" path="res://Scenes/Enemy/taunt_action.gd" id="16_nedns"]
+[ext_resource type="Script" uid="uid://bs4kiuebjywjj" path="res://Scenes/Enemy/see_player_condition.gd" id="17_uiqc0"]
+[ext_resource type="Script" uid="uid://k6uvb55n6geb" path="res://Scenes/Enemy/ranged_attack_action.gd" id="18_2q5qt"]
+[ext_resource type="Script" uid="uid://bvpbgs22hxbgv" path="res://Scenes/Enemy/in_attack_range_condition.gd" id="18_fpphq"]
+[ext_resource type="Script" uid="uid://2qri6rrfv8ui" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="19_76rvy"]
+[ext_resource type="Script" uid="uid://cs4nggulhq2hy" path="res://Scenes/Enemy/pursue_action.gd" id="21_guhpx"]
+[ext_resource type="Script" uid="uid://ctyouy4ubb6k7" path="res://Scenes/Enemy/idle_action.gd" id="22_lalh0"]
+[ext_resource type="Script" uid="uid://cmkgjh7l2fs47" path="res://Scenes/Enemy/dead_action.gd" id="23_17c54"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_feemn"]
+material = SubResource("StandardMaterial3D_pj6uk")
+
+[sub_resource type="SphereMesh" id="SphereMesh_8lle6"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_8woie"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlqur"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glmiw"]
+size = Vector3(0.3, 1, 0.3)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y8fsf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ulax1"]
+radius = 0.6
+height = 2.1
+
+[node name="RangedTestEnemy" type="CharacterBody3D"]
+collision_mask = 3
+script = ExtResource("1_x1oxd")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
+mesh = SubResource("CapsuleMesh_feemn")
+skeleton = NodePath("../..")
+
+[node name="eye" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202, 0.715, -0.534)
+mesh = SubResource("SphereMesh_8lle6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
+mesh = SubResource("SphereMesh_8woie")
+surface_material_override/0 = SubResource("StandardMaterial3D_dlqur")
+
+[node name="eye2" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255, 0.715, -0.534)
+mesh = SubResource("SphereMesh_8lle6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
+mesh = SubResource("SphereMesh_8woie")
+surface_material_override/0 = SubResource("StandardMaterial3D_dlqur")
+
+[node name="EnemyRangedWeapon" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0.35965538, 0.23132974, -0.5534748)
+mesh = SubResource("BoxMesh_glmiw")
+script = ExtResource("2_2q5qt")
+
+[node name="Barrel" type="Node3D" parent="VisualRoot/EnemyRangedWeapon"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.51307404, 1.4901161e-08)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_y8fsf")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 1.5
+simplify_path = true
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 15.0
+
+[node name="EnemyPerceptionComponent" parent="." instance=ExtResource("5_xkomw")]
+los_length = 50.0
+
+[node name="NavigationTimer" type="Timer" parent="EnemyPerceptionComponent"]
+wait_time = 0.5
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("6_lxx2r")]
+collision_layer = 1048576
+script = ExtResource("7_1yuem")
+collision_shape = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
+shape = SubResource("CapsuleShape3D_ulax1")
+
+[node name="DamageImmunityTimer" type="Timer" parent="HealthComponent"]
+one_shot = true
+
+[node name="KnockbackImmunityTimer" type="Timer" parent="HealthComponent"]
+
+[node name="KillTimer" type="Timer" parent="HealthComponent"]
+wait_time = 2.0
+
+[node name="EnemyBlackboard" type="Node" parent="."]
+script = ExtResource("8_4d8qb")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("9_mwocq")
+actor_node_path = NodePath("..")
+blackboard = NodePath("../EnemyBlackboard")
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("10_x5cig")
+
+[node name="IsAliveSequence" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("11_f324p")
+
+[node name="IsAliveCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
+script = ExtResource("12_momj3")
+
+[node name="AlwaysSucceedDecorator" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
+script = ExtResource("11_gt54a")
+
+[node name="TrackingCooldown" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator"]
+script = ExtResource("19_76rvy")
+wait_time = 0.3
+metadata/_custom_type_script = "uid://2qri6rrfv8ui"
+
+[node name="TrackPlayerSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown"]
+script = ExtResource("14_q5668")
+
+[node name="SearchForPlayerAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown/TrackPlayerSequence"]
+script = ExtResource("14_o70f3")
+metadata/_custom_type_script = "uid://0eoucuud5j4a"
+
+[node name="UpdateNavigationAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown/TrackPlayerSequence"]
+script = ExtResource("15_jkion")
+
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
+script = ExtResource("13_cevqt")
+
+[node name="AttackSuccessfulSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
+script = ExtResource("14_q5668")
+
+[node name="AttackSuccessfulCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence"]
+script = ExtResource("15_3u4oq")
+
+[node name="TauntAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence"]
+script = ExtResource("16_nedns")
+
+[node name="SeePlayerReactiveSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
+script = ExtResource("11_f324p")
+
+[node name="SeePlayerOrNavFinishedCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence"]
+script = ExtResource("17_uiqc0")
+
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence"]
+script = ExtResource("13_cevqt")
+
+[node name="InAttackRangeReactiveSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite"]
+script = ExtResource("11_f324p")
+
+[node name="InAttackRangeCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence"]
+script = ExtResource("18_fpphq")
+
+[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence"]
+script = ExtResource("19_76rvy")
+wait_time = 5.0
+
+[node name="RangedAttackAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence/CooldownDecorator"]
+script = ExtResource("18_2q5qt")
+
+[node name="Timer" type="Timer" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence/CooldownDecorator/RangedAttackAction"]
+one_shot = true
+
+[node name="PursueAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite"]
+script = ExtResource("21_guhpx")
+
+[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
+script = ExtResource("22_lalh0")
+
+[node name="DeadAction" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("23_17c54")
+
+[connection signal="timeout" from="EnemyPerceptionComponent/NavigationTimer" to="EnemyPerceptionComponent" method="_on_navigation_timer_timeout"]

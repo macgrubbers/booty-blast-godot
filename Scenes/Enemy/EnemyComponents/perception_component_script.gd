@@ -20,7 +20,7 @@ signal update_can_attack
 
 func _ready() -> void:
 	await parent.ready
-	perception_timer.start()
+	#perception_timer.start()
 
 
 func _on_perception_timer_timeout() -> void:
@@ -31,7 +31,7 @@ func _on_perception_timer_timeout() -> void:
 	else:
 		print("no player ref!")
 		player_found = false
-		parent.update_see_player(player_found)
+		blackboard.set_value("player_found", false)
 		#parent.update_in_attack_range(false)
 		
 		
@@ -66,7 +66,7 @@ func check_player_raycast(player_pos:Vector3):
 		horiz_angle > los_horizontal_angle/2):
 		if player_found:
 			player_found = false
-			parent.update_see_player(player_found)
+			blackboard.set_value("player_found", false)
 			print("Out of FOV")
 		return
 
@@ -84,13 +84,16 @@ func check_player_raycast(player_pos:Vector3):
 	if !result or !result.collider.is_in_group("Player"):
 		if player_found:
 			player_found = false
-			parent.update_see_player(player_found)
+			blackboard.set_value("player_found", false)
+
 		return
 	
 	# We passed all checks and found the player
 	if !player_found:
 		player_found = true
-		parent.update_see_player(player_found)
+		blackboard.set_value("player_found", true)
 	
-	nav_agent.set_target_position(player_pos)
-	blackboard.set_value("is_navigation_finished", false)
+	blackboard.set_value("last_seen_player_pos", player_pos)
+
+	#blackboard.set_target_position(player_pos)
+	#blackboard.set_value("is_navigation_finished", false)

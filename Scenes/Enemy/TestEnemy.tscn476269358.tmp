@@ -157,22 +157,22 @@ script = ExtResource("13_wtncq")
 [node name="IsAliveCondition" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
 script = ExtResource("14_nn124")
 
-[node name="Tracking" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
+[node name="AlwaysSucceedDecorator" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]
 script = ExtResource("13_xonbj")
 
-[node name="TrackingCooldown" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/Tracking"]
+[node name="TrackingCooldown" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator"]
 script = ExtResource("19_wjm2s")
 wait_time = 0.3
 metadata/_custom_type_script = "uid://2qri6rrfv8ui"
 
-[node name="TrackPlayerSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/Tracking/TrackingCooldown"]
+[node name="TrackPlayerSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown"]
 script = ExtResource("12_o4n5j")
 
-[node name="SearchForPlayerAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/Tracking/TrackingCooldown/TrackPlayerSequence"]
+[node name="SearchForPlayerAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown/TrackPlayerSequence"]
 script = ExtResource("16_pjybl")
 metadata/_custom_type_script = "uid://0eoucuud5j4a"
 
-[node name="Melee_UpdateNavigationAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/Tracking/TrackingCooldown/TrackPlayerSequence"]
+[node name="Melee_UpdateNavigationAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/AlwaysSucceedDecorator/TrackingCooldown/TrackPlayerSequence"]
 script = ExtResource("17_xdjo4")
 
 [node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence"]

@@ -1,10 +1,11 @@
 @tool
-class_name Melee_AttackAction extends ActionLeaf
+class_name RangedAttackAction extends ActionLeaf
 
 @onready var attack_dir:Vector3
 @onready var CHARGE_SPEED:float
 
 var delta:float
+@onready var player_pos:Vector3
 @onready var charge_time:float = 0.25
 var current_time:float
 
@@ -17,16 +18,12 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	post_attack = false
 	current_time = 0
 	CHARGE_SPEED = 20
-	var player_pos = blackboard.get_value("player_ref").get_global_position()
-	attack_dir = actor.get_global_position().direction_to(player_pos)
+	player_pos = blackboard.get_value("player_ref").get_global_position()
 	delta = get_physics_process_delta_time()
 
 	
 	#actor.weapon.toggle_hitbox(true)
-	actor.weapon.activate_for_set_time(1.5)
-	actor.visual_root.look_at(player_pos)
-	actor.visual_root.rotation.x = 0
-	actor.visual_root.rotation.z = 0
+	
 	
 	timer.start()
 
@@ -42,9 +39,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	if post_attack:
 		return SUCCESS
 		
-	current_time += delta
-	actor.velocity.x = attack_dir.x * CHARGE_SPEED
-	actor.velocity.z = attack_dir.z * CHARGE_SPEED
+	actor.weapon.fire(player_pos)
 	
 	if current_time <= charge_time:
 		return RUNNING
