@@ -43,11 +43,12 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	var actor_pos = actor.get_global_position()
 	var player_pos = blackboard.get_value("player_ref").get_global_position()
 	var dist_to_player = (actor_pos - player_pos).length()
+	var just_attacked = blackboard.get_value("just_attacked")
 
 	if dist_to_player <= actor.attack_range:
 		blackboard.set_value("in_attack_range", true)
-	else:
-		blackboard.set_value("in_attack_range", false)
+	#else:
+		#blackboard.set_value("in_attack_range", false)
 
 	# 1. Check if player is within FOV
 	var local_player_pos = actor.to_local(player_pos)
@@ -60,19 +61,23 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	#	1. We see the player
 	#	2. We're close enough to ignore FOV
 	#	3. We're inside our FOV
-	if (dist_to_player >= ignore_fov_distance and 
-		horiz_angle > los_horizontal_angle/2):
+	if ((dist_to_player >= ignore_fov_distance and 
+		horiz_angle > los_horizontal_angle/2) and 
+		!just_attacked):
 		if see_player:
 			see_player = false
 			blackboard.set_value("see_player", false)
 		return
 
+	if just_attacked:
+		print("just attakced")
+		blackboard.set_value("just_attacked", false)
+
 	# 2. Check if we have LOS
-	var dir_to_player = actor_pos.direction_to(player_pos)
+	var dir_to_player = actor_pos.direction_to(player_pos + Vector3(0,0.5,0))
 	var space_state = actor.get_world_3d().direct_space_state
 	var origin = actor_pos
 	var end = origin + dir_to_player * los_length
-	end.y = origin.y	# Make it flat for now
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_areas = false
 	query.set_collision_mask(1 | 2 | 20)
@@ -91,5 +96,4 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 		blackboard.set_value("see_player", true)
 		blackboard.set_value("player_just_lost", false)
 
-	
 	blackboard.set_value("last_seen_player_pos", player_pos)

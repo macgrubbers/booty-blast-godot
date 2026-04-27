@@ -2,6 +2,7 @@ class_name EnemyBlackboard extends Blackboard
 
 func _ready():
 	set_value("is_alive", true)
+	set_value("just_attacked", false)
 	set_value("attack_successful", false)
 	set_value("see_player", false)
 	set_value("last_seen_player_pos", Vector3.ZERO)
