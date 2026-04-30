@@ -29,6 +29,7 @@ var knockback_vector : Vector3
 @export_group("Dash variables")
 @export var dash_speed : float
 @export var dash_duration : float
+@export var dash_accel : float
 
 @export_group("Jump variables")
 @export var jump_height : float

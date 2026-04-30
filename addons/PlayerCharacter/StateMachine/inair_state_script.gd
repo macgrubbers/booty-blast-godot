@@ -61,6 +61,9 @@ func input_management():
 	if Input.is_action_just_pressed("lmb"):
 		transitioned.emit(self, "AirAttackState")
 		
+	if Input.is_action_just_pressed("v"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "DashState")
 		
 func check_if_floor():
 	if cR.is_on_floor():

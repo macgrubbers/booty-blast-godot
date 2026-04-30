@@ -65,6 +65,10 @@ func input_management():
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
+			
+	if Input.is_action_just_pressed("v"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "DashState")
 		
 		
 func move(delta : float):
