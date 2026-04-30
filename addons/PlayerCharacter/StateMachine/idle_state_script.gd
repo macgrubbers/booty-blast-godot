@@ -59,6 +59,10 @@ func input_management():
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
+			
+	if Input.is_action_just_pressed("v"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "DashState")
 	
 	# TODO: Maybe there's a better way to determine if we should start dialogue?
 	#	TODO: we cannot speak AND interact with an object with this implementation

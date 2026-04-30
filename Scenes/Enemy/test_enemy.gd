@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 8.0
+const PATROL_SPEED = 5.0
 var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
@@ -10,13 +11,14 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var perception_component = $EnemyPerceptionComponent
 @onready var nav_agent = $NavigationAgent3D
 @onready var health_component = $HealthComponent
+@onready var behavior_tree = $BeehaveTree
 @onready var blackboard : Blackboard = $EnemyBlackboard
 @onready var weapon = $VisualRoot/EnemyWeapon
 @onready var visual_root = $VisualRoot
 @onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
 
-@export var patrol_path : Curve3D
+@export var patrol_path : Path3D
 
 func _ready() -> void:
 	nav_agent.connect("navigation_finished", _on_naviagtion_finished)
@@ -28,6 +30,7 @@ func _ready() -> void:
 	
 	if patrol_path:
 		blackboard.set_value("can_patrol", true)
+
 
 func _physics_process(_delta: float) -> void:
 	visual_root.global_position = global_position

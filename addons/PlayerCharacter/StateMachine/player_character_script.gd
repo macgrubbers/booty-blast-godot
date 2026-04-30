@@ -26,6 +26,10 @@ var knockback_vector : Vector3
 @export var run_deccel : float
 @export var continious_run : bool = false #if true, doesn't need to keep run button on to run
 
+@export_group("Dash variables")
+@export var dash_speed : float
+@export var dash_duration : float
+
 @export_group("Jump variables")
 @export var jump_height : float
 @export var jump_time_to_peak : float

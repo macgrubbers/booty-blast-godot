@@ -72,7 +72,7 @@ func check_if_wall():
 	var collider = forward_raycast.get_collider()
 	if collider and applied_rotation_timer.is_stopped():
 		var model_rotation = cR.visual_root.rotation.y
-		cR.velocity.y = 0
+		cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
 		health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
 		cR.visual_root.rotation.y += PI
 		applied_rotation_timer.start()
