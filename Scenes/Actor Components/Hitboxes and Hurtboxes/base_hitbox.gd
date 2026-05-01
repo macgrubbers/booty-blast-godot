@@ -3,11 +3,16 @@ class_name BaseHitbox extends Area3D
 @export var duration_timer: Timer
 @onready var damage:int = 1
 
+#var debug_shape:Shape3D
+
 signal attack_successful
 
 func _ready() -> void:
-	connect("area_entered",_on_area_entered)
-	duration_timer.connect("timeout", _on_duration_timer_timeout)
+	if duration_timer:
+		connect("area_entered",_on_area_entered)
+		duration_timer.connect("timeout", _on_duration_timer_timeout)
+	else:
+		monitoring = true
 
 
 func _on_area_entered(area: Area3D) -> void:

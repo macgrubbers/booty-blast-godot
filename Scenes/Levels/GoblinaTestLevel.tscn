@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=6 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_vuc7q"]
@@ -16,12 +16,6 @@ sky = SubResource("Sky_d8mrn")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vuc7q"]
-size = Vector3(110, 0.2, 110)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_afynh"]
-size = Vector2(110, 110)
-
 [node name="GoblinaTestLevel" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
@@ -38,38 +32,46 @@ environment = SubResource("Environment_okje8")
 [node name="Structures" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.972207, 0)
 
-[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D/Structures"]
-collision_layer = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Structures/Ground"]
-shape = SubResource("BoxShape3D_vuc7q")
-
-[node name="GroundMesh" type="MeshInstance3D" parent="NavigationRegion3D/Structures/Ground"]
-material_override = ExtResource("1_okje8")
-mesh = SubResource("PlaneMesh_afynh")
-skeleton = NodePath("../../../..")
-
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Structures"]
 material_override = ExtResource("1_okje8")
 use_collision = true
 collision_layer = 2
 
 [node name="WallJumpTest1" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-8.742278e-08, 0, 1, 0, 5, 0, -2, 0, -4.371139e-08, -5, 15, 50)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 5, 0, -2, 0, -4.371139e-08, 64.506584, 21.412918, 86.66545)
 size = Vector3(4, 6, 1)
 
 [node name="WallJumpTest2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-8.742278e-08, 0, 1, 0, 5, 0, -2, 0, -4.371139e-08, 5, 15, 50)
+transform = Transform3D(-8.742277e-08, 0, 1, 0, 5, 0, -2, 0, -4.3711385e-08, 74.506584, 21.412918, 86.66545)
 size = Vector3(4, 6, 1)
 
 [node name="WallJumpTest3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(2.8, 0, 0, 0, 5, 0, 0, 0, 1, 0, 15, 54.482334)
+transform = Transform3D(2.8, 0, -3.5527137e-15, 0, 5, 0, 1.4210855e-14, 0, 1, 69.506584, 21.412918, 91.14778)
 size = Vector3(4, 6, 1)
 
 [node name="WallJumpTest4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(2.8, 0, 0, 0, -2.1855695e-07, -1, 0, 5, -4.371139e-08, 0, 24.700047, 31.144363)
+transform = Transform3D(2.8, -1.4210855e-14, 2.1175824e-22, 0, -2.1855696e-07, -1, 1.4210855e-14, 5, -4.371139e-08, 69.506584, 31.112968, 67.809814)
 size = Vector3(4, 6, 1)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0459747, 43.3733)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -30, 2.046, 113)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -20, 14.251, 42.5)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 20, 14.251, 42.5)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.4464054, 14.251, -6.4034014)
+size = Vector3(40, 0.5, 100)
+
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0263329, 0)
