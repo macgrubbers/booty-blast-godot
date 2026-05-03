@@ -73,6 +73,14 @@ var coyote_jump_on : bool = false
 @export var ragdoll_on_floor_only : bool = false
 @export var follow_cam_pos_when_aimed : bool = false
 
+# Size variables
+enum sizes {SMALL,LARGE}
+@onready var small_size_scale: int = 1
+@onready var large_size_scale: int = 4
+@onready var current_size:sizes
+@onready var changing_size:bool
+@onready var transform_rate:float = 2
+
 #references variables
 @onready var visual_root = %VisualRoot
 @onready var godot_plush_skin = %GodotPlushSkin
@@ -119,6 +127,9 @@ func _process(delta: float):
 	
 func _physics_process(delta : float):
 	modify_physics_properties()
+	
+	if changing_size:
+		change_size(delta)
 	
 	move_and_slide()
 	
@@ -185,3 +196,20 @@ func check_if_alive()->bool:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugView"):
 		debug_hud.visible = not debug_hud.visible
+
+
+# Change the size of the player
+func change_size(delta:float):
+	if current_size == sizes.SMALL:
+		scale = scale.move_toward(Vector3(1,1,1)*large_size_scale, transform_rate * delta)
+		if scale == Vector3(1,1,1)*4:
+			current_size = sizes.LARGE
+			changing_size = false
+	else:
+		scale = scale.move_toward(Vector3(1,1,1) * small_size_scale, transform_rate * delta)
+		if scale == Vector3(1,1,1):
+			current_size = sizes.SMALL
+			changing_size = false
+
+func toggle_size():
+	changing_size = true
