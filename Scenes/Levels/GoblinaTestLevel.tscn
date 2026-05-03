@@ -21,7 +21,7 @@ glow_enabled = true
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 46.7243, -24.7815)
+transform = Transform3D(-0.8660254, -0.48296297, 0.12940957, 0, 0.25881907, 0.9659259, -0.50000006, 0.83651626, -0.22414389, 0, 295.70538, 224.74242)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
@@ -30,48 +30,64 @@ environment = SubResource("Environment_okje8")
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 
 [node name="Structures" type="Node3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.972207, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Structures"]
 material_override = ExtResource("1_okje8")
 use_collision = true
 collision_layer = 2
 
-[node name="WallJumpTest1" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-8.742278e-08, 0, 1, 0, 5, 0, -2, 0, -4.371139e-08, 64.506584, 21.412918, 86.66545)
-size = Vector3(4, 6, 1)
-
-[node name="WallJumpTest2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-8.742277e-08, 0, 1, 0, 5, 0, -2, 0, -4.3711385e-08, 74.506584, 21.412918, 86.66545)
-size = Vector3(4, 6, 1)
-
-[node name="WallJumpTest3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(2.8, 0, -3.5527137e-15, 0, 5, 0, 1.4210855e-14, 0, 1, 69.506584, 21.412918, 91.14778)
-size = Vector3(4, 6, 1)
-
-[node name="WallJumpTest4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(2.8, -1.4210855e-14, 2.1175824e-22, 0, -2.1855696e-07, -1, 1.4210855e-14, 5, -4.371139e-08, 69.506584, 31.112968, 67.809814)
-size = Vector3(4, 6, 1)
-
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0459747, 43.3733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 43)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -20, 20, -0.5)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 20, 20, -0.5)
+size = Vector3(40, 0.5, 100)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 20, -50)
+size = Vector3(40, 0.5, 40)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, -0.99999994, 8.742277e-08, 0, -8.742277e-08, -0.99999994, 0.446, 40, 0)
 size = Vector3(40, 0.5, 100)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -30, 2.046, 113)
-size = Vector3(40, 0.5, 100)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.072, 0, 167.5)
+size = Vector3(150, 0.5, 150)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -20, 14.251, 42.5)
-size = Vector3(40, 0.5, 100)
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0, 75, -75)
+size = Vector3(150, 0.5, 150)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 20, 14.251, 42.5)
-size = Vector3(40, 0.5, 100)
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0, 75, 75)
+size = Vector3(150, 0.5, 150)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.4464054, 14.251, -6.4034014)
-size = Vector3(40, 0.5, 100)
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -75, 75, 0)
+size = Vector3(150, 0.5, 150)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 75, 75, 47.5)
+size = Vector3(150, 0.5, 55)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 75, 75, -47.5)
+size = Vector3(150, 0.5, 55)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 75, 105, 0)
+size = Vector3(130, 0.5, 40)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0.3, 75)
+polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
+depth = 6.0
 
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0263329, 0)

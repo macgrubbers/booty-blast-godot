@@ -27,7 +27,7 @@ var aim_cam_pos_side : bool = true #false = left, true = right
 @export var cam_zoom_out_action : String = ""
 
 #references variables
-@onready var cam : Camera3D = %Camera3D
+#@onready var cam : Camera3D = %Camera3D
 
 # Signals
 signal paused
@@ -37,6 +37,8 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.set_use_accumulated_input(false)
 	set_active(active)
+	
+	add_excluded_object(self)
 	
 func set_active(state : bool):
 	#enable/disable play char camera
@@ -77,8 +79,8 @@ func _process(delta):
 	var joy_dir:Vector2 # = Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down")
 	
 	#position the cam according to her mode (default, aim (with left or right side))
-	if !cam_aimed: cam.position = Vector3(0.0, 0.0, zoom_val)
-	else: cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, zoom_val)
+	#if !cam_aimed: cam.position = Vector3(0.0, 0.0, zoom_val)
+	#else: cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, zoom_val)
 	
 	#rotate cam
 	rotate_from_vector(joy_dir * Vector2(1.0, 0.5) * pan_rotation_val * delta)
@@ -96,7 +98,9 @@ func rotate_from_vector(vector : Vector2):
 	
 func zoom_handling(delta : float):
 	#zoom in/out cam, and clamp zoom value between min and max zoom values
-	zoom_val += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
-	zoom_val = clamp(zoom_val, min_zoom_val, max_zoom_val)
+	#zoom_val += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
+	#zoom_val = clamp(zoom_val, min_zoom_val, max_zoom_val)
+	spring_length += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
+	spring_length = clamp(spring_length, min_zoom_val, max_zoom_val)
 	
 	
