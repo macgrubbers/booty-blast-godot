@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=10 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_vuc7q"]
+[ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/MovingPlatform.tscn" id="3_afynh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ey38f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,6 +16,34 @@ background_mode = 2
 sky = SubResource("Sky_d8mrn")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_afynh"]
+resource_name = "new_animation"
+length = 8.0
+loop_mode = 2
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(2.5, 1, -4.709791, 3.498382, 189.42188, 6.1, 1, -4.71, 40, 189.422, 8, 1, -4.71, 40, 189.422)
+
+[sub_resource type="Animation" id="Animation_8gaqj"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -4.709791, 3.498382, 189.42188)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_35nj8"]
+_data = {
+&"RESET": SubResource("Animation_8gaqj"),
+&"new_animation": SubResource("Animation_afynh")
+}
 
 [node name="GoblinaTestLevel" type="Node3D"]
 
@@ -37,7 +66,7 @@ use_collision = true
 collision_layer = 2
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 43)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 80.46789)
 size = Vector3(40, 0.5, 100)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D"]
@@ -57,7 +86,7 @@ transform = Transform3D(1, 0, 0, 0, -0.99999994, 8.742277e-08, 0, -8.742277e-08,
 size = Vector3(40, 0.5, 100)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.072, 0, 167.5)
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -0.072, 0, 167.5)
 size = Vector3(150, 0.5, 150)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
@@ -84,10 +113,24 @@ size = Vector3(150, 0.5, 55)
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 75, 105, 0)
 size = Vector3(130, 0.5, 40)
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0.3, 75)
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.429574, 0.00014138222, 192.46013)
+polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
+depth = 6.0
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGPolygon3D2"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -10.421617, -0.11972821, -6.2006073)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
 depth = 6.0
 
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0263329, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.848493, 65.271324)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("3_afynh")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.709791, 3.498382, 189.42188)
+collision_layer = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
+libraries = {
+&"": SubResource("AnimationLibrary_35nj8")
+}
