@@ -53,7 +53,7 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	# 1. Check if player is within FOV
 	var local_player_pos = actor.to_local(player_pos)
 	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
-	var facing_dir = -actor.visual_root.global_transform.basis.z
+	var facing_dir = -actor.visual_root.global_transform.basis.z + actor.global_transform.basis.z
 	var facing_dir_2d = Vector2(facing_dir.x,facing_dir.z)
 	var horiz_angle = abs(rad_to_deg(facing_dir_2d.angle_to(local_player_pos_2d)))
 
@@ -64,6 +64,7 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	if ((dist_to_player >= ignore_fov_distance and 
 		horiz_angle > los_horizontal_angle/2) and 
 		!just_attacked):
+		print("not in los")
 		if see_player:
 			see_player = false
 			blackboard.set_value("see_player", false)

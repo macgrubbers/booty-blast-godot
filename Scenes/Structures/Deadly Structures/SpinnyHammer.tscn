@@ -17,6 +17,7 @@ transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, 0.25, 0, -0.25, -1.092784
 [node name="BaseHitbox" type="Area3D" parent="Sketchfab_Scene"]
 collision_layer = 0
 collision_mask = 524288
+monitorable = false
 script = ExtResource("3_eea7c")
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
