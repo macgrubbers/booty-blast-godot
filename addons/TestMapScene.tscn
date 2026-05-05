@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/MovingPlatform.tscn" id="3_d8mrn"]
 [ext_resource type="PackedScene" uid="uid://hnkl57lbc0un" path="res://Scenes/Structures/Deadly Structures/HurtGround.tscn" id="3_guw0b"]
 [ext_resource type="PackedScene" uid="uid://ct0fq3bju8oq2" path="res://Scenes/Characters/Santa.tscn" id="6_5vr1x"]
-[ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/TestEnemy.tscn" id="11_fb2ed"]
+[ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="11_fb2ed"]
 [ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="12_gexyx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f4by"]

@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
 [ext_resource type="PackedScene" uid="uid://biygdyqsnd43a" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="2_8gaqj"]
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_vuc7q"]
-[ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/TestEnemy.tscn" id="3_afynh"]
+[ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="3_afynh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ey38f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -124,7 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.848493, 65.271324)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 42.483215, 1.1749973, 157.18683)
 
 [node name="TestEnemy2" parent="." instance=ExtResource("3_afynh")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 42.483215, 1.1749973, 162.75293)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 42.483215, 1.1749973, 162.75293)
 
 [node name="TestEnemy3" parent="." instance=ExtResource("3_afynh")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 42.483215, 1.1749973, 150.70099)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.483215, 1.1749973, 150.70099)

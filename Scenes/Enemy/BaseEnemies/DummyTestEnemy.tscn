@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://br2g5rfbuher0"]
+
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="1_2a34n"]
+[ext_resource type="Script" uid="uid://bfopmp6igag53" path="res://Scenes/Enemy/BaseEnemies/dummy_test_enemy.gd" id="1_2aieb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtncq"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2aieb"]
+material = SubResource("StandardMaterial3D_wtncq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_8koco"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_qamok"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nshfs"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cptsp"]
+radius = 1.1
+height = 4.1
+
+[node name="DummyTestEnemy" type="CharacterBody3D"]
+script = ExtResource("1_2aieb")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
+mesh = SubResource("CapsuleMesh_2aieb")
+skeleton = NodePath("../..")
+
+[node name="eye" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202, 0.715, -0.534)
+mesh = SubResource("SphereMesh_8koco")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
+mesh = SubResource("SphereMesh_qamok")
+surface_material_override/0 = SubResource("StandardMaterial3D_nshfs")
+
+[node name="eye2" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255, 0.715, -0.534)
+mesh = SubResource("SphereMesh_8koco")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
+mesh = SubResource("SphereMesh_qamok")
+surface_material_override/0 = SubResource("StandardMaterial3D_nshfs")
+
+[node name="WeaponHitbox" type="Area3D" parent="." node_paths=PackedStringArray("duration_timer")]
+transform = Transform3D(-2.1855694e-08, -0.5, -2.1855694e-08, 0, -2.1855694e-08, 0.5, -0.5, 2.1855694e-08, 9.553427e-16, 0, 0, 0)
+collision_layer = 0
+collision_mask = 524288
+monitoring = false
+monitorable = false
+script = ExtResource("1_2a34n")
+duration_timer = NodePath("")
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_cptsp")
