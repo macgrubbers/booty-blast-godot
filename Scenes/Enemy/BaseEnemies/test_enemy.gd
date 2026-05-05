@@ -15,7 +15,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var blackboard : Blackboard = $EnemyBlackboard
 @onready var weapon = $VisualRoot/EnemyWeapon
 @onready var visual_root = $VisualRoot
-@onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
+@onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
 
 @export var patrol_path : Path3D

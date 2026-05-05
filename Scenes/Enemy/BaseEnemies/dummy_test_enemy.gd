@@ -10,11 +10,18 @@ var knockback_vector : Vector3 = Vector3.ZERO
 
 @onready var health_component = $HealthComponent
 @onready var visual_root = $VisualRoot
-@onready var ragdoll = preload("res://Scenes/Enemy/Ragdoll_TestEnemy.tscn")
+@onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 
+var can_patrol : bool = true
 @export var patrol_path : Path3D
+@onready var path_follow : PathFollow3D = $PathFollow3D
 
 func _ready() -> void:
+	if patrol_path:
+		move_child(path_follow, patrol_path.get_index())	# Make path follow a child
+	else:
+		can_patrol = false
+		
 	var temp_rotation = global_rotation
 	global_rotation = Vector3(0,0,0)
 	visual_root.global_rotation = temp_rotation
@@ -24,27 +31,20 @@ func _ready() -> void:
 		#health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	visual_root.global_position = global_position
-	move_and_slide()
+	path_follow.progress += SPEED * delta
+	print(path_follow.progress)
 
 
-func gravity_apply():
-	# apply gravity
-	if !is_on_floor():
-		velocity += get_gravity() * get_physics_process_delta_time()
-	#elif is_on_floor() and gravity_velocity.length() > 0:
-		#restart_gravity()
-
-
-
-# Start tracking the player by starting the timer
-#	TODO: Timer must cycle start once before player is tracked, change this
-'''
-func start_tracking_player()->void:
-	if nav_agent.is_navigation_finished():
-		nav_agent.set_target_position(perception_component.player_ref.global_position)
-'''
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
-	pass
+	# Create enemy ragdoll
+	var enemy_ragdoll:RigidBody3D = ragdoll.instantiate()
+	enemy_ragdoll.set_global_transform(get_global_transform())
+	var rand_hit = Vector3(randf_range(-50,50), randf_range(-50,50), randf_range(-50,50))
+	enemy_ragdoll.apply_impulse(health_component.last_applied_knockback*1.5)
+	enemy_ragdoll.apply_torque(rand_hit)
+	get_tree().current_scene.add_child(enemy_ragdoll)
+	
+	queue_free()
