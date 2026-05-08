@@ -13,15 +13,9 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 
 var can_patrol : bool = true
-@export var patrol_path : Path3D
-@onready var path_follow : PathFollow3D = $PathFollow3D
+@export var path_follow : PathFollow3D
 
 func _ready() -> void:
-	if patrol_path:
-		move_child(path_follow, patrol_path.get_index())	# Make path follow a child
-	else:
-		can_patrol = false
-		
 	var temp_rotation = global_rotation
 	global_rotation = Vector3(0,0,0)
 	visual_root.global_rotation = temp_rotation
@@ -32,9 +26,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	visual_root.global_position = global_position
-	path_follow.progress += SPEED * delta
-	print(path_follow.progress)
+	move_and_slide()
+	print(global_position)
 
 
 	

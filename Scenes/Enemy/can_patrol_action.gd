@@ -1,5 +1,5 @@
 @tool
-class_name CanPatrolCondition extends BlackboardHasCondition
+class_name CanPatrolCondition extends ConditionLeaf
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var can_patrol = blackboard.get_value("can_patrol")

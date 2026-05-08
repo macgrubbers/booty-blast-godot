@@ -126,6 +126,15 @@ spin_rate = 300.0
 transform = Transform3D(-0.14285715, 0, -8.742278e-08, 0, 0.16666667, 0, 1.2488969e-08, 0, -1, 8.514378, 3.5446622, 46.972336)
 spin_rate = 240.0
 
+[node name="Paths" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Patrol1" type="Path3D" parent="NavigationRegion3D/Paths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04467261, 5.867421, 153.91669)
+curve = SubResource("Curve3D_qpiey")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.848493, 65.271324)
 
@@ -138,9 +147,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 42.4
 [node name="TestEnemy3" parent="." instance=ExtResource("3_afynh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.483215, 1.1749973, 150.70099)
 
-[node name="DummyTestEnemy" parent="." node_paths=PackedStringArray("patrol_path") instance=ExtResource("6_qpiey")]
+[node name="DummyTestEnemy" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04467261, 5.867421, 153.91669)
-patrol_path = NodePath("Path3D2")
-
-[node name="Path3D2" type="Path3D" parent="DummyTestEnemy"]
-curve = SubResource("Curve3D_qpiey")
+path_follow = NodePath("../NavigationRegion3D/Paths/Patrol1/PathFollow3D")
