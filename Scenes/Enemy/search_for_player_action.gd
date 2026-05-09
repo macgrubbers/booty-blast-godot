@@ -1,5 +1,5 @@
 @tool
-class_name SearchForPlayerAction extends ActionLeaf
+class_name TrackPlayerAction extends ActionLeaf
 
 var see_player:bool = false
 var ignore_fov_distance:float = 12
@@ -18,60 +18,32 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	return SUCCESS
 
 
-#func _on_perception_timer_timeout() -> void:
-	#player_ref = parent.blackboard.get_value("player_ref")
-	#if player_ref:
-		#var player_pos = player_ref.get_global_position()
-		#check_player_raycast(player_pos)
-	#else:
-		#print("no player ref!")
-		#player_found = false
-		#blackboard.set_value("player_found", false)
-		##parent.update_in_attack_range(false)
-		
-		
 
-
-# Calls update_see_player if:
-#	1. We are within the Line-of-Sight area of the target (the player)
-#	2. We can "see" the player with a raycast
-#	3. We have not seen the player previously
-
-# Calls update_in_attack_range if:
-#	1. The distance to the player is within the parent's attack range
 func check_player_raycast(actor:Node, blackboard:Blackboard):
 	var actor_pos = actor.get_global_position()
 	var player_pos = blackboard.get_value("player_ref").get_global_position()
 	var dist_to_player = (actor_pos - player_pos).length()
 	var just_attacked = blackboard.get_value("just_attacked")
 
-	if dist_to_player <= actor.attack_range:
-		blackboard.set_value("in_attack_range", true)
-	#else:
-		#blackboard.set_value("in_attack_range", false)
 
-	# 1. Check if player is within FOV
+	# Check if player is within FOV
 	var local_player_pos = actor.to_local(player_pos)
 	var local_player_pos_2d = Vector2(local_player_pos.x, local_player_pos.z).normalized()
-	var facing_dir = -actor.visual_root.global_transform.basis.z + actor.global_transform.basis.z
+	var facing_dir = -actor.visual_root.global_transform.basis.z
 	var facing_dir_2d = Vector2(facing_dir.x,facing_dir.z)
 	var horiz_angle = abs(rad_to_deg(facing_dir_2d.angle_to(local_player_pos_2d)))
-
-	# Check if:
-	#	1. We see the player
-	#	2. We're close enough to ignore FOV
-	#	3. We're inside our FOV
-	if ((dist_to_player >= ignore_fov_distance and 
-		horiz_angle > los_horizontal_angle/2) and 
+	
+	# Check if player is outside FOV
+	# If we see the player and are close, ignore FOV checks
+	#	(this prevents the enemy from losing track of the player when very close)
+	if (horiz_angle > los_horizontal_angle/2 and 
 		!just_attacked):
-		print("not in los")
-		if see_player:
-			see_player = false
-			blackboard.set_value("see_player", false)
+		if !see_player and dist_to_player <= ignore_fov_distance:
+				blackboard.set_value("see_player", false)
+				blackboard.set_value("in_attack_range", false)
 		return
 
 	if just_attacked:
-		print("just attakced")
 		blackboard.set_value("just_attacked", false)
 
 	# 2. Check if we have LOS
@@ -87,14 +59,18 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	# If we don't have LOS
 	if !result or !result.collider.is_in_group("Player"):
 		if see_player:
-			see_player = false
 			blackboard.set_value("see_player", false)
+			blackboard.set_value("in_attack_range", false)
 		return
 	
 	# We passed all checks and found the player
 	if !see_player:
-		see_player = true
 		blackboard.set_value("see_player", true)
 		blackboard.set_value("player_just_lost", false)
-
+	
+	if dist_to_player <= actor.attack_range:
+		blackboard.set_value("in_attack_range", true)
+	
 	blackboard.set_value("last_seen_player_pos", player_pos)
+	
+	return

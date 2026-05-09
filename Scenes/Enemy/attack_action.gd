@@ -32,7 +32,6 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 
 # Pause, lunge, pause again
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	print("attack")
 	actor.gravity_apply()
 	if !timer.is_stopped():
 		var lerp_amount:Vector3 = actor.velocity.lerp(Vector3.ZERO,delta*5)

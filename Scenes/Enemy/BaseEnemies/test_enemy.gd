@@ -47,24 +47,10 @@ func gravity_apply():
 	#elif is_on_floor() and gravity_velocity.length() > 0:
 		#restart_gravity()
 
-
-
-# Start tracking the player by starting the timer
-#	TODO: Timer must cycle start once before player is tracked, change this
-'''
-func start_tracking_player()->void:
-	if nav_agent.is_navigation_finished():
-		nav_agent.set_target_position(perception_component.player_ref.global_position)
-'''
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
 	blackboard.set_value("is_alive", false)
 
-#func _on_kill_timer_timeout():
-	#pass
-
-#func update_see_player(status:bool):
-	#blackboard.set_value("see_player", status)
 
 func update_in_attack_range(status:bool):
 	blackboard.set_value("in_attack_range", status)

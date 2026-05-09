@@ -25,11 +25,6 @@ func _ready() -> void:
 		#health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 
 
-func _physics_process(delta: float) -> void:
-	move_and_slide()
-	print(global_position)
-
-
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
 	# Create enemy ragdoll

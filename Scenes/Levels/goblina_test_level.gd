@@ -2,6 +2,7 @@ extends Node3D
 
 # References
 @onready var player_ref:CharacterBody3D = $Player
+@onready var player_spawn_point:Node3D = $NavigationRegion3D/PlayerSpawnPoint
 
 # Preloads
 @onready var player_node = preload("res://addons/PlayerCharacter/PlayerCharacterScene.tscn")
@@ -14,6 +15,7 @@ extends Node3D
 func respawn_player():
 	player_ref.queue_free()
 	var new_character = player_node.instantiate()
+	new_character.global_position = player_spawn_point.global_position
 	add_child(new_character)
 	player_ref = new_character
 	

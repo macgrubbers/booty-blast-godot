@@ -135,6 +135,9 @@ curve = SubResource("Curve3D_qpiey")
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/Patrol1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
+[node name="PlayerSpawnPoint" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 63.8294)
+
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.848493, 65.271324)
 
@@ -148,5 +151,5 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 42.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.483215, 1.1749973, 150.70099)
 
 [node name="DummyTestEnemy" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04467261, 5.867421, 153.91669)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0068746, 5.867421, 155.89268)
 path_follow = NodePath("../NavigationRegion3D/Paths/Patrol1/PathFollow3D")

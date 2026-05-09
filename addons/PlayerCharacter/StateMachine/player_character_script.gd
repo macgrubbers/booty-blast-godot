@@ -119,6 +119,9 @@ func _ready():
 		foot_step_audio.play()
 		)
 		
+	# rotate camera 180 cuz this annoys me greatly
+	$OrbitView.global_rotation.y += PI
+		
 func _process(delta: float):
 	#update_interact_raycast()
 	modify_model_orientation(delta)

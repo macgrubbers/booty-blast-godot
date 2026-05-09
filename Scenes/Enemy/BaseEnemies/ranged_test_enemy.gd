@@ -37,9 +37,6 @@ func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
 func _on_kill_timer_timeout():
 	pass
 
-func update_see_player(status:bool):
-	blackboard.set_value("see_player", status)
-
 func update_in_attack_range(status:bool):
 	blackboard.set_value("in_attack_range", status)
 
