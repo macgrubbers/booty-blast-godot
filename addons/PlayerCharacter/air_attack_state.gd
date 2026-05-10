@@ -22,7 +22,6 @@ func verifications():
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
-	# for the attack area
 	air_attack_area.monitoring = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,7 +58,6 @@ func gravity_apply(delta : float):
 
 func check_if_floor():
 	if cR.is_on_floor():
-		air_attack_area.monitoring = false
 		if cR.move_dir: transitioned.emit(self, cR.walk_or_run)
 		else: transitioned.emit(self, "IdleState")
 
@@ -121,6 +119,10 @@ func _on_air_attack_area_entered(area: Area3D) -> void:
 #	TODO: remove toggle to check states
 func _on_animation_finished():
 	if get_parent().curr_state is AirAttackState:
-		cR.can_wall_jump = true
-		air_attack_area.monitoring = false
 		transitioned.emit(self, "InairState")
+
+func exit():
+	cR.can_wall_jump = true
+	air_attack_area.monitoring = false
+	air_attack_area.area_entered.disconnect(_on_air_attack_area_entered)
+	cR.godot_plush_skin.wave_done.disconnect(_on_animation_finished)

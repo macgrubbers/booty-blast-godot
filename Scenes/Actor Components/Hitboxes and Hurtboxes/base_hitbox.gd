@@ -11,8 +11,7 @@ func _ready() -> void:
 	connect("area_entered",_on_area_entered)
 	if duration_timer:
 		duration_timer.connect("timeout", _on_duration_timer_timeout)
-	else:
-		monitoring = true
+
 
 
 func _on_area_entered(area: Area3D) -> void:
