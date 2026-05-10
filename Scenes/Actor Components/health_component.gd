@@ -5,7 +5,7 @@ var last_applied_knockback:Vector3
 
 @export var is_alive = true
 @export var max_health : float = 3
-@export var current_health : float
+var current_health : float
 @export var collision_shape : Node3D
 
 

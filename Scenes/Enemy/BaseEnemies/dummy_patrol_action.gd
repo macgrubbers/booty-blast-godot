@@ -15,7 +15,8 @@ func _on_actor_ready():
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var delta = get_physics_process_delta_time()
 	path_follow.progress_ratio += actor.patrol_speed * delta
-	actor.visual_root.look_at(path_follow.global_position)
+	if !actor.visual_root.rotation.cross(path_follow.global_position).is_zero_approx():
+		actor.visual_root.look_at(path_follow.global_position)
 	actor.visual_root.rotation.x = 0
 	actor.visual_root.rotation.z = 0
 	actor.global_position = path_follow.global_position

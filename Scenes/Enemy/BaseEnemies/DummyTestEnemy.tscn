@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://bfopmp6igag53" path="res://Scenes/Enemy/BaseEnemies/dummy_test_enemy.gd" id="1_2aieb"]
 [ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Actor Components/HealthComponent.tscn" id="3_8koco"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="4_ioio2"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_ujkjw"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="6_6lcp4"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="7_8h472"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_ujkjw"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="6_6lcp4"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="7_8h472"]
 [ext_resource type="Script" uid="uid://brem0kkowevfx" path="res://Scenes/Enemy/is_dead_condition.gd" id="8_i0bvo"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="9_utdcw"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="10_0k7nr"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="9_utdcw"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="10_0k7nr"]
 [ext_resource type="Script" uid="uid://dkwwxnv2urk3s" path="res://Scenes/Enemy/attack_successful_condition.gd" id="11_6b6w8"]
 [ext_resource type="Script" uid="uid://injr1nr1g0vj" path="res://Scenes/Enemy/taunt_action.gd" id="12_t84fl"]
 [ext_resource type="Script" uid="uid://6ix20nyw0yn0" path="res://Scenes/Enemy/BaseEnemies/dummy_patrol_action.gd" id="13_ioio2"]
@@ -46,7 +46,9 @@ height = 2.05
 radius = 0.6
 height = 1.2
 
-[node name="DummyTestEnemy" type="CharacterBody3D"]
+[node name="DummyTestEnemy" type="CharacterBody3D" groups=["Enemies"]]
+collision_layer = 1048576
+collision_mask = 0
 script = ExtResource("1_2aieb")
 patrol_speed = 0.25
 
@@ -86,6 +88,7 @@ collision_mask = 524288
 monitoring = false
 monitorable = false
 script = ExtResource("1_2a34n")
+target_groups = Array[String](["Player"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitbox"]
@@ -95,6 +98,7 @@ shape = SubResource("CapsuleShape3D_cptsp")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_8koco")]
 collision_layer = 1048576
 monitoring = false
+max_health = 1.0
 collision_shape = NodePath("CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]

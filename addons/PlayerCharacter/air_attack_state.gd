@@ -23,7 +23,7 @@ func verifications():
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
 	# for the attack area
-	air_attack_area.set_monitoring(true)
+	air_attack_area.monitoring = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -40,7 +40,8 @@ func physics_update(delta : float):
 	
 	check_if_floor()
 	
-	check_if_wall()
+	if cR.can_wall_jump:
+		check_if_wall_jump()
 	
 	move(delta)
 
@@ -58,6 +59,7 @@ func gravity_apply(delta : float):
 
 func check_if_floor():
 	if cR.is_on_floor():
+		air_attack_area.monitoring = false
 		if cR.move_dir: transitioned.emit(self, cR.walk_or_run)
 		else: transitioned.emit(self, "IdleState")
 
@@ -67,16 +69,21 @@ func check_if_floor():
 			cR.velocity.z = 0.0
 
 
-# Check if we should wall bounce 
-func check_if_wall():
+# Check if we should wall jump 
+func check_if_wall_jump():
 	var collider = forward_raycast.get_collider()
 	if collider and applied_rotation_timer.is_stopped():
-		var model_rotation = cR.visual_root.rotation.y
-		cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
-		health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
-		cR.visual_root.rotation.y += PI
-		applied_rotation_timer.start()
+		wall_jump()
 
+# Wall jump off of wall or enemy
+# 	TODO: reflection angle is just y-rotation flipped 180
+func wall_jump():
+	cR.can_wall_jump = false
+	var model_rotation = cR.visual_root.rotation.y
+	cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
+	health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
+	cR.visual_root.rotation.y += PI
+	applied_rotation_timer.start()
 
 # Input that transitions states is not handled in this state
 func input_management():
@@ -106,12 +113,14 @@ func _on_air_attack_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
-		area.change_health(-1)
+		area.change_health(-3)
+		wall_jump()
 
 
 # Called when wave animation is complete
 #	TODO: remove toggle to check states
 func _on_animation_finished():
 	if get_parent().curr_state is AirAttackState:
-		air_attack_area.set_monitoring(false)
+		cR.can_wall_jump = true
+		air_attack_area.monitoring = false
 		transitioned.emit(self, "InairState")

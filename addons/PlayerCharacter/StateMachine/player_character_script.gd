@@ -51,6 +51,7 @@ var buffered_jump : bool = false
 var coyote_jump_cooldown_ref : float
 var coyote_jump_on : bool = false
 @export var auto_jump : bool = false
+var can_wall_jump : bool = true
  
 @export_group("In air variables")
 @export var in_air_move_speed : Array[Curve]

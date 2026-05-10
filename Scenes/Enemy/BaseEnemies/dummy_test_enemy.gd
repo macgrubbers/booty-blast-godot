@@ -11,6 +11,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var health_component = $HealthComponent
 @onready var visual_root = $VisualRoot
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
+@onready var blackboard : Blackboard = $EnemyBlackboard
 
 @export var path_follow : PathFollow3D
 

@@ -1,8 +1,8 @@
 class_name BaseHitbox extends Area3D
 
 @export var duration_timer: Timer
-@onready var damage:int = 1
-
+@export var damage:int = 1
+@export var target_groups:Array[String]
 #var debug_shape:Shape3D
 
 signal attack_successful
@@ -16,14 +16,15 @@ func _ready() -> void:
 
 
 func _on_area_entered(area: Area3D) -> void:
-	if area.get_parent().is_in_group("Player"):
-		var player_pos = area.get_parent().get_global_position()
-		area.change_health(-damage,global_position)
-		var k_scale = 10
-		var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
-				 + Vector3(0,k_scale,0)
-		area.apply_knockback(knockback_vec, true)
-		attack_successful.emit()
+	for group in target_groups:
+		if area.get_parent().is_in_group(group) and (area is HealthComponent):
+			var player_pos = area.get_parent().get_global_position()
+			area.change_health(-damage)
+			var k_scale = 10
+			var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
+					 + Vector3(0,k_scale,0)
+			area.apply_knockback(knockback_vec, true)
+			attack_successful.emit()
 
 func activate_for_set_time(duration:float):
 	duration_timer.set_wait_time(duration)

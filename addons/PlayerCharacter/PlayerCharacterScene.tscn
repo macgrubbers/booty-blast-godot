@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=57 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -33,6 +33,7 @@
 [ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="24_qq7mp"]
 [ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
 [ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="26_20r42"]
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="27_wj5av"]
 
 [sub_resource type="Curve" id="Curve_l1d2p"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -193,7 +194,13 @@ draw_pass_1 = SubResource("QuadMesh_bw4i7")
 [node name="AirAttackHitbox" type="Area3D" parent="VisualRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3145728
+monitoring = false
+monitorable = false
+script = ExtResource("27_wj5av")
+damage = 3
+target_groups = Array[String](["Enemies"])
+metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
 shape = SubResource("SphereShape3D_f3fy5")
@@ -339,13 +346,26 @@ monitorable = false
 shape = SubResource("SphereShape3D_pi2tj")
 
 [node name="ButtSlamFallingHitbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43647325, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 0
 collision_mask = 1048576
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamFallingHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
+shape = SubResource("CylinderShape3D_khnxt")
+
+[node name="FallingHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+monitoring = false
+monitorable = false
+script = ExtResource("27_wj5av")
+damage = 3
+target_groups = Array[String](["Enemies"])
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallingHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
 shape = SubResource("CylinderShape3D_khnxt")
 
