@@ -11,6 +11,7 @@ var last_frame_position : Vector3
 var last_frame_velocity : Vector3
 var was_on_floor : bool = false
 var walk_or_run : String = "WalkState" #keep in memory if play char was walking or running before being in the air
+signal just_landed
 
 # Knockback
 var knockback_vector : Vector3
@@ -27,9 +28,11 @@ var knockback_vector : Vector3
 @export var continious_run : bool = false #if true, doesn't need to keep run button on to run
 
 @export_group("Dash variables")
+@onready var can_dash : bool = true
 @export var dash_speed : float
 @export var dash_duration : float
 @export var dash_accel : float
+@onready var dash_reset_timer:Timer = $DashResetTimer
 
 @export_group("Jump variables")
 @export var jump_height : float
@@ -129,6 +132,9 @@ func _process(delta: float):
 	display_properties()
 	
 func _physics_process(delta : float):
+	if is_on_floor() and not was_on_floor:
+		just_landed.emit()
+		
 	modify_physics_properties()
 	
 	if changing_size:
@@ -216,3 +222,15 @@ func change_size(delta:float):
 
 func toggle_size():
 	changing_size = true
+
+func just_dashed():
+	can_dash = false
+	if !is_on_floor():
+		await just_landed
+
+	dash_reset_timer.wait_time = .75
+	dash_reset_timer.start()
+	await dash_reset_timer.timeout
+	print("can dash again!")
+	can_dash = true
+	return

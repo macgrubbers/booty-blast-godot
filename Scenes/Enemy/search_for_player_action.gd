@@ -1,7 +1,6 @@
 @tool
 class_name TrackPlayerAction extends ActionLeaf
 
-var see_player:bool = false
 var ignore_fov_distance:float = 12
 
 @onready var los_length:float = 50
@@ -18,13 +17,12 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	return SUCCESS
 
 
-
 func check_player_raycast(actor:Node, blackboard:Blackboard):
 	var actor_pos = actor.get_global_position()
 	var player_pos = blackboard.get_value("player_ref").get_global_position()
 	var dist_to_player = (actor_pos - player_pos).length()
 	var just_attacked = blackboard.get_value("just_attacked")
-
+	var does_see_player = blackboard.get_value("see_player")
 
 	# Check if player is within FOV
 	var local_player_pos = actor.to_local(player_pos)
@@ -38,9 +36,10 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	#	(this prevents the enemy from losing track of the player when very close)
 	if (horiz_angle > los_horizontal_angle/2 and 
 		!just_attacked):
-		if !see_player and dist_to_player <= ignore_fov_distance:
-				blackboard.set_value("see_player", false)
-				blackboard.set_value("in_attack_range", false)
+		if !does_see_player and dist_to_player <= ignore_fov_distance:
+			print("dropped track!")
+			blackboard.set_value("see_player", false)
+			blackboard.set_value("in_attack_range", false)
 		return
 
 	if just_attacked:
@@ -58,13 +57,14 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	
 	# If we don't have LOS
 	if !result or !result.collider.is_in_group("Player"):
-		if see_player:
+		print("no result!")
+		if does_see_player:
 			blackboard.set_value("see_player", false)
 			blackboard.set_value("in_attack_range", false)
 		return
 	
 	# We passed all checks and found the player
-	if !see_player:
+	if !does_see_player:
 		blackboard.set_value("see_player", true)
 		blackboard.set_value("player_just_lost", false)
 	

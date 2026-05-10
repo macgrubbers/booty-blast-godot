@@ -5,7 +5,7 @@ var state_name : String = "Dash"
 var dash_dir:Vector2
 var cR : CharacterBody3D
 
-@onready var timer : Timer = $DashTimer
+@onready var timer : Timer = $DashDurationTimer
 
 func enter(char_ref : CharacterBody3D):
 	cR = char_ref
@@ -13,26 +13,15 @@ func enter(char_ref : CharacterBody3D):
 	if dash_dir.is_equal_approx(Vector2.ZERO):
 		dash_dir = Vector2(sin(cR.visual_root.rotation.y), cos(cR.visual_root.rotation.y))
 	
-	cR.velocity.y = 0
 	verifications()
 	
 func verifications():
+	cR.velocity.y = 0
+	cR.just_dashed()
 	cR.godot_plush_skin.set_state("run")
 	timer.set_wait_time(cR.dash_duration)
 	timer.connect("timeout", _on_timer_timeout)
 	timer.start()
-	
-	#cR.move_speed = cR.dash_speed
-	#cR.move_accel = cR.run_accel
-	#cR.move_deccel = cR.run_deccel
-	
-	# Copied over from run state
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
-	if !cR.movement_dust.emitting: cR.movement_dust.emitting = true
 	
 func update(_delta : float):
 	pass

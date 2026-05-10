@@ -116,8 +116,8 @@ radius = 2.0
 radius = 5.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_khnxt"]
-height = 1.0
-radius = 1.5
+height = 0.5
+radius = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_tsatr"]
 font_size = 35
@@ -247,7 +247,7 @@ metadata/_custom_type_script = "uid://5gk47o641xgt"
 script = ExtResource("14_mjas7")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 
-[node name="DashTimer" type="Timer" parent="StateMachine/DashState"]
+[node name="DashDurationTimer" type="Timer" parent="StateMachine/DashState"]
 one_shot = true
 
 [node name="JumpState" type="Node" parent="StateMachine"]
@@ -346,6 +346,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamFallingHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
 shape = SubResource("CylinderShape3D_khnxt")
 
 [node name="DialogueHUD" type="CanvasLayer" parent="."]
@@ -608,6 +609,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "....."
 label_settings = ExtResource("17_c1i0s")
+
+[node name="DashResetTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="StateMachine/HurtState/HurtTimer" to="StateMachine/HurtState" method="_on_hurt_timer_timeout"]
 [connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]

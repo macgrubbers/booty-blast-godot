@@ -89,11 +89,13 @@ func toggle_butt_slam_land_hitbox():
 # Signaled when falling hitbox is entered
 func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
+		print("butt slam hit!")
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(Vector3(0,-50,0), false)
 		area.change_health(-3)
 		
 		# apply knockback up to player
+		cR.velocity.y = 0
 		cR.health_component.apply_knockback(Vector3(0,12,0),true)
 		
 		# Refresh jump as if landed
@@ -104,6 +106,7 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 		if cR.has_cut_jump: cR.has_cut_jump = false
 		
 		butt_slam_falling_hitbox.set_monitoring(false)
+		print("butt slam bounce!")
 		transitioned.emit(self, "InairState")
 
 

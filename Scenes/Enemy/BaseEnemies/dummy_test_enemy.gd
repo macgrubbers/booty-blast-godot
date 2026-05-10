@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 8.0
-const PATROL_SPEED = 5.0
+@export var patrol_speed:float
 var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
@@ -12,7 +12,6 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var visual_root = $VisualRoot
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 
-var can_patrol : bool = true
 @export var path_follow : PathFollow3D
 
 func _ready() -> void:

@@ -14,7 +14,7 @@ func _on_actor_ready():
 #	TODO: could be reused for other enemies
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var delta = get_physics_process_delta_time()
-	path_follow.progress_ratio += .25 * delta
+	path_follow.progress_ratio += actor.patrol_speed * delta
 	actor.visual_root.look_at(path_follow.global_position)
 	actor.visual_root.rotation.x = 0
 	actor.visual_root.rotation.z = 0
