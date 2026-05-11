@@ -7,14 +7,17 @@ var state_name : String = "Inair"
 @onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
 
 var cR : CharacterBody3D
+var health_component : HealthComponent
 
 func enter(char_ref : CharacterBody3D):
 	cR = char_ref
+	health_component = cR.health_component
 	
 	verifications()
 	
 func verifications():
 	falling_hitbox.monitoring = true
+	falling_hitbox.connect("attack_successful", _on_falling_attack_successful)
 	cR.godot_plush_skin.set_state("fall")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -117,3 +120,12 @@ func impact_audio_playing():
 
 func exit():
 	falling_hitbox.monitoring = false
+
+func _on_falling_attack_successful():
+	cR.velocity.y = 0
+	health_component.apply_knockback(Vector3(0,10,0),false)
+	cR.floor_snap_length = 1.0
+	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
+	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
+	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
+	if cR.has_cut_jump: cR.has_cut_jump = false

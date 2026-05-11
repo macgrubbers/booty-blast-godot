@@ -57,7 +57,6 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	
 	# If we don't have LOS
 	if !result or !result.collider.is_in_group("Player"):
-		print("no result!")
 		if does_see_player:
 			blackboard.set_value("see_player", false)
 			blackboard.set_value("in_attack_range", false)

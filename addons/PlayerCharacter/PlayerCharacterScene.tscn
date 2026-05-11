@@ -524,6 +524,7 @@ text = "how dafuq do I play
 ????"
 
 [node name="InfoScreen" type="Control" parent="HUD"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -537,10 +538,10 @@ color = Color(0.19076231, 0.19076234, 0.19076231, 0.76862746)
 
 [node name="Label" type="Label" parent="HUD/InfoScreen"]
 layout_mode = 0
-offset_left = 335.0
-offset_top = 69.0
-offset_right = 1036.0
-offset_bottom = 482.0
+offset_left = 325.0
+offset_top = 24.0
+offset_right = 1026.0
+offset_bottom = 515.0
 text = "[wasd] - Move
 [Lshift] + hold - Run
 [space] - Jump
@@ -552,11 +553,14 @@ text = "[wasd] - Move
 [c] - Get beeg
 [x] - Toggle Debug Mode
 
+---------------------------------------------------------------
+double jump in air, dash doesn't start cooldown until landed
 Attack or land on enemies to kill them
-Block attacks also kills enemies
-Getting bigger means bigger attacks
 Air attacks bounce you off walls & enemies
-"
+Block attacks also kills enemies (and reflect projectiles wip)
+Beeg goblina = beeg attacks (and that's it for now)
+----------------------------------------------------------------
+have fun :3"
 
 [node name="DeadScreen" type="Control" parent="HUD"]
 visible = false
