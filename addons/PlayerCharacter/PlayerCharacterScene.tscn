@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=61 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://dn6ij0iia5tca" path="res://addons/PlayerCharacter/dialogue_hud.gd" id="22_tsatr"]
 [ext_resource type="Script" uid="uid://bfo8g37pn7rpt" path="res://addons/hud.gd" id="23_1gvdm"]
 [ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="24_qq7mp"]
+[ext_resource type="Script" uid="uid://k8rc5gww2kps" path="res://addons/PlayerCharacter/block_state.gd" id="25_5gw51"]
 [ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
 [ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="26_20r42"]
 [ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="27_wj5av"]
@@ -85,6 +86,15 @@ anim_offset_max = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f3fy5"]
 radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gw51"]
+transparency = 1
+albedo_color = Color(0.38431373, 0.5764706, 1, 0.5764706)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fdn82"]
+material = SubResource("StandardMaterial3D_5gw51")
+radius = 1.0
+height = 2.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
 random_pitch = 1.2
@@ -204,6 +214,12 @@ metadata/_custom_type_script = "uid://bem514aj86eyo"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
 shape = SubResource("SphereShape3D_f3fy5")
 
+[node name="Shield" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+mesh = SubResource("SphereMesh_fdn82")
+skeleton = NodePath("../../StateMachine/BlockState")
+
 [node name="AudioRoot" type="Node3D" parent="."]
 
 [node name="FootStepAudio" type="AudioStreamPlayer3D" parent="AudioRoot"]
@@ -289,6 +305,14 @@ script = ExtResource("21_f3fy5")
 
 [node name="HurtTimer" type="Timer" parent="StateMachine/HurtState"]
 wait_time = 0.6
+one_shot = true
+
+[node name="BlockState" type="Node" parent="StateMachine"]
+script = ExtResource("25_5gw51")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="Timer" type="Timer" parent="StateMachine/BlockState"]
+wait_time = 0.5
 one_shot = true
 
 [node name="Raycasts" type="Node3D" parent="."]
@@ -500,7 +524,6 @@ text = "how dafuq do I play
 ????"
 
 [node name="InfoScreen" type="Control" parent="HUD"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -514,26 +537,26 @@ color = Color(0.19076231, 0.19076234, 0.19076231, 0.76862746)
 
 [node name="Label" type="Label" parent="HUD/InfoScreen"]
 layout_mode = 0
-offset_left = 285.0
-offset_top = 101.0
-offset_right = 986.0
-offset_bottom = 514.0
+offset_left = 335.0
+offset_top = 69.0
+offset_right = 1036.0
+offset_bottom = 482.0
 text = "[wasd] - Move
-
 [Lshift] + hold - Run
-
-[space] - Jump, land on enemies to kill them and bounce upwards
-
+[space] - Jump
 [v] - Dash
-
 [lmb] - Attack
+[lmb] + in-air - Air Attack
+[rmb] - Block
+[ctrl] - Butt slam
+[c] - Get beeg
+[x] - Toggle Debug Mode
 
-[lmb] while in-air - Air Attack, bounce off walls or enemies when hit
-
-[ctrl] - Butt slam, increases gravity and bounce upwards on hit
-
-[c] - Get BEEG (hitboxes bigger, no other change right now)
-[x] - Debug Mode (not very pretty right now)"
+Attack or land on enemies to kill them
+Block attacks also kills enemies
+Getting bigger means bigger attacks
+Air attacks bounce you off walls & enemies
+"
 
 [node name="DeadScreen" type="Control" parent="HUD"]
 visible = false

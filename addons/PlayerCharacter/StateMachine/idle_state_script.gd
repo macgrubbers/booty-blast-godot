@@ -88,9 +88,13 @@ func input_management():
 		else:
 			print("No collider!")
 		
-		
 	if Input.is_action_just_pressed("lmb"):
-		transitioned.emit(self, "GroundAttackState")
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "GroundAttackState")
+		
+	if Input.is_action_just_pressed("rmb"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "BlockState")
 		
 func move(delta : float):
 	#manage the character movement

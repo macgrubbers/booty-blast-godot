@@ -69,6 +69,10 @@ func input_management():
 	if Input.is_action_just_pressed("v"):
 		if !cR.godot_plush_skin.ragdoll and cR.can_dash:
 			transitioned.emit(self, "DashState")
+			
+	if Input.is_action_just_pressed("rmb"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "BlockState")
 		
 		
 func move(delta : float):

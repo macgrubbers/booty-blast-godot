@@ -8,7 +8,6 @@ var last_applied_knockback:Vector3
 var current_health : float
 @export var collision_shape : Node3D
 
-
 @onready var damage_immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
 
