@@ -4,6 +4,8 @@ class_name InairState
 
 var state_name : String = "Inair"
 
+@onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
+
 var cR : CharacterBody3D
 
 func enter(char_ref : CharacterBody3D):
@@ -12,6 +14,7 @@ func enter(char_ref : CharacterBody3D):
 	verifications()
 	
 func verifications():
+	falling_hitbox.monitoring = true
 	cR.godot_plush_skin.set_state("fall")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -107,3 +110,6 @@ func impact_audio_playing():
 	var floor_impact_percent : float = clamp(abs(cR.velocity.y), 0.0, cR.fall_gravity) / cR.fall_gravity
 	cR.impact_audio.volume_db = linear_to_db(remap(floor_impact_percent, 0.0, 1.0, 0.5, 2.0))
 	cR.impact_audio.play()
+
+func exit():
+	falling_hitbox.monitoring = false

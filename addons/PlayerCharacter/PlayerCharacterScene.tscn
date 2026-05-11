@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=58 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
 [ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="26_20r42"]
 [ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="27_wj5av"]
+[ext_resource type="Script" uid="uid://ce5i03bfhvgwe" path="res://addons/PlayerCharacter/falling_hitbox.gd" id="28_edc57"]
 
 [sub_resource type="Curve" id="Curve_l1d2p"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -198,8 +199,6 @@ collision_mask = 1048576
 monitoring = false
 monitorable = false
 script = ExtResource("27_wj5av")
-damage = 3
-target_groups = Array[String](["Enemies"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
@@ -358,9 +357,11 @@ shape = SubResource("CylinderShape3D_khnxt")
 
 [node name="FallingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 0
+collision_mask = 1048576
 monitoring = false
 monitorable = false
-script = ExtResource("27_wj5av")
+script = ExtResource("28_edc57")
 damage = 3
 target_groups = Array[String](["Enemies"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
@@ -412,56 +413,6 @@ autowrap_mode = 3
 process_mode = 3
 script = ExtResource("23_1gvdm")
 
-[node name="PauseScreen" type="Control" parent="HUD"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="HUD/PauseScreen"]
-layout_mode = 0
-offset_right = 1150.0
-offset_bottom = 650.0
-color = Color(0.29411766, 0.29411766, 0.29411766, 0.56078434)
-
-[node name="Label" type="Label" parent="HUD/PauseScreen"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.80500007
-anchor_bottom = 1.2870001
-offset_left = 491.0
-offset_top = 269.0
-offset_right = 674.8
-offset_bottom = 297.52
-theme_override_colors/font_color = Color(0, 0.7934291, 7.70092e-07, 1)
-text = "PAUSED"
-label_settings = SubResource("LabelSettings_o2ynt")
-
-[node name="DeadScreen" type="Control" parent="HUD"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1153.0
-offset_bottom = 650.0
-
-[node name="Label" type="Label" parent="HUD/DeadScreen"]
-layout_mode = 0
-offset_left = 297.0
-offset_top = 197.0
-offset_right = 959.0
-offset_bottom = 267.0
-text = "You got BOOTY BLASTED"
-label_settings = SubResource("LabelSettings_f3fy5")
-
-[node name="RespawnButton" type="Button" parent="HUD/DeadScreen"]
-layout_mode = 0
-offset_left = 497.0
-offset_top = 294.0
-offset_right = 669.0
-offset_bottom = 360.0
-text = "Respawn"
-
 [node name="HealthBar" type="Control" parent="HUD"]
 process_mode = 1
 layout_mode = 3
@@ -512,6 +463,101 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "[E] Interact"
+
+[node name="PauseScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PauseScreen"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+color = Color(0.29411766, 0.29411766, 0.29411766, 0.56078434)
+
+[node name="Label" type="Label" parent="HUD/PauseScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.80500007
+anchor_bottom = 1.2870001
+offset_left = 491.0
+offset_top = 269.0
+offset_right = 674.8
+offset_bottom = 297.52
+theme_override_colors/font_color = Color(0, 0.7934291, 7.70092e-07, 1)
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_o2ynt")
+
+[node name="InfoScreenButton" type="Button" parent="HUD/PauseScreen"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 374.0
+offset_right = 747.0
+offset_bottom = 440.0
+text = "how dafuq do I play
+????"
+
+[node name="InfoScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/InfoScreen"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+color = Color(0.19076231, 0.19076234, 0.19076231, 0.76862746)
+
+[node name="Label" type="Label" parent="HUD/InfoScreen"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 101.0
+offset_right = 986.0
+offset_bottom = 514.0
+text = "[wasd] - Move
+
+[Lshift] + hold - Run
+
+[space] - Jump, land on enemies to kill them and bounce upwards
+
+[v] - Dash
+
+[lmb] - Attack
+
+[lmb] while in-air - Air Attack, bounce off walls or enemies when hit
+
+[ctrl] - Butt slam, increases gravity and bounce upwards on hit
+
+[c] - Get BEEG (hitboxes bigger, no other change right now)
+[x] - Debug Mode (not very pretty right now)"
+
+[node name="DeadScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 197.0
+offset_right = 959.0
+offset_bottom = 267.0
+text = "You got BOOTY BLASTED"
+label_settings = SubResource("LabelSettings_f3fy5")
+
+[node name="RespawnButton" type="Button" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 294.0
+offset_right = 669.0
+offset_bottom = 360.0
+text = "Respawn"
 
 [node name="DebugHUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -634,5 +680,6 @@ label_settings = ExtResource("17_c1i0s")
 one_shot = true
 
 [connection signal="timeout" from="StateMachine/HurtState/HurtTimer" to="StateMachine/HurtState" method="_on_hurt_timer_timeout"]
-[connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]
 [connection signal="animation_finished" from="HUD/HealthBar/Health1" to="HUD/HealthBar" method="_on_health_1_animation_finished"]
+[connection signal="pressed" from="HUD/PauseScreen/InfoScreenButton" to="HUD" method="_on_info_screen_button_pressed"]
+[connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]

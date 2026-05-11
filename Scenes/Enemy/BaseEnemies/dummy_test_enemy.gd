@@ -5,7 +5,6 @@ const SPEED = 8.0
 var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
-@export var attack_range : float = 10
 @onready var attack_type = "melee"
 
 @onready var health_component = $HealthComponent
