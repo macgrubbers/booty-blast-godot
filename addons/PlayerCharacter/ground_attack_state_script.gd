@@ -69,9 +69,8 @@ func move(delta : float):
 
 func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
-		print(cR)
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.change_health(-5)
+		area.change_health(-5, cR)
 		area.apply_knockback(dir_vector * 5 + Vector3(0,4,0),false)
 
 

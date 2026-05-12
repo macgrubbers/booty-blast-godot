@@ -20,7 +20,7 @@ func _on_area_entered(area: Area3D) -> void:
 	for group in target_groups:
 		if area.get_parent().is_in_group(group) and (area is HealthComponent):
 			var player_pos = area.get_parent().get_global_position()
-			area.change_health(-damage)
+			area.change_health(-damage, owner)
 			var k_scale = 10
 			var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
 					 + Vector3(0,k_scale,0)

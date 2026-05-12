@@ -4,6 +4,7 @@ var state_name : String = "Block"
 
 @onready var block_timer: Timer = $Timer
 @onready var shield: MeshInstance3D = $"../../VisualRoot/Shield"
+@onready var health_component: HealthComponent
 var cR : CharacterBody3D
 
 func enter(char_ref : CharacterBody3D):
@@ -15,6 +16,9 @@ func verifications():
 	shield.visible = true
 	block_timer.connect("timeout", _on_block_timer_timeout)
 	block_timer.start()
+	health_component = cR.health_component
+	health_component.connect("just_hit", block_attack)
+	health_component.can_be_hurt = false
 	
 	cR.godot_plush_skin.set_state("tpose lmao")
 	cR.move_speed = cR.walk_speed
@@ -97,5 +101,11 @@ func _on_block_timer_timeout():
 	transitioned.emit(self, "IdleState")
 
 func exit():
-	print(shield.visible)
+	health_component.disconnect("just_hit", block_attack)
+	health_component.can_be_hurt = true
 	shield.visible = false
+
+
+func block_attack(attacker:Node3D):
+	print("block!")
+	attacker.health_component.change_health(-3, owner)

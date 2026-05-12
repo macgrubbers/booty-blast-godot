@@ -14,6 +14,6 @@ func _process(delta: float) -> void:
 #	NOTE: This will only interface with the player's hurtbox
 func _on_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
-		area.change_health(-1)
+		area.change_health(-1, owner)
 		var body_vel = area.get_parent().get_velocity().normalized()
 		area.apply_knockback(Vector3(-body_vel.x*10,22,-body_vel.z*10), true)

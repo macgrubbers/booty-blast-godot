@@ -4,13 +4,16 @@ class_name HealthComponent
 var last_applied_knockback:Vector3
 
 @export var is_alive = true
+@onready var can_be_hurt: bool = true
 @export var max_health : float = 3
+@export var immunity_time: float = 1
 var current_health : float
 @export var collision_shape : Node3D
 
-@onready var damage_immunity_timer = $DamageImmunityTimer
+@onready var immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
 
+signal just_hit(attacker:Node3D)
 signal update_health(current_health:float)
 signal kill()
 
@@ -23,21 +26,25 @@ func _ready():
 	call_deferred("post_ready")
 
 func post_ready():
-	damage_immunity_timer.set_wait_time(1.0)
-	damage_immunity_timer.set_one_shot(true)
+	immunity_timer.set_wait_time(1.0)
+	immunity_timer.set_one_shot(true)
+	immunity_timer.connect("timeout", _on_immunity_timer_timeout)
 	knockback_immunity_timer.set_wait_time(1.0)
 	knockback_immunity_timer.set_one_shot(true)
 	emit_signal("update_health", current_health)
 
 
-func change_health(amount : float):
+func change_health(amount : float, attacker:Node3D):
 	# ignore changing health if immune or dead
-	if !damage_immunity_timer.is_stopped() or !is_alive:
+	if !can_be_hurt or !is_alive:
 		return
 	
+	emit_signal("just_hit", attacker)
 	current_health += amount
-	damage_immunity_timer.start()
+	immunity_timer.start()
 	emit_signal("update_health", current_health)
+	can_be_hurt = false
+	immunity_timer.start()
 	
 	if current_health <= 0:
 		current_health = 0
@@ -62,3 +69,7 @@ func set_max_health(new_max:float):
 	max_health = new_max
 	if current_health > max_health:
 		current_health = max_health
+
+func _on_immunity_timer_timeout():
+	can_be_hurt = true
+	
