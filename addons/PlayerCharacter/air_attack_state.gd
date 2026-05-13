@@ -18,6 +18,8 @@ func enter(char_ref : CharacterBody3D):
 
 
 func verifications():
+	air_attack_area.area_entered.connect(_on_air_attack_area_entered)
+	cR.godot_plush_skin.wave_done.connect(_on_animation_finished)
 	cR.godot_plush_skin.set_state("air_attack")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -82,6 +84,7 @@ func wall_jump():
 	health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
 	cR.visual_root.rotation.y += PI
 	applied_rotation_timer.start()
+	transitioned.emit(self, "InairState")
 
 # Input that transitions states is not handled in this state
 func input_management():

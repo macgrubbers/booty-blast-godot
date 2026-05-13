@@ -13,7 +13,7 @@ var current_health : float
 @onready var immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
 
-signal just_hit(attacker:Node3D)
+signal just_hit(attacker: Node3D, attack_successful: bool)
 signal update_health(current_health:float)
 signal kill()
 
@@ -37,14 +37,16 @@ func post_ready():
 func change_health(amount : float, attacker:Node3D):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
+		emit_signal("just_hit", attacker, false)
 		return
 	
-	emit_signal("just_hit", attacker)
+	
 	current_health += amount
 	immunity_timer.start()
 	emit_signal("update_health", current_health)
 	can_be_hurt = false
 	immunity_timer.start()
+	emit_signal("just_hit", attacker,true )
 	
 	if current_health <= 0:
 		current_health = 0
@@ -52,6 +54,7 @@ func change_health(amount : float, attacker:Node3D):
 		#get_parent().kill()
 		await get_tree().process_frame # TODO: added to let ragdolls be created after enemy death, maybe remove later
 		emit_signal("kill")
+	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false):
 	# ignore knockback if immune

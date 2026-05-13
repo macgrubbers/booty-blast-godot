@@ -106,6 +106,6 @@ func exit():
 	shield.visible = false
 
 
-func block_attack(attacker:Node3D):
-	print("block!")
+func block_attack(attacker:Node3D, result:bool):
 	attacker.health_component.change_health(-3, owner)
+	attacker.health_component.apply_knockback(Vector3(randf()*10,randf()*10,randf()*10), false)
