@@ -1,19 +1,18 @@
-[gd_scene load_steps=33 format=3 uid="uid://drjre5d2o6v1t"]
+[gd_scene load_steps=32 format=3 uid="uid://drjre5d2o6v1t"]
 
 [ext_resource type="Script" uid="uid://dlaqv4ulhm8bc" path="res://Scenes/Enemy/BaseEnemies/ranged_test_enemy.gd" id="1_x1oxd"]
 [ext_resource type="Script" uid="uid://cvm04xxkhc5eg" path="res://Scenes/Enemy/enemy_ranged_weapon.gd" id="2_2q5qt"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemy/EnemyComponents/EnemyPerceptionComponent.tscn" id="5_xkomw"]
 [ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Actor Components/HealthComponent.tscn" id="6_lxx2r"]
 [ext_resource type="Script" uid="uid://de6v6dugsheog" path="res://Scenes/Actor Components/test_enemy_health_component.gd" id="7_1yuem"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="8_4d8qb"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_mwocq"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_x5cig"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="11_f324p"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="11_gt54a"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="9_mwocq"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="10_x5cig"]
+[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="11_f324p"]
+[ext_resource type="Script" uid="uid://dsf3a8vlolhx8" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="11_gt54a"]
 [ext_resource type="Script" uid="uid://brem0kkowevfx" path="res://Scenes/Enemy/is_dead_condition.gd" id="12_momj3"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="13_cevqt"]
+[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="13_cevqt"]
 [ext_resource type="Script" uid="uid://0eoucuud5j4a" path="res://Scenes/Enemy/search_for_player_action.gd" id="14_o70f3"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="14_q5668"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="14_q5668"]
 [ext_resource type="Script" uid="uid://dkwwxnv2urk3s" path="res://Scenes/Enemy/attack_successful_condition.gd" id="15_3u4oq"]
 [ext_resource type="Script" uid="uid://cswn1t525iden" path="res://Scenes/Enemy/update_navigation_action.gd" id="15_jkion"]
 [ext_resource type="Script" uid="uid://injr1nr1g0vj" path="res://Scenes/Enemy/taunt_action.gd" id="16_nedns"]
@@ -27,7 +26,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj6uk"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(1, 0.4, 0.17254902, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_feemn"]
 material = SubResource("StandardMaterial3D_pj6uk")
@@ -57,7 +56,6 @@ collision_mask = 3
 script = ExtResource("1_x1oxd")
 
 [node name="VisualRoot" type="Node3D" parent="."]
-top_level = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
 mesh = SubResource("CapsuleMesh_feemn")
@@ -100,12 +98,6 @@ simplify_path = true
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 15.0
-
-[node name="EnemyPerceptionComponent" parent="." instance=ExtResource("5_xkomw")]
-los_length = 50.0
-
-[node name="NavigationTimer" type="Timer" parent="EnemyPerceptionComponent"]
-wait_time = 0.5
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("6_lxx2r")]
 collision_layer = 1048576
@@ -204,5 +196,3 @@ script = ExtResource("22_lalh0")
 
 [node name="DeadAction" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("23_17c54")
-
-[connection signal="timeout" from="EnemyPerceptionComponent/NavigationTimer" to="EnemyPerceptionComponent" method="_on_navigation_timer_timeout"]

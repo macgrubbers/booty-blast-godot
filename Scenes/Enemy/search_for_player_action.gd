@@ -39,7 +39,6 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 		if !does_see_player and dist_to_player <= ignore_fov_distance:
 			print("dropped track!")
 			blackboard.set_value("see_player", false)
-			blackboard.set_value("in_attack_range", false)
 		return
 
 	if just_attacked:
