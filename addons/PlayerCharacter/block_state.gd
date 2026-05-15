@@ -107,5 +107,8 @@ func exit():
 
 
 func block_attack(attacker:Node3D, result:bool):
+	if attacker.is_in_group("Projectiles"):
+		attacker.return_to_sender()
+		return
 	attacker.health_component.change_health(-3, owner)
 	attacker.health_component.apply_knockback(Vector3(randf()*10,randf()*10,randf()*10), false)

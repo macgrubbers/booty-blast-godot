@@ -37,7 +37,7 @@ point_count = 4
 [sub_resource type="Curve3D" id="Curve3D_ytg45"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -20),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, -10),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -150,19 +150,19 @@ curve = SubResource("Curve3D_qpiey")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="PatrolFloat1" type="Path3D" parent="NavigationRegion3D/Paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.304537, 29.718407, 163.713)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 30.304537, 29.718407, 163.713)
 curve = SubResource("Curve3D_ytg45")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/PatrolFloat1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 10)
 tilt_enabled = false
 
 [node name="PatrolFloat2" type="Path3D" parent="NavigationRegion3D/Paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.983166, 29.718407, 163.713)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 46.983166, 29.718407, 163.713)
 curve = SubResource("Curve3D_ytg45")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/PatrolFloat2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, -9.999998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 progress = 10.0
 tilt_enabled = false
 
@@ -171,7 +171,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5.1, 167)
 curve = SubResource("Curve3D_ytg45")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/Patrol2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, -9.999998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 progress = 10.0
 tilt_enabled = false
 
