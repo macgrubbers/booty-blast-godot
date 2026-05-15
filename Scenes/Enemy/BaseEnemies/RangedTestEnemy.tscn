@@ -102,6 +102,7 @@ debug_path_custom_point_size = 15.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("6_lxx2r")]
 collision_layer = 1048576
 script = ExtResource("7_1yuem")
+max_health = 1.0
 collision_shape = NodePath("CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]

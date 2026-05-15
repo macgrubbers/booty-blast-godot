@@ -17,7 +17,7 @@ func verifications():
 	block_timer.connect("timeout", _on_block_timer_timeout)
 	block_timer.start()
 	health_component = cR.health_component
-	health_component.connect("just_hit", block_attack)
+	health_component.connect("attack_unsuccessful", block_attack)
 	health_component.can_be_hurt = false
 	
 	cR.godot_plush_skin.set_state("tpose lmao")
@@ -101,7 +101,7 @@ func _on_block_timer_timeout():
 	transitioned.emit(self, "IdleState")
 
 func exit():
-	health_component.disconnect("just_hit", block_attack)
+	health_component.disconnect("attack_unsuccessful", block_attack)
 	health_component.can_be_hurt = true
 	shield.visible = false
 

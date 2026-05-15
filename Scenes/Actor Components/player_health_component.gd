@@ -3,7 +3,7 @@ extends HealthComponent
 @onready var state_machine = $"../StateMachine"
 
 
-func change_health(amount: float, attacker: Node3D):
+func change_health(amount: float, attacker: Node3D, knockback:Vector3 = Vector3.ZERO):
 	# TODO: ignore damage if we're above the source, use can_damage()
 	super(amount, attacker)
 	state_machine.on_player_hurt()

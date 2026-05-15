@@ -13,7 +13,8 @@ var current_health : float
 @onready var immunity_timer = $DamageImmunityTimer
 @onready var knockback_immunity_timer = $KnockbackImmunityTimer
 
-signal just_hit(attacker: Node3D, attack_successful: bool)
+signal attack_successful(attacker: Node3D)
+signal attack_unsuccessful(attacker: Node3D)
 signal update_health(current_health:float)
 signal kill()
 
@@ -34,10 +35,10 @@ func post_ready():
 	emit_signal("update_health", current_health)
 
 
-func change_health(amount : float, attacker:Node3D):
+func change_health(amount : float, attacker:Node3D, knockback:Vector3 = Vector3.ZERO):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
-		emit_signal("just_hit", attacker, false)
+		emit_signal("attack_unsuccessful", attacker, false)
 		return
 	
 	
@@ -46,7 +47,8 @@ func change_health(amount : float, attacker:Node3D):
 	emit_signal("update_health", current_health)
 	can_be_hurt = false
 	immunity_timer.start()
-	emit_signal("just_hit", attacker,true )
+	emit_signal("attack_successful", attacker,true )
+	apply_knockback(knockback)
 	
 	if current_health <= 0:
 		current_health = 0

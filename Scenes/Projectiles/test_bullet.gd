@@ -4,6 +4,7 @@ extends Area3D
 @onready var direction:Vector3
 @onready var shooter:Node3D
 @onready var reflect_speed_multiplier:float = 3
+var target:Node3D
 
 func setup(start_position:Vector3, target:Vector3):
 	set_global_position(start_position)
@@ -19,4 +20,10 @@ func return_to_sender():
 
 func _on_area_entered(area:Area3D)->void:
 	if area is HealthComponent:
-		area.change_health(-1,self)
+		area.connect("attack_successful", cleanup)
+		area.change_health(-1,self,direction*10 + Vector3(0,5,0))
+
+		
+func cleanup():
+	queue_free()
+		
