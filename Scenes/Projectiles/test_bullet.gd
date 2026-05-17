@@ -21,9 +21,11 @@ func return_to_sender():
 func _on_area_entered(area:Area3D)->void:
 	if area is HealthComponent:
 		area.connect("attack_successful", cleanup)
-		area.change_health(-1,self,direction*10 + Vector3(0,5,0))
+		area.apply_knockback(direction*10 + Vector3(0,5,0))
+		area.change_health(-1,self)
+		print("hit a health component")
 
-		
-func cleanup():
+
+func cleanup(target:Node3D):
 	queue_free()
 		

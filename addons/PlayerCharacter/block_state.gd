@@ -106,7 +106,7 @@ func exit():
 	shield.visible = false
 
 
-func block_attack(attacker:Node3D, result:bool):
+func block_attack(attacker:Node3D):
 	if attacker.is_in_group("Projectiles"):
 		attacker.return_to_sender()
 		return

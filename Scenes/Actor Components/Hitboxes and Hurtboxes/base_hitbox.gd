@@ -2,6 +2,7 @@ class_name BaseHitbox extends Area3D
 
 @export var duration_timer: Timer
 @export var damage: int = 1
+@export var knockback_amount: Vector3
 @export var target_groups: Array[String]
 #var debug_shape:Shape3D
 

@@ -1,26 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://biygdyqsnd43a"]
+[gd_scene load_steps=7 format=3 uid="uid://lii61fy4437q"]
 
-[ext_resource type="Script" uid="uid://brt8iu24ws3av" path="res://Scenes/Structures/Deadly Structures/spinny_hammer.gd" id="1_gsyst"]
-[ext_resource type="PackedScene" uid="uid://d0qesc5gvqr64" path="res://Assets/low poly sword/scene.gltf" id="1_pogsc"]
+[ext_resource type="Script" uid="uid://bkahiqlk4mvsb" path="res://Scenes/Structures/Deadly Structures/spinny_hammer.gd" id="1_gsyst"]
 [ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="3_eea7c"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v14hn"]
-size = Vector3(10, 4, 50)
+[sub_resource type="BoxMesh" id="BoxMesh_pogsc"]
+size = Vector3(0.5, 4, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsyst"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eea7c"]
+material = SubResource("StandardMaterial3D_gsyst")
+top_radius = 1.0
+bottom_radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v14hn"]
+height = 1.0
+radius = 0.95
 
 [node name="SpinnyHammer" type="Node3D"]
 script = ExtResource("1_gsyst")
-spin_rate = 180.0
+spin_rate = 360.0
 
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_pogsc")]
-transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, 0.25, 0, -0.25, -1.0927847e-08, 0, 4.937374, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_pogsc")
 
-[node name="BaseHitbox" type="Area3D" parent="Sketchfab_Scene"]
-collision_layer = 0
-collision_mask = 524288
-monitorable = false
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.9938345, 0)
+mesh = SubResource("CylinderMesh_eea7c")
+
+[node name="BaseHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.021337, 0.70152175)
 script = ExtResource("3_eea7c")
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/BaseHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.1474783e-07, 20.92699)
-shape = SubResource("BoxShape3D_v14hn")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseHitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_v14hn")

@@ -38,7 +38,7 @@ func post_ready():
 func change_health(amount : float, attacker:Node3D, knockback:Vector3 = Vector3.ZERO):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
-		emit_signal("attack_unsuccessful", attacker, false)
+		emit_signal("attack_unsuccessful", attacker)
 		return
 	
 	
@@ -47,8 +47,7 @@ func change_health(amount : float, attacker:Node3D, knockback:Vector3 = Vector3.
 	emit_signal("update_health", current_health)
 	can_be_hurt = false
 	immunity_timer.start()
-	emit_signal("attack_successful", attacker,true )
-	apply_knockback(knockback)
+	emit_signal("attack_successful", attacker)
 	
 	if current_health <= 0:
 		current_health = 0
@@ -59,6 +58,7 @@ func change_health(amount : float, attacker:Node3D, knockback:Vector3 = Vector3.
 	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false):
+	print("applying knockback!")
 	# ignore knockback if immune
 	if !knockback_immunity_timer.is_stopped():
 		return
