@@ -15,6 +15,7 @@ var current_health : float
 
 signal attack_successful(attacker: Node3D)
 signal attack_unsuccessful(attacker: Node3D)
+signal apply_hitstun(duration:float)
 signal update_health(current_health:float)
 signal kill()
 
@@ -35,7 +36,10 @@ func post_ready():
 	emit_signal("update_health", current_health)
 
 
-func change_health(amount : float, attacker:Node3D, knockback:Vector3 = Vector3.ZERO):
+func change_health(amount : float, 
+					attacker:Node3D, 
+					knockback:Vector3 = Vector3.ZERO, 
+					hitstun_duration:float = 0):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
 		emit_signal("attack_unsuccessful", attacker)
@@ -63,7 +67,7 @@ func apply_knockback(amount:Vector3, start_timer:bool = false):
 	if !knockback_immunity_timer.is_stopped():
 		return
 	last_applied_knockback = amount
-	get_parent().velocity += amount
+	get_owner().velocity += amount
 	if start_timer:
 		knockback_immunity_timer.start()
 

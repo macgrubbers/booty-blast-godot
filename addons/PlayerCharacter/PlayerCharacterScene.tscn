@@ -304,7 +304,7 @@ metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 script = ExtResource("21_f3fy5")
 
 [node name="HurtTimer" type="Timer" parent="StateMachine/HurtState"]
-wait_time = 0.6
+wait_time = 0.7
 one_shot = true
 
 [node name="BlockState" type="Node" parent="StateMachine"]

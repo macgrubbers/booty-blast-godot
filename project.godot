@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 Player="The lone player group"
 Enemies=""
 Projectiles=""
+Structures=""
 
 [input]
 

@@ -197,4 +197,4 @@ path_follow = NodePath("../NavigationRegion3D/Paths/Patrol2/PathFollow3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4614811, 1.1749954, 148.27132)
 
 [node name="SpinnyHammer" parent="." instance=ExtResource("7_3onre")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 45.007725, 23.135567, 263.84488)
+transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45.007725, 23.135567, 263.84488)
