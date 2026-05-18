@@ -22,7 +22,7 @@ func _on_area_entered(area:Area3D)->void:
 	if area is HealthComponent:
 		area.connect("attack_successful", cleanup)
 		area.apply_knockback(direction*10 + Vector3(0,5,0))
-		area.change_health(-1,self)
+		area.attack(-1,self)
 		print("hit a health component")
 
 

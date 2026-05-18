@@ -15,7 +15,7 @@ var current_health : float
 
 signal attack_successful(attacker: Node3D)
 signal attack_unsuccessful(attacker: Node3D)
-signal apply_hitstun(duration:float)
+signal hitstunned(duration:float)
 signal update_health(current_health:float)
 signal kill()
 
@@ -36,23 +36,24 @@ func post_ready():
 	emit_signal("update_health", current_health)
 
 
-func change_health(amount : float, 
+func attack(amount : float, 
 					attacker:Node3D, 
 					knockback:Vector3 = Vector3.ZERO, 
 					hitstun_duration:float = 0):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
 		emit_signal("attack_unsuccessful", attacker)
-		return
+	else:
+		current_health += amount
+		immunity_timer.start()
+		emit_signal("update_health", current_health)
+		can_be_hurt = false
+		immunity_timer.start()
+		emit_signal("attack_successful", attacker)
+		emit_signal("hitstunned", hitstun_duration)
 	
-	
-	current_health += amount
-	immunity_timer.start()
-	emit_signal("update_health", current_health)
-	can_be_hurt = false
-	immunity_timer.start()
-	emit_signal("attack_successful", attacker)
-	
+	apply_knockback(knockback, false)
+
 	if current_health <= 0:
 		current_health = 0
 		is_alive = false

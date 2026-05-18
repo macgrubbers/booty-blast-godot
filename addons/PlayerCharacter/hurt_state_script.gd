@@ -1,16 +1,14 @@
-extends State
+class_name StunnedState extends State
 
-class_name HurtState
-
-var state_name : String = "Hurt"
+var state_name : String = "Stunned"
 
 var cR : CharacterBody3D
-@onready var hurt_timer : Timer = $HurtTimer
+@onready var stun_timer : Timer = $StunTimer
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
-	hurt_timer.start()
+	stun_timer.start()
 
 	verifications()
 	
