@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqil3ejoinc13"]
+
+[ext_resource type="Script" uid="uid://bfabh51fmsusc" path="res://Scenes/Structures/Destructable Structures/base_destructable_platform.gd" id="1_o713d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvmqv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_28t77"]
+load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o713d"]
+diffuse_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_28t77")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_haobg"]
+material = SubResource("StandardMaterial3D_o713d")
+
+[node name="BaseDestructablePlatform" type="StaticBody3D"]
+collision_layer = 6
+collision_mask = 0
+script = ExtResource("1_o713d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_nvmqv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_haobg")
