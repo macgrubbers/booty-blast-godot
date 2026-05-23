@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://koel1ckxl2kb"]
+
+[ext_resource type="Script" uid="uid://dpsvrq0ht60mg" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/player_base_hitbox.gd" id="1_lbjm2"]
+
+[node name="PlayerBaseHitbox" type="Area3D"]
+script = ExtResource("1_lbjm2")
+metadata/_custom_type_script = "uid://bem514aj86eyo"

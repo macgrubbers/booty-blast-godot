@@ -1,6 +1,6 @@
 class_name BaseDestructablePlatform extends StaticBody3D
 
-func attack():
+func attack(damage:int):
 	kill()
 	
 func kill():

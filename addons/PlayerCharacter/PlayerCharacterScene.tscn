@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=62 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
 [ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://addons/PlayerCharacter/Vfx/dust_mat.tres" id="4_j7qt1"]
 [ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://addons/Arts/Sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
+[ext_resource type="Script" uid="uid://ck50xmxl5f05s" path="res://addons/PlayerCharacter/air_attack_hitbox.gd" id="6_fdn82"]
 [ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://addons/Arts/Sounds/footstep_concrete_001.ogg" id="6_nlp36"]
 [ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://addons/Arts/Sounds/footstep_concrete_002.ogg" id="7_4283i"]
 [ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://addons/Arts/Sounds/jingles_SAX15.ogg" id="8_s241m"]
@@ -34,8 +35,8 @@
 [ext_resource type="Script" uid="uid://k8rc5gww2kps" path="res://addons/PlayerCharacter/block_state.gd" id="25_5gw51"]
 [ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
 [ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="26_20r42"]
-[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="27_wj5av"]
 [ext_resource type="Script" uid="uid://ce5i03bfhvgwe" path="res://addons/PlayerCharacter/falling_hitbox.gd" id="28_edc57"]
+[ext_resource type="Script" uid="uid://cnuwp72c5hvrf" path="res://addons/PlayerCharacter/ground_attack_hitbox.gd" id="29_fdn82"]
 
 [sub_resource type="Curve" id="Curve_l1d2p"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -122,7 +123,7 @@ radius = 0.55
 height = 2.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
-radius = 2.0
+radius = 3.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
 radius = 5.0
@@ -208,7 +209,7 @@ collision_layer = 0
 collision_mask = 1048580
 monitoring = false
 monitorable = false
-script = ExtResource("27_wj5av")
+script = ExtResource("6_fdn82")
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
@@ -355,6 +356,11 @@ collision_layer = 0
 collision_mask = 3145732
 monitoring = false
 monitorable = false
+script = ExtResource("29_fdn82")
+damage = 3
+knockback_magnitude = 10.0
+area_target_groups = Array[String](["Enemies"])
+metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
 shape = SubResource("SphereShape3D_h8602")
@@ -387,7 +393,6 @@ monitoring = false
 monitorable = false
 script = ExtResource("28_edc57")
 damage = 3
-target_groups = Array[String](["Enemies"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallingHitbox"]

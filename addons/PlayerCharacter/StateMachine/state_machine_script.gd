@@ -26,7 +26,7 @@ func _ready():
 			child.transitioned.connect(on_state_child_transition)
 			
 			if child is GroundAttackState:
-				ground_attack_area.area_entered.connect(child._on_ground_attack_area_3d_area_entered)
+				#ground_attack_area.area_entered.connect(child._on_ground_attack_area_3d_area_entered)
 				godot_plush_skin.wave_done.connect(child._on_animation_finished)
 				
 			if child is ButtSlamState:

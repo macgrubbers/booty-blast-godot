@@ -63,7 +63,6 @@ func attack(amount : float,
 	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false):
-	print("applying knockback!")
 	# ignore knockback if immune
 	if !knockback_immunity_timer.is_stopped():
 		return

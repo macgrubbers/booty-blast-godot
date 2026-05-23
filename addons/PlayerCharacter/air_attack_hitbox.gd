@@ -1,4 +1,4 @@
-extends BaseHitbox
+class_name AirAttackHitbox extends PlayerBaseHitbox
 
 @onready var player: CharacterBody3D = $"../.."
 

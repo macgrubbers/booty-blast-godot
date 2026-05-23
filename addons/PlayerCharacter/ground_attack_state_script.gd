@@ -26,6 +26,7 @@ func verifications():
 	
 	# for the attack area
 	ground_attack_area.set_monitoring(true)
+	ground_attack_area.set_monitorable(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -67,17 +68,23 @@ func move(delta : float):
 
 
 
-func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
-	if area is HealthComponent:
-		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.attack(-5, cR)
-		area.apply_knockback(dir_vector * 5 + Vector3(0,4,0),false)
-
+#func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
+	#if area is HealthComponent:
+		#var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
+		#area.attack(-5, cR)
+		#area.apply_knockback(dir_vector * 5 + Vector3(0,4,0),false)
+#
+#
+#func _on_ground_attack_hitbox_body_entered(body: Node3D) -> void:
+	#pass # Replace with function body.
 
 
 # Called when wave animation is complete
 #	TODO: remove toggle to check states
 func _on_animation_finished():
 	if get_parent().curr_state is GroundAttackState:
-		ground_attack_area.set_monitoring(false)
 		transitioned.emit(self, "IdleState")
+
+func exit():
+	ground_attack_area.set_monitoring(false)
+	ground_attack_area.set_monitorable(false)

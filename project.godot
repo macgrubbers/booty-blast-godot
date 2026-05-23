@@ -30,6 +30,7 @@ Player="The lone player group"
 Enemies=""
 Projectiles=""
 Structures=""
+Destructables=""
 
 [input]
 
