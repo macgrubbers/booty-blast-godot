@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=16 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Script" uid="uid://c82cckocoi1e8" path="res://Scenes/Levels/goblina_test_level.gd" id="1_35nj8"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://lii61fy4437q" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="7_3onre"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="7_ytg45"]
 [ext_resource type="PackedScene" uid="uid://bqil3ejoinc13" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePlatform.tscn" id="8_3onre"]
+[ext_resource type="PackedScene" uid="uid://cuxgsfy6shs0a" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePhysicsObject.tscn" id="9_7fmjj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ey38f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -234,3 +235,6 @@ transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45
 
 [node name="BaseDestructablePlatform" parent="." instance=ExtResource("8_3onre")]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 40.454895, 4.9824443, 190.75793)
+
+[node name="BaseDestructablePhysicsObject" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0766068, 18.337421, 118.16791)

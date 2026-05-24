@@ -6,5 +6,6 @@ func _ready() -> void:
 	super._ready()
 
 func _on_body_entered(body:Node3D):
-	body.attack(-damage)
+	var knockback:Vector3 = global_position.direction_to(body.global_position)
+	body.attack(-damage, knockback)
 	return
