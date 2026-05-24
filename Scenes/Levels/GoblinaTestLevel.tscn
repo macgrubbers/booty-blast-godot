@@ -237,4 +237,4 @@ transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 40.454895, 4.9824443, 190.75793)
 
 [node name="BaseDestructablePhysicsObject" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0766068, 18.337421, 118.16791)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5796366, 6.4895544, 118.16791)

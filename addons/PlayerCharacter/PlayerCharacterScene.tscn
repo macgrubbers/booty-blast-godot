@@ -349,7 +349,7 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="GroundAttackHitbox" type="Area3D" parent="."]
+[node name="GroundAttackHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
 collision_layer = 0
@@ -357,6 +357,8 @@ collision_mask = 3145732
 monitoring = false
 monitorable = false
 script = ExtResource("29_fdn82")
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
 damage = 3
 knockback_magnitude = 10.0
 area_target_groups = Array[String](["Enemies"])
@@ -364,6 +366,8 @@ metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
 shape = SubResource("SphereShape3D_h8602")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
 
 [node name="ButtSlamLandHitbox" type="Area3D" parent="."]
 collision_layer = 0
