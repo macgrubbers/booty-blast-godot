@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bevmstv857663"]
+
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Actor Components/spawner.gd" id="1_nvi84"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_nvi84")

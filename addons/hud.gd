@@ -14,13 +14,21 @@ extends CanvasLayer
 
 @onready var info_screen = $InfoScreen
 
+@onready var collection_component = $"../CollectionComponent"
+@onready var collectables_bar = $CollectablesBar
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	# Connect signals
 	cam_holder.connect("paused", on_game_paused)
 	health_component.connect("kill",on_player_died)
 	health_component.connect("update_health", on_health_updated)
 	interact_raycast.connect("new_collider_found", _on_new_collider_found)
+	
+	collection_component.connect("just_collected", _on_collectable_update)
+	
+	# Update collectables
+	collectables_bar.update_moneys()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,3 +65,8 @@ func _on_new_collider_found(collider):
 		interact_label.text = "[F] Interact with " + collider.get_parent().get_name()
 	else:
 		interact.visible = false
+
+
+func _on_collectable_update(body:Node3D):
+	if body is CoinCollectable:
+		collectables_bar.update_moneys()

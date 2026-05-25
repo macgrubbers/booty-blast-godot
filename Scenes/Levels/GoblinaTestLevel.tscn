@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=19 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Script" uid="uid://c82cckocoi1e8" path="res://Scenes/Levels/goblina_test_level.gd" id="1_35nj8"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_vuc7q"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="3_afynh"]
+[ext_resource type="PackedScene" uid="uid://biygdyqsnd43a" path="res://Scenes/Structures/Deadly Structures/SpinnySword.tscn" id="3_jofns"]
+[ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="3_n6hmm"]
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="6_qpiey"]
 [ext_resource type="PackedScene" uid="uid://lii61fy4437q" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="7_3onre"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="7_ytg45"]
@@ -65,7 +67,7 @@ navigation_mesh = SubResource("NavigationMesh_35nj8")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Structures"]
 material_override = ExtResource("1_okje8")
 use_collision = true
-collision_layer = 2
+collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 80.46789)
@@ -143,6 +145,14 @@ size = Vector3(50.368973, 0.5, 44.369568)
 transform = Transform3D(0.7, 0, -3.5527137e-15, 0, 0.7, 0, 0, 0, 0.7000001, -53.567856, 35.182568, 0.06570053)
 size = Vector3(59.18691, 0.5, 140.0294)
 
+[node name="CSGBox3D17" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(0.70000005, 0, 3.0597977e-08, 3.0597974e-08, 1.3374801e-15, -0.70000017, 0, 0.70000005, 1.3374802e-15, -65.67207, -1.7654601, -68.232346)
+size = Vector3(161.1547, 1.6593628, 94.23299)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(0.70000005, 0, 3.0597977e-08, 3.0597974e-08, 1.3374801e-15, -0.70000017, 0, 0.70000005, 1.3374802e-15, -8.9831085, 8.350437, -57.057907)
+size = Vector3(0.81580764, 33.586395, 123.13554)
+
 [node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
 transform = Transform3D(7, 0, 0, 0, 6, 0, 0, 0, 1, -6.6347528, 0.00014138222, 219.39624)
 polygon = PackedVector2Array(0, 0, 0, 2, 6, 0)
@@ -157,8 +167,22 @@ transform = Transform3D(-3.059797e-08, 0, 0.7000001, 0, 0.7, 0, -0.7, 0, -3.0597
 size = Vector3(35.25055, 0.5, 3.1218262)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGPolygon3D2"]
-transform = Transform3D(-3.059797e-08, 0, 0.7000001, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -1.0880225, 1.8319998, 6.400543)
-size = Vector3(35.25055, 0.5, 3.1218262)
+transform = Transform3D(-3.059797e-08, 0, 0.7000001, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -1.6359656, 1.8319998, 6.400543)
+size = Vector3(35.25055, 0.5, 4.687378)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D/CSGPolygon3D2"]
+transform = Transform3D(-3.059797e-08, 0, 0.7000001, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -1.5711956, 2.2303457, -24.194199)
+size = Vector3(13.935684, 0.5, 4.5023193)
+
+[node name="SpinnySword" parent="NavigationRegion3D/Structures" instance=ExtResource("3_jofns")]
+transform = Transform3D(-0.015707368, 0.9998766, 0, -0.9998766, -0.015707368, 0, 0, 0, 1, -32.89609, 17.218952, 207.5507)
+spin_rate = 360.0
+
+[node name="SpinnyHammer" parent="NavigationRegion3D/Structures" instance=ExtResource("7_3onre")]
+transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45.007725, 23.135567, 263.84488)
+
+[node name="BaseDestructablePlatform" parent="NavigationRegion3D/Structures" instance=ExtResource("8_3onre")]
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 40.454895, 4.9824443, 190.75793)
 
 [node name="Paths" type="Node3D" parent="NavigationRegion3D"]
 
@@ -201,65 +225,257 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 63.8294)
 [node name="Player" parent="." instance=ExtResource("2_vuc7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.848493, 65.271324)
 
-[node name="TestEnemy" parent="." instance=ExtResource("3_afynh")]
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="TestEnemy" parent="Enemies" instance=ExtResource("3_afynh")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.965984, 1.1749973, 146.74007)
 
-[node name="TestEnemy2" parent="." instance=ExtResource("3_afynh")]
+[node name="TestEnemy2" parent="Enemies" instance=ExtResource("3_afynh")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.420029, 1.1749973, 120.290405)
 
-[node name="TestEnemy3" parent="." instance=ExtResource("3_afynh")]
+[node name="TestEnemy3" parent="Enemies" instance=ExtResource("3_afynh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.498253, 1.1749973, 214.25177)
 
-[node name="DummyTestEnemy" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
+[node name="DummyTestEnemy" parent="Enemies" node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0068746, 5.867421, 155.89268)
-path_follow = NodePath("../NavigationRegion3D/Paths/Patrol1/PathFollow3D")
+path_follow = NodePath("../../NavigationRegion3D/Paths/Patrol1/PathFollow3D")
 
-[node name="DummyTestEnemy2" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
+[node name="DummyTestEnemy2" parent="Enemies" node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
 transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, 30.329056, 29.738934, 163.75533)
 patrol_speed = 0.1
-path_follow = NodePath("../NavigationRegion3D/Paths/PatrolFloat1/PathFollow3D")
+path_follow = NodePath("../../NavigationRegion3D/Paths/PatrolFloat1/PathFollow3D")
 
-[node name="DummyTestEnemy3" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
+[node name="DummyTestEnemy3" parent="Enemies" node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
 transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, 46.983322, 29.738934, 163.75533)
 patrol_speed = 0.1
-path_follow = NodePath("../NavigationRegion3D/Paths/PatrolFloat2/PathFollow3D")
+path_follow = NodePath("../../NavigationRegion3D/Paths/PatrolFloat2/PathFollow3D")
 
-[node name="DummyTestEnemy4" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
+[node name="DummyTestEnemy4" parent="Enemies" node_paths=PackedStringArray("path_follow") instance=ExtResource("6_qpiey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5.1, 167)
-path_follow = NodePath("../NavigationRegion3D/Paths/Patrol2/PathFollow3D")
+path_follow = NodePath("../../NavigationRegion3D/Paths/Patrol2/PathFollow3D")
 
-[node name="RangedTestEnemy" parent="." instance=ExtResource("7_ytg45")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4614811, 1.1749954, 148.27132)
+[node name="RangedTestEnemy" parent="Enemies" instance=ExtResource("7_ytg45")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.644332, 12.423096, 160.48596)
 
-[node name="SpinnyHammer" parent="." instance=ExtResource("7_3onre")]
-transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45.007725, 23.135567, 263.84488)
+[node name="RangedTestEnemy2" parent="Enemies" instance=ExtResource("7_ytg45")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.1321197, 15.977846, 197.52394)
 
-[node name="BaseDestructablePlatform" parent="." instance=ExtResource("8_3onre")]
-transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 40.454895, 4.9824443, 190.75793)
+[node name="Props" type="Node3D" parent="."]
 
-[node name="BaseDestructablePhysicsObject" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.2997627, 111.77934)
+[node name="BaseDestructablePhysicsObject" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 43.679165, 5.575797, 126.213844)
 scale_override = Vector3(3, 3, 3)
 
-[node name="BaseDestructablePhysicsObject2" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.5145235, 2.2997627, 112.9582)
+[node name="BaseDestructablePhysicsObject2" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 42.167786, 2.2997627, 120.96785)
 scale_override = Vector3(3, 3, 3)
 
-[node name="BaseDestructablePhysicsObject3" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6928194, 5.8343296, 111.92519)
+[node name="BaseDestructablePhysicsObject3" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 44.54711, 2.5212893, 128.16412)
 scale_override = Vector3(3, 3, 3)
 
-[node name="BaseDestructablePhysicsObject4" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2997627, 115.507515)
+[node name="BaseDestructablePhysicsObject4" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 42.75306, 8.589237, 124.56715)
 scale_override = Vector3(3, 3, 3)
 
-[node name="BaseDestructablePhysicsObject5" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.447271, 115.20939)
+[node name="BaseDestructablePhysicsObject5" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 41.96746, 5.439729, 122.421425)
 scale_override = Vector3(3, 3, 3)
 
-[node name="BaseDestructablePhysicsObject6" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21898901, 9.442961, 114.280876)
+[node name="BaseDestructablePhysicsObject6" parent="Props" instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 42.53754, 2.353487, 124.87088)
 scale_override = Vector3(3, 3, 3)
 
-[node name="HealthCollectable" parent="." instance=ExtResource("10_w0wue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4401245, 1.0850011, 141.31323)
+[node name="Collectables" type="Node3D" parent="."]
+
+[node name="HealthCollectable" parent="Collectables" instance=ExtResource("10_w0wue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.826004, 15.630731, 194.71252)
+
+[node name="CoinCollectable" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.3993961, 81.371925)
+
+[node name="CoinCollectable2" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.3020531, 85.35948)
+
+[node name="CoinCollectable3" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.2846705, 89.76678)
+
+[node name="CoinCollectable4" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.1578757, 94.54135)
+
+[node name="CoinCollectable5" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.2209145, 98.42398)
+
+[node name="CoinCollectable6" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3204975, 1.2501665, 103.35596)
+
+[node name="CoinCollectable7" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058595657, 5.453604, 153.71391)
+
+[node name="CoinCollectable8" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7548018, 11.411804, 162.2603)
+
+[node name="CoinCollectable9" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0716815, 19.297, 172.73798)
+
+[node name="CoinCollectable10" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.764343, 27.76721, 163.88406)
+
+[node name="CoinCollectable11" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.672064, 30.591537, 163.88406)
+
+[node name="CoinCollectable12" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.016186, 32.440563, 163.88406)
+
+[node name="CoinCollectable13" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.016186, 33.410255, 163.88406)
+
+[node name="CoinCollectable14" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.016186, 34.25377, 163.88406)
+
+[node name="CoinCollectable15" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.016186, 35.098732, 163.88406)
+
+[node name="CoinCollectable16" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.726505, 32.440563, 163.88406)
+
+[node name="CoinCollectable17" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.726505, 33.36718, 163.88406)
+
+[node name="CoinCollectable18" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.726505, 34.470905, 163.88406)
+
+[node name="CoinCollectable19" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.726505, 35.51039, 163.88406)
+
+[node name="CoinCollectable20" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.522892, 36.471222, 163.88406)
+
+[node name="CoinCollectable21" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.5259, 39.114735, 163.88406)
+
+[node name="CoinCollectable22" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.500988, 36.40871, 163.88406)
+
+[node name="CoinCollectable23" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 1.6050457, 157.0028)
+
+[node name="CoinCollectable24" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 3.5195117, 157.0028)
+
+[node name="CoinCollectable25" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 5.3196034, 157.0028)
+
+[node name="CoinCollectable26" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 7.28413, 157.0028)
+
+[node name="CoinCollectable27" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 9.318979, 157.0028)
+
+[node name="CoinCollectable28" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 11.361222, 157.0028)
+
+[node name="CoinCollectable29" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 13.167577, 157.0028)
+
+[node name="CoinCollectable30" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 15.327152, 157.0028)
+
+[node name="CoinCollectable31" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 17.429718, 157.0028)
+
+[node name="CoinCollectable32" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 19.30165, 157.0028)
+
+[node name="CoinCollectable33" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 21.454624, 157.0028)
+
+[node name="CoinCollectable34" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 23.880783, 157.0028)
+
+[node name="CoinCollectable35" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0035, 26.222359, 157.0028)
+
+[node name="CoinCollectable36" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.60204, 1.6050457, 181.96344)
+
+[node name="CoinCollectable37" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.60204, 1.6050457, 184.67409)
+
+[node name="CoinCollectable38" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.60204, 1.6050457, 178.90594)
+
+[node name="CoinCollectable39" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.60204, 1.6050457, 187.14375)
+
+[node name="CoinCollectable40" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.605015, 1.6050457, 215.77386)
+
+[node name="CoinCollectable42" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.355732, 5.278738, 215.77386)
+
+[node name="CoinCollectable44" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.935171, 7.81992, 216.42288)
+
+[node name="CoinCollectable46" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0365045, 11.031001, 216.42288)
+
+[node name="CoinCollectable47" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.976035, 13.847637, 216.42288)
+
+[node name="CoinCollectable48" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 14.989113, 243.33081)
+
+[node name="CoinCollectable49" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 21.36548, 240.37099)
+
+[node name="CoinCollectable50" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 24.000313, 238.30553)
+
+[node name="CoinCollectable51" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 27.051844, 235.03424)
+
+[node name="CoinCollectable52" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 30.749968, 231.90086)
+
+[node name="CoinCollectable53" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.082085, 33.998306, 227.58212)
+
+[node name="CoinCollectable41" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.083421, 1.3480368, 184.34148)
+
+[node name="CoinCollectable43" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.730177, 8.114915, 184.34148)
+
+[node name="CoinCollectable45" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.730177, 10.378982, 184.34148)
+
+[node name="CoinCollectable54" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.730177, 13.0875225, 184.34148)
+
+[node name="CoinCollectable55" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.730177, 16.08789, 184.34148)
+
+[node name="CoinCollectable56" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 15.354359, 192.57927)
+
+[node name="CoinCollectable57" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 15.354359, 197.82191)
+
+[node name="CoinCollectable58" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 13.52835, 215.74203)
+
+[node name="CoinCollectable59" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 13.52835, 222.0913)
+
+[node name="CoinCollectable60" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 13.52835, 226.26526)
+
+[node name="CoinCollectable61" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 13.52835, 229.78712)
+
+[node name="CoinCollectable62" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.48832, 13.52835, 233.24269)
+
+[node name="CoinCollectable63" parent="Collectables" instance=ExtResource("3_n6hmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.900894, 5.7148066, 164.02304)

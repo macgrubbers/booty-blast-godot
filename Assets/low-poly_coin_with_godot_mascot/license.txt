@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low-poly coin with Godot mascot
+* source:	https://sketchfab.com/3d-models/low-poly-coin-with-godot-mascot-326f5a81e8ea428cbe0001a6e12eae49
+* author:	Kirill Diduk (https://sketchfab.com/kdiduk)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low-poly coin with Godot mascot" (https://sketchfab.com/3d-models/low-poly-coin-with-godot-mascot-326f5a81e8ea428cbe0001a6e12eae49) by Kirill Diduk (https://sketchfab.com/kdiduk) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

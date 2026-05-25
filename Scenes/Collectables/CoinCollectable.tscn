@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cebgpc41kiyaf"]
+
+[ext_resource type="Script" uid="uid://d0px7qfqp8q5e" path="res://Scenes/Collectables/coin_collectable.gd" id="1_jy18t"]
+[ext_resource type="PackedScene" uid="uid://bbhldxwpinc0q" path="res://Assets/low-poly_coin_with_godot_mascot/scene.gltf" id="2_v4wvr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jy18t"]
+height = 0.112457275
+
+[node name="CoinCollectable" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_jy18t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.0005950928, -2.6012456e-11, 0)
+shape = SubResource("CylinderShape3D_jy18t")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_v4wvr")]

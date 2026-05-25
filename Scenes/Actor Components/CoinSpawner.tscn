@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmegn0mgs6x42"]
+
+[ext_resource type="Script" uid="uid://dm8k7ujovqmbv" path="res://Scenes/Actor Components/coin_spawner.gd" id="1_63iw3"]
+[ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="2_t6hdp"]
+
+[node name="CoinSpawner" type="Node3D"]
+script = ExtResource("1_63iw3")
+spawning_object = ExtResource("2_t6hdp")
+metadata/_custom_type_script = "uid://clav251aoerdv"

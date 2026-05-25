@@ -21,6 +21,7 @@ func setup_shape_cast():
 		print("shape setup")
 
 func _on_body_entered(body:Node3D):
+	print(body)
 	calculate_knockback_dir()
 	body.attack(-damage, knockback_dir * knockback_magnitude, global_collision_point)
 	return

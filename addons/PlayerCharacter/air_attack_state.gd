@@ -24,7 +24,8 @@ func verifications():
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
-	air_attack_area.monitoring = true
+	air_attack_area.set_monitoring(true)
+	air_attack_area.set_monitorable(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -126,6 +127,7 @@ func _on_animation_finished():
 
 func exit():
 	cR.can_wall_jump = true
-	air_attack_area.monitoring = false
+	air_attack_area.set_monitoring(false)
+	air_attack_area.set_monitorable(false)
 	air_attack_area.area_entered.disconnect(_on_air_attack_area_entered)
 	cR.godot_plush_skin.wave_done.disconnect(_on_animation_finished)

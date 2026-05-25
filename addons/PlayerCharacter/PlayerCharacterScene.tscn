@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=66 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://di4uha55gs8ua" path="res://addons/PlayerCharacter/collection_component.gd" id="29_0r710"]
 [ext_resource type="Script" uid="uid://cnuwp72c5hvrf" path="res://addons/PlayerCharacter/ground_attack_hitbox.gd" id="29_fdn82"]
 [ext_resource type="Script" uid="uid://bxtdawvxerm5x" path="res://addons/PlayerCharacter/butt_slam_land_hitbox.gd" id="31_or008"]
+[ext_resource type="Script" uid="uid://uoitdn0rxndy" path="res://addons/PlayerCharacter/collectables_bar.gd" id="37_wl7ak"]
 
 [sub_resource type="Curve" id="Curve_l1d2p"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -208,17 +209,21 @@ lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_dhnoe")
 draw_pass_1 = SubResource("QuadMesh_bw4i7")
 
-[node name="AirAttackHitbox" type="Area3D" parent="VisualRoot"]
+[node name="AirAttackHitbox" type="Area3D" parent="VisualRoot" node_paths=PackedStringArray("shape_cast", "collision_shape")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
 collision_layer = 0
 collision_mask = 1048580
 monitoring = false
 monitorable = false
 script = ExtResource("6_fdn82")
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
 shape = SubResource("SphereShape3D_f3fy5")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/AirAttackHitbox"]
 
 [node name="Shield" type="MeshInstance3D" parent="VisualRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -469,14 +474,14 @@ script = ExtResource("23_1gvdm")
 [node name="HealthBar" type="Control" parent="HUD"]
 process_mode = 1
 layout_mode = 3
-anchors_preset = 0
-offset_left = 91.0
-offset_top = 559.0
-offset_right = 459.0
-offset_bottom = 662.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 script = ExtResource("25_tsatr")
 
 [node name="Health1" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(51, -46.5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("26_20r42")
 animation = &"gif"
@@ -485,7 +490,7 @@ frame_progress = 0.22065857
 speed_scale = 0.6
 
 [node name="Health2" type="AnimatedSprite2D" parent="HUD/HealthBar"]
-position = Vector2(100, 0)
+position = Vector2(151, -46.5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("26_20r42")
 animation = &"gif"
@@ -494,13 +499,32 @@ frame_progress = 0.22065857
 speed_scale = 0.6
 
 [node name="Health3" type="AnimatedSprite2D" parent="HUD/HealthBar"]
-position = Vector2(200, 0)
+position = Vector2(251, -46.5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("26_20r42")
 animation = &"gif"
 frame = 5
 frame_progress = 0.22065857
 speed_scale = 0.6
+
+[node name="CollectablesBar" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -229.0
+offset_bottom = 130.0
+grow_horizontal = 0
+script = ExtResource("37_wl7ak")
+
+[node name="MoneyLabel" type="Label" parent="HUD/CollectablesBar"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 113.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "monies:"
 
 [node name="Interact" type="Control" parent="HUD"]
 visible = false

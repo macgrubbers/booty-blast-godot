@@ -47,8 +47,7 @@ radius = 0.6
 height = 1.2
 
 [node name="DummyTestEnemy" type="CharacterBody3D" groups=["Enemies"]]
-collision_layer = 1048576
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_2aieb")
 patrol_speed = 0.25
 
@@ -87,7 +86,6 @@ collision_layer = 0
 collision_mask = 524288
 monitorable = false
 script = ExtResource("1_2a34n")
-target_groups = Array[String](["Player"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitbox"]
@@ -96,7 +94,6 @@ shape = SubResource("CapsuleShape3D_cptsp")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_8koco")]
 collision_layer = 1048576
-monitoring = false
 max_health = 1.0
 collision_shape = NodePath("CollisionShape3D")
 
