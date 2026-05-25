@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://m5b81iwbwwco"]
+
+[ext_resource type="Script" uid="uid://dp2eb2jgxb0tp" path="res://Scenes/Collectables/base_collectable.gd" id="1_vqh58"]
+
+[node name="BaseCollectable" type="Area3D" groups=["Collectables"]]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_vqh58")

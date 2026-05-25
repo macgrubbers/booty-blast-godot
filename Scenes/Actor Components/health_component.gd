@@ -35,11 +35,10 @@ func post_ready():
 	knockback_immunity_timer.set_one_shot(true)
 	emit_signal("update_health", current_health)
 
-
 func attack(amount : float, 
-					attacker:Node3D, 
-					knockback:Vector3 = Vector3.ZERO, 
-					hitstun_duration:float = 0):
+			attacker:Node3D, 
+			knockback:Vector3 = Vector3.ZERO, 
+			hitstun_duration:float = 0):
 	# ignore changing health if immune or dead
 	if !can_be_hurt or !is_alive:
 		emit_signal("attack_unsuccessful", attacker)
@@ -70,6 +69,10 @@ func apply_knockback(amount:Vector3, start_timer:bool = false):
 	get_owner().velocity += amount
 	if start_timer:
 		knockback_immunity_timer.start()
+
+func heal(amount:int):
+	current_health += amount
+	emit_signal("update_health", current_health)
 
 func get_current_health()->float:
 	return current_health

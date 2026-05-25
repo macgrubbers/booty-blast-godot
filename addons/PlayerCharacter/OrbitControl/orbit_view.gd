@@ -27,7 +27,7 @@ var aim_cam_pos_side : bool = true #false = left, true = right
 @export var cam_zoom_out_action : String = ""
 
 #references variables
-#@onready var cam : Camera3D = %Camera3D
+@onready var cam : Camera3D = %Camera3D
 
 # Signals
 signal paused

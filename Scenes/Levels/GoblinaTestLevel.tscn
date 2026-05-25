@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=17 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Script" uid="uid://c82cckocoi1e8" path="res://Scenes/Levels/goblina_test_level.gd" id="1_35nj8"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="7_ytg45"]
 [ext_resource type="PackedScene" uid="uid://bqil3ejoinc13" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePlatform.tscn" id="8_3onre"]
 [ext_resource type="PackedScene" uid="uid://cuxgsfy6shs0a" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePhysicsObject.tscn" id="9_7fmjj"]
+[ext_resource type="PackedScene" uid="uid://dqfx7d5xppmyn" path="res://Scenes/Collectables/HealthCollectable.tscn" id="10_w0wue"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ey38f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -237,4 +238,28 @@ transform = Transform3D(-2.1855695e-07, 0, -5, 0, 5, 0, 5, 0, -2.1855695e-07, 45
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 1, 40.454895, 4.9824443, 190.75793)
 
 [node name="BaseDestructablePhysicsObject" parent="." instance=ExtResource("9_7fmjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5796366, 6.4895544, 118.16791)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.2997627, 111.77934)
+scale_override = Vector3(3, 3, 3)
+
+[node name="BaseDestructablePhysicsObject2" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.5145235, 2.2997627, 112.9582)
+scale_override = Vector3(3, 3, 3)
+
+[node name="BaseDestructablePhysicsObject3" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6928194, 5.8343296, 111.92519)
+scale_override = Vector3(3, 3, 3)
+
+[node name="BaseDestructablePhysicsObject4" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2997627, 115.507515)
+scale_override = Vector3(3, 3, 3)
+
+[node name="BaseDestructablePhysicsObject5" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.447271, 115.20939)
+scale_override = Vector3(3, 3, 3)
+
+[node name="BaseDestructablePhysicsObject6" parent="." instance=ExtResource("9_7fmjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21898901, 9.442961, 114.280876)
+scale_override = Vector3(3, 3, 3)
+
+[node name="HealthCollectable" parent="." instance=ExtResource("10_w0wue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4401245, 1.0850011, 141.31323)

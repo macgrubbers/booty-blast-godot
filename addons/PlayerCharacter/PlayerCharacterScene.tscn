@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=65 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
@@ -34,9 +34,11 @@
 [ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="24_qq7mp"]
 [ext_resource type="Script" uid="uid://k8rc5gww2kps" path="res://addons/PlayerCharacter/block_state.gd" id="25_5gw51"]
 [ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
-[ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://addons/Arts/Images/peach.gif" id="26_20r42"]
+[ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://Assets/2D Art/peach.gif" id="26_20r42"]
 [ext_resource type="Script" uid="uid://ce5i03bfhvgwe" path="res://addons/PlayerCharacter/falling_hitbox.gd" id="28_edc57"]
+[ext_resource type="Script" uid="uid://di4uha55gs8ua" path="res://addons/PlayerCharacter/collection_component.gd" id="29_0r710"]
 [ext_resource type="Script" uid="uid://cnuwp72c5hvrf" path="res://addons/PlayerCharacter/ground_attack_hitbox.gd" id="29_fdn82"]
+[ext_resource type="Script" uid="uid://bxtdawvxerm5x" path="res://addons/PlayerCharacter/butt_slam_land_hitbox.gd" id="31_or008"]
 
 [sub_resource type="Curve" id="Curve_l1d2p"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -121,6 +123,9 @@ stream_0/stream = ExtResource("8_s241m")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mx8g3"]
 radius = 0.55
 height = 2.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fdn82"]
+radius = 1.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
 radius = 3.0
@@ -349,6 +354,16 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="CollectionComponent" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("29_0r710")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_fdn82")
+
 [node name="GroundAttackHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
@@ -361,7 +376,6 @@ shape_cast = NodePath("ShapeCast3D")
 collision_shape = NodePath("CollisionShape3D")
 damage = 3
 knockback_magnitude = 10.0
-area_target_groups = Array[String](["Enemies"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
@@ -369,14 +383,20 @@ shape = SubResource("SphereShape3D_h8602")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
 
-[node name="ButtSlamLandHitbox" type="Area3D" parent="."]
+[node name="ButtSlamLandHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape")]
 collision_layer = 0
 collision_mask = 3145732
 monitoring = false
 monitorable = false
+script = ExtResource("31_or008")
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
+metadata/_custom_type_script = "uid://dpsvrq0ht60mg"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamLandHitbox"]
 shape = SubResource("SphereShape3D_pi2tj")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="ButtSlamLandHitbox"]
 
 [node name="ButtSlamFallingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

@@ -8,6 +8,12 @@ extends Node3D
 @onready var player_node = preload("res://addons/PlayerCharacter/PlayerCharacterScene.tscn")
 
 
+func _physics_process(delta: float) -> void:
+	for node:Node3D in get_tree().get_nodes_in_group("Collectables"):
+		node.look_at(player_ref.cam_holder.cam.get_global_position())
+		node.rotation.x = 0
+		node.rotation.z = 0
+
 # Respawn will:
 #	remove the old player
 #	instantiate a new character, add as a child, update its reference

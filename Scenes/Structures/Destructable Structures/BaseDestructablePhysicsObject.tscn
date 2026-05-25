@@ -1,16 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuxgsfy6shs0a"]
+[gd_scene load_steps=5 format=3 uid="uid://cuxgsfy6shs0a"]
 
 [ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_el2yp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el2yp"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e2x2s"]
-load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs7fl"]
 diffuse_mode = 1
-albedo_color = Color(1, 0, 0, 1)
-albedo_texture = SubResource("CompressedTexture2D_e2x2s")
+albedo_color = Color(0.3606433, 0.36064333, 0, 1)
 metallic_specular = 0.0
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
@@ -22,6 +18,7 @@ material = SubResource("StandardMaterial3D_fs7fl")
 [node name="BaseDestructablePhysicsObject" type="RigidBody3D"]
 collision_layer = 6
 collision_mask = 2
+mass = 1.5
 script = ExtResource("1_el2yp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -29,3 +26,7 @@ shape = SubResource("BoxShape3D_el2yp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_mbnqw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
