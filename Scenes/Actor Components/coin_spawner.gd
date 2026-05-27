@@ -1,6 +1,6 @@
 extends Spawner
 
-func spawn(amount:int):
+func spawn(amount:int = 1):
 	for i in range(amount):
 		var new_coin:CoinCollectable = spawning_object.instantiate()
 		new_coin.set_global_transform(get_global_transform())

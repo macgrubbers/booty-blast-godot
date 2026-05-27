@@ -12,17 +12,17 @@ func enter(char_ref : CharacterBody3D):
 	cR = char_ref
 	verifications()
 	butt_slam_falling_hitbox.set_monitoring(true)
-	
+
 func verifications():
 	cR.godot_plush_skin.set_state("butt_slam")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
-	
+
 	# Stop horizontal velocity
 	cR.jump_gravity
 	cR.velocity.x = 0.0
 	cR.velocity.z = 0.0
-	
+
 func physics_update(delta : float):
 	applies(delta)
 	
@@ -38,7 +38,7 @@ func applies(delta : float):
 	if !cR.is_on_floor(): 
 		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
 		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
-		
+
 func gravity_apply(delta : float):
 	cR.velocity.y -= cR.fall_gravity * cR.butt_slam_gravity_multiplier * delta
 	# if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta
@@ -53,6 +53,10 @@ func input_management():
 #	Toggles land hitbox on for a set time and transitions states
 func check_if_floor():
 	if cR.is_on_floor():
+		# first time landing
+		if butt_slam_falling_hitbox.monitoring == true:
+			just_landed.emit()
+		
 		butt_slam_falling_hitbox.set_monitoring(false)
 		cR.squash_and_strech(0.3, 0.08)
 		cR.particles_manager.display_particles(cR.land_particles, cR)
@@ -60,6 +64,8 @@ func check_if_floor():
 		toggle_butt_slam_land_hitbox()
 		
 		impact_audio_playing()
+	else:
+		prev_in_air_velocity = cR.velocity
 		
 	if cR.is_on_wall():
 		if cR.hit_wall_cut_velocity:
@@ -78,8 +84,7 @@ func impact_audio_playing():
 func toggle_butt_slam_land_hitbox():
 	butt_slam_land_hitbox.set_monitoring(true)
 	await get_tree().create_timer(0.5).timeout
-	butt_slam_land_hitbox.set_monitoring(false)
-	
+
 	# Transition out of attack state
 	if cR.move_dir: 
 		transitioned.emit(self, cR.walk_or_run)
@@ -89,7 +94,6 @@ func toggle_butt_slam_land_hitbox():
 # Signaled when falling hitbox is entered
 func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
-		print("butt slam hit!")
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(Vector3(0,-50,0), false)
 		area.attack(-3, cR)
@@ -106,7 +110,6 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 		if cR.has_cut_jump: cR.has_cut_jump = false
 		
 		butt_slam_falling_hitbox.set_monitoring(false)
-		print("butt slam bounce!")
 		transitioned.emit(self, "InairState")
 
 
@@ -116,3 +119,7 @@ func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(dir_vector * 15 + Vector3(0,12,0), false)
 		area.attack(-3, cR)
+
+func exit():
+	butt_slam_falling_hitbox.set_monitoring(false)
+	butt_slam_land_hitbox.set_monitoring(false)

@@ -20,10 +20,10 @@ func _ready():
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
-			#if child is StunnedState:
-				#child.transitioned.connect(on_state_child_transition)
-			#else:
 			child.transitioned.connect(on_state_child_transition)
+			
+			# Connect just landed signal, only a few states will use it though so TODO nitpick, only connect relevant states?
+			child.just_landed.connect(_on_just_landed)
 			
 			if child is GroundAttackState:
 				#ground_attack_area.area_entered.connect(child._on_ground_attack_area_3d_area_entered)
@@ -32,9 +32,6 @@ func _ready():
 			if child is ButtSlamState:
 				butt_slam_land_hitbox.area_entered.connect(child._on_butt_slam_landing_hitbox_entered)
 				butt_slam_falling_hitbox.area_entered.connect(child._on_butt_slam_falling_hitbox_entered)
-
-
-				
 
 	# Connect the dead state
 	char_ref.get_node("HealthComponent").connect("kill", on_player_dead)
@@ -76,3 +73,16 @@ func on_player_dead():
 
 func _on_hitstunned(stun_duration:float):
 	curr_state.transitioned.emit(curr_state, "StunnedState", stun_duration)
+
+# Check if we should do anything special on landing
+# Liiiikke a JUMP PAD!!!!
+func _on_just_landed():
+	if char_ref.floor_check.is_colliding():
+		var collider = char_ref.floor_check.get_collider()
+		if collider is LaunchingPlatform:
+			var collision_normal = char_ref.floor_check.get_collision_normal()
+			collider.launch(char_ref.health_component,
+							curr_state,
+							curr_state.prev_in_air_velocity,
+							collision_normal)
+			curr_state.transitioned.emit(curr_state,"InAirState")

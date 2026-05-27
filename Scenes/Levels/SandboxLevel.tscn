@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://07f5hw5ewlgh"]
+
+[ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
+[ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_qrb30"]
+[ext_resource type="PackedScene" uid="uid://bnjn82pm8puu5" path="res://Scenes/Structures/Interactable Structures/LaunchingPlatform.tscn" id="3_s27tv"]
+[ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="4_pauaf"]
+[ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="5_4c52t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_d8mrn"]
+sky_material = SubResource("ProceduralSkyMaterial_qrb30")
+
+[sub_resource type="Environment" id="Environment_s27tv"]
+background_mode = 2
+sky = SubResource("Sky_d8mrn")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_pauaf"]
+agent_radius = 1.5
+
+[sub_resource type="Curve3D" id="Curve3D_4c52t"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, -2, 0, 0, 0, 0, 0, 0, -2, 0, -2, 0, 0, 0, 0, 0, 0, -2, 0, 2),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="SandboxLevel" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.8660254, -0.48296297, 0.12940957, 0, 0.25881907, 0.9659259, -0.50000006, 0.83651626, -0.22414389, 0, 295.70538, 224.74242)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_s27tv")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_pauaf")
+
+[node name="Structures" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Structures"]
+material_override = ExtResource("1_2ln86")
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+size = Vector3(100, 1, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 35, 15, 30)
+size = Vector3(10, 1, 30)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 29.5, 30)
+size = Vector3(10, 1, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 3.5, 10)
+size = Vector3(5, 7, 5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 25, 15, 30)
+size = Vector3(10, 1, 30)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 3.5, 15)
+size = Vector3(5, 7, 5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Structures/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 10.5, 15)
+size = Vector3(5, 7, 5)
+
+[node name="Paths" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Patrol1" type="Path3D" parent="NavigationRegion3D/Paths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04467261, 41.058384, 153.91669)
+curve = SubResource("Curve3D_4c52t")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Paths/Patrol1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Player" parent="." instance=ExtResource("2_qrb30")]
+
+[node name="LaunchingPlatform" parent="." instance=ExtResource("3_s27tv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0.5, 22)
+
+[node name="Button" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.030056, 2, 24.987732)
+spawning_object = ExtResource("5_4c52t")
+spawn_point = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)

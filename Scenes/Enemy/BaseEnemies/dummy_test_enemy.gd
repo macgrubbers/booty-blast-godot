@@ -22,7 +22,12 @@ func _ready() -> void:
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
 		#health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
+	
+	if path_follow:
+		blackboard.set_value("can_patrol", true)
 
+func _physics_process(delta: float) -> void:
+	print("alive")
 
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):

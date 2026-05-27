@@ -86,9 +86,12 @@ func check_if_floor():
 		cR.particles_manager.display_particles(cR.land_particles, cR)
 		
 		impact_audio_playing()
-			
+		
+		just_landed.emit()
 		if cR.move_dir: transitioned.emit(self, cR.walk_or_run)
 		else: transitioned.emit(self, "IdleState")
+	else:
+		prev_in_air_velocity = cR.velocity
 		
 	if cR.is_on_wall():
 		if cR.hit_wall_cut_velocity:
@@ -120,6 +123,8 @@ func impact_audio_playing():
 
 func exit():
 	falling_hitbox.monitoring = false
+	falling_hitbox.disconnect("attack_successful", _on_falling_attack_successful)
+
 
 func _on_falling_attack_successful():
 	cR.velocity.y = 0

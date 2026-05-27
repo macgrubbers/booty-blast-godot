@@ -61,11 +61,14 @@ func attack(amount : float,
 		emit_signal("kill")
 	return
 
-func apply_knockback(amount:Vector3, start_timer:bool = false):
+func apply_knockback(amount:Vector3, start_timer:bool = false, reset_velocity:bool = false):
 	# ignore knockback if immune
 	if !knockback_immunity_timer.is_stopped():
 		return
 	last_applied_knockback = amount
+	if reset_velocity:
+		print("reset velocity to zero")
+		get_owner().velocity = Vector3.ZERO
 	get_owner().velocity += amount
 	if start_timer:
 		knockback_immunity_timer.start()

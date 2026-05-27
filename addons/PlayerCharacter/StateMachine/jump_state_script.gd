@@ -23,7 +23,6 @@ func update(_delta : float):
 	pass
 	
 func physics_update(delta : float):
-	
 	applies(delta)
 	
 	cR.gravity_apply(delta)
@@ -54,10 +53,13 @@ func input_management():
 			transitioned.emit(self, "RagdollState")
 			
 func check_if_floor():
-	if !cR.is_on_floor() and cR.velocity.y < 0.0:
-		transitioned.emit(self, "InairState")
+	if !cR.is_on_floor():
+		prev_in_air_velocity = cR.velocity
+		if cR.velocity.y < 0.0:
+			transitioned.emit(self, "InairState")
 		
 	if cR.is_on_floor():
+		just_landed.emit()
 		if cR.move_dir: transitioned.emit(self, cR.walk_or_run)
 		else: transitioned.emit(self, "IdleState")
 		
@@ -121,5 +123,3 @@ func jump():
 		if cR.is_on_floor(): 
 			cR.squash_and_strech(1.12, 0.1)
 			cR.particles_manager.display_particles(cR.jump_particles, cR)
-		
-		

@@ -18,7 +18,6 @@ func setup_shape_cast():
 		shape_cast.collide_with_areas = true
 		shape_cast.collide_with_bodies = true
 		shape_cast.enabled = false
-		print("shape setup")
 
 func _on_body_entered(body:Node3D):
 	print(body)

@@ -61,8 +61,11 @@ func gravity_apply(delta : float):
 
 func check_if_floor():
 	if cR.is_on_floor():
+		just_landed.emit()
 		if cR.move_dir: transitioned.emit(self, cR.walk_or_run)
 		else: transitioned.emit(self, "IdleState")
+	else:
+		prev_in_air_velocity = cR.velocity
 
 	if cR.is_on_wall():
 		if cR.hit_wall_cut_velocity:

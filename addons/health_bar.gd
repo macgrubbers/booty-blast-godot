@@ -13,6 +13,8 @@ func _process(delta: float) -> void:
 
 func update_player_health(new_health:int):
 	var player_health = new_health
+	if player_health < 0:
+		player_health = 0
 	if player_health != heart_container.size():
 		for i in range(heart_container.size(),player_health,-1):
 			heart_container[i-1].visible = false

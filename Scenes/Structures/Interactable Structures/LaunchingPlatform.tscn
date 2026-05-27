@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnjn82pm8puu5"]
+
+[ext_resource type="Script" uid="uid://cy01x83g7ha65" path="res://Scenes/Structures/Interactable Structures/launching_platform.gd" id="1_rl45l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pw6y6"]
+size = Vector3(4, 0.5, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8vob"]
+albedo_color = Color(0, 0.70179814, 0.7017979, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g84ws"]
+material = SubResource("StandardMaterial3D_h8vob")
+size = Vector3(4, 0.5, 4)
+
+[node name="LaunchingPlatform" type="AnimatableBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_rl45l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_pw6y6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_g84ws")
+skeleton = NodePath("../CollisionShape3D")

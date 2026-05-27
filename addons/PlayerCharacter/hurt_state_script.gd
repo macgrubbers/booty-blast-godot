@@ -27,3 +27,8 @@ func physics_update(delta : float):
 # TODO: determine if we should be grounded or inair
 func _on_hurt_timer_timeout() -> void:
 	transitioned.emit(self, "InairState")
+
+func exit():
+	pass
+	# TODO: find a way to detect if we should emit just_landed signal
+	#	OR maybe stunned state shouldn't be a state and just a property any state can have?
