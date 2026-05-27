@@ -100,7 +100,6 @@ monitorable = false
 script = ExtResource("3_qedty")
 duration_timer = NodePath("DurationTimer")
 damage = 3
-target_groups = Array[String](["Player"])
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="VisualRoot/EnemyWeapon/WeaponHitbox"]

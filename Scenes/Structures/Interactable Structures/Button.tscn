@@ -4,22 +4,24 @@
 [ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Actor Components/spawner.gd" id="2_fttgw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_55gt3"]
-height = 3.1
+height = 1.5
+radius = 0.25
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_55gt3"]
-height = 3.0
+top_radius = 0.25
+bottom_radius = 0.25
+height = 1.5
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v5u43"]
-top_radius = 0.3
-bottom_radius = 0.3
+top_radius = 0.1
+bottom_radius = 0.1
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fttgw"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_scf2i"]
-height = 5.0
-radius = 2.0
+radius = 1.0
 
 [node name="Button" type="StaticBody3D"]
 collision_layer = 2
@@ -35,7 +37,7 @@ mesh = SubResource("CylinderMesh_55gt3")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5269616, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7597859, 0)
 mesh = SubResource("CylinderMesh_v5u43")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fttgw")

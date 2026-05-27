@@ -16,6 +16,9 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 
 func _ready() -> void:
+	var temp_rotation = global_rotation
+	global_rotation = Vector3(0,0,0)
+	visual_root.global_rotation = temp_rotation
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
 		health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)

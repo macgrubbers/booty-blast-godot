@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 const SPEED = 8.0
 const PATROL_SPEED = 5.0
-var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
 @export var attack_range : float = 10
@@ -44,8 +43,6 @@ func gravity_apply():
 	# apply gravity
 	if !is_on_floor():
 		velocity += get_gravity() * get_physics_process_delta_time()
-	#elif is_on_floor() and gravity_velocity.length() > 0:
-		#restart_gravity()
 
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):

@@ -1,4 +1,7 @@
-extends Spawner
+class_name CoinSpawner extends Spawner
+
+func _ready() -> void:
+	spawning_object = preload("res://Scenes/Collectables/CoinCollectable.tscn")
 
 func spawn(amount:int = 1):
 	for i in range(amount):

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BootyBlastGodot"
-run/main_scene="uid://duh26g4yrluc"
+run/main_scene="uid://07f5hw5ewlgh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

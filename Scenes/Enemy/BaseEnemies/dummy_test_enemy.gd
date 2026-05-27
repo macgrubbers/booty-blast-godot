@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 const SPEED = 8.0
 @export var patrol_speed:float
-var gravity_velocity : Vector3 = Vector3.ZERO
 var knockback_vector : Vector3 = Vector3.ZERO
 
 @onready var attack_type = "melee"
@@ -27,7 +26,7 @@ func _ready() -> void:
 		blackboard.set_value("can_patrol", true)
 
 func _physics_process(delta: float) -> void:
-	print("alive")
+	move_and_slide()
 
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
@@ -40,3 +39,6 @@ func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
 	get_tree().current_scene.add_child(enemy_ragdoll)
 	
 	queue_free()
+
+func gravity_apply():
+	velocity += get_gravity() * get_physics_process_delta_time()

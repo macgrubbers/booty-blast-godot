@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuxgsfy6shs0a"]
+[gd_scene load_steps=6 format=3 uid="uid://cuxgsfy6shs0a"]
 
 [ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_el2yp"]
+[ext_resource type="Script" uid="uid://dm8k7ujovqmbv" path="res://Scenes/Actor Components/coin_spawner.gd" id="2_e2x2s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el2yp"]
+size = Vector3(3, 3, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs7fl"]
 diffuse_mode = 1
@@ -14,6 +16,7 @@ uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mbnqw"]
 material = SubResource("StandardMaterial3D_fs7fl")
+size = Vector3(3, 3, 3)
 
 [node name="BaseDestructablePhysicsObject" type="RigidBody3D"]
 collision_layer = 6
@@ -30,3 +33,7 @@ mesh = SubResource("BoxMesh_mbnqw")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="CoinSpawner" type="Node3D" parent="."]
+script = ExtResource("2_e2x2s")
+metadata/_custom_type_script = "uid://dm8k7ujovqmbv"
