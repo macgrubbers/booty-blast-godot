@@ -25,7 +25,7 @@ radius = 0.95
 
 [node name="SpinnyHammer" type="Node3D" groups=["Structures"]]
 script = ExtResource("1_gsyst")
-spin_rate = 360.0
+spin_rate = 720.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -45,10 +45,12 @@ transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 2.6865725
 collision_layer = 1572864
 collision_mask = 1572864
 script = ExtResource("2_gsyst")
-knockback_magnitude = 50.0
-target_groups = Array[String](["Player", "Enemies"])
+knockback_magnitude = 30.0
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/BaseHitbox"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_v14hn")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

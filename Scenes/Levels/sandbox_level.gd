@@ -3,7 +3,7 @@ extends Node3D
 # References
 @onready var enemies:Node3D = $Enemies
 @onready var player_ref:CharacterBody3D = $Player
-@onready var player_spawn_point:Node3D = $NavigationRegion3D/PlayerSpawnPoint
+@onready var player_spawn_point:Node3D = $PlayerSpawnPoint
 @onready var blackboard:Blackboard = $EnemyBlackboard
 # Preloads
 @onready var player_node = preload("res://addons/PlayerCharacter/PlayerCharacterScene.tscn")
@@ -32,7 +32,7 @@ func respawn_player():
 	update_blackboards()
 
 func update_blackboards():
-	for child in enemies.get_children():
+	for child in get_children():
 		if child.is_in_group("Enemies"):
 			child.blackboard.set_value("player_ref", player_ref)
 

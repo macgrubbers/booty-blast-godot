@@ -86,3 +86,6 @@ func _on_just_landed():
 							curr_state.prev_in_air_velocity,
 							collision_normal)
 			curr_state.transitioned.emit(curr_state,"InAirState")
+		
+		elif collider is PressurePlate:
+			collider.activate()

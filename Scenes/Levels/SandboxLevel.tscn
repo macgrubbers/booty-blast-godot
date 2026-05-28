@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=18 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="5_4c52t"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="7_tsqwa"]
 [ext_resource type="PackedScene" uid="uid://cuxgsfy6shs0a" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePhysicsObject.tscn" id="8_mu8i2"]
+[ext_resource type="PackedScene" uid="uid://lii61fy4437q" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="9_jfaew"]
+[ext_resource type="PackedScene" uid="uid://c7t3qtik4ndib" path="res://Scenes/Structures/Interactable Structures/PressurePlate.tscn" id="10_ca7po"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -36,6 +38,9 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu8i2"]
+albedo_color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+
 [node name="SandboxLevel" type="Node3D"]
 script = ExtResource("1_l0xhg")
 
@@ -51,6 +56,7 @@ environment = SubResource("Environment_s27tv")
 [node name="PlayerSpawnPoint" type="Node3D" parent="."]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024490356, -0.036396027, -0.07893753)
 navigation_mesh = SubResource("NavigationMesh_pauaf")
 
 [node name="Paths" type="Node3D" parent="NavigationRegion3D"]
@@ -73,75 +79,103 @@ collision_layer = 3
 size = Vector3(100, 1, 100)
 
 [node name="Test_StepAndJump" type="CSGCombiner3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.424103, 0, 8.78957)
 material_override = ExtResource("1_2ln86")
 use_collision = true
 collision_layer = 3
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 3.5, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 size = Vector3(5, 7, 5)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 3.5, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5)
 size = Vector3(5, 7, 5)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 10.5, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5, 5)
 size = Vector3(5, 7, 5)
 
 [node name="Test_WallJumpAndLaunchPad" type="CSGCombiner3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 44.5)
 material_override = ExtResource("1_2ln86")
 use_collision = true
 collision_layer = 3
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 35, 15, 30)
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 5, 15, 0)
 size = Vector3(10, 1, 30)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 25, 15, 30)
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -5, 15, 0)
 size = Vector3(10, 1, 30)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 29.5, 30)
-size = Vector3(10, 1, 10)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 29.5, 0)
+size = Vector3(10, 1, 20)
 
 [node name="LaunchingPlatform" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad" instance=ExtResource("3_s27tv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0.5, 22)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -10)
 
-[node name="Test_Spawners" type="Node3D" parent="NavigationRegion3D"]
+[node name="LaunchingPlatform2" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad" instance=ExtResource("3_s27tv")]
+transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, -20, 1, -10)
 
-[node name="DummyEnemySpawner" parent="NavigationRegion3D/Test_Spawners" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 25)
+[node name="Test_Spawners" type="CSGCombiner3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1, -32.561073)
+material_override = SubResource("StandardMaterial3D_mu8i2")
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Test_Spawners"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.8812637, 0, 7.4961357)
+size = Vector3(7, 1, 25)
+
+[node name="SpawnerButtons" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2"]
+
+[node name="DummyEnemySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 spawning_object = ExtResource("5_4c52t")
 spawn_point = NodePath("SpawnPoint")
 
-[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/DummyEnemySpawner"]
+[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/DummyEnemySpawner"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.973728, 6.3510065, 0)
 
-[node name="RegularEnemySpawner" parent="NavigationRegion3D/Test_Spawners" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 19)
+[node name="RegularEnemySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 spawning_object = ExtResource("4_beuee")
 spawn_point = NodePath("SpawnPoint")
 
-[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/RegularEnemySpawner"]
+[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RegularEnemySpawner"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.973728, 6.3510065, 0)
 
-[node name="RangedEnemySpawner" parent="NavigationRegion3D/Test_Spawners" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 13)
+[node name="RangedEnemySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 spawning_object = ExtResource("7_tsqwa")
 spawn_point = NodePath("SpawnPoint")
 
-[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/RangedEnemySpawner"]
+[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RangedEnemySpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)
 
-[node name="CrateSpawner" parent="NavigationRegion3D/Test_Spawners" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 7)
+[node name="CrateSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 spawning_object = ExtResource("8_mu8i2")
 spawn_point = NodePath("SpawnPoint")
 
-[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CrateSpawner"]
+[node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/CrateSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)
+
+[node name="Test_HammerLaunch" type="CSGCombiner3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1.5142651, 37.965076)
+
+[node name="SpinnyHammer" parent="NavigationRegion3D/Test_HammerLaunch" instance=ExtResource("9_jfaew")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 5, 0)
+activatable = true
+use_timer = true
+timer_duration = 3.0
+
+[node name="PressurePlate" parent="NavigationRegion3D/Test_HammerLaunch" node_paths=PackedStringArray("activating_node") instance=ExtResource("10_ca7po")]
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 3.2435539, -3.6790085)
+activating_node = NodePath("../SpinnyHammer")
 
 [node name="Player" parent="." instance=ExtResource("2_qrb30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
