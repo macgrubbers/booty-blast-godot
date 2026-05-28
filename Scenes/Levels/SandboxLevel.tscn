@@ -74,6 +74,8 @@ size = Vector3(100, 1, 100)
 
 [node name="Test_StepAndJump" type="CSGCombiner3D" parent="NavigationRegion3D"]
 material_override = ExtResource("1_2ln86")
+use_collision = true
+collision_layer = 3
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 3.5, 10)
@@ -89,6 +91,8 @@ size = Vector3(5, 7, 5)
 
 [node name="Test_WallJumpAndLaunchPad" type="CSGCombiner3D" parent="NavigationRegion3D"]
 material_override = ExtResource("1_2ln86")
+use_collision = true
+collision_layer = 3
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
 transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 35, 15, 30)

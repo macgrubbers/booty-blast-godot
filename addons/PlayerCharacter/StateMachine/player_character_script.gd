@@ -133,6 +133,7 @@ func _process(delta: float):
 	display_properties()
 	
 func _physics_process(delta : float):
+	#print($StateMachine/ButtSlamState/Timer.is_stopped())
 	if is_on_floor() and not was_on_floor:
 		just_landed.emit()
 		

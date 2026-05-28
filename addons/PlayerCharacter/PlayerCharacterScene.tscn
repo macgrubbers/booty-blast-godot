@@ -307,6 +307,10 @@ metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 script = ExtResource("18_pi2tj")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 
+[node name="Timer" type="Timer" parent="StateMachine/ButtSlamState"]
+wait_time = 0.5
+one_shot = true
+
 [node name="TalkingState" type="Node" parent="StateMachine"]
 script = ExtResource("19_20r42")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"

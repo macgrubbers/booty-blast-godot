@@ -7,20 +7,24 @@ var state_name : String = "ButtSlam"
 var cR : CharacterBody3D
 @onready var butt_slam_land_hitbox : Area3D = $"../../ButtSlamLandHitbox"
 @onready var butt_slam_falling_hitbox : Area3D = $"../../ButtSlamFallingHitbox"
+@onready var land_timer: Timer = $Timer
 
 func enter(char_ref : CharacterBody3D):
 	cR = char_ref
 	verifications()
-	butt_slam_falling_hitbox.set_monitoring(true)
+	
 
 func verifications():
+	land_timer.connect("timeout", _on_land_timer_timeout)
+	butt_slam_falling_hitbox.set_monitoring(true)
 	cR.godot_plush_skin.set_state("butt_slam")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 
 	# Stop horizontal velocity
-	cR.jump_gravity
+	#cR.jump_gravity
 	cR.velocity.x = 0.0
+	cR.velocity.y = 0.0
 	cR.velocity.z = 0.0
 
 func physics_update(delta : float):
@@ -55,22 +59,22 @@ func check_if_floor():
 	if cR.is_on_floor():
 		# first time landing
 		if butt_slam_falling_hitbox.monitoring == true:
+			land_timer.start()
+			butt_slam_falling_hitbox.set_monitoring(false)
+			butt_slam_land_hitbox.set_monitoring(true)
 			just_landed.emit()
-		
-		butt_slam_falling_hitbox.set_monitoring(false)
+
 		cR.squash_and_strech(0.3, 0.08)
 		cR.particles_manager.display_particles(cR.land_particles, cR)
-		
-		toggle_butt_slam_land_hitbox()
 		
 		impact_audio_playing()
 	else:
 		prev_in_air_velocity = cR.velocity
-		
-	if cR.is_on_wall():
-		if cR.hit_wall_cut_velocity:
-			cR.velocity.x = 0.0
-			cR.velocity.z = 0.0
+
+	#if cR.is_on_wall():
+		#if cR.hit_wall_cut_velocity:
+			#cR.velocity.x = 0.0
+			#cR.velocity.z = 0.0
 
 # audio played when play char touch the ground after being in air
 # the volume is calculated based on the velocity pre ground hit, plus the fall gravity
@@ -79,13 +83,9 @@ func impact_audio_playing():
 	cR.impact_audio.volume_db = linear_to_db(remap(floor_impact_percent, 0.0, 1.0, 0.5, 2.0))
 	cR.impact_audio.play()
 
-# When landed, toggle the hitbox on for a start a timer
-# When the timer ends, hitbox is toggled off and state is transitioned
-func toggle_butt_slam_land_hitbox():
-	butt_slam_land_hitbox.set_monitoring(true)
-	await get_tree().create_timer(0.5).timeout
 
-	# Transition out of attack state
+func _on_land_timer_timeout():
+	print("timeout!")
 	if cR.move_dir: 
 		transitioned.emit(self, cR.walk_or_run)
 	else: 
@@ -120,6 +120,10 @@ func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 		area.apply_knockback(dir_vector * 15 + Vector3(0,12,0), false)
 		area.attack(-3, cR)
 
+
 func exit():
+	print("exit state")
 	butt_slam_falling_hitbox.set_monitoring(false)
 	butt_slam_land_hitbox.set_monitoring(false)
+	land_timer.stop()
+	print(land_timer.is_stopped())
