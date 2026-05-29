@@ -4,6 +4,8 @@ extends Node3D
 @onready var physical_bone_simulator_3d = %PhysicalBoneSimulator3D
 @onready var animation_tree : AnimationTree = %AnimationTree
 @onready var state_machine : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
+@onready var pelvis_bone : PhysicalBone3D = $"GodotPlushModel/Rig/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone DEF-hips"
+
 
 var ragdoll : bool = false : set = set_ragdoll
 var squash_and_stretch = 1.0 : set = set_squash_and_stretch
@@ -40,3 +42,7 @@ func emit_footstep(intensity : float = 1.0) -> void:
 
 func _on_wave_animation_finished() -> void:
 	wave_done.emit()
+
+func apply_impulse_to_ragdoll(amount:Vector3):
+	print("knocking back: ", amount)
+	pelvis_bone.apply_impulse(amount)
