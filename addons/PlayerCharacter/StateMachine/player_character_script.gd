@@ -140,7 +140,7 @@ func _physics_process(delta : float):
 	modify_physics_properties()
 	
 	if changing_size:
-		change_size(delta)
+		change_size()
 	
 	move_and_slide()
 	
@@ -210,7 +210,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # Change the size of the player
-func change_size(delta:float):
+func change_size(new_size:sizes):
+	var delta = get_physics_process_delta_time()
 	if current_size == sizes.SMALL:
 		scale = scale.move_toward(Vector3(1,1,1)*large_size_scale, transform_rate * delta)
 		if scale == Vector3(1,1,1)*4:

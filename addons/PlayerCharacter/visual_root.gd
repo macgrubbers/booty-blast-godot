@@ -23,7 +23,7 @@ func change_size(delta:float):
 
 func _physics_process(delta: float) -> void:
 	if changing_size:
-		change_size(delta)
+		change_size()
 
 func toggle_size():
 	changing_size = true

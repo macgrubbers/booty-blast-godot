@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=19 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cuxgsfy6shs0a" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePhysicsObject.tscn" id="8_mu8i2"]
 [ext_resource type="PackedScene" uid="uid://lii61fy4437q" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="9_jfaew"]
 [ext_resource type="PackedScene" uid="uid://c7t3qtik4ndib" path="res://Scenes/Structures/Interactable Structures/PressurePlate.tscn" id="10_ca7po"]
+[ext_resource type="PackedScene" uid="uid://bt60xkaytxah4" path="res://Scenes/Collectables/BigBootyJuice.tscn" id="11_rsahn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -176,6 +177,9 @@ timer_duration = 3.0
 [node name="PressurePlate" parent="NavigationRegion3D/Test_HammerLaunch" node_paths=PackedStringArray("activating_node") instance=ExtResource("10_ca7po")]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 3.2435539, -3.6790085)
 activating_node = NodePath("../SpinnyHammer")
+
+[node name="BigBootyJuice" parent="NavigationRegion3D" instance=ExtResource("11_rsahn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2233062, 2.1984472, 12.427785)
 
 [node name="Player" parent="." instance=ExtResource("2_qrb30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)

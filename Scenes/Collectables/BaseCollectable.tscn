@@ -5,4 +5,5 @@
 [node name="BaseCollectable" type="RigidBody3D" groups=["Collectables"]]
 collision_layer = 16
 collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_vqh58")

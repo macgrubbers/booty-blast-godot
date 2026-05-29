@@ -12,11 +12,11 @@ extends Node3D
 func _ready() -> void:
 	connect("child_entered_tree", _on_new_child_added)
 
-func _physics_process(delta: float) -> void:
-	for node:Node3D in get_tree().get_nodes_in_group("Collectables"):
-		node.look_at(player_ref.cam_holder.cam.get_global_position())
-		node.rotation.x = 0
-		node.rotation.z = 0
+#func _physics_process(delta: float) -> void:
+	#for node:Node3D in get_tree().get_nodes_in_group("Collectables"):
+		#node.look_at(player_ref.cam_holder.cam.get_global_position())
+		#node.rotation.x = 0
+		#node.rotation.z = 0
 
 # Respawn will:
 #	remove the old player

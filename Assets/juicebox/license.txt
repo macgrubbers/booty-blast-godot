@@ -1,0 +1,8 @@
+Model Information:
+* title:	Juice
+* source:	https://sketchfab.com/3d-models/juice-8fe5a207999b4bbbbbbf0e483e4a2455
+* author:	c00l (https://sketchfab.com/abayganbekov)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

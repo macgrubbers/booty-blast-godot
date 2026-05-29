@@ -16,3 +16,6 @@ func _on_body_entered(body:Node3D):
 		PlayerData.moneys += body.value
 		just_collected.emit(body)
 		body.collect()
+	
+	elif body is BigBootyJuice:
+		body.collect()
