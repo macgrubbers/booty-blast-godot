@@ -1,5 +1,6 @@
 class_name CollectionComponent extends Area3D
 
+@onready var player_ref:CharacterBody3D = $".."
 @onready var health_component: HealthComponent = $"../HealthComponent"
 
 signal just_collected(type:Area3D)
@@ -18,4 +19,7 @@ func _on_body_entered(body:Node3D):
 		body.collect()
 	
 	elif body is BigBootyJuice:
+		player_ref.is_changing_size = true
+		player_ref.new_size = player_ref.sizes.LARGE
+		player_ref.size_buff_timer.set_wait_time(body.duration)
 		body.collect()

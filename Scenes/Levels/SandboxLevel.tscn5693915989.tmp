@@ -171,7 +171,7 @@ spawning_object = ExtResource("11_rsahn")
 spawn_point = NodePath("SpawnPoint")
 
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/JuiceSpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.974, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)
 
 [node name="Test_HammerLaunch" type="CSGCombiner3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1.5142651, 37.965076)
@@ -191,3 +191,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2233062, 2.1984472, 12.4277
 
 [node name="Player" parent="." instance=ExtResource("2_qrb30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
+continious_run = false
+auto_jump = false

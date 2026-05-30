@@ -79,11 +79,14 @@ var can_wall_jump : bool = true
 
 # Size variables
 enum sizes {SMALL,LARGE}
-@onready var small_size_scale: int = 1
-@onready var large_size_scale: int = 4
+@export_group("Size Changing Variables")
+@export var small_size_scale: float = 1
+@export var large_size_scale: float = 4
+@export var transform_rate:float = 2
 @onready var current_size:sizes
-@onready var changing_size:bool
-@onready var transform_rate:float = 2
+@onready var new_size:sizes
+@onready var is_changing_size:bool
+@onready var size_buff_timer:Timer = $SizeBuffTimer
 
 #references variables
 @onready var visual_root = %VisualRoot
@@ -126,6 +129,8 @@ func _ready():
 	# rotate camera 180 cuz this annoys me greatly
 	$OrbitView.global_rotation.y += PI
 		
+	size_buff_timer.connect("timeout", _on_size_buff_timer_timeout)
+		
 func _process(delta: float):
 	#update_interact_raycast()
 	modify_model_orientation(delta)
@@ -139,8 +144,8 @@ func _physics_process(delta : float):
 		
 	modify_physics_properties()
 	
-	if changing_size:
-		change_size()
+	if is_changing_size:
+		change_size(delta)
 	
 	move_and_slide()
 	
@@ -210,22 +215,23 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # Change the size of the player
-func change_size(new_size:sizes):
-	var delta = get_physics_process_delta_time()
-	if current_size == sizes.SMALL:
-		scale = scale.move_toward(Vector3(1,1,1)*large_size_scale, transform_rate * delta)
-		if scale == Vector3(1,1,1)*4:
-			current_size = sizes.LARGE
-			changing_size = false
+func change_size(delta):
+	# Determine size constant
+	var size_scale:float
+	if new_size == sizes.SMALL: size_scale = small_size_scale
+	else: size_scale = large_size_scale
+	
+	var new_scale = scale.move_toward(Vector3(1,1,1)*size_scale, transform_rate * delta)
+	# Stop changing size if we're close enough
+	if scale.is_equal_approx(new_scale):
+		current_size = new_size
+		is_changing_size = false
+		if current_size == sizes.LARGE:
+			size_buff_timer.start()
 	else:
-		scale = scale.move_toward(Vector3(1,1,1) * small_size_scale, transform_rate * delta)
-		if scale == Vector3(1,1,1):
-			current_size = sizes.SMALL
-			changing_size = false
+		scale = new_scale
 
-func toggle_size():
-	changing_size = true
-
+# TODO: make timer start immediate after no matter what
 func just_dashed():
 	can_dash = false
 	if !is_on_floor():
@@ -234,6 +240,10 @@ func just_dashed():
 	dash_reset_timer.wait_time = .75
 	dash_reset_timer.start()
 	await dash_reset_timer.timeout
-	print("can dash again!")
 	can_dash = true
 	return
+
+func _on_size_buff_timer_timeout():
+	print("buff over")
+	new_size = sizes.SMALL
+	is_changing_size = true

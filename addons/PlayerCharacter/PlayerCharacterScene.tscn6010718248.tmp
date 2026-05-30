@@ -1,6 +1,7 @@
-[gd_scene load_steps=65 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=66 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
+[ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_b6qkq"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
 [ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://addons/PlayerCharacter/OrbitControl/orbit_view.tscn" id="3_hcr6r"]
 [ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
@@ -165,6 +166,7 @@ walk_deccel = 7.5
 run_speed = 15.0
 run_accel = 3.5
 run_deccel = 6.5
+continious_run = null
 dash_speed = 35.0
 dash_duration = 0.2
 dash_accel = 12.0
@@ -175,6 +177,7 @@ jump_cut_multiplier = 0.7
 jump_cooldown = 0.2
 nb_jumps_in_air_allowed = 1
 coyote_jump_cooldown = 0.2
+auto_jump = null
 in_air_move_speed = Array[Curve]([SubResource("Curve_l1d2p"), SubResource("Curve_pdxi8")])
 in_air_accel = Array[Curve]([SubResource("Curve_8rpwc"), SubResource("Curve_x3fw6")])
 hit_wall_cut_velocity = true
@@ -191,6 +194,7 @@ follow_cam_pos_when_aimed = true
 
 [node name="VisualRoot" type="Node3D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("2_b6qkq")
 
 [node name="GodotPlushSkin" parent="VisualRoot" instance=ExtResource("2_mtsks")]
 unique_name_in_owner = true
@@ -759,9 +763,6 @@ text = "....."
 label_settings = ExtResource("17_c1i0s")
 
 [node name="DashResetTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="SizeBuffTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="timeout" from="StateMachine/StunnedState/StunTimer" to="StateMachine/StunnedState" method="_on_hurt_timer_timeout"]
