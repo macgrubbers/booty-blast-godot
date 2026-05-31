@@ -1,5 +1,6 @@
 extends Node3D
 
+
 @onready var godot_plush_mesh = $GodotPlushModel/Rig/Skeleton3D/GodotPlushMesh
 @onready var physical_bone_simulator_3d = %PhysicalBoneSimulator3D
 @onready var animation_tree : AnimationTree = %AnimationTree

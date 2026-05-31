@@ -27,7 +27,9 @@ var aim_cam_pos_side : bool = true #false = left, true = right
 @export var cam_zoom_out_action : String = ""
 
 #references variables
+@onready var player : CharacterBody3D = $".."
 @onready var cam : Camera3D = %Camera3D
+@onready var player_ragdoll = %GodotPlushSkin.pelvis_bone
 
 # Signals
 signal paused
@@ -75,6 +77,10 @@ func _input(event):
 		rotate_from_vector(mouse_motion * mouse_sens)
 		
 func _process(delta):
+	if player.health_component.is_alive:
+		global_position = player.get_global_position() + Vector3(0,1,0)
+	else:
+		global_position = player_ragdoll.get_global_position() + Vector3(0,1,0)
 	#get pan direction
 	var joy_dir:Vector2 # = Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down")
 	

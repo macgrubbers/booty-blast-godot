@@ -232,7 +232,6 @@ mesh = SubResource("SphereMesh_fdn82")
 skeleton = NodePath("../../StateMachine/BlockState")
 
 [node name="AudioRoot" type="Node3D" parent="."]
-top_level = true
 
 [node name="FootStepAudio" type="AudioStreamPlayer3D" parent="AudioRoot"]
 unique_name_in_owner = true

@@ -89,6 +89,11 @@ collision_layer = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 size = Vector3(5, 7, 5)
 
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_StepAndJump/CSGBox3D5"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.5255508, -0.10600376, 0)
+pixel_size = 0.015
+text = "Regular Jump Height"
+
 [node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5)
 size = Vector3(5, 7, 5)
@@ -96,6 +101,11 @@ size = Vector3(5, 7, 5)
 [node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Test_StepAndJump"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5, 5)
 size = Vector3(5, 7, 5)
+
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_StepAndJump/CSGBox3D7"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.5255508, 0.02873516, 0)
+pixel_size = 0.015
+text = "Double Jump Height"
 
 [node name="Test_WallJumpAndLaunchPad" type="CSGCombiner3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 44.5)
@@ -141,6 +151,12 @@ spawn_point = NodePath("SpawnPoint")
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/DummyEnemySpawner"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.973728, 6.3510065, 0)
 
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/DummyEnemySpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Dummy Enemy"
+
 [node name="RegularEnemySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 spawning_object = ExtResource("4_beuee")
@@ -148,6 +164,12 @@ spawn_point = NodePath("SpawnPoint")
 
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RegularEnemySpawner"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.973728, 6.3510065, 0)
+
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RegularEnemySpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Regular Enemy"
 
 [node name="RangedEnemySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -157,6 +179,12 @@ spawn_point = NodePath("SpawnPoint")
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RangedEnemySpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)
 
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/RangedEnemySpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Ranged Enemy"
+
 [node name="CrateSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 spawning_object = ExtResource("8_mu8i2")
@@ -165,6 +193,12 @@ spawn_point = NodePath("SpawnPoint")
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/CrateSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.973728, 6.3510065, 0)
 
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/CrateSpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Crate w/ Monies"
+
 [node name="JuiceSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_pauaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
 spawning_object = ExtResource("11_rsahn")
@@ -172,6 +206,13 @@ spawn_point = NodePath("SpawnPoint")
 
 [node name="SpawnPoint" type="Node3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/JuiceSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.974, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/JuiceSpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Juice That Makes
+You Bigger"
 
 [node name="Test_HammerLaunch" type="CSGCombiner3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1.5142651, 37.965076)
@@ -185,9 +226,6 @@ timer_duration = 3.0
 [node name="PressurePlate" parent="NavigationRegion3D/Test_HammerLaunch" node_paths=PackedStringArray("activating_node") instance=ExtResource("10_ca7po")]
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 3.2435539, -3.6790085)
 activating_node = NodePath("../SpinnyHammer")
-
-[node name="BigBootyJuice" parent="NavigationRegion3D" instance=ExtResource("11_rsahn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2233062, 2.1984472, 12.427785)
 
 [node name="Player" parent="." instance=ExtResource("2_qrb30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)

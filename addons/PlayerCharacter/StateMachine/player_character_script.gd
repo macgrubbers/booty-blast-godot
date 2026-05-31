@@ -88,6 +88,8 @@ enum sizes {SMALL,LARGE}
 @onready var is_changing_size:bool
 @onready var size_buff_timer:Timer = $SizeBuffTimer
 
+signal just_got_big(duration:float)
+
 #references variables
 @onready var visual_root = %VisualRoot
 @onready var godot_plush_skin = %GodotPlushSkin
@@ -227,6 +229,7 @@ func change_size(delta):
 		current_size = new_size
 		is_changing_size = false
 		if current_size == sizes.LARGE:
+			just_got_big.emit(size_buff_timer.get_wait_time())
 			size_buff_timer.start()
 	else:
 		scale = new_scale

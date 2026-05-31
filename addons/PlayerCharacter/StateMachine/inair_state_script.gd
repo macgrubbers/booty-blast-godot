@@ -74,6 +74,10 @@ func input_management():
 	if Input.is_action_just_pressed("rmb"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "BlockState")
+			
+	if Input.is_action_just_pressed("x"):
+		if !cR.godot_plush_skin.ragdoll:
+			transitioned.emit(self, "RagdollState")
 		
 func check_if_floor():
 	if cR.is_on_floor():
