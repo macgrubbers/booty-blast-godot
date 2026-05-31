@@ -62,7 +62,7 @@ func on_health_updated(new_health:int)->void:
 func _on_new_collider_found(collider):
 	if collider:
 		interact.visible = true
-		interact_label.text = "[F] Interact with " + collider.get_parent().get_name()
+		interact_label.text = "[F] Interact with " + collider.get_name()
 	else:
 		interact.visible = false
 
@@ -70,3 +70,5 @@ func _on_new_collider_found(collider):
 func _on_collectable_update(body:Node3D):
 	if body is CoinCollectable:
 		collectables_bar.update_moneys()
+	elif body is GemCollectable:
+		collectables_bar.update_gems()

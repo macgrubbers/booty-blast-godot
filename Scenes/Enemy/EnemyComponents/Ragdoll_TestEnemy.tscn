@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdfuqoktr0slh"]
 
 [ext_resource type="Script" uid="uid://dr6ymp2uronws" path="res://Scenes/Enemy/EnemyComponents/ragdoll_test_enemy.gd" id="1_2esnq"]
-[ext_resource type="PackedScene" uid="uid://bmegn0mgs6x42" path="res://Scenes/Actor Components/CoinSpawner.tscn" id="2_tafvk"]
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Actor Components/spawner.gd" id="2_tafvk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ctu1"]
 
@@ -25,7 +25,7 @@ albedo_color = Color(0, 0, 0, 1)
 
 [node name="RagdollTestEnemy" type="RigidBody3D"]
 collision_layer = 0
-collision_mask = 2097154
+collision_mask = 2097155
 angular_damp_mode = 1
 script = ExtResource("1_2esnq")
 
@@ -58,4 +58,6 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="CoinSpawner" parent="." instance=ExtResource("2_tafvk")]
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("2_tafvk")
+metadata/_custom_type_script = "uid://clav251aoerdv"

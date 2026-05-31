@@ -156,7 +156,8 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_mask = 2
+collision_layer = 0
+collision_mask = 3
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -553,6 +554,15 @@ offset_right = 113.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 30
 text = "monies:"
+
+[node name="GemLabel" type="Label" parent="HUD/CollectablesBar"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 49.0
+offset_right = 112.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 30
+text = "gems:"
 
 [node name="Interact" type="Control" parent="HUD"]
 visible = false

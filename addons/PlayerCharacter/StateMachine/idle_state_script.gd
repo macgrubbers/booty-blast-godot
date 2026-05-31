@@ -71,6 +71,7 @@ func input_management():
 		var collider = $"../../Raycasts/InteractRaycast".get_collider()
 		if collider:
 			var interact_obj = collider.get_parent()
+			print(interact_obj)
 			
 			# If we can talk to it, talk!
 			if interact_obj.has_method("get_dialogue_manager"):
@@ -80,6 +81,7 @@ func input_management():
 			
 			# If we can interact with it, interact!
 			elif interact_obj.has_method("interact"):
+				print("can interact")
 				interact_obj.interact()
 		else:
 			print("No collider!")

@@ -19,6 +19,11 @@ func _on_body_entered(body:Node3D):
 		just_collected.emit(body)
 		body.collect()
 	
+	elif body is GemCollectable:
+		PlayerData.gems += body.value
+		just_collected.emit(body)
+		body.collect()
+	
 	elif body is BigBootyJuice:
 		player_ref.is_changing_size = true
 		player_ref.new_size = player_ref.sizes.LARGE

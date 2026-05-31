@@ -8,9 +8,8 @@ class_name button
 @onready var spawner = $Spawner
 
 func _ready() -> void:
-	spawner.spawning_object = spawning_object
 	spawner.set_global_transform(spawn_point.get_global_transform())
 
 func interact():
 	print("button pressed")
-	spawner.spawn()
+	spawner.spawn(spawning_object, 1)

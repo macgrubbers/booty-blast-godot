@@ -2,7 +2,7 @@ extends Node3D
 
 
 @onready var godot_plush_mesh = $GodotPlushModel/Rig/Skeleton3D/GodotPlushMesh
-@onready var physical_bone_simulator_3d = %PhysicalBoneSimulator3D
+@onready var physical_bone_simulator_3d = $GodotPlushModel/Rig/Skeleton3D/PhysicalBoneSimulator3D
 @onready var animation_tree : AnimationTree = %AnimationTree
 @onready var state_machine : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
 @onready var pelvis_bone : PhysicalBone3D = $"GodotPlushModel/Rig/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone DEF-hips"

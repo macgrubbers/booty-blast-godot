@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgx6pos0jcbht"]
+
+[ext_resource type="ArrayMesh" uid="uid://bvdpief56wvfs" path="res://Assets/chest_low_poly/iron_chest_top.res" id="1_2rihf"]
+[ext_resource type="Script" uid="uid://bj08i40dq1tum" path="res://Scenes/Props/chest.gd" id="1_hky7g"]
+[ext_resource type="ArrayMesh" uid="uid://o8512mp28r36" path="res://Assets/chest_low_poly/iron_chest_bottom.res" id="2_hky7g"]
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Actor Components/spawner.gd" id="4_esnon"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_esnon"]
+size = Vector3(2.35, 1.1, 2.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e47le"]
+size = Vector3(2.5952148, 1.2577149, 2.1417236)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hky7g"]
+size = Vector3(4, 3, 3)
+
+[node name="Chest" type="AnimatableBody3D"]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_hky7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31492448, 0)
+shape = SubResource("BoxShape3D_esnon")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033447266, 0.7932126, 0.04547119)
+shape = SubResource("BoxShape3D_e47le")
+
+[node name="Mesh_Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0, 0)
+mesh = ExtResource("1_2rihf")
+
+[node name="Mesh_Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0, 0)
+mesh = ExtResource("2_hky7g")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_hky7g")
+
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("4_esnon")
+metadata/_custom_type_script = "uid://clav251aoerdv"

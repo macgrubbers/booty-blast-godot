@@ -1,4 +1,4 @@
 extends Node
 
 var moneys = 0
-var diamonds = 0
+var gems = 0
