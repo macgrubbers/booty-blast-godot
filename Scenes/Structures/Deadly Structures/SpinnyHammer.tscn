@@ -45,6 +45,7 @@ transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 2.6865725
 collision_layer = 1572864
 collision_mask = 1572864
 script = ExtResource("2_gsyst")
+damage = 3
 knockback_magnitude = 30.0
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 

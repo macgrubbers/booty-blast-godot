@@ -9,7 +9,7 @@ height = 1.0
 
 [node name="GemCollectable" type="RigidBody3D"]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 16
 mass = 0.1
 gravity_scale = 0.0
 script = ExtResource("1_o7le6")

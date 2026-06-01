@@ -54,7 +54,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_orange.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem4.res",
 "save_to_file/path": "uid://c4hvwei7m61f8"
 },
 "Sketchfab_Scene_Object_2": {
@@ -63,7 +63,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_green.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem3.res",
 "save_to_file/path": "uid://c5fkf6miaiaey"
 },
 "Sketchfab_Scene_Object_3": {
@@ -72,7 +72,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_pink.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem5.res",
 "save_to_file/path": "uid://duho0yous76bk"
 },
 "Sketchfab_Scene_Object_4": {
@@ -81,7 +81,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_yellow.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem7.res",
 "save_to_file/path": "uid://dgu20kh58cwov"
 },
 "Sketchfab_Scene_Object_5": {
@@ -90,7 +90,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_purple.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem6.res",
 "save_to_file/path": "uid://cunqtx0gavikm"
 },
 "Sketchfab_Scene_Object_6": {
@@ -99,7 +99,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/crystals_pack/gem_green2.res",
+"save_to_file/fallback_path": "res://Assets/crystals_pack/gem2.res",
 "save_to_file/path": "uid://b5s386ipb2e6l"
 }
 }

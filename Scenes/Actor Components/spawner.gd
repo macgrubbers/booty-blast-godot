@@ -16,7 +16,10 @@ func spawn(obj_type: PackedScene, amount:int = 1):
 			new_obj.set_physicsable(make_physicsable)
 		get_tree().current_scene.add_child(new_obj)
 		if current_spawn_method == spawn_methods.SCATTER and new_obj.has_method("apply_central_impulse"):
-			new_obj.apply_central_impulse(Vector3(randf_range(x_impulse_range.x, x_impulse_range.y),
+			new_obj.apply_impulse(Vector3(randf_range(x_impulse_range.x, x_impulse_range.y),
+													randf_range(z_impulse_range.x, z_impulse_range.y),
+													randf_range(y_impulse_range.x, y_impulse_range.y)),
+								Vector3(randf_range(x_impulse_range.x, x_impulse_range.y),
 													randf_range(z_impulse_range.x, z_impulse_range.y),
 													randf_range(y_impulse_range.x, y_impulse_range.y)))
 
