@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://dn7da5imejjry" path="res://Scenes/Collectables/gem_collectable.gd" id="1_o7le6"]
 [ext_resource type="ArrayMesh" uid="uid://bqrubgi4bqpo1" path="res://Assets/crystals_pack/gem1.res" id="2_cb84m"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cb84m"]
-radius = 0.25
-height = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_cb84m"]
+size = Vector3(0.25, 0.5, 0.25)
 
 [node name="GemCollectable" type="RigidBody3D"]
 collision_layer = 16
@@ -16,7 +15,7 @@ script = ExtResource("1_o7le6")
 metadata/_custom_type_script = "uid://dp2eb2jgxb0tp"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_cb84m")
+shape = SubResource("BoxShape3D_cb84m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

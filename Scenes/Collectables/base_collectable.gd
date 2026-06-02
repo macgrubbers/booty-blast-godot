@@ -23,6 +23,7 @@ func set_physicsable(val:bool):
 		set_gravity_scale(1.0)
 		set_collision_mask_value(1, true)
 		set_collision_mask_value(2, true)
+		set_collision_mask_value(3, true)
 	else:
 		physicsable = false
 		set_gravity_scale(0.0)
