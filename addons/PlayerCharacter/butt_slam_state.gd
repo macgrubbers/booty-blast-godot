@@ -96,7 +96,7 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(Vector3(0,-50,0), false)
-		area.attack(-3, cR)
+		area.attack(3, cR)
 		
 		# apply knockback up to player
 		cR.velocity.y = 0
@@ -118,7 +118,7 @@ func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(dir_vector * 15 + Vector3(0,12,0), false)
-		area.attack(-3, cR)
+		area.attack(3, cR)
 
 
 func exit():

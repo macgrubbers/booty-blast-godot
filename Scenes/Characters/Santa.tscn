@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcdo1lhmk7j5h" path="res://Scenes/Characters/santa.gd" id="1_jtxtl"]
 [ext_resource type="PackedScene" uid="uid://di4w8hhjlc02l" path="res://santa_import.tscn" id="2_3063e"]
-[ext_resource type="Script" uid="uid://mgjf5n7l3gdl" path="res://Scenes/Actor Components/Dialogue/dialogue_manager_component.gd" id="3_sy7bg"]
+[ext_resource type="Script" uid="uid://mgjf5n7l3gdl" path="res://Scenes/Components/Dialogue/dialogue_manager_component.gd" id="3_sy7bg"]
 [ext_resource type="Script" uid="uid://c08wam0ismfqh" path="res://Scenes/Characters/santa_dialogue_node_start.gd" id="4_r1cu7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jtxtl"]

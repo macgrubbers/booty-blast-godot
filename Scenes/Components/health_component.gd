@@ -43,7 +43,7 @@ func attack(amount : float,
 	if !can_be_hurt or !is_alive:
 		emit_signal("attack_unsuccessful", attacker)
 	else:
-		current_health += amount
+		current_health -= amount
 		immunity_timer.start()
 		emit_signal("update_health", current_health)
 		can_be_hurt = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bg16cdng0jbiv"]
 
-[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="1_fyqau"]
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="1_fyqau"]
 
 [node name="BaseHitbox" type="Area3D"]
 monitoring = false

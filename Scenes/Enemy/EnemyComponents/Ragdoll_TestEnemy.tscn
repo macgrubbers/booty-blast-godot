@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdfuqoktr0slh"]
 
 [ext_resource type="Script" uid="uid://dr6ymp2uronws" path="res://Scenes/Enemy/EnemyComponents/ragdoll_test_enemy.gd" id="1_2esnq"]
-[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Actor Components/spawner.gd" id="2_tafvk"]
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/spawner.gd" id="2_tafvk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ctu1"]
 

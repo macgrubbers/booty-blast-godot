@@ -118,7 +118,7 @@ func _on_air_attack_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
-		area.attack(-3, cR)
+		area.attack(3, cR)
 		wall_jump()
 
 

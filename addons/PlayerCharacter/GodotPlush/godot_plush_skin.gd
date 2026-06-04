@@ -46,4 +46,5 @@ func _on_wave_animation_finished() -> void:
 
 func apply_impulse_to_ragdoll(amount:Vector3):
 	print("knocking back: ", amount)
+	await get_tree().physics_frame
 	pelvis_bone.apply_impulse(amount)

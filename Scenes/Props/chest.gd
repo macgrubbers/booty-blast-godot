@@ -45,12 +45,12 @@ func _physics_process(delta: float) -> void:
 			spawner.spawn(spawned_object, 1)
 
 		else:
-			print("step")
 			frames += 1
 
 	if contained_gems <= 0 and contained_coins <= 0:
 		set_physics_process(false)
+		cleanup()
 
 func cleanup():
 	pass
-	#queue_free()
+	$ExplosiveComponent.activate()

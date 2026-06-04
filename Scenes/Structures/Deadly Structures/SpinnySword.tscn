@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brt8iu24ws3av" path="res://Scenes/Structures/Deadly Structures/spinny_sword.gd" id="1_gsyst"]
 [ext_resource type="PackedScene" uid="uid://d0qesc5gvqr64" path="res://Assets/low poly sword/scene.gltf" id="1_pogsc"]
-[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Actor Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="3_eea7c"]
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="3_eea7c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v14hn"]
 size = Vector3(10, 4, 50)

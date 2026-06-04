@@ -20,9 +20,8 @@ func setup_shape_cast():
 		shape_cast.enabled = false
 
 func _on_body_entered(body:Node3D):
-	print(body)
 	calculate_knockback_dir()
-	body.attack(-damage, knockback_dir * knockback_magnitude, global_collision_point)
+	body.attack(damage, knockback_dir * knockback_magnitude, global_collision_point)
 	return
 
 func _on_area_entered(area: Area3D) -> void:

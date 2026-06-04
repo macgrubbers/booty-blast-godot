@@ -115,6 +115,6 @@ func block_attack(attacker:Node3D):
 		return
 	
 	else:
-		attacker.health_component.attack(-3, owner)
+		attacker.health_component.attack(3, owner)
 		attacker.health_component.apply_knockback(Vector3(randf()*10,randf()*10,randf()*10), false)
 		return

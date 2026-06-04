@@ -16,7 +16,7 @@ func _ready() -> void:
 func _on_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
 		#var player_pos = area.get_parent().get_global_position()
-		area.attack(-damage, owner, knockback_dir * knockback_magnitude)
+		area.attack(damage, owner, knockback_dir * knockback_magnitude)
 		#var k_scale = 10
 		#var knockback_vec = global_position.direction_to(player_pos).normalized() * k_scale \
 				 #+ Vector3(0,k_scale,0)
