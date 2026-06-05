@@ -128,6 +128,7 @@ rmb={
 
 3d_physics/layer_2="Static Structures"
 3d_physics/layer_3="Destructable Structures"
+3d_physics/layer_4="Interactables"
 3d_physics/layer_5="Collectables"
 3d_physics/layer_8="Ragdolls"
 3d_physics/layer_20="Player"

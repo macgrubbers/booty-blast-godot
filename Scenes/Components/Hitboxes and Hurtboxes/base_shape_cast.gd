@@ -1,4 +1,4 @@
-extends ShapeCast3D
+class_name HurtShapeCast extends ShapeCast3D
 
 @export var shape_radius:float
 @export var damage:int

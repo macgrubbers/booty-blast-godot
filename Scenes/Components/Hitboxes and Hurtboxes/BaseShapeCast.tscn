@@ -2,6 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c4n4dpj47yeao" path="res://Scenes/Components/Hitboxes and Hurtboxes/base_shape_cast.gd" id="1_bxey5"]
 
-[node name="BaseShapeCast" type="ShapeCast3D"]
+[node name="HurtShapeCast" type="ShapeCast3D"]
 collision_mask = 0
 script = ExtResource("1_bxey5")
