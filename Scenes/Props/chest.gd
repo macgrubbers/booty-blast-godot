@@ -52,5 +52,5 @@ func _physics_process(delta: float) -> void:
 		cleanup()
 
 func cleanup():
-	pass
-	$ExplosiveComponent.activate()
+	await await get_tree().create_timer(2.0).timeout
+	queue_free()

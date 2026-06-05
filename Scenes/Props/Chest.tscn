@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgx6pos0jcbht"]
+[gd_scene load_steps=11 format=3 uid="uid://bgx6pos0jcbht"]
 
 [ext_resource type="ArrayMesh" uid="uid://dmq8qmfo3dgjk" path="res://Assets/chest_low_poly/iron_chest_top.res" id="1_2rihf"]
 [ext_resource type="Script" uid="uid://bj08i40dq1tum" path="res://Scenes/Props/chest.gd" id="1_hky7g"]
 [ext_resource type="ArrayMesh" uid="uid://xb3j7710uygl" path="res://Assets/chest_low_poly/iron_chest_bottom.res" id="2_hky7g"]
 [ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/spawner.gd" id="4_esnon"]
-[ext_resource type="PackedScene" uid="uid://fghavxjuoluu" path="res://Scenes/Components/Hitboxes and Hurtboxes/BaseShapeCast.tscn" id="5_e47le"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_esnon"]
 size = Vector3(2.35, 1.1, 2.1)
@@ -90,7 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033447266, 0.7932126, 0.045
 shape = SubResource("BoxShape3D_e47le")
 
 [node name="Hinge" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99996394, -0.008412383, 0, 0.008412383, 0.99996394, 0, 0.14594781, -1.044424)
+transform = Transform3D(1, 0, 0, 0, 0.9999639, -0.008412383, 0, 0.008412383, 0.9999639, 0, 0.14594781, -1.044424)
 
 [node name="Mesh_Top" type="MeshInstance3D" parent="Hinge"]
 transform = Transform3D(1, 0, 0, 0, 1.000001, 0, 0, 0, 1.000001, -3.741045, -0.28836733, 1.0473042)
@@ -117,11 +116,3 @@ metadata/_custom_type_script = "uid://clav251aoerdv"
 libraries = {
 &"": SubResource("AnimationLibrary_esnon")
 }
-
-[node name="ExplosiveComponent" parent="." instance=ExtResource("5_e47le")]
-collision_mask = 524304
-collide_with_areas = true
-shape_radius = 10.0
-damage = 3
-knockback_magnitude = 10.0
-extra_vertical_knockback = Vector3(0, 0.5, 0)

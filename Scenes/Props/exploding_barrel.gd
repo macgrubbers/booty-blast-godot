@@ -1,6 +1,6 @@
 class_name ExplodingBarrel extends RigidBody3D
 
-@onready var fuse_duration:float = 5.0
+@onready var fuse_duration:float = 3.0
 
 @onready var explosion: HurtShapeCast = $HurtShapeCast
 @onready var fuse = $Fuse
@@ -15,6 +15,10 @@ func interact():
 		$FuseParticles.emitting = true
 
 func detonate():
-	print("BOOM!")
+	$FuseParticles.emitting = false
+	$ExplosionParticles.emitting = true
+	$Meshes.visible = false
+	$CollisionShape3D.disabled = true
 	explosion.activate()
+	await $ExplosionParticles.finished
 	queue_free()

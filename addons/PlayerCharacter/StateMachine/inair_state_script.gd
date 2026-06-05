@@ -5,6 +5,8 @@ class_name InairState
 var state_name : String = "Inair"
 
 @onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
+@onready var ledge_raycast1: RayCast3D = $"../../Raycasts/LedgeGrabRaycast1"
+@onready var ledge_raycast2 : RayCast3D = $"../../Raycasts/LedgeGrabRaycast2"
 
 var cR : CharacterBody3D
 var health_component : HealthComponent
@@ -16,6 +18,8 @@ func enter(char_ref : CharacterBody3D):
 	verifications()
 	
 func verifications():
+	ledge_raycast1.enabled = true
+	ledge_raycast2.enabled = true
 	falling_hitbox.monitoring = true
 	falling_hitbox.connect("attack_successful", _on_falling_attack_successful)
 	cR.godot_plush_skin.set_state("fall")
@@ -35,13 +39,20 @@ func physics_update(delta : float):
 	
 	check_if_floor()
 	
+	check_if_ledge()
+	
 	move(delta)
 	
 func applies(delta : float):
 	if !cR.is_on_floor(): 
 		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
 		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
-		
+
+func check_if_ledge():
+	if ledge_raycast1.is_colliding() and !ledge_raycast2.is_colliding():
+		cR.velocity = Vector3.ZERO
+		#transitioned.emit(self, "LedgeGrabState")
+
 func gravity_apply(delta : float):
 	if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta
 		
@@ -126,6 +137,8 @@ func impact_audio_playing():
 	cR.impact_audio.play()
 
 func exit():
+	ledge_raycast1.enabled = false
+	ledge_raycast2.enabled = false
 	falling_hitbox.monitoring = false
 	falling_hitbox.disconnect("attack_successful", _on_falling_attack_successful)
 
