@@ -17,6 +17,8 @@ func spawn(obj_type: PackedScene, amount:int = 1):
 		get_tree().current_scene.add_child(new_obj)
 		if current_spawn_method == spawn_methods.SCATTER and new_obj.has_method("apply_central_impulse"):
 			scatter(new_obj)
+		if new_obj.has_method("interact"):
+			new_obj.interact()
 
 func scatter(new_obj:Node):
 	new_obj.apply_impulse(Vector3(randf_range(x_impulse_range.x, x_impulse_range.y),
