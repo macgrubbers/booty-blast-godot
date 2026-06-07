@@ -15,6 +15,8 @@ var frames: int = 0
 
 @onready var start_spawning:bool = false
 
+# TODO: make chest spawn any object
+
 func _ready() -> void:
 	spawner.set_spawn_method(Spawner.spawn_methods.SCATTER, 
 						true,

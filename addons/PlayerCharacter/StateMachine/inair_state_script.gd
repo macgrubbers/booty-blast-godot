@@ -7,6 +7,7 @@ var state_name : String = "Inair"
 @onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
 @onready var ledge_raycast1: RayCast3D = $"../../Raycasts/LedgeGrabRaycast1"
 @onready var ledge_raycast2 : RayCast3D = $"../../Raycasts/LedgeGrabRaycast2"
+@onready var ledge_shapecast :ShapeCast3D = $"../../Raycasts/LedgeGrabRaycast3/LedgeGrabShapecast"
 
 var cR : CharacterBody3D
 var health_component : HealthComponent
@@ -50,8 +51,10 @@ func applies(delta : float):
 
 func check_if_ledge():
 	if ledge_raycast1.is_colliding() and !ledge_raycast2.is_colliding():
-		cR.velocity = Vector3.ZERO
-		#transitioned.emit(self, "LedgeGrabState")
+		# Check shapecast to see if we can fit above, helps with edges and corners
+		ledge_shapecast.force_shapecast_update()
+		if !ledge_shapecast.is_colliding():
+			transitioned.emit(self, "LedgeGrabState")
 
 func gravity_apply(delta : float):
 	if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta

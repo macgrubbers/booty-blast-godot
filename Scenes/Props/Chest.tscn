@@ -89,7 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033447266, 0.7932126, 0.045
 shape = SubResource("BoxShape3D_e47le")
 
 [node name="Hinge" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999638, -0.008412382, 0, 0.008412382, 0.9999638, 0, 0.14594781, -1.044424)
+transform = Transform3D(1, 0, 0, 0, 0.99996376, -0.008412381, 0, 0.008412381, 0.99996376, 0, 0.14594781, -1.044424)
 
 [node name="Mesh_Top" type="MeshInstance3D" parent="Hinge"]
 transform = Transform3D(1, 0, 0, 0, 1.000001, 0, 0, 0, 1.000001, -3.741045, -0.28836733, 1.0473042)

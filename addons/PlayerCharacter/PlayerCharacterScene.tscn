@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=71 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -124,6 +124,8 @@ streams_count = 1
 stream_0/stream = ExtResource("8_s241m")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhngq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywnt5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mx8g3"]
 radius = 0.55
@@ -358,7 +360,7 @@ script = ExtResource("19_qq7mp")
 
 [node name="LedgeGrabRaycast1" type="RayCast3D" parent="Raycasts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-target_position = Vector3(0, 0, 1)
+target_position = Vector3(0, 0, 1.5)
 collision_mask = 7
 hit_back_faces = false
 script = ExtResource("27_jf28f")
@@ -370,11 +372,17 @@ collision_mask = 7
 hit_from_inside = true
 
 [node name="LedgeGrabRaycast3" type="RayCast3D" parent="Raycasts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.9522988)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.1)
 enabled = false
 target_position = Vector3(0, -1.5, 0)
 collision_mask = 7
 hit_from_inside = true
+
+[node name="LedgeGrabShapecast" type="ShapeCast3D" parent="Raycasts/LedgeGrabRaycast3"]
+enabled = false
+shape = SubResource("CapsuleShape3D_ywnt5")
+target_position = Vector3(0, 0, 0)
+collision_mask = 7
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("17_mx8g3")]
 collision_layer = 524288

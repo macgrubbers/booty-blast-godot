@@ -89,7 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033447266, 0.7932126, 0.045
 shape = SubResource("BoxShape3D_n6vuu")
 
 [node name="Hinge" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999637, -0.008412381, 0, 0.008412381, 0.9999637, 0, 0.14594781, -1.044424)
+transform = Transform3D(1, 0, 0, 0, 0.99996364, -0.00841238, 0, 0.00841238, 0.99996364, 0, 0.14594781, -1.044424)
 
 [node name="Mesh_Top" type="MeshInstance3D" parent="Hinge"]
 transform = Transform3D(1, 0, 0, 0, 1.000001, 0, 0, 0, 1.000001, -3.741045, -0.28836733, 1.0473042)
@@ -110,6 +110,7 @@ shape = SubResource("BoxShape3D_erosr")
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5905126, 0)
 script = ExtResource("4_yitxt")
+activate_objects = true
 metadata/_custom_type_script = "uid://clav251aoerdv"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
