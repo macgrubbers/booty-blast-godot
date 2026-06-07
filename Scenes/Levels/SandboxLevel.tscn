@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=26 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://d3am51ay6u01e" path="res://Scenes/Collectables/GemCollectable.tscn" id="13_5vd47"]
 [ext_resource type="PackedScene" uid="uid://bgx6pos0jcbht" path="res://Scenes/Props/Chest.tscn" id="15_kygao"]
 [ext_resource type="PackedScene" uid="uid://bmnocubr33alu" path="res://Scenes/Props/ExplodingBarrel.tscn" id="16_kc1c0"]
-[ext_resource type="PackedScene" uid="uid://cixj8a8a8tubm" path="res://Scenes/Props/PropChest.tscn" id="17_ossde"]
 [ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="18_6l74f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
@@ -320,11 +319,8 @@ activating_node = NodePath("../SpinnyHammer")
 [node name="Player" parent="." instance=ExtResource("2_qrb30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
 
-[node name="Barrel" parent="." instance=ExtResource("16_kc1c0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7156205, 1.4632986, 10.419467)
-
-[node name="PropChest" parent="." instance=ExtResource("17_ossde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.506296, 1.3523978, 4.826586)
-
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
+
+[node name="TestEnemy" parent="." instance=ExtResource("4_beuee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7329292, 2.6039386, 19.280136)

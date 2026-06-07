@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqt4r1mhvss1"]
+
+[ext_resource type="Script" uid="uid://b52ned8bng2jk" path="res://Scenes/Components/perception_component.gd" id="1_06hnl"]
+
+[node name="PerceptionComponent" type="Area3D"]
+monitorable = false
+script = ExtResource("1_06hnl")

@@ -4,7 +4,7 @@ const SPEED = 8.0
 const PATROL_SPEED = 5.0
 var knockback_vector : Vector3 = Vector3.ZERO
 
-@export var attack_range : float = 10
+@export var attack_range : float = 3
 @onready var attack_type = "melee"
 
 @onready var perception_component = $EnemyPerceptionComponent
@@ -25,7 +25,6 @@ func _ready() -> void:
 	visual_root.global_rotation = temp_rotation
 	nav_agent.connect("navigation_finished", _on_naviagtion_finished)
 	#weapon.hitbox.connect("attack_successful", _on_successful_attack)
-	$VisualRoot/LilGooberVisuals.play_walk()
 
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)

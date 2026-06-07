@@ -8,7 +8,7 @@ var movement_velocity : Vector3 = Vector3.ZERO
 @onready var visuals = $"../../../../../../../../VisualRoot/LilGooberVisuals"
 
 func before_run(actor: Node, blackboard: Blackboard) -> void:
-	visuals.play_walk()
+	visuals.play_run()
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	actor.gravity_apply()
