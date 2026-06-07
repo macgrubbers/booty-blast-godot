@@ -321,6 +321,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
 
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
-
-[node name="TestEnemy" parent="." instance=ExtResource("4_beuee")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7329292, 2.6039386, 19.280136)
