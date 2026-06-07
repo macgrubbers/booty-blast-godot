@@ -40,7 +40,6 @@ collision_mask = 3
 script = ExtResource("1_2kq5l")
 
 [node name="VisualRoot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40320063, 0)
 
 [node name="LilGooberVisuals" parent="VisualRoot" instance=ExtResource("2_mhhax")]
 

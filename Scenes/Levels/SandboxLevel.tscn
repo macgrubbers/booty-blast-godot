@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=27 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bgx6pos0jcbht" path="res://Scenes/Props/Chest.tscn" id="15_kygao"]
 [ext_resource type="PackedScene" uid="uid://bmnocubr33alu" path="res://Scenes/Props/ExplodingBarrel.tscn" id="16_kc1c0"]
 [ext_resource type="PackedScene" uid="uid://cixj8a8a8tubm" path="res://Scenes/Props/PropChest.tscn" id="17_ossde"]
+[ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="18_6l74f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -324,3 +325,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7156205, 1.4632986, 10.419
 
 [node name="PropChest" parent="." instance=ExtResource("17_ossde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.506296, 1.3523978, 4.826586)
+
+[node name="ladder" parent="." instance=ExtResource("18_6l74f")]
+transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)

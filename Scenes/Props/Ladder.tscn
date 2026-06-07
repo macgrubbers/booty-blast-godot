@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ys6gk3apit4n"]
+
+[ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="1_e1y7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1y7s"]
+size = Vector3(0.7, 10, 0.2)
+
+[node name="Ladder" type="StaticBody3D"]
+collision_layer = 7
+collision_mask = 0
+
+[node name="ladder" parent="." instance=ExtResource("1_e1y7s")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.0076523, 0)
+shape = SubResource("BoxShape3D_e1y7s")

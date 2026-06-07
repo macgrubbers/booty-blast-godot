@@ -12,7 +12,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var health_component = $HealthComponent
 @onready var behavior_tree = $BeehaveTree
 @onready var blackboard : Blackboard = $EnemyBlackboard
-@onready var weapon = $VisualRoot/EnemyWeapon
+#@onready var weapon = $VisualRoot/EnemyWeapon
 @onready var visual_root = $VisualRoot
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
@@ -24,7 +24,8 @@ func _ready() -> void:
 	global_rotation = Vector3(0,0,0)
 	visual_root.global_rotation = temp_rotation
 	nav_agent.connect("navigation_finished", _on_naviagtion_finished)
-	weapon.hitbox.connect("attack_successful", _on_successful_attack)
+	#weapon.hitbox.connect("attack_successful", _on_successful_attack)
+	$VisualRoot/LilGooberVisuals.play_walk()
 
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)

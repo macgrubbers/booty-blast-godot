@@ -45,7 +45,7 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 		blackboard.set_value("just_attacked", false)
 
 	# 2. Check if we have LOS
-	var dir_to_player = actor_pos.direction_to(player_pos + Vector3(0,0.5,0))
+	var dir_to_player = actor_pos.direction_to(player_pos) # + Vector3(0,0.5,0))
 	var space_state = actor.get_world_3d().direct_space_state
 	var origin = actor_pos
 	var end = origin + dir_to_player * los_length
@@ -53,6 +53,7 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	query.collide_with_areas = false
 	query.set_collision_mask(1 | 2 | 20)
 	var result = space_state.intersect_ray(query)
+	print(result)
 	
 	# If we don't have LOS
 	if !result or !result.collider.is_in_group("Player"):

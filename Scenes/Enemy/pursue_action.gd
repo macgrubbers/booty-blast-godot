@@ -5,6 +5,10 @@ var state_name : String = "Pursue"
 
 var movement_acceleration : float = 0.4
 var movement_velocity : Vector3 = Vector3.ZERO
+@onready var visuals = $"../../../../../../../../VisualRoot/LilGooberVisuals"
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	visuals.play_walk()
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	actor.gravity_apply()
