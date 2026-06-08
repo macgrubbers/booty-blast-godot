@@ -38,3 +38,12 @@ func set_knockback_magnitude(new_knockback:float):
 	
 func set_knockback_direction(new_dir:Vector3):
 	knockback_dir = new_dir
+
+func toggle(opt:bool):
+	monitoring = opt
+	# TODO: do a physics query
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	var overlapping_areas = get_overlapping_areas()
+	for area in overlapping_areas:
+		_on_area_entered(area)

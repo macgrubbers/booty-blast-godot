@@ -4,7 +4,7 @@ const SPEED = 8.0
 const PATROL_SPEED = 5.0
 var knockback_vector : Vector3 = Vector3.ZERO
 
-@export var attack_range : float = 3
+@export var attack_range : float = 5
 @onready var attack_type = "melee"
 
 @onready var perception_component = $EnemyPerceptionComponent

@@ -12,7 +12,7 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	actor.gravity_apply()
+	#actor.gravity_apply()
 	# Create enemy ragdoll
 	#var enemy_ragdoll:RigidBody3D = actor.ragdoll.instantiate()
 	#enemy_ragdoll.set_global_transform(actor.get_global_transform())

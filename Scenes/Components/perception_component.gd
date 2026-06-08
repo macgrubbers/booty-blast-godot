@@ -2,6 +2,7 @@ class_name PerceptionComponent extends Area3D
 
 var ignore_fov_distance:float = 12
 
+var is_alive:bool = true
 @onready var los_length:float = 50
 @onready var los_vertical_angle:float
 @onready var los_horizontal_angle:float = 70
@@ -14,11 +15,14 @@ var current_frame:int = 0
 @onready var actor
 @onready var collision_shape: CollisionShape3D
 @export var blackboard: Blackboard
+@export var health_component:HealthComponent
+@export var nav_agent:NavigationAgent3D
 
 func _ready() -> void:
 	actor = get_owner()
 	connect("area_entered", _on_area_entered)
 	connect("area_exited", _on_area_exited)
+	health_component.connect("kill", _on_player_died)
 
 
 func _on_area_entered(area:Area3D):
@@ -27,9 +31,13 @@ func _on_area_entered(area:Area3D):
 func _on_area_exited(area:Area3D):
 	start_updating = false
 
+func _on_player_died():
+	disconnect("area_entered", _on_area_entered)
+	disconnect("area_exited", _on_area_exited)
+	is_alive = false
 
 func _physics_process(delta: float) -> void:
-	if start_updating:
+	if start_updating and is_alive:
 		if current_frame >= frames_skip:
 			check_player_raycast()
 			current_frame = 0
@@ -56,10 +64,10 @@ func check_player_raycast():
 	#	(this prevents the enemy from losing track of the player when very close)
 	if (horiz_angle > los_horizontal_angle/2 and 
 		!just_attacked):
-		if !does_see_player and dist_to_player <= ignore_fov_distance:
+		if !does_see_player and dist_to_player >= ignore_fov_distance:
 			print("dropped track!")
 			blackboard.set_value("see_player", false)
-		return
+			return
 
 	if just_attacked:
 		blackboard.set_value("just_attacked", false)
@@ -91,4 +99,19 @@ func check_player_raycast():
 	
 	blackboard.set_value("last_seen_player_pos", player_pos)
 	
+	update_navigation()
+	
 	return
+
+
+func update_navigation():
+	if blackboard.get_value("see_player"):
+		if !blackboard.get_value("in_attack_range"):
+			var player_pos = blackboard.get_value("last_seen_player_pos")
+			nav_agent.set_target_position(player_pos)
+			blackboard.set_value("is_navigation_finished", false)
+		else:
+			nav_agent.set_target_position(actor.global_position)
+	else:
+		# Do task maybe, or maybe just do nothing
+		pass

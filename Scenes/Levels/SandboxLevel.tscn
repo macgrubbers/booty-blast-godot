@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=30 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -44,6 +44,24 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ossde"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6l74f"]
+load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tpjj"]
+diffuse_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_6l74f")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_oebwi"]
+material = SubResource("StandardMaterial3D_4tpjj")
+size = Vector3(100, 1, 100)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_kc1c0"]
 size = Vector3(5, 7, 5)
 
@@ -83,14 +101,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="Props" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="Floor" type="CSGCombiner3D" parent="NavigationRegion3D"]
-material_override = ExtResource("1_2ln86")
-use_collision = true
-collision_layer = 3
+[node name="Floor" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7963867, 0)
-size = Vector3(100, 6.5927734, 100)
+[node name="StaticBody4" type="StaticBody3D" parent="NavigationRegion3D/Floor"]
+collision_layer = 159
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody4"]
+shape = SubResource("BoxShape3D_ossde")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor/StaticBody4"]
+mesh = SubResource("BoxMesh_oebwi")
 
 [node name="Test_StepAndJump" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.424103, 0, 8.78957)
@@ -321,3 +342,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
 
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
+
+[node name="TestEnemy" parent="." instance=ExtResource("4_beuee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.566885, 2.7328734, 12.7684145)
