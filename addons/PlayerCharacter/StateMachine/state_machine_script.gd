@@ -3,6 +3,7 @@ extends Node
 @export var initial_state : State
 
 var curr_state : State
+var prev_state : State
 var curr_state_name  : String
 var states : Dictionary = {}
 
@@ -40,6 +41,7 @@ func _ready():
 	if initial_state:
 		await get_tree().create_timer(0.1).timeout
 		initial_state.enter(char_ref)
+		prev_state = initial_state
 		curr_state = initial_state
 		curr_state_name = curr_state.state_name
 
@@ -65,8 +67,10 @@ func on_state_child_transition(state : State, new_state_name : String, stun_amou
 		new_state.stun_timer.set_wait_time(stun_amount)
 	new_state.enter(char_ref)
 	
+	prev_state = curr_state
 	curr_state = new_state
 	curr_state_name = curr_state.state_name
+	print(curr_state)
 
 func on_player_dead():
 	curr_state.transitioned.emit(curr_state, "RagdollState")

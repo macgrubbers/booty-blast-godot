@@ -23,6 +23,8 @@ func verifications():
 	timer.connect("timeout", _on_timer_timeout)
 	timer.start()
 	
+	cR.cam_holder.lock_camera_vertical = false
+	
 func update(_delta : float):
 	pass
 	

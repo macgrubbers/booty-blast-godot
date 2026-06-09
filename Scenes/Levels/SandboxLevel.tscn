@@ -63,11 +63,11 @@ material = SubResource("StandardMaterial3D_4tpjj")
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kc1c0"]
-size = Vector3(5, 7, 5)
+size = Vector3(5, 4, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ossde"]
 material = ExtResource("1_2ln86")
-size = Vector3(5, 7, 5)
+size = Vector3(5, 4, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu8i2"]
 albedo_color = Color(0.19793725, 0.19793722, 0.19793722, 1)
@@ -117,7 +117,7 @@ mesh = SubResource("BoxMesh_oebwi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.424103, 0, 8.78957)
 
 [node name="StaticBody" type="StaticBody3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 2
 collision_mask = 0
 
@@ -133,7 +133,7 @@ pixel_size = 0.015
 text = "Regular Jump Height"
 
 [node name="StaticBody2" type="StaticBody3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 collision_layer = 2
 collision_mask = 0
 
@@ -144,7 +144,7 @@ shape = SubResource("BoxShape3D_kc1c0")
 mesh = SubResource("BoxMesh_ossde")
 
 [node name="StaticBody3" type="StaticBody3D" parent="NavigationRegion3D/Test_StepAndJump"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 5)
 collision_layer = 2
 collision_mask = 0
 
@@ -342,6 +342,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
 
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
-
-[node name="TestEnemy" parent="." instance=ExtResource("4_beuee")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.566885, 2.7328734, 12.7684145)

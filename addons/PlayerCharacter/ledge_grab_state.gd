@@ -6,6 +6,7 @@ var cR : CharacterBody3D
 @onready var raycasts: Node3D = $"../../Raycasts"
 @onready var ledge_grab_raycast1: RayCast3D = $"../../Raycasts/LedgeGrabRaycast1"
 @onready var ledge_grab_raycast3: RayCast3D = $"../../Raycasts/LedgeGrabRaycast3"
+@onready var cam = $"../../OrbitView"
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
@@ -14,7 +15,7 @@ func enter(char_ref : CharacterBody3D):
 	verifications()
 	
 func verifications():
-	
+	cR.cam_holder.lock_camera_vertical = false
 	
 	# Do a PhysicsRayQueryParameters3D that mimics ledge_grab_raycast1 to get
 	#	the surface normal
@@ -30,6 +31,8 @@ func verifications():
 	var surface_normal:Vector3
 	if result:
 		surface_normal = result.normal
+		
+	cam.lock_camera_vertical = false
 	
 	
 	# Force update raycasts

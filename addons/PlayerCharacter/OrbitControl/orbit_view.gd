@@ -7,6 +7,8 @@ var active : bool = true : set = set_active
 @export_range(-90.0, 90.0, 0.1, "radians") var min_limit_x : float
 @export_range(-90.0, 90.0, 0.1, "radians") var max_limit_x : float
 @export_range(0.0, 20.0, 0.01) var pan_rotation_val : float
+@export var camera_position_offset:Vector3
+var lock_camera_vertical = false
 
 @export_group("Zoom variables")
 var zoom_val : float = 8.0
@@ -78,9 +80,15 @@ func _input(event):
 		
 func _process(delta):
 	if player.health_component.is_alive:
-		global_position = player.get_global_position() + Vector3(0,1,0)
+		var player_pos:Vector3 = player.get_global_position()
+		var player_vel = player.get_velocity()
+		if !lock_camera_vertical:
+			global_position = global_position.lerp(player_pos + camera_position_offset, 0.15)
+		else:
+			var cam_y = global_position.y
+			global_position = global_position.lerp(Vector3(player_pos.x, cam_y, player_pos.z), 0.15)
 	else:
-		global_position = player_ragdoll.get_global_position() + Vector3(0,1,0)
+		global_position = player_ragdoll.get_global_position() + camera_position_offset
 	#get pan direction
 	var joy_dir:Vector2 # = Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down")
 	
@@ -97,9 +105,12 @@ func _process(delta):
 func rotate_from_vector(vector : Vector2):
 	#rotate cam by the vector's amount, and clamp the rotation between max up and max down values
 	#(to avoid doing 360 degree turn with the cam for example)
-	if vector.length() == 0: return
-	rotation.y -= vector.x
-	rotation.x -= vector.y
+	if vector.length() == 0:
+		return
+	
+	#rotation.y -= vector.x
+	#rotation.x -= vector.y
+	rotation = rotation.lerp(Vector3(rotation.x - vector.y, rotation.y - vector.x, 0), 0.4)
 	rotation.x = clamp(rotation.x, min_limit_x, max_limit_x)
 	
 func zoom_handling(delta : float):

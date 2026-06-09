@@ -25,6 +25,8 @@ func verifications():
 	if cR.has_cut_jump: cR.has_cut_jump = false
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
+	cR.cam_holder.lock_camera_vertical = false
+	
 func update(_delta : float):
 	pass
 	

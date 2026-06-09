@@ -4,10 +4,12 @@ class_name InairState
 
 var state_name : String = "Inair"
 
+@onready var state_machine = $".."
 @onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
 @onready var ledge_raycast1: RayCast3D = $"../../Raycasts/LedgeGrabRaycast1"
 @onready var ledge_raycast2 : RayCast3D = $"../../Raycasts/LedgeGrabRaycast2"
 @onready var ledge_shapecast :ShapeCast3D = $"../../Raycasts/LedgeGrabRaycast3/LedgeGrabShapecast"
+@onready var cam = $"../../OrbitView"
 
 var cR : CharacterBody3D
 var health_component : HealthComponent
@@ -26,6 +28,13 @@ func verifications():
 	cR.godot_plush_skin.set_state("fall")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
+	
+	# Camera locking
+	await get_tree().physics_frame
+	if state_machine.prev_state is JumpState and cR.nb_jumps_in_air_allowed > 0:
+		cR.cam_holder.lock_camera_vertical = true
+	else:
+		cR.cam_holder.lock_camera_vertical = false
 	
 func update(_delta : float):
 	pass
@@ -131,6 +140,7 @@ func move(delta : float):
 		
 		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * in_air_move_speed_val, in_air_accel_val * delta)
 		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * in_air_move_speed_val, in_air_accel_val * delta)
+		print(abs(cR.velocity.x) + abs(cR.velocity.z))
 		
 func impact_audio_playing():
 	#audio played when play char touch the ground after being in air
