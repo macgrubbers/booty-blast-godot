@@ -2,9 +2,11 @@ class_name PlayerBaseHitbox extends BaseHitbox
 
 var global_collision_point:Vector3
 var extra_vertical_knockback:Vector3
+@export_range(0,1) var camera_shake_intensity:float
 
 @export var shape_cast: ShapeCast3D
 @export var collision_shape: CollisionShape3D
+@export var camera_root: SpringArm3D
 
 func _ready() -> void:
 	setup_shape_cast()
@@ -28,6 +30,8 @@ func _on_body_entered(body:Node3D):
 func _on_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
 		calculate_knockback_dir()
+		if !is_zero_approx(camera_shake_intensity):
+			camera_root.add_trauma(camera_shake_intensity)
 	super._on_area_entered(area)
 
 func calculate_knockback_dir():

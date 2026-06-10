@@ -84,6 +84,7 @@ func _on_just_landed():
 	if char_ref.floor_check.is_colliding():
 		var collider = char_ref.floor_check.get_collider()
 		if collider is LaunchingPlatform:
+			char_ref.cam_holder.reset_trauma()
 			var collision_normal = char_ref.floor_check.get_collision_normal()
 			collider.launch(char_ref.health_component,
 							curr_state,

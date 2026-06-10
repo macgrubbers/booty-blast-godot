@@ -59,6 +59,7 @@ func check_if_floor():
 	if cR.is_on_floor():
 		# first time landing
 		if butt_slam_falling_hitbox.monitoring == true:
+			cR.cam_holder.add_trauma(.55)
 			land_timer.start()
 			butt_slam_falling_hitbox.set_monitoring(false)
 			butt_slam_land_hitbox.set_monitoring(true)

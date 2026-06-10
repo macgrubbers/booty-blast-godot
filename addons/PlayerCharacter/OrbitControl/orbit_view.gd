@@ -10,6 +10,17 @@ var active : bool = true : set = set_active
 @export var camera_position_offset:Vector3
 var lock_camera_vertical = false
 
+@export_group("Camera shake variables")
+@export var shake_decay: float = 0.95          # How fast the shake fades out (0-1)
+@export var shake_max_roll: float = 0.1       # Maximum camera roll in radians
+@export var shake_max_offset: Vector3 = Vector3(1, 1, 1) # Max shake distance (X, Y, Z)
+
+var trauma: float = 0.0                 # Current shake intensity
+var trauma_power: float = 2.0           # Shape of the shake curve
+var noise: FastNoiseLite = FastNoiseLite.new()
+var noise_y: float = 0.0
+var noise_speed: float = 20.0
+
 @export_group("Zoom variables")
 var zoom_val : float = 8.0
 @export var max_zoom_val : float
@@ -43,6 +54,10 @@ func _ready():
 	set_active(active)
 	
 	add_excluded_object(self)
+	
+	# Camera shake
+	noise.seed = randi()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	
 func set_active(state : bool):
 	#enable/disable play char camera
@@ -102,6 +117,9 @@ func _process(delta):
 	#handle zoom
 	zoom_handling(delta)
 	
+	#handle shake
+	shake_handling(delta)
+	
 func rotate_from_vector(vector : Vector2):
 	#rotate cam by the vector's amount, and clamp the rotation between max up and max down values
 	#(to avoid doing 360 degree turn with the cam for example)
@@ -119,5 +137,36 @@ func zoom_handling(delta : float):
 	#zoom_val = clamp(zoom_val, min_zoom_val, max_zoom_val)
 	spring_length += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
 	spring_length = clamp(spring_length, min_zoom_val, max_zoom_val)
+
+
+func shake_handling(delta:float):
+	if trauma > 0.0:
+		trauma = max(trauma - shake_decay * delta, 0.0)
+		shake_camera()
+	#else:
+		## Return to resting state smoothly
+		#cam.transform.origin = transform.origin.lerp(Vector3.ZERO, delta * 10)
+		#cam.rotation = rotation.lerp(Vector3.ZERO, delta * 10)
+
+func add_trauma(amount: float) -> void:
+	trauma = clamp(trauma + amount, 0.0, 1.0)
 	
+func reset_trauma():
+	trauma = 0.0
+
+
+func shake_camera() -> void:
+	var shake_amount = pow(trauma, trauma_power)
+	noise_y += 1.0 # Move down the noise space
+
+	# Calculate offsets
+	var offset_x = shake_max_offset.x * shake_amount * noise.get_noise_2d(noise.seed, noise_y * noise_speed)
+	var offset_y = shake_max_offset.y * shake_amount * noise.get_noise_2d(noise.seed + 1, noise_y * noise_speed)
+	var offset_z = shake_max_offset.z * shake_amount * noise.get_noise_2d(noise.seed + 2, noise_y * noise_speed)
 	
+	# Calculate rotations
+	var rot_z = shake_max_roll * shake_amount * noise.get_noise_2d(noise.seed + 3, noise_y * noise_speed)
+	
+	# Apply local offset and rotation to the Camera3D node
+	cam.transform.origin += Vector3(offset_x, offset_y, offset_z)
+	cam.rotation.z = rot_z
