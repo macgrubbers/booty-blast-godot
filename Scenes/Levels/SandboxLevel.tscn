@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=31 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d3am51ay6u01e" path="res://Scenes/Collectables/GemCollectable.tscn" id="13_5vd47"]
 [ext_resource type="PackedScene" uid="uid://bgx6pos0jcbht" path="res://Scenes/Props/Chest.tscn" id="15_kygao"]
 [ext_resource type="PackedScene" uid="uid://bmnocubr33alu" path="res://Scenes/Props/ExplodingBarrel.tscn" id="16_kc1c0"]
+[ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Respawner.tscn" id="18_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="18_6l74f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
@@ -175,7 +176,7 @@ transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -
 size = Vector3(10, 1, 30)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 29.5, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 19.5, 0)
 size = Vector3(10, 1, 20)
 
 [node name="LaunchingPlatform" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad" instance=ExtResource("3_s27tv")]
@@ -342,3 +343,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
 
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
+
+[node name="Respawner" parent="." node_paths=PackedStringArray("respawn_timer") instance=ExtResource("18_4tpjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3557377, 21.60523)
+spawning_object = ExtResource("10_6hne3")
+objects_start_physicsable = true
+respawn_timer = NodePath("Timer")
+respawn_method = 1
+start_spawning_on_ready = true
+
+[node name="Timer" type="Timer" parent="Respawner"]

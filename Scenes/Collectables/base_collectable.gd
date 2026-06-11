@@ -5,7 +5,10 @@ var num_ticks:int = 0
 @export var spin_rate : float = 720
 var physicsable:bool = false
 
+signal consumed
+
 func collect():
+	consumed.emit()
 	cleanup()
 
 func cleanup():
