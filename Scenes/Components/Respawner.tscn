@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu68npdmxcrsw"]
-
-[ext_resource type="Script" uid="uid://ckcod7d55mjpd" path="res://Scenes/Components/respawner.gd" id="1_nqkwk"]
-
-[node name="Respawner" type="Node3D"]
-script = ExtResource("1_nqkwk")

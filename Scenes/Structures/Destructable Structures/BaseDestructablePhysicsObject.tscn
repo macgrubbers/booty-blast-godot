@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cuxgsfy6shs0a"]
 
 [ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_el2yp"]
-[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/spawner.gd" id="2_e2x2s"]
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/DEPRECATEDspawner.gd" id="2_e2x2s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el2yp"]
 size = Vector3(3, 3, 3)

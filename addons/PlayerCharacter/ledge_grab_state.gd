@@ -20,6 +20,7 @@ func verifications():
 	# Do a PhysicsRayQueryParameters3D that mimics ledge_grab_raycast1 to get
 	#	the surface normal
 	# It's inefficient but easier to use the RayCast3D nodes than it is the queries
+	await get_tree().physics_frame
 	var space_state = cR.get_world_3d().direct_space_state
 	var origin = ledge_grab_raycast1.get_global_position()
 	var end = origin + (raycasts.get_global_basis() * ledge_grab_raycast1.get_target_position())
@@ -31,6 +32,9 @@ func verifications():
 	var surface_normal:Vector3
 	if result:
 		surface_normal = result.normal
+	else:
+		print("no surface normal!")
+		transitioned.emit(self, "InAirState")
 		
 	cam.lock_camera_vertical = false
 	
@@ -54,7 +58,9 @@ func verifications():
 	cR.visual_root.look_at(raycast1_intersect_pos + surface_normal)
 	cR.visual_root.rotation.x = 0
 	cR.visual_root.rotation.z = 0
-
+	cR.move_dir = Vector2.ZERO
+	
+	DebugDraw3D.draw_ray(raycast1_intersect_pos, surface_normal, 5, Color.CRIMSON, 5)
 	
 func physics_update(_delta : float):
 	input_management()

@@ -97,11 +97,20 @@ func _process(delta):
 	if player.health_component.is_alive:
 		var player_pos:Vector3 = player.get_global_position()
 		var player_vel = player.get_velocity()
+		var new_global_position
 		if !lock_camera_vertical:
-			global_position = global_position.lerp(player_pos + camera_position_offset, 0.15)
+			new_global_position = global_position.lerp(player_pos + camera_position_offset, 0.10)
+			if new_global_position.distance_to(global_position) < 0.1:
+				global_position = player_pos + camera_position_offset
+			else:
+				global_position = new_global_position
 		else:
 			var cam_y = global_position.y
-			global_position = global_position.lerp(Vector3(player_pos.x, cam_y, player_pos.z), 0.15)
+			new_global_position = global_position.lerp(Vector3(player_pos.x, cam_y, player_pos.z), 0.10)
+			if new_global_position.distance_to(global_position) < 0.1:
+				global_position = Vector3(player_pos.x, cam_y, player_pos.z)
+			else:
+				global_position = new_global_position
 	else:
 		global_position = player_ragdoll.get_global_position() + camera_position_offset
 	#get pan direction

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bwvmmk8j4rubw" path="res://Scenes/Props/prop_chest.gd" id="1_h6wfx"]
 [ext_resource type="ArrayMesh" uid="uid://dmq8qmfo3dgjk" path="res://Assets/chest_low_poly/iron_chest_top.res" id="2_cb3yh"]
 [ext_resource type="ArrayMesh" uid="uid://xb3j7710uygl" path="res://Assets/chest_low_poly/iron_chest_bottom.res" id="3_hmpfe"]
-[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/spawner.gd" id="4_yitxt"]
+[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/DEPRECATEDspawner.gd" id="4_yitxt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bhnph"]
 size = Vector3(2.35, 1.1, 2.1)

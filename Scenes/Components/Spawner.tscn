@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bevmstv857663"]
+[gd_scene load_steps=2 format=3 uid="uid://bu68npdmxcrsw"]
 
-[ext_resource type="Script" uid="uid://clav251aoerdv" path="res://Scenes/Components/spawner.gd" id="1_nvi84"]
+[ext_resource type="Script" uid="uid://ckcod7d55mjpd" path="res://Scenes/Components/spawner.gd" id="1_nqkwk"]
 
 [node name="Spawner" type="Node3D"]
-script = ExtResource("1_nvi84")
+script = ExtResource("1_nqkwk")

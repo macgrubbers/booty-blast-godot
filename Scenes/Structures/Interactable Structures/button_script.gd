@@ -2,14 +2,11 @@ extends StaticBody3D
 
 class_name button
 
-@export var spawning_object:PackedScene
-@export var spawn_point:Node3D
+@export var linked_object:Node
+@export var button_delay:float
 
-@onready var spawner = $Spawner
 
-func _ready() -> void:
-	spawner.set_global_transform(spawn_point.get_global_transform())
 
 func interact():
-	print("button pressed")
-	spawner.spawn(spawning_object, 1)
+	if linked_object and linked_object.has_method("activate"):
+		linked_object.activate()

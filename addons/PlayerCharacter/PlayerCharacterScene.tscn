@@ -360,20 +360,20 @@ collide_with_bodies = false
 script = ExtResource("19_qq7mp")
 
 [node name="LedgeGrabRaycast1" type="RayCast3D" parent="Raycasts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, 1.5)
 collision_mask = 7
 hit_back_faces = false
 script = ExtResource("27_jf28f")
 
 [node name="LedgeGrabRaycast2" type="RayCast3D" parent="Raycasts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.5)
 enabled = false
 collision_mask = 7
 hit_from_inside = true
 
 [node name="LedgeGrabRaycast3" type="RayCast3D" parent="Raycasts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.5)
 enabled = false
 target_position = Vector3(0, -1.5, 0)
 collision_mask = 7
