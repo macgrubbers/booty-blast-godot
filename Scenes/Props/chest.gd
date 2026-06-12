@@ -17,12 +17,7 @@ var frames: int = 0
 
 # TODO: make chest spawn any object
 
-func _ready() -> void:
-	spawner.set_spawn_method(Spawner.spawn_methods.SCATTER, 
-						true,
-						Vector2(-0.1,0.1),
-						Vector2(1,1.5),
-						Vector2(-0.1,0.1))
+
 
 func interact():
 	if !open:
@@ -44,7 +39,13 @@ func _physics_process(delta: float) -> void:
 				spawned_object = coin_scene
 				contained_coins -= 1
 
-			spawner.spawn(spawned_object, 1)
+			var new_obj = spawner.spawn()
+			new_obj.apply_impulse(Vector3(randf_range(-0.1, 0.1),
+											randf_range(1, 1.5),
+											randf_range(-0.1, 0.1)),
+									Vector3(randf_range(-0.1, 0.1),
+											randf_range(-0.1, 0.1),
+											randf_range(-0.1, 0.1)))
 
 		else:
 			frames += 1

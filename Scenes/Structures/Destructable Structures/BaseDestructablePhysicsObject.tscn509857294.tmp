@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuxgsfy6shs0a"]
+[gd_scene load_steps=6 format=3 uid="uid://cuxgsfy6shs0a"]
 
 [ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_el2yp"]
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="2_e2x2s"]
-[ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="3_fs7fl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_el2yp"]
 size = Vector3(3, 3, 3)
@@ -36,4 +35,3 @@ wait_time = 1.5
 one_shot = true
 
 [node name="Spawner" parent="." instance=ExtResource("2_e2x2s")]
-spawning_object = ExtResource("3_fs7fl")

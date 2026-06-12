@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgx6pos0jcbht"]
+[gd_scene load_steps=11 format=3 uid="uid://bgx6pos0jcbht"]
 
 [ext_resource type="ArrayMesh" uid="uid://dmq8qmfo3dgjk" path="res://Assets/chest_low_poly/iron_chest_top.res" id="1_2rihf"]
 [ext_resource type="Script" uid="uid://bj08i40dq1tum" path="res://Scenes/Props/chest.gd" id="1_hky7g"]
 [ext_resource type="ArrayMesh" uid="uid://xb3j7710uygl" path="res://Assets/chest_low_poly/iron_chest_bottom.res" id="2_hky7g"]
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="4_esnon"]
-[ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="5_e47le"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_esnon"]
 size = Vector3(2.35, 1.1, 2.1)
@@ -109,8 +108,6 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_hky7g")
 
 [node name="Spawner" parent="." instance=ExtResource("4_esnon")]
-spawning_object = ExtResource("5_e47le")
-objects_start_physicsable = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
