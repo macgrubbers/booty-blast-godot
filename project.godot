@@ -39,6 +39,7 @@ Structures=""
 Destructables=""
 Collectables=""
 Activatable=""
+Checkpoints=""
 
 [input]
 
@@ -135,6 +136,7 @@ rmb={
 3d_physics/layer_4="Interactables"
 3d_physics/layer_5="Collectables"
 3d_physics/layer_8="Ragdolls"
+3d_physics/layer_9="Checkpoints"
 3d_physics/layer_20="Player"
 3d_physics/layer_21="Enemies"
 3d_physics/layer_22="Projectiles"

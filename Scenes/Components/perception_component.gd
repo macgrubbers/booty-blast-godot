@@ -26,9 +26,11 @@ func _ready() -> void:
 
 
 func _on_area_entered(area:Area3D):
+	blackboard.set_value("player_ref", area.get_owner())
 	start_updating = true
 
 func _on_area_exited(area:Area3D):
+	blackboard.set_value("player_ref", null)
 	start_updating = false
 
 func _on_player_died():
@@ -47,7 +49,10 @@ func _physics_process(delta: float) -> void:
 
 func check_player_raycast():
 	var actor_pos = actor.get_global_position()
-	var player_pos = blackboard.get_value("player_ref").get_global_position()
+	var player_ref = blackboard.get_value("player_ref")
+	if !player_ref:
+		return
+	var player_pos = player_ref.get_global_position()
 	var dist_to_player = (actor_pos - player_pos).length()
 	var just_attacked = blackboard.get_value("just_attacked")
 	var does_see_player = blackboard.get_value("see_player")

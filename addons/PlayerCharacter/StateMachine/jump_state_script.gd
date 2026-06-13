@@ -14,7 +14,7 @@ func enter(char_ref : CharacterBody3D):
 	jump()
 	
 func verifications():
-	cR.cam_holder.lock_camera_vertical = true
+	cR.cam_holder.use_cam_y_deadzone = true
 	cR.godot_plush_skin.set_state("jump")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.jump_cooldown < cR.jump_cooldown_ref: cR.jump_cooldown = cR.jump_cooldown_ref
@@ -101,7 +101,7 @@ func jump():
 			cR.coyote_jump_on = false
 			can_jump = true 
 		elif cR.nb_jumps_in_air_allowed > 0:
-			cR.cam_holder.lock_camera_vertical = false
+			#cR.cam_holder.use_cam_y_deadzone = false
 			cR.nb_jumps_in_air_allowed -= 1
 			cR.jump_cooldown = cR.jump_cooldown_ref
 			can_jump = true 

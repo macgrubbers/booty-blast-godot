@@ -263,7 +263,7 @@ shape = SubResource("CapsuleShape3D_xhngq")
 [node name="OrbitView" parent="." instance=ExtResource("3_hcr6r")]
 top_level = true
 mouse_sens = 0.004
-camera_position_offset = Vector3(0, 3, 0)
+camera_position_offset = Vector3(0, 3.5, 0)
 mouse_mode_action = "Esc"
 cam_zoom_in_action = "Mouse Wheel Up"
 cam_zoom_out_action = "Mouse Wheel Down"
@@ -405,7 +405,7 @@ one_shot = true
 
 [node name="CollectionComponent" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 272
 monitorable = false
 script = ExtResource("29_0r710")
 

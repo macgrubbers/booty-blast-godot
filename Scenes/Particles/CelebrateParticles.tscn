@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://gux4el78020r"]
+
+[sub_resource type="Curve" id="Curve_lvduc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.734375, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_oeexy"]
+curve = SubResource("Curve_lvduc")
+
+[sub_resource type="Gradient" id="Gradient_vptdu"]
+offsets = PackedFloat32Array(0, 0.1746988, 0.37951806, 0.5903614, 0.8072289, 0.9939759)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.5294118, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0.7490196, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h76nf"]
+gradient = SubResource("Gradient_vptdu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqbmr"]
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+angular_velocity_min = -1000.0
+angular_velocity_max = 999.99994
+gravity = Vector3(0, -10, 0)
+color_initial_ramp = SubResource("GradientTexture1D_h76nf")
+alpha_curve = SubResource("CurveTexture_oeexy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvduc"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oeexy"]
+material = SubResource("StandardMaterial3D_lvduc")
+size = Vector2(0.1, 0.2)
+
+[node name="CelebrateParticles" type="GPUParticles3D"]
+emitting = false
+amount = 100
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vqbmr")
+draw_pass_1 = SubResource("PlaneMesh_oeexy")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3y4a6x2ioehl"]
+
+[ext_resource type="Script" uid="uid://dqc4esnh7ujnk" path="res://Scenes/Structures/Interactable Structures/checkpoint.gd" id="1_sommq"]
+[ext_resource type="PackedScene" uid="uid://bgi3eonb8kd36" path="res://Assets/golf_flag/scene.gltf" id="2_gscr2"]
+[ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="3_gscr2"]
+[ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="4_4nv62"]
+[ext_resource type="PackedScene" uid="uid://gux4el78020r" path="res://Scenes/Particles/CelebrateParticles.tscn" id="5_pdyo0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rrbos"]
+height = 2.4482422
+radius = 0.64208984
+
+[node name="Checkpoint" type="Area3D" groups=["Checkpoints"]]
+collision_layer = 256
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_sommq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2241211, 0)
+shape = SubResource("CylinderShape3D_rrbos")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_gscr2")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+
+[node name="Spawner" parent="." instance=ExtResource("3_gscr2")]
+spawning_object = ExtResource("4_4nv62")
+
+[node name="CelebrateParticles" parent="." instance=ExtResource("5_pdyo0")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

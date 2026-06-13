@@ -8,7 +8,9 @@ var active : bool = true : set = set_active
 @export_range(-90.0, 90.0, 0.1, "radians") var max_limit_x : float
 @export_range(0.0, 20.0, 0.01) var pan_rotation_val : float
 @export var camera_position_offset:Vector3
-var lock_camera_vertical = false
+var use_cam_y_deadzone = false
+var prev_use_cam_y_deadzone = false
+@export var cam_y_deadzone:float = 5
 
 @export_group("Camera shake variables")
 @export var shake_decay: float = 0.95          # How fast the shake fades out (0-1)
@@ -54,6 +56,7 @@ func _ready():
 	set_active(active)
 	
 	add_excluded_object(self)
+	position = camera_position_offset
 	
 	# Camera shake
 	noise.seed = randi()
@@ -97,20 +100,29 @@ func _process(delta):
 	if player.health_component.is_alive:
 		var player_pos:Vector3 = player.get_global_position()
 		var player_vel = player.get_velocity()
-		var new_global_position
-		if !lock_camera_vertical:
-			new_global_position = global_position.lerp(player_pos + camera_position_offset, 0.10)
-			if new_global_position.distance_to(global_position) < 0.1:
-				global_position = player_pos + camera_position_offset
+		var new_global_position = player_pos
+		# if using deadzone
+		var player_camera_pos_diff = player_pos.y - global_position.y
+		
+		if use_cam_y_deadzone:
+			# if outside the deadzone, move towards it
+			if (player_camera_pos_diff) >= 1:
+				new_global_position.y = player_pos.y
+			
+			# force off deadzone if we're falling
+			elif (player_camera_pos_diff) <= -3.51:
+				use_cam_y_deadzone = false
+			# if within the deadzone, stay steady
 			else:
-				global_position = new_global_position
+				new_global_position.y = global_position.y
+		# Grounded camera
 		else:
-			var cam_y = global_position.y
-			new_global_position = global_position.lerp(Vector3(player_pos.x, cam_y, player_pos.z), 0.10)
-			if new_global_position.distance_to(global_position) < 0.1:
-				global_position = Vector3(player_pos.x, cam_y, player_pos.z)
-			else:
-				global_position = new_global_position
+				new_global_position.y = player_pos.y + camera_position_offset.y
+		# set the new camera position
+		# TODO: change lerp based on veocity?
+		global_position.x = lerp(global_position.x, new_global_position.x, delta*8)
+		global_position.y = lerp(global_position.y, new_global_position.y, delta*4)
+		global_position.z = lerp(global_position.z, new_global_position.z, delta*8)
 	else:
 		global_position = player_ragdoll.get_global_position() + camera_position_offset
 	#get pan direction

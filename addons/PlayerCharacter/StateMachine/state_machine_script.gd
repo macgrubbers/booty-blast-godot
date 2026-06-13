@@ -70,7 +70,6 @@ func on_state_child_transition(state : State, new_state_name : String, stun_amou
 	prev_state = curr_state
 	curr_state = new_state
 	curr_state_name = curr_state.state_name
-	print(curr_state)
 
 func on_player_dead():
 	curr_state.transitioned.emit(curr_state, "RagdollState")

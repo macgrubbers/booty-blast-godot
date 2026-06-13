@@ -15,7 +15,7 @@ func enter(char_ref : CharacterBody3D):
 	verifications()
 	
 func verifications():
-	cR.cam_holder.lock_camera_vertical = false
+	cR.cam_holder.use_cam_y_deadzone = false
 	
 	# Do a PhysicsRayQueryParameters3D that mimics ledge_grab_raycast1 to get
 	#	the surface normal
@@ -36,7 +36,7 @@ func verifications():
 		print("no surface normal!")
 		transitioned.emit(self, "InAirState")
 		
-	cam.lock_camera_vertical = false
+	cam.use_cam_y_deadzone = false
 	
 	
 	# Force update raycasts

@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
-[ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://addons/PlayerCharacter/PlayerCharacterScene.tscn" id="2_qrb30"]
+[ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_6l74f"]
 [ext_resource type="PackedScene" uid="uid://bnjn82pm8puu5" path="res://Scenes/Structures/Interactable Structures/LaunchingPlatform.tscn" id="3_s27tv"]
 [ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="4_pauaf"]
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="6_ca7po"]
@@ -73,8 +73,9 @@ size = Vector3(5, 4, 5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu8i2"]
 albedo_color = Color(0.19793725, 0.19793722, 0.19793722, 1)
 
-[node name="SandboxLevel" type="Node3D"]
+[node name="SandboxLevel" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
 script = ExtResource("1_l0xhg")
+current_checkpoint = NodePath("Checkpoints/PlayerStartCheckpoint")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -85,7 +86,14 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_s27tv")
 
-[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+[node name="Checkpoints" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4314489, 0)
+
+[node name="PlayerStartCheckpoint" parent="Checkpoints" instance=ExtResource("2_6l74f")]
+monitorable = false
+
+[node name="Checkpoint1" parent="Checkpoints" instance=ExtResource("2_6l74f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.075862, 19.906746, 44.14487)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024490356, -0.036396027, -0.07893753)
@@ -338,19 +346,5 @@ timer_duration = 3.0
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0, 3.2435539, -3.6790085)
 activating_node = NodePath("../SpinnyHammer")
 
-[node name="Player" parent="." instance=ExtResource("2_qrb30")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.356849, 0)
-
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
-
-[node name="Respawner" parent="." node_paths=PackedStringArray("respawn_timer") instance=ExtResource("18_4tpjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3557377, 21.60523)
-spawning_object = ExtResource("10_6hne3")
-objects_start_physicsable = true
-respawn_timer = NodePath("Timer")
-respawn_method = 1
-start_spawning_on_ready = true
-
-[node name="Timer" type="Timer" parent="Respawner"]
-wait_time = 20.0

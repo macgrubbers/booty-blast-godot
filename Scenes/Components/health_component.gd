@@ -59,6 +59,7 @@ func attack(amount : float,
 		#get_parent().kill()
 		await get_tree().process_frame # TODO: added to let ragdolls be created after enemy death, maybe remove later
 		emit_signal("kill")
+		monitorable = false
 	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false, reset_velocity:bool = false):

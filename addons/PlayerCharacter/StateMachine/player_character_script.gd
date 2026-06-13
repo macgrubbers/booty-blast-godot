@@ -106,6 +106,7 @@ signal just_got_big(duration:float)
 @onready var floor_check : RayCast3D = %FloorRaycast
 @onready var interact_raycast : RayCast3D = $Raycasts/InteractRaycast
 @onready var health_component = $HealthComponent
+@onready var collection_component = $CollectionComponent
 
 #particles variables
 @onready var movement_dust = %MovementDust
