@@ -41,8 +41,8 @@ height = 2.1
 radius = 1.0
 
 [node name="TestEnemy" type="CharacterBody3D" groups=["Enemies"]]
-collision_layer = 0
-collision_mask = 3
+collision_layer = 1024
+collision_mask = 1027
 script = ExtResource("1_2kq5l")
 
 [node name="VisualRoot" type="Node3D" parent="."]
@@ -70,11 +70,12 @@ nav_agent = NodePath("../NavigationAgent3D")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="PerceptionComponent"]
 shape = SubResource("SphereShape3D_q84gq")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_o1tme")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("knockback_immunity_timer", "damage_immunity_timer") instance=ExtResource("3_o1tme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 1048576
 script = ExtResource("4_7tq7j")
-collision_shape = NodePath("CollisionShape3D")
+knockback_immunity_timer = NodePath("KnockbackImmunityTimer")
+damage_immunity_timer = NodePath("DamageImmunityTimer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
 shape = SubResource("CapsuleShape3D_7tq7j")
@@ -94,8 +95,9 @@ collision_mask = 524288
 monitoring = false
 monitorable = false
 script = ExtResource("6_op6hw")
-damage = 3
 knockback_magnitude = 5.0
+extra_vertical_knockback = Vector3(0, 7, 0)
+hitstun_duration = 0.3
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SwordHitbox"]
@@ -130,6 +132,8 @@ script = ExtResource("18_wogru")
 
 [node name="TauntAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence"]
 script = ExtResource("19_wogru")
+
+[node name="Timer" type="Timer" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/AttackSuccessfulSequence/TauntAction"]
 
 [node name="PlayerJustLostSequence" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
 script = ExtResource("13_wtncq")

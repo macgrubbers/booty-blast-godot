@@ -4,7 +4,7 @@ const SPEED = 8.0
 const PATROL_SPEED = 5.0
 var knockback_vector : Vector3 = Vector3.ZERO
 
-@export var attack_range : float = 5
+@export var attack_range : float = 3
 @onready var attack_type = "melee"
 
 @onready var perception_component = $EnemyPerceptionComponent
@@ -12,8 +12,8 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var health_component = $HealthComponent
 @onready var behavior_tree = $BeehaveTree
 @onready var blackboard : Blackboard = $EnemyBlackboard
-#@onready var weapon = $VisualRoot/EnemyWeapon
 @onready var visual_root = $VisualRoot
+@onready var weapon_hitbox = $SwordHitbox
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 @onready var weapon_ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_EnemyWeapon.tscn")
 
@@ -24,11 +24,11 @@ func _ready() -> void:
 	global_rotation = Vector3(0,0,0)
 	visual_root.global_rotation = temp_rotation
 	nav_agent.connect("navigation_finished", _on_naviagtion_finished)
-	#weapon.hitbox.connect("attack_successful", _on_successful_attack)
+	weapon_hitbox.connect("attack_successful",_on_successful_attack)
+
 
 	if health_component:
 		health_component.connect("kill", _on_enemy_dead)
-		#health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 	
 	if patrol_path:
 		blackboard.set_value("can_patrol", true)

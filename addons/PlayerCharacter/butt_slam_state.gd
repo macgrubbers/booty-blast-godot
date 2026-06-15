@@ -6,8 +6,12 @@ var state_name : String = "ButtSlam"
 
 var cR : CharacterBody3D
 @onready var butt_slam_land_hitbox : Area3D = $"../../ButtSlamLandHitbox"
-@onready var butt_slam_falling_hitbox : Area3D = $"../../ButtSlamFallingHitbox"
+@onready var falling_hitbox : Area3D = $"../../FallingHitbox"
 @onready var land_timer: Timer = $Timer
+@export var attack_damage:int = 3
+@export var attack_level:int = 1
+@export var knockback_magnitude:float = 15
+@export var extra_knockback_vec:Vector3 = Vector3(0,12,0)
 
 func enter(char_ref : CharacterBody3D):
 	cR = char_ref
@@ -16,7 +20,7 @@ func enter(char_ref : CharacterBody3D):
 
 func verifications():
 	land_timer.connect("timeout", _on_land_timer_timeout)
-	butt_slam_falling_hitbox.set_monitoring(true)
+	falling_hitbox.set_monitoring(true)
 	cR.godot_plush_skin.set_state("butt_slam")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -58,10 +62,10 @@ func input_management():
 func check_if_floor():
 	if cR.is_on_floor():
 		# first time landing
-		if butt_slam_falling_hitbox.monitoring == true:
+		if falling_hitbox.monitoring == true:
 			cR.cam_holder.add_trauma(.55)
 			land_timer.start()
-			butt_slam_falling_hitbox.set_monitoring(false)
+			falling_hitbox.set_monitoring(false)
 			butt_slam_land_hitbox.set_monitoring(true)
 			just_landed.emit()
 
@@ -86,7 +90,6 @@ func impact_audio_playing():
 
 
 func _on_land_timer_timeout():
-	print("timeout!")
 	if cR.move_dir: 
 		transitioned.emit(self, cR.walk_or_run)
 	else: 
@@ -96,8 +99,7 @@ func _on_land_timer_timeout():
 func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.apply_knockback(Vector3(0,-50,0), false)
-		area.attack(3, cR)
+		area.attack(3,attack_level, cR, Vector3(0,-50,0))
 		
 		# apply knockback up to player
 		cR.velocity.y = 0
@@ -110,21 +112,23 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 		if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
 		if cR.has_cut_jump: cR.has_cut_jump = false
 		
-		butt_slam_falling_hitbox.set_monitoring(false)
+		falling_hitbox.set_monitoring(false)
 		transitioned.emit(self, "InairState")
 
 
 # Signaled when landing hitbox is entered
 func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 	if area is HealthComponent:
-		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.apply_knockback(dir_vector * 15 + Vector3(0,12,0), false)
-		area.attack(3, cR)
+		var knockback_dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
+		area.attack(attack_damage, 
+					attack_level, 
+					cR,
+					(knockback_dir_vector * knockback_magnitude) + extra_knockback_vec)
 
 
 func exit():
 	print("exit state")
-	butt_slam_falling_hitbox.set_monitoring(false)
+	falling_hitbox.set_monitoring(false)
 	butt_slam_land_hitbox.set_monitoring(false)
 	land_timer.stop()
 	print(land_timer.is_stopped())

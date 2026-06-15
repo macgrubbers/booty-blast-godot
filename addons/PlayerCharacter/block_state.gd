@@ -17,6 +17,7 @@ func verifications():
 	block_timer.connect("timeout", _on_block_timer_timeout)
 	block_timer.start()
 	health_component = cR.health_component
+	health_component.block_state = true
 	health_component.connect("attack_unsuccessful", block_attack)
 	health_component.can_be_hurt = false
 	
@@ -101,6 +102,7 @@ func _on_block_timer_timeout():
 	transitioned.emit(self, "IdleState")
 
 func exit():
+	health_component.block_state = false
 	health_component.disconnect("attack_unsuccessful", block_attack)
 	health_component.can_be_hurt = true
 	shield.visible = false
@@ -115,6 +117,6 @@ func block_attack(attacker:Node3D):
 		return
 	
 	else:
-		attacker.health_component.attack(3, owner)
-		attacker.health_component.apply_knockback(Vector3(randf()*10,randf()*10,randf()*10), false)
+		var knockback_amount = Vector3(randf(),randf(),randf()) * 10
+		attacker.health_component.attack(3, 3, owner)
 		return

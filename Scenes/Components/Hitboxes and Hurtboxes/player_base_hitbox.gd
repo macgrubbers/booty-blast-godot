@@ -1,9 +1,7 @@
 class_name PlayerBaseHitbox extends BaseHitbox
 
 var global_collision_point:Vector3
-var extra_vertical_knockback:Vector3
 @export_range(0,1) var camera_shake_intensity:float
-
 @export var shape_cast: ShapeCast3D
 @export var collision_shape: CollisionShape3D
 @export var camera_root: SpringArm3D

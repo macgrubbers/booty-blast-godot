@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk38tmg0yct7b"]
+
+[ext_resource type="Script" uid="uid://dkhrgwsjpy2ro" path="res://Scenes/Props/crate_wood_fragments.gd" id="1_8tsrd"]
+[ext_resource type="ArrayMesh" uid="uid://7rjk20xwy1q6" path="res://Assets/barrel__crate/Fragments/cratepiece1.res" id="2_g7se4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkrr2"]
+size = Vector3(1.4937134, 0.17102051, 0.13452148)
+
+[node name="CrateWoodFragments" type="RigidBody3D"]
+collision_mask = 15
+script = ExtResource("1_8tsrd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+mesh = ExtResource("2_g7se4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025665283, -0.0068969727, -0.00061035156)
+shape = SubResource("BoxShape3D_dkrr2")

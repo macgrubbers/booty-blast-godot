@@ -13,6 +13,6 @@ func _ready():
 	set_value("player_just_lost", false)
 	set_value("can_patrol", false)
 
-	for node in get_tree().current_scene.get_children():
-		if node.is_in_group("Player"):
-			set_value("player_ref", node)
+	#for node in get_tree().current_scene.get_children():
+		#if node.is_in_group("Player"):
+			#set_value("player_ref", node)

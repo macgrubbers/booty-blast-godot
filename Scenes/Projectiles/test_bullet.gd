@@ -4,6 +4,7 @@ extends Area3D
 @onready var direction:Vector3
 @onready var shooter:Node3D
 @onready var reflect_speed_multiplier:float = 3
+@export var attack_level:int = 1
 var target:Node3D
 
 func setup(start_position:Vector3, target:Vector3):
@@ -21,8 +22,7 @@ func return_to_sender():
 func _on_area_entered(area:Area3D)->void:
 	if area is HealthComponent:
 		area.connect("attack_successful", cleanup)
-		area.apply_knockback(direction*10 + Vector3(0,5,0))
-		area.attack(1,self)
+		area.attack(1,attack_level,self,direction*10 + Vector3(0,5,0))
 
 
 func cleanup(target:Node3D):

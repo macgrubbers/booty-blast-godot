@@ -57,8 +57,7 @@ func check_player_raycast(actor:Node, blackboard:Blackboard):
 	DebugDraw3D.draw_ray(origin, origin.direction_to(end), los_length, Color.CRIMSON)
 	# If we don't have LOS
 	if !result or !(result.collider is HealthComponent):
-		print("nada")
-		if does_see_player:
+		if blackboard.get_value("see_player"):
 			blackboard.set_value("see_player", false)
 			blackboard.set_value("in_attack_range", false)
 		return

@@ -9,7 +9,12 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	$"../../../VisualRoot/LilGooberVisuals".bone_simulator.set_active(true)
 	$"../../../VisualRoot/LilGooberVisuals".bone_simulator.physical_bones_start_simulation()
 	$"../../../VisualRoot/LilGooberVisuals".apply_impulse_to_ragdoll(health_component.last_applied_knockback + Vector3(0,3,0))
-
+	
+	# disable collision shapes
+	$"../../../CollisionShape3D".disabled = true
+	$"../../../HealthComponent/CollisionShape3D".disabled = true
+	$"../../../PerceptionComponent/CollisionShape3D2".disabled = true
+	$"../../../SwordHitbox/CollisionShape3D".disabled = true
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.gravity_apply()

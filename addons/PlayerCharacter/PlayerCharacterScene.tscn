@@ -161,8 +161,8 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_layer = 0
-collision_mask = 3
+collision_layer = 1024
+collision_mask = 1027
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -385,10 +385,12 @@ shape = SubResource("CapsuleShape3D_ywnt5")
 target_position = Vector3(0, 0, 0)
 collision_mask = 7
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("17_mx8g3")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("knockback_immunity_timer", "damage_immunity_timer") instance=ExtResource("17_mx8g3")]
 collision_layer = 524288
 script = ExtResource("20_khnxt")
-collision_shape = NodePath("HurtBox")
+defense_level = 1
+knockback_immunity_timer = NodePath("KnockbackImmunityTimer")
+damage_immunity_timer = NodePath("DamageImmunityTimer")
 
 [node name="HurtBox" type="CollisionShape3D" parent="HealthComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -434,7 +436,7 @@ shape = SubResource("SphereShape3D_h8602")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
 
-[node name="ButtSlamLandHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape")]
+[node name="ButtSlamLandHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
 collision_layer = 0
 collision_mask = 3145732
 monitoring = false
@@ -442,23 +444,13 @@ monitorable = false
 script = ExtResource("31_or008")
 shape_cast = NodePath("ShapeCast3D")
 collision_shape = NodePath("CollisionShape3D")
+camera_root = NodePath("../OrbitView")
 metadata/_custom_type_script = "uid://dpsvrq0ht60mg"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamLandHitbox"]
 shape = SubResource("SphereShape3D_pi2tj")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="ButtSlamLandHitbox"]
-
-[node name="ButtSlamFallingHitbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-collision_layer = 0
-collision_mask = 1048576
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamFallingHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
-shape = SubResource("CylinderShape3D_khnxt")
 
 [node name="FallingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

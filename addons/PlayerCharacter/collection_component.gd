@@ -12,7 +12,6 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 func _on_body_entered(body:Node3D):
-	print("body entered")
 	if body is HealthCollectable:
 		health_component.heal(body.heal_amount)
 		body.collect()

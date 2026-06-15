@@ -1,0 +1,839 @@
+[gd_scene load_steps=71 format=3 uid="uid://bgkmxyw21pc1m"]
+
+[ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
+[ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
+[ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://addons/PlayerCharacter/OrbitControl/orbit_view.tscn" id="3_hcr6r"]
+[ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
+[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://addons/PlayerCharacter/Vfx/dust_mat.tres" id="4_j7qt1"]
+[ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://addons/Arts/Sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
+[ext_resource type="Script" uid="uid://ck50xmxl5f05s" path="res://addons/PlayerCharacter/air_attack_hitbox.gd" id="6_fdn82"]
+[ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://addons/Arts/Sounds/footstep_concrete_001.ogg" id="6_nlp36"]
+[ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://addons/Arts/Sounds/footstep_concrete_002.ogg" id="7_4283i"]
+[ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://addons/Arts/Sounds/jingles_SAX15.ogg" id="8_s241m"]
+[ext_resource type="Script" uid="uid://sca7ypsol83f" path="res://addons/PlayerCharacter/StateMachine/state_machine_script.gd" id="9_pxnim"]
+[ext_resource type="Script" uid="uid://stil4xkf3tk0" path="res://addons/PlayerCharacter/StateMachine/idle_state_script.gd" id="10_wmnke"]
+[ext_resource type="Script" uid="uid://blt7dest23fk0" path="res://addons/PlayerCharacter/StateMachine/walk_state_script.gd" id="11_v44tt"]
+[ext_resource type="Script" uid="uid://5gk47o641xgt" path="res://addons/PlayerCharacter/StateMachine/run_state_script.gd" id="12_l1d2p"]
+[ext_resource type="Script" uid="uid://dvu58wf01wils" path="res://addons/PlayerCharacter/StateMachine/jump_state_script.gd" id="13_pdxi8"]
+[ext_resource type="Script" uid="uid://bh3rdvokmrar1" path="res://addons/PlayerCharacter/StateMachine/inair_state_script.gd" id="14_8rpwc"]
+[ext_resource type="Script" uid="uid://bkxt56vr23k3r" path="res://addons/PlayerCharacter/dash_state.gd" id="14_mjas7"]
+[ext_resource type="LabelSettings" uid="uid://sescerp70o6b" path="res://addons/Arts/Fonts/LabelFontSettings.tres" id="17_c1i0s"]
+[ext_resource type="Script" uid="uid://c2ywu0ouw6ix3" path="res://addons/PlayerCharacter/ground_attack_state_script.gd" id="17_h8602"]
+[ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Components/HealthComponent.tscn" id="17_mx8g3"]
+[ext_resource type="Script" uid="uid://d2tif6xsjkwnw" path="res://addons/PlayerCharacter/StateMachine/ragdoll_state_script.gd" id="17_pdxi8"]
+[ext_resource type="Script" uid="uid://chnbi4s1tf7pa" path="res://addons/PlayerCharacter/Debug/DebugHUDScript.gd" id="17_qmq2g"]
+[ext_resource type="Script" uid="uid://m87xpylr2x1k" path="res://addons/PlayerCharacter/air_attack_state.gd" id="18_o2ynt"]
+[ext_resource type="Script" uid="uid://dt5u7nsri8oli" path="res://addons/PlayerCharacter/butt_slam_state.gd" id="18_pi2tj"]
+[ext_resource type="Script" uid="uid://25pwfrpbe38o" path="res://addons/PlayerCharacter/talking_state.gd" id="19_20r42"]
+[ext_resource type="Script" uid="uid://c7k0dsuvb8jsk" path="res://addons/PlayerCharacter/interact_raycast.gd" id="19_qq7mp"]
+[ext_resource type="Script" uid="uid://c01c6ttt0dp22" path="res://Scenes/Components/player_health_component.gd" id="20_khnxt"]
+[ext_resource type="Script" uid="uid://l0kqgude1gdr" path="res://addons/PlayerCharacter/hurt_state_script.gd" id="21_f3fy5"]
+[ext_resource type="Script" uid="uid://dn6ij0iia5tca" path="res://addons/PlayerCharacter/dialogue_hud.gd" id="22_tsatr"]
+[ext_resource type="Script" uid="uid://bfo8g37pn7rpt" path="res://addons/hud.gd" id="23_1gvdm"]
+[ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="24_qq7mp"]
+[ext_resource type="Script" uid="uid://k8rc5gww2kps" path="res://addons/PlayerCharacter/block_state.gd" id="25_5gw51"]
+[ext_resource type="Script" uid="uid://dtvys5amlu47b" path="res://addons/health_bar.gd" id="25_tsatr"]
+[ext_resource type="Script" uid="uid://bydnr1b340lju" path="res://addons/PlayerCharacter/ledge_grab_state.gd" id="25_ywnt5"]
+[ext_resource type="SpriteFrames" uid="uid://ce878q1clpb8f" path="res://Assets/2D Art/peach.gif" id="26_20r42"]
+[ext_resource type="Script" uid="uid://la5fud0p4b53" path="res://addons/PlayerCharacter/raycasts.gd" id="26_ywnt5"]
+[ext_resource type="Script" uid="uid://bcngpscjtwf8n" path="res://addons/PlayerCharacter/ledge_grab_raycast_1.gd" id="27_jf28f"]
+[ext_resource type="Script" uid="uid://ce5i03bfhvgwe" path="res://addons/PlayerCharacter/falling_hitbox.gd" id="28_edc57"]
+[ext_resource type="Script" uid="uid://di4uha55gs8ua" path="res://addons/PlayerCharacter/collection_component.gd" id="29_0r710"]
+[ext_resource type="Script" uid="uid://cnuwp72c5hvrf" path="res://addons/PlayerCharacter/ground_attack_hitbox.gd" id="29_fdn82"]
+[ext_resource type="Script" uid="uid://bxtdawvxerm5x" path="res://addons/PlayerCharacter/butt_slam_land_hitbox.gd" id="31_or008"]
+[ext_resource type="Script" uid="uid://cn383vl1g3pu" path="res://addons/PlayerCharacter/big_bar.gd" id="36_6vkim"]
+[ext_resource type="Texture2D" uid="uid://rldcpjhhv8dj" path="res://Assets/2D Art/peach_evil.png" id="37_dp80o"]
+[ext_resource type="Script" uid="uid://uoitdn0rxndy" path="res://addons/PlayerCharacter/collectables_bar.gd" id="37_wl7ak"]
+
+[sub_resource type="Curve" id="Curve_l1d2p"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.654804, 2.56598), 0.0, 0.0, 0, 0, Vector2(1, 6.66422), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_pdxi8"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8rpwc"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.644128, 3.04252), 0.0, 0.0, 0, 0, Vector2(1, 6.56892), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_x3fw6"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wrw8f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yttci"]
+curve = SubResource("Curve_wrw8f")
+
+[sub_resource type="Curve" id="Curve_gyl8p"]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p3jn6"]
+curve = SubResource("Curve_gyl8p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dhnoe"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.25
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0.2, 0)
+scale_curve = SubResource("CurveTexture_p3jn6")
+alpha_curve = SubResource("CurveTexture_yttci")
+anim_speed_min = 0.01
+anim_speed_max = 0.03
+anim_offset_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_bw4i7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f3fy5"]
+radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gw51"]
+transparency = 1
+albedo_color = Color(0.38431373, 0.5764706, 1, 0.5764706)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fdn82"]
+material = SubResource("StandardMaterial3D_5gw51")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("5_8ixl8")
+stream_1/stream = ExtResource("6_nlp36")
+stream_2/stream = ExtResource("7_4283i")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vpnr"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("5_8ixl8")
+stream_1/stream = ExtResource("6_nlp36")
+stream_2/stream = ExtResource("7_4283i")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fvg16"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_s241m")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhngq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywnt5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mx8g3"]
+radius = 0.55
+height = 2.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fdn82"]
+radius = 1.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
+radius = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_khnxt"]
+height = 0.5
+radius = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tsatr"]
+font_size = 35
+font_color = Color(0.6052743, 0.6052743, 0.6052743, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o2ynt"]
+font = ExtResource("24_qq7mp")
+font_size = 80
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f3fy5"]
+font = ExtResource("24_qq7mp")
+font_size = 70
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 0
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_ms4x1")
+walk_speed = 10.0
+walk_accel = 5.0
+walk_deccel = 10.0
+run_speed = 20.0
+run_accel = 5.0
+run_deccel = 6.5
+dash_speed = 30.0
+dash_duration = 0.2
+dash_accel = 12.0
+jump_height = 4.0
+jump_time_to_peak = 0.5
+jump_time_to_descent = 0.5
+jump_cut_multiplier = 1.0
+jump_cooldown = 0.2
+nb_jumps_in_air_allowed = 1
+coyote_jump_cooldown = 0.25
+in_air_move_speed = Array[Curve]([SubResource("Curve_l1d2p"), SubResource("Curve_pdxi8")])
+in_air_accel = Array[Curve]([SubResource("Curve_8rpwc"), SubResource("Curve_x3fw6")])
+hit_wall_cut_velocity = true
+moveForwardAction = "w"
+moveBackwardAction = "s"
+moveLeftAction = "a"
+moveRightAction = "d"
+runAction = "LShift"
+jumpAction = "space"
+model_rot_speed = 12.0
+ragdoll_gravity = 24.0
+ragdoll_on_floor_only = true
+follow_cam_pos_when_aimed = true
+
+[node name="VisualRoot" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="GodotPlushSkin" parent="VisualRoot" instance=ExtResource("2_mtsks")]
+unique_name_in_owner = true
+
+[node name="ParticlesManager" type="Node3D" parent="VisualRoot"]
+unique_name_in_owner = true
+script = ExtResource("3_v44tt")
+
+[node name="MovementDust" type="GPUParticles3D" parent="VisualRoot"]
+unique_name_in_owner = true
+material_override = ExtResource("4_j7qt1")
+cast_shadow = 0
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_dhnoe")
+draw_pass_1 = SubResource("QuadMesh_bw4i7")
+
+[node name="AirAttackHitbox" type="Area3D" parent="VisualRoot" node_paths=PackedStringArray("shape_cast", "collision_shape")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
+collision_layer = 0
+collision_mask = 1048580
+monitoring = false
+monitorable = false
+script = ExtResource("6_fdn82")
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
+shape = SubResource("SphereShape3D_f3fy5")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/AirAttackHitbox"]
+
+[node name="Shield" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+mesh = SubResource("SphereMesh_fdn82")
+skeleton = NodePath("../../StateMachine/BlockState")
+
+[node name="AudioRoot" type="Node3D" parent="."]
+top_level = true
+
+[node name="FootStepAudio" type="AudioStreamPlayer3D" parent="AudioRoot"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_sxclc")
+max_polyphony = 3
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="AudioRoot"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_3vpnr")
+volume_db = 5.0
+max_polyphony = 3
+
+[node name="WaveAudio" type="AudioStreamPlayer3D" parent="AudioRoot"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_fvg16")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xhngq")
+
+[node name="OrbitView" parent="." instance=ExtResource("3_hcr6r")]
+top_level = true
+mouse_sens = 0.004
+camera_position_offset = Vector3(0, 3.5, 0)
+mouse_mode_action = "Esc"
+cam_zoom_in_action = "Mouse Wheel Up"
+cam_zoom_out_action = "Mouse Wheel Down"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("9_pxnim")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("10_wmnke")
+metadata/_custom_type_script = "uid://stil4xkf3tk0"
+
+[node name="WalkState" type="Node" parent="StateMachine"]
+script = ExtResource("11_v44tt")
+metadata/_custom_type_script = "uid://blt7dest23fk0"
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("12_l1d2p")
+metadata/_custom_type_script = "uid://5gk47o641xgt"
+
+[node name="DashState" type="Node" parent="StateMachine"]
+script = ExtResource("14_mjas7")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="DashDurationTimer" type="Timer" parent="StateMachine/DashState"]
+one_shot = true
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("13_pdxi8")
+metadata/_custom_type_script = "uid://dvu58wf01wils"
+
+[node name="InairState" type="Node" parent="StateMachine"]
+script = ExtResource("14_8rpwc")
+metadata/_custom_type_script = "uid://bh3rdvokmrar1"
+
+[node name="RagdollState" type="Node" parent="StateMachine"]
+script = ExtResource("17_pdxi8")
+metadata/_custom_type_script = "uid://d2tif6xsjkwnw"
+
+[node name="GroundAttackState" type="Node" parent="StateMachine"]
+script = ExtResource("17_h8602")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="AirAttackState" type="Node" parent="StateMachine"]
+script = ExtResource("18_o2ynt")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="ButtSlamState" type="Node" parent="StateMachine"]
+script = ExtResource("18_pi2tj")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="Timer" type="Timer" parent="StateMachine/ButtSlamState"]
+wait_time = 0.5
+one_shot = true
+
+[node name="TalkingState" type="Node" parent="StateMachine"]
+script = ExtResource("19_20r42")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="StunnedState" type="Node" parent="StateMachine"]
+script = ExtResource("21_f3fy5")
+
+[node name="StunTimer" type="Timer" parent="StateMachine/StunnedState"]
+wait_time = 0.7
+one_shot = true
+
+[node name="BlockState" type="Node" parent="StateMachine"]
+script = ExtResource("25_5gw51")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="Timer" type="Timer" parent="StateMachine/BlockState"]
+wait_time = 0.5
+one_shot = true
+
+[node name="LedgeGrabState" type="Node" parent="StateMachine"]
+script = ExtResource("25_ywnt5")
+metadata/_custom_type_script = "uid://gjekmtw4eb1e"
+
+[node name="Raycasts" type="Node3D" parent="."]
+script = ExtResource("26_ywnt5")
+
+[node name="FloorRaycast" type="RayCast3D" parent="Raycasts"]
+unique_name_in_owner = true
+target_position = Vector3(0, -2, 0)
+collision_mask = 2
+
+[node name="InteractRaycast" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71797085, 0)
+target_position = Vector3(0, 0, 3)
+collision_mask = 15
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("19_qq7mp")
+
+[node name="LedgeGrabRaycast1" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, 1.5)
+collision_mask = 7
+hit_back_faces = false
+script = ExtResource("27_jf28f")
+
+[node name="LedgeGrabRaycast2" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.5)
+enabled = false
+collision_mask = 7
+hit_from_inside = true
+
+[node name="LedgeGrabRaycast3" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.5)
+enabled = false
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 7
+hit_from_inside = true
+
+[node name="LedgeGrabShapecast" type="ShapeCast3D" parent="Raycasts/LedgeGrabRaycast3"]
+enabled = false
+shape = SubResource("CapsuleShape3D_ywnt5")
+target_position = Vector3(0, 0, 0)
+collision_mask = 7
+
+[node name="HealthComponent" parent="." instance=ExtResource("17_mx8g3")]
+collision_layer = 524288
+script = ExtResource("20_khnxt")
+max_health = null
+defense_level = null
+armor_blocks_knockback = null
+immunity_time = null
+
+[node name="HurtBox" type="CollisionShape3D" parent="HealthComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_mx8g3")
+
+[node name="DamageImmunityTimer" type="Timer" parent="HealthComponent"]
+one_shot = true
+
+[node name="KnockbackImmunityTimer" type="Timer" parent="HealthComponent"]
+
+[node name="AppliedRotationTimer" type="Timer" parent="HealthComponent"]
+wait_time = 0.3
+one_shot = true
+
+[node name="CollectionComponent" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 272
+monitorable = false
+script = ExtResource("29_0r710")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_fdn82")
+
+[node name="GroundAttackHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
+collision_layer = 0
+collision_mask = 3145732
+monitoring = false
+monitorable = false
+script = ExtResource("29_fdn82")
+camera_shake_intensity = 0.3
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
+camera_root = NodePath("../OrbitView")
+damage = 3
+knockback_magnitude = 10.0
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
+shape = SubResource("SphereShape3D_h8602")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
+
+[node name="ButtSlamLandHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
+collision_layer = 0
+collision_mask = 3145732
+monitoring = false
+monitorable = false
+script = ExtResource("31_or008")
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
+camera_root = NodePath("../OrbitView")
+metadata/_custom_type_script = "uid://dpsvrq0ht60mg"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamLandHitbox"]
+shape = SubResource("SphereShape3D_pi2tj")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="ButtSlamLandHitbox"]
+
+[node name="FallingHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 0
+collision_mask = 1048576
+monitoring = false
+monitorable = false
+script = ExtResource("28_edc57")
+damage = 3
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallingHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
+shape = SubResource("CylinderShape3D_khnxt")
+
+[node name="DialogueHUD" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("22_tsatr")
+
+[node name="DialogueBox" type="Control" parent="DialogueHUD"]
+visible = false
+layout_mode = 3
+anchor_left = 0.064
+anchor_top = 0.42000002
+anchor_right = 0.93200004
+anchor_bottom = 0.883
+offset_left = 0.27199554
+offset_top = -0.16000366
+offset_right = 0.3359375
+offset_bottom = -0.184021
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="DialogueHUD/DialogueBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.12225237, 0.1222522, 0.12225223, 0.74509805)
+
+[node name="Label" type="Label" parent="DialogueHUD/DialogueBox/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+theme_override_colors/font_color = Color(18.892002, 18.892002, 18.892002, 1)
+theme_override_font_sizes/font_size = 30
+text = "Sample Text"
+label_settings = SubResource("LabelSettings_tsatr")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("23_1gvdm")
+
+[node name="HealthBar" type="Control" parent="HUD"]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("25_tsatr")
+
+[node name="Health1" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(79, -81.5)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("26_20r42")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[node name="Health2" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(179, -81.5)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("26_20r42")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[node name="Health3" type="AnimatedSprite2D" parent="HUD/HealthBar"]
+position = Vector2(279, -81.5)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("26_20r42")
+animation = &"gif"
+frame = 5
+frame_progress = 0.22065857
+speed_scale = 0.6
+
+[node name="BigBar" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -259.0
+offset_right = 504.0
+grow_vertical = 0
+script = ExtResource("36_6vkim")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/BigBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 83.0
+offset_top = -324.0
+offset_right = 283.0
+offset_bottom = -142.0
+step = 0.0
+fill_mode = 5
+texture_progress = ExtResource("37_dp80o")
+
+[node name="CollectablesBar" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -229.0
+offset_bottom = 130.0
+grow_horizontal = 0
+script = ExtResource("37_wl7ak")
+
+[node name="MoneyLabel" type="Label" parent="HUD/CollectablesBar"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 8.0
+offset_right = 113.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "monies:"
+
+[node name="GemLabel" type="Label" parent="HUD/CollectablesBar"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 49.0
+offset_right = 112.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 30
+text = "gems:"
+
+[node name="Interact" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 650.0
+offset_top = 300.0
+offset_right = 690.0
+offset_bottom = 340.0
+
+[node name="Label" type="Label" parent="HUD/Interact"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "[E] Interact"
+
+[node name="PauseScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PauseScreen"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+color = Color(0.29411766, 0.29411766, 0.29411766, 0.56078434)
+
+[node name="Label" type="Label" parent="HUD/PauseScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.80500007
+anchor_bottom = 1.2870001
+offset_left = 491.0
+offset_top = 269.0
+offset_right = 674.8
+offset_bottom = 297.52
+theme_override_colors/font_color = Color(0, 0.7934291, 7.70092e-07, 1)
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_o2ynt")
+
+[node name="InfoScreenButton" type="Button" parent="HUD/PauseScreen"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 374.0
+offset_right = 747.0
+offset_bottom = 440.0
+text = "how dafuq do I play
+????"
+
+[node name="InfoScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/InfoScreen"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+color = Color(0.19076231, 0.19076234, 0.19076231, 0.76862746)
+
+[node name="Label" type="Label" parent="HUD/InfoScreen"]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 24.0
+offset_right = 1026.0
+offset_bottom = 515.0
+text = "[wasd] - Move
+[Lshift] + hold - Run
+[space] - Jump
+[v] - Dash
+[lmb] - Attack
+[lmb] + in-air - Air Attack
+[rmb] - Block
+[ctrl] - Butt slam
+[c] - Get beeg
+[x] - Toggle Debug Mode
+
+---------------------------------------------------------------
+double jump in air, dash doesn't start cooldown until landed
+Attack or land on enemies to kill them
+Air attacks bounce you off walls & enemies
+Block attacks also kills enemies (and reflect projectiles wip)
+Beeg goblina = beeg attacks (and that's it for now)
+----------------------------------------------------------------
+have fun :3"
+
+[node name="DeadScreen" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 197.0
+offset_right = 959.0
+offset_bottom = 267.0
+text = "You got BOOTY BLASTED"
+label_settings = SubResource("LabelSettings_f3fy5")
+
+[node name="RespawnButton" type="Button" parent="HUD/DeadScreen"]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 294.0
+offset_right = 669.0
+offset_bottom = 360.0
+text = "Respawn"
+
+[node name="DebugHUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("17_qmq2g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugHUD"]
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 312.0
+offset_bottom = 171.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugHUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentStateL" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Current state :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityL" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Velocity :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="NbJumpsInAirAllowedL" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nb jumps in air allowed :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="JumpBufferL" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Jump buffer :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CoyoteTimeL" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Coyote time :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DebugHUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentStateLT" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityLT" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="NbJumpsInAirAllowedLT" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="JumpBufferLT" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CoyoteTimeLT" type="Label" parent="DebugHUD/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="DebugHUD"]
+offset_left = 920.0
+offset_top = 7.0
+offset_right = 1251.0
+offset_bottom = 105.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="DebugHUD/HBoxContainer2"]
+layout_mode = 2
+
+[node name="ModelOrientationL" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+text = "Model orientation :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CameraModeL" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+text = "Camera mode :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="FramesPerSecondL" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+text = "Frames per second :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="DebugHUD/HBoxContainer2"]
+layout_mode = 2
+
+[node name="ModelOrientationLT" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CameraModeLT" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="FramesPerSecondLT" type="Label" parent="DebugHUD/HBoxContainer2/VBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="DashResetTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SizeBuffTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="StateMachine/StunnedState/StunTimer" to="StateMachine/StunnedState" method="_on_hurt_timer_timeout"]
+[connection signal="animation_finished" from="HUD/HealthBar/Health1" to="HUD/HealthBar" method="_on_health_1_animation_finished"]
+[connection signal="pressed" from="HUD/PauseScreen/InfoScreenButton" to="HUD" method="_on_info_screen_button_pressed"]
+[connection signal="pressed" from="HUD/DeadScreen/RespawnButton" to="HUD" method="_on_respawn_button_pressed"]

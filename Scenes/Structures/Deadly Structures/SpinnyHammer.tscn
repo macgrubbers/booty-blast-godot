@@ -42,8 +42,9 @@ skeleton = NodePath("../..")
 
 [node name="BaseHitbox" type="Area3D" parent="MeshInstance3D/MeshInstance3D"]
 transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 2.6865725e-16, -1, -8.742278e-08, -1, 3.5527137e-15, -4.1406867e-08, 0.94727874, 0)
-collision_layer = 1572864
+collision_layer = 0
 collision_mask = 1572864
+monitorable = false
 script = ExtResource("2_gsyst")
 damage = 3
 knockback_magnitude = 30.0

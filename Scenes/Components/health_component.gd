@@ -1,17 +1,25 @@
 extends Area3D
 class_name HealthComponent
 
-var last_applied_knockback:Vector3
+# health and armor
+@export var max_health : int = 3
+var current_health : int
+@export_range(1,3) var defense_level:int = 0
 
-@export var is_alive = true
+# status
+@onready var is_alive = true
 @onready var can_be_hurt: bool = true
-@export var max_health : float = 3
-@export var immunity_time: float = 1
-var current_health : float
-@export var collision_shape : Node3D
+@export var armor_blocks_knockback:bool = false
 
-@onready var immunity_timer = $DamageImmunityTimer
-@onready var knockback_immunity_timer = $KnockbackImmunityTimer
+# immunity timers
+@export var knockback_immunity_timer:Timer
+@export var damage_immunity_timer:Timer
+@export var immunity_time: float = 1
+
+
+# knockback
+var last_applied_knockback:Vector3 # For ragdolls
+
 
 signal attack_successful(attacker: Node3D)
 signal attack_unsuccessful(attacker: Node3D)
@@ -22,36 +30,40 @@ signal kill()
 func _ready():
 	is_alive = true
 	current_health = max_health
-	if collision_shape == null:
-		print("ERROR: Health component attached to ", get_parent().get_name(),
-				" does not have a CollisionShape3D attached!")
 	call_deferred("post_ready")
 
 func post_ready():
-	immunity_timer.set_wait_time(1.0)
-	immunity_timer.set_one_shot(true)
-	immunity_timer.connect("timeout", _on_immunity_timer_timeout)
+	damage_immunity_timer.set_wait_time(1.0)
+	damage_immunity_timer.set_one_shot(true)
+	damage_immunity_timer.connect("timeout", _on_immunity_timer_timeout)
 	knockback_immunity_timer.set_wait_time(1.0)
 	knockback_immunity_timer.set_one_shot(true)
 	emit_signal("update_health", current_health)
 
-func attack(amount : float, 
+# TODO: renamed successful/unsuccessful to 'hit' and 'block' to not confuse signals w/ hitboxes
+func attack(amount : int,
+			attack_level : int,
 			attacker:Node3D, 
 			knockback:Vector3 = Vector3.ZERO, 
 			hitstun_duration:float = 0):
+	var is_armor_blocked = (defense_level > attack_level)
 	# ignore changing health if immune or dead
-	if !can_be_hurt or !is_alive:
+	if !can_be_hurt or !is_alive or (is_armor_blocked):
 		emit_signal("attack_unsuccessful", attacker)
 	else:
 		current_health -= amount
-		immunity_timer.start()
 		emit_signal("update_health", current_health)
-		can_be_hurt = false
-		immunity_timer.start()
 		emit_signal("attack_successful", attacker)
-		emit_signal("hitstunned", hitstun_duration)
+
+	# Start immunity timer regardless of success
+	damage_immunity_timer.start()
+	can_be_hurt = false
 	
-	apply_knockback(knockback, false)
+	# apply knockback if possible
+	var block_attack = armor_blocks_knockback and is_armor_blocked
+	if !block_attack:
+		apply_knockback(knockback, false)
+		emit_signal("hitstunned", hitstun_duration)
 
 	if current_health <= 0:
 		current_health = 0
@@ -81,7 +93,7 @@ func heal(amount:int):
 func get_current_health()->float:
 	return current_health
 	
-func set_max_health(new_max:float):
+func set_max_health(new_max:int):
 	max_health = new_max
 	if current_health > max_health:
 		current_health = max_health
