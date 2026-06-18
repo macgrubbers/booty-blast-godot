@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=32 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://bmnocubr33alu" path="res://Scenes/Props/ExplodingBarrel.tscn" id="14_li1bp"]
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="18_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="18_6l74f"]
-[ext_resource type="PackedScene" uid="uid://dk3nl28i063fm" path="res://Scenes/Props/CrateWood.tscn" id="19_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://bkquxrhccsube" path="res://Scenes/Props/SpikeBall.tscn" id="20_oebwi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
@@ -351,8 +350,11 @@ activating_node = NodePath("../SpinnyHammer")
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
 
-[node name="CrateWood" parent="." instance=ExtResource("19_4tpjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2200031, 5.4816723, 19.113428)
-
 [node name="SpikeBall" parent="." instance=ExtResource("20_oebwi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3167286, 10.791773, 16.516937)
+
+[node name="LaunchingPlatform2" parent="." instance=ExtResource("3_s27tv")]
+transform = Transform3D(1, 0, 0, 0, 0.6179968, 0.7861804, 0, -0.7861804, 0.6179968, -1.9840717, 3.2042665, 17.857645)
+
+[node name="TestEnemy" parent="." instance=ExtResource("7_6l74f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9443762, 0.5511893, 9.199611)
