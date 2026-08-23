@@ -5,7 +5,7 @@ var state_name : String = "Pursue"
 
 var movement_acceleration : float = 0.4
 var movement_velocity : Vector3 = Vector3.ZERO
-@onready var visuals = $"../../../../../../../../VisualRoot/LilGooberVisuals"
+@onready var visuals = $"../../../../../../../VisualRoot/LilGooberVisuals"
 
 func before_run(actor: Node, blackboard: Blackboard) -> void:
 	pass

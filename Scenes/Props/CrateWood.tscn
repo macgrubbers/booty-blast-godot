@@ -1,71 +1,17 @@
-[gd_scene load_steps=11 format=4 uid="uid://dk3nl28i063fm"]
+[gd_scene load_steps=6 format=3 uid="uid://dk3nl28i063fm"]
 
-[ext_resource type="Texture2D" uid="uid://c4f1ae78vys83" path="res://Assets/barrel__crate/textures/cratebarrel_baseColor.png" id="1_1hebi"]
 [ext_resource type="Script" uid="uid://blfi3satn6i2p" path="res://Scenes/Props/crate_wood.gd" id="1_5h05k"]
-[ext_resource type="Texture2D" uid="uid://bthltb6a41uyg" path="res://Assets/barrel__crate/textures/cratebarrel_metallicRoughness.png" id="2_5h05k"]
-[ext_resource type="Texture2D" uid="uid://7fbkswytn0rh" path="res://Assets/barrel__crate/textures/cratebarrel_normal.png" id="3_g8fht"]
+[ext_resource type="PackedScene" uid="uid://dous4xb3ircum" path="res://Assets/barrel__crate/crate.tscn" id="3_li61n"]
 [ext_resource type="Script" uid="uid://b1t251ja36jx0" path="res://Scenes/Props/prop_health_component.gd" id="4_1hebi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wk3w"]
-resource_name = "cratebarrel"
-cull_mode = 2
-albedo_texture = ExtResource("1_1hebi")
-metallic = 1.0
-metallic_texture = ExtResource("2_5h05k")
-metallic_texture_channel = 2
-roughness_texture = ExtResource("2_5h05k")
-roughness_texture_channel = 1
-normal_enabled = true
-normal_texture = ExtResource("3_g8fht")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_fx3kf"]
-_surfaces = [{
-"aabb": AABB(-75, -75, -75, 150, 150, 150),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQAAwAEAAEABQAAAAIABQADAAAAAgAEAAYABQACAAYAAwAHAAQABQAHAAMABwAGAAQABwAFAAYA"),
-"name": "cratebarrel",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("//8AAP//AAAAAP////8AAP///////wAAAAAAAP//AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAA==")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_gp3rf"]
-resource_name = "Sketchfab_Scene_crate_cratebarrel_0"
-_surfaces = [{
-"aabb": AABB(-75, -75, -75, 150, 150, 150),
-"attribute_data": PackedByteArray("/3//f/9//38AAP//AAD///9/////f///AAD/fwAA/3//f/9//3//fwAA//8AAP///3////9///8AAP9/AAD/f/9//3//f/9/AAD//wAA////f////3///wAA/38AAP9//3//f/9//38AAP//AAD///9/////f///AAD/fwAA/3//f/9//3//fwAA//8AAP///3////9///8AAP9/AAD/f/9//3//f/9/AAD//wAA////f////3///wAA/38AAP9/"),
-"format": 34896613431,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_2wk3w"),
-"name": "cratebarrel",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("//8AAP//AIAAAP////8AgP///////wCAAAAAAP//AID//wAAAAD/v/////////+//////wAA/7///wAA////vwAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP//AAAAAP///78AAP//AAD/vwAA//////+/AAAAAAAA/7//////////vwAA//8AAP+//////wAA/78AAP//////v///AAAAAP+/AAAAAP///7///wAA////vwAAAAAAAP+//3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3///////3////9/////f////38AAP9/AAD/fwAA/38AAP9/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_fx3kf")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_21e4r"]
-size = Vector3(1.5, 1.5, 1.5)
+size = Vector3(3, 3, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tln88"]
-size = Vector3(1.5, 1.5, 1.5)
+size = Vector3(3, 3, 3)
 
 [node name="CrateWood" type="RigidBody3D"]
 script = ExtResource("1_5h05k")
-
-[node name="crate" type="Node3D" parent="."]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, -2.220446e-18, 0, 2.220446e-18, 0.01, 0, 0, 0)
-visible = false
-
-[node name="crate_cratebarrel_0" type="MeshInstance3D" parent="crate"]
-mesh = SubResource("ArrayMesh_gp3rf")
-skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_21e4r")
@@ -76,7 +22,11 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_1hebi")
 max_health = 1
+defense_level = 1
 metadata/_custom_type_script = "uid://b3oivafuxug0e"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
 shape = SubResource("BoxShape3D_tln88")
+
+[node name="Crate" parent="." instance=ExtResource("3_li61n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

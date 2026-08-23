@@ -8,7 +8,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 
 @onready var health_component = $HealthComponent
 @onready var visual_root = $VisualRoot
-@onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
+@onready var ragdoll = preload("res://Assets/Lil' Goober Hostile/Lil Goober Dummy.tscn")
 @onready var blackboard : Blackboard = $EnemyBlackboard
 
 @export var path_follow : PathFollow3D
@@ -30,15 +30,7 @@ func _physics_process(delta: float) -> void:
 
 	
 func _on_enemy_dead(last_knockback:Vector3 = Vector3.ZERO):
-	# Create enemy ragdoll
-	var enemy_ragdoll:RigidBody3D = ragdoll.instantiate()
-	enemy_ragdoll.set_global_transform(get_global_transform())
-	var rand_hit = Vector3(randf_range(-50,50), randf_range(-50,50), randf_range(-50,50))
-	enemy_ragdoll.apply_impulse(health_component.last_applied_knockback*1.5)
-	enemy_ragdoll.apply_torque(rand_hit)
-	get_tree().current_scene.add_child(enemy_ragdoll)
-	
-	queue_free()
+	blackboard.set_value("is_alive", false)
 
 func gravity_apply():
 	velocity += get_gravity() * get_physics_process_delta_time()

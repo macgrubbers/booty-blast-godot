@@ -445,7 +445,6 @@ script = ExtResource("31_or008")
 shape_cast = NodePath("ShapeCast3D")
 collision_shape = NodePath("CollisionShape3D")
 camera_root = NodePath("../OrbitView")
-damage = 5
 metadata/_custom_type_script = "uid://dpsvrq0ht60mg"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtSlamLandHitbox"]
@@ -456,7 +455,7 @@ shape = SubResource("SphereShape3D_pi2tj")
 [node name="FallingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 0
-collision_mask = 1048580
+collision_mask = 1048576
 monitoring = false
 monitorable = false
 script = ExtResource("28_edc57")

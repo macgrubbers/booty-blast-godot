@@ -25,9 +25,15 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	#actor.weapon.toggle_hitbox(true)
 	timer.start()
 
-# Pause, lunge, pause again
+# Pause, attack, pause again
 func tick(actor: Node, blackboard: Blackboard) -> int:
-	player_pos = blackboard.get_value("player_ref").get_global_position()
+	var player_ref = blackboard.get_value("player_ref")
+	
+	if !player_ref:
+		return FAILURE
+	
+	player_pos = player_ref.get_global_position()
+	
 	actor.visual_root.look_at(player_pos)
 	actor.gravity_apply()
 	if !timer.is_stopped():

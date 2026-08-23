@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=39 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="7_6l74f"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="8_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://lii61fy4437q" path="res://Scenes/Structures/Deadly Structures/SpinnyHammer.tscn" id="9_jfaew"]
-[ext_resource type="PackedScene" uid="uid://cuxgsfy6shs0a" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePhysicsObject.tscn" id="9_oebwi"]
+[ext_resource type="PackedScene" uid="uid://dk3nl28i063fm" path="res://Scenes/Props/CrateWood.tscn" id="10_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="10_6hne3"]
 [ext_resource type="PackedScene" uid="uid://c7t3qtik4ndib" path="res://Scenes/Structures/Interactable Structures/PressurePlate.tscn" id="10_ca7po"]
 [ext_resource type="PackedScene" uid="uid://bt60xkaytxah4" path="res://Scenes/Collectables/BigBootyJuice.tscn" id="10_d0jy3"]
+[ext_resource type="PackedScene" uid="uid://dq4uk3j3ymc7f" path="res://Scenes/Props/CrateMetal.tscn" id="11_oebwi"]
 [ext_resource type="PackedScene" uid="uid://d3am51ay6u01e" path="res://Scenes/Collectables/GemCollectable.tscn" id="12_met4o"]
 [ext_resource type="PackedScene" uid="uid://bgx6pos0jcbht" path="res://Scenes/Props/Chest.tscn" id="13_g6416"]
 [ext_resource type="PackedScene" uid="uid://bmnocubr33alu" path="res://Scenes/Props/ExplodingBarrel.tscn" id="14_li1bp"]
@@ -292,22 +293,36 @@ Ranged Enemy"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("8_4tpjj")
 
-[node name="CrateSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
+[node name="WoodCrateSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 linked_object = NodePath("Spawner")
 
-[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/CrateSpawner"]
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/WoodCrateSpawner"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
 pixel_size = 0.015
 text = "Spawn:
-Crate w/ Monies"
+Wood Crate"
 
-[node name="Spawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/CrateSpawner" instance=ExtResource("18_4tpjj")]
+[node name="Spawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/WoodCrateSpawner" instance=ExtResource("18_4tpjj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
-spawning_object = ExtResource("9_oebwi")
+spawning_object = ExtResource("10_4tpjj")
+
+[node name="MetalCrateSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+linked_object = NodePath("Spawner")
+
+[node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/MetalCrateSpawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4, 0)
+pixel_size = 0.015
+text = "Spawn:
+Metal Crate"
+
+[node name="Spawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/MetalCrateSpawner" instance=ExtResource("18_4tpjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+spawning_object = ExtResource("11_oebwi")
 
 [node name="JuiceSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/JuiceSpawner"]
@@ -322,7 +337,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("10_d0jy3")
 
 [node name="MoneySpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/MoneySpawner"]
@@ -336,7 +351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("10_6hne3")
 
 [node name="GemSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/GemSpawner"]
@@ -350,7 +365,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("12_met4o")
 
 [node name="ChestSpawn" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/ChestSpawn"]
@@ -364,7 +379,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("13_g6416")
 
 [node name="ExplodingBarrelSpawn" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -35)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/ExplodingBarrelSpawn"]
@@ -378,7 +393,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 spawning_object = ExtResource("14_li1bp")
 
 [node name="SpikeBallSpawner" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons" node_paths=PackedStringArray("linked_object") instance=ExtResource("4_pauaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -40)
 linked_object = NodePath("Spawner")
 
 [node name="Label3D" type="Label3D" parent="NavigationRegion3D/Test_Spawners/CSGBox3D2/SpawnerButtons/SpikeBallSpawner"]
@@ -406,6 +421,3 @@ activating_node = NodePath("../SpinnyHammer")
 
 [node name="ladder" parent="." instance=ExtResource("18_6l74f")]
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
-
-[node name="TestEnemy" parent="." instance=ExtResource("7_6l74f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9443762, 0.5511893, 9.199611)

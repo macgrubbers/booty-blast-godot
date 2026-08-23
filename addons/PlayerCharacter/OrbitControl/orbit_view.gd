@@ -96,7 +96,7 @@ func _input(event):
 		var mouse_motion = event.xformed_by(viewport_transform).relative
 		rotate_from_vector(mouse_motion * mouse_sens)
 		
-func _process(delta):
+func _physics_process(delta):
 	if player.health_component.is_alive:
 		var player_pos:Vector3 = player.get_global_position()
 		var player_vel = player.get_velocity()
@@ -120,6 +120,7 @@ func _process(delta):
 				new_global_position.y = player_pos.y + camera_position_offset.y
 		# set the new camera position
 		# TODO: change lerp based on veocity?
+		
 		global_position.x = lerp(global_position.x, new_global_position.x, delta*8)
 		global_position.y = lerp(global_position.y, new_global_position.y, delta*4)
 		global_position.z = lerp(global_position.z, new_global_position.z, delta*8)

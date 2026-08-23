@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=4 uid="uid://dous4xb3ircum"]
+
+[ext_resource type="Texture2D" uid="uid://c4f1ae78vys83" path="res://Assets/barrel__crate/textures/cratebarrel_baseColor.png" id="1_ynuu3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svyem"]
+resource_name = "cratebarrel"
+cull_mode = 2
+albedo_texture = ExtResource("1_ynuu3")
+metallic_specular = 0.0
+metallic_texture_channel = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2wk3w"]
+_surfaces = [{
+"aabb": AABB(-75, -75, -75, 150, 150, 150),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQAAwAEAAEABQAAAAIABQADAAAAAgAEAAYABQACAAYAAwAHAAQABQAHAAMABwAGAAQABwAFAAYA"),
+"name": "cratebarrel",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAAAAP////8AAP///////wAAAAAAAP//AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fx3kf"]
+resource_name = "Sketchfab_Scene_crate_cratebarrel_0"
+_surfaces = [{
+"aabb": AABB(-75, -75, -75, 150, 150, 150),
+"attribute_data": PackedByteArray("/3//f/9//38AAP//AAD///9/////f///AAD/fwAA/3//f/9//3//fwAA//8AAP///3////9///8AAP9/AAD/f/9//3//f/9/AAD//wAA////f////3///wAA/38AAP9//3//f/9//38AAP//AAD///9/////f///AAD/fwAA/3//f/9//3//fwAA//8AAP///3////9///8AAP9/AAD/f/9//3//f/9/AAD//wAA////f////3///wAA/38AAP9/"),
+"format": 34896613431,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_svyem"),
+"name": "cratebarrel",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//AIAAAP////8AgP///////wCAAAAAAP//AID//wAAAAD/v/////////+//////wAA/7///wAA////vwAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP//AAAAAP///78AAP//AAD/vwAA//////+/AAAAAAAA/7//////////vwAA//8AAP+//////wAA/78AAP//////v///AAAAAP+/AAAAAP///7///wAA////vwAAAAAAAP+//3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3///////3////9/////f////38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2wk3w")
+
+[node name="Crate" type="Node3D"]
+
+[node name="crate_cratebarrel_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, -2.220446e-18, 0, 2.220446e-18, 0.01, 0, 0, 0)
+mesh = SubResource("ArrayMesh_fx3kf")
+skeleton = NodePath("")
