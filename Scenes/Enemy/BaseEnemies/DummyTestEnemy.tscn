@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://br2g5rfbuher0"]
+[gd_scene load_steps=19 format=3 uid="uid://br2g5rfbuher0"]
 
 [ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="1_2a34n"]
 [ext_resource type="Script" uid="uid://bfopmp6igag53" path="res://Scenes/Enemy/BaseEnemies/dummy_test_enemy.gd" id="1_2aieb"]
+[ext_resource type="PackedScene" uid="uid://csdrdb6tdxta4" path="res://Assets/Lil' Goober Hostile/Lil Goober Visuals.tscn" id="2_qia3t"]
 [ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Components/HealthComponent.tscn" id="3_8koco"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="4_ioio2"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_ujkjw"]
@@ -16,34 +17,16 @@
 [ext_resource type="Script" uid="uid://cmkgjh7l2fs47" path="res://Scenes/Enemy/dead_action.gd" id="16_kjdom"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8koco"]
-height = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtncq"]
-vertex_color_use_as_albedo = true
-albedo_color = Color(1, 0.8039216, 0.2509804, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2aieb"]
-material = SubResource("StandardMaterial3D_wtncq")
-height = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_8koco"]
-radius = 0.2
-height = 0.4
-
-[sub_resource type="SphereMesh" id="SphereMesh_qamok"]
-radius = 0.1
-height = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nshfs"]
-albedo_color = Color(0, 0, 0, 1)
+radius = 0.29003906
+height = 1.3183594
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cptsp"]
 radius = 1.025
 height = 2.05
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qamok"]
-radius = 0.6
-height = 1.2
+radius = 0.27978516
+height = 1.3447021
 
 [node name="DummyTestEnemy" type="CharacterBody3D" groups=["Enemies"]]
 collision_mask = 3
@@ -51,36 +34,16 @@ script = ExtResource("1_2aieb")
 patrol_speed = 0.25
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56152344, 0)
 shape = SubResource("CapsuleShape3D_8koco")
 
 [node name="VisualRoot" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot"]
-mesh = SubResource("CapsuleMesh_2aieb")
-skeleton = NodePath("../..")
-
-[node name="eye" type="MeshInstance3D" parent="VisualRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202, 0.215, -0.534)
-mesh = SubResource("SphereMesh_8koco")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
-mesh = SubResource("SphereMesh_qamok")
-surface_material_override/0 = SubResource("StandardMaterial3D_nshfs")
-
-[node name="eye2" type="MeshInstance3D" parent="VisualRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255, 0.215, -0.534)
-mesh = SubResource("SphereMesh_8koco")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot/eye2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.113)
-mesh = SubResource("SphereMesh_qamok")
-surface_material_override/0 = SubResource("StandardMaterial3D_nshfs")
+[node name="LilGooberVisuals" parent="VisualRoot" instance=ExtResource("2_qia3t")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
 [node name="WeaponHitbox" type="Area3D" parent="."]
-transform = Transform3D(-2.1855694e-08, -0.5, -2.1855694e-08, 0, -2.1855694e-08, 0.5, -0.5, 2.1855694e-08, 9.553427e-16, 0, 0, 0)
+transform = Transform3D(-2.1855694e-08, -0.5, -2.1855694e-08, 0, -2.1855694e-08, 0.5, -0.5, 2.1855694e-08, 9.553427e-16, 0, 0.6143434, 0)
 collision_layer = 0
 collision_mask = 524288
 monitorable = false
@@ -91,12 +54,15 @@ metadata/_custom_type_script = "uid://bem514aj86eyo"
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_cptsp")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_8koco")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("knockback_immunity_timer", "damage_immunity_timer") instance=ExtResource("3_8koco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72767997, 0)
 collision_layer = 1048576
 max_health = 1.0
-collision_shape = NodePath("CollisionShape3D")
+knockback_immunity_timer = NodePath("KnockbackImmunityTimer")
+damage_immunity_timer = NodePath("DamageImmunityTimer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1943726, 0)
 shape = SubResource("CapsuleShape3D_qamok")
 
 [node name="DamageImmunityTimer" type="Timer" parent="HealthComponent"]
