@@ -10,7 +10,7 @@ size = Vector3(3, 3, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_2acnt"]
 size = Vector3(3, 3, 3)
 
-[node name="CrateMetal" type="RigidBody3D"]
+[node name="CrateMetal" type="RigidBody3D" groups=["Destructables"]]
 script = ExtResource("1_wxqt0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -22,7 +22,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_fr4uu")
 max_health = 1
-defense_level = 2
+defense_level = 3
 armor_blocks_knockback = true
 metadata/_custom_type_script = "uid://b3oivafuxug0e"
 

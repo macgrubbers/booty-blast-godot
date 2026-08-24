@@ -5,6 +5,7 @@ class_name ButtSlamState
 var state_name : String = "ButtSlam"
 
 var cR : CharacterBody3D
+@onready var floor_raycast: RayCast3D = %FloorRaycast
 @onready var butt_slam_land_hitbox : Area3D = $"../../ButtSlamLandHitbox"
 @onready var falling_hitbox : Area3D = $"../../FallingHitbox"
 @onready var land_timer: Timer = $Timer
@@ -101,9 +102,10 @@ func _on_butt_slam_falling_hitbox_entered(area : Area3D):
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
 		area.attack(3,attack_level, cR, Vector3(0,-50,0))
 		
-		# apply knockback up to player
-		cR.velocity.y = 0
-		cR.health_component.apply_knockback(Vector3(0,12,0),true)
+		# apply knockback up to player if it's an enemy
+		if !area.get_owner().is_in_group("Destructables"):
+			cR.velocity.y = 0
+			cR.health_component.apply_knockback(Vector3(0,12,0),true)
 		
 		# Refresh jump as if landed
 		cR.floor_snap_length = 1.0

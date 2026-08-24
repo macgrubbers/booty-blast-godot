@@ -24,7 +24,7 @@ func verifications():
 	ledge_raycast1.enabled = true
 	ledge_raycast2.enabled = true
 	falling_hitbox.monitoring = true
-	falling_hitbox.connect("attack_successful", _on_falling_attack_successful)
+	#falling_hitbox.connect("attack_successful", _on_falling_attack_successful)
 	cR.godot_plush_skin.set_state("fall")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -63,6 +63,8 @@ func check_if_ledge():
 	if ledge_raycast1.is_colliding() and !ledge_raycast2.is_colliding():
 		# Check shapecast to see if we can fit above, helps with edges and corners
 		ledge_shapecast.force_shapecast_update()
+		
+		# Check if there's space for us to ledge grab up onto.
 		if !ledge_shapecast.is_colliding():
 			transitioned.emit(self, "LedgeGrabState")
 
@@ -89,7 +91,7 @@ func input_management():
 		transitioned.emit(self, "ButtSlamState")
 		
 	if Input.is_action_just_pressed("lmb"):
-		transitioned.emit(self, "AirAttackState")
+		transitioned.emit(self, "GroundAttackState")
 		
 	if Input.is_action_just_pressed("v"):
 		if !cR.godot_plush_skin.ragdoll and cR.can_dash:

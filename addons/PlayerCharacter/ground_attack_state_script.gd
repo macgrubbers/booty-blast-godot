@@ -7,6 +7,8 @@ var state_name : String = "GroundAttack"
 @onready var cR : CharacterBody3D
 @onready var ground_attack_area : Area3D = %GroundAttackHitbox
 
+@onready var dash_dir:Vector2
+
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
@@ -24,21 +26,21 @@ func verifications():
 	if cR.has_cut_jump: cR.has_cut_jump = false
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
+	dash_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
+	if dash_dir.is_equal_approx(Vector2.ZERO):
+		dash_dir = Vector2(sin(cR.visual_root.rotation.y), cos(cR.visual_root.rotation.y))
+	
+	cR.velocity.x = dash_dir.x * cR.dash_speed
+	cR.velocity.z = dash_dir.y * cR.dash_speed
+
+	
 	# for the attack area
 	ground_attack_area.set_monitoring(true)
 	ground_attack_area.set_monitorable(true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func update(delta: float) -> void:
-	pass
-
 
 func physics_update(delta : float):
 	cR.gravity_apply(delta)
-	
-	input_management()
-	
-	#check_if_floor()
 	
 	move(delta)
 	
@@ -53,30 +55,10 @@ func check_if_floor():
 			cR.jump_buff_on = false
 			transitioned.emit(self, "JumpState")
 
-# Input that transitions states is not handled in this state
-func input_management():
-	pass
 
 # TODO: add movement with attacking?
 func move(delta : float):
-	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
-	
-	if cR.move_dir and cR.is_on_floor():
-		#apply smooth move
-		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * cR.move_speed, cR.move_accel * delta)
-		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * cR.move_speed, cR.move_accel * delta)
-
-
-
-#func _on_ground_attack_area_3d_area_entered(area: Area3D) -> void:
-	#if area is HealthComponent:
-		#var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		#area.attack(-5, cR)
-		#area.apply_knockback(dir_vector * 5 + Vector3(0,4,0),false)
-#
-#
-#func _on_ground_attack_hitbox_body_entered(body: Node3D) -> void:
-	#pass # Replace with function body.
+	pass
 
 
 # Called when wave animation is complete

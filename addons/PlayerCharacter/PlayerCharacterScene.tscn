@@ -307,6 +307,9 @@ metadata/_custom_type_script = "uid://d2tif6xsjkwnw"
 script = ExtResource("17_h8602")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
 
+[node name="AttackDurationTimer" type="Timer" parent="StateMachine/GroundAttackState"]
+one_shot = true
+
 [node name="AirAttackState" type="Node" parent="StateMachine"]
 script = ExtResource("18_o2ynt")
 metadata/_custom_type_script = "uid://gjekmtw4eb1e"
@@ -464,7 +467,7 @@ damage = 3
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallingHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49637097, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34647262, 0)
 shape = SubResource("CylinderShape3D_khnxt")
 
 [node name="DialogueHUD" type="CanvasLayer" parent="."]

@@ -61,7 +61,7 @@ var can_wall_jump : bool = true
 #gravity variables
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-@onready var butt_slam_gravity_multiplier : float = 4.5
+@onready var butt_slam_gravity_multiplier : float = 2.5
 
 @export_group("Keybinding variables")
 @export var moveForwardAction : String = ""

@@ -42,8 +42,8 @@ func physics_update(delta : float):
 	
 	check_if_floor()
 	
-	if cR.can_wall_jump:
-		check_if_wall_jump()
+	#if cR.can_wall_jump:
+		#check_if_wall_jump()
 	
 	move(delta)
 
@@ -73,16 +73,16 @@ func check_if_floor():
 			cR.velocity.z = 0.0
 
 
-# Check if we should wall jump 
-func check_if_wall_jump():
-	var collider = forward_raycast.get_collider()
-	if collider and applied_rotation_timer.is_stopped():
-		wall_jump()
+## Check if we should wall jump 
+#func check_if_wall_jump():
+	#var collider = forward_raycast.get_collider()
+	#if collider and applied_rotation_timer.is_stopped():
+		#wall_jump()
 
 # Wall jump off of wall or enemy
 # 	TODO: reflection angle is just y-rotation flipped 180
 func wall_jump():
-	cR.can_wall_jump = false
+	#cR.can_wall_jump = false
 	var model_rotation = cR.visual_root.rotation.y
 	cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
 	health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
@@ -115,10 +115,12 @@ func move(delta : float):
 #	on an air attack
 #	used for hitting damageable entities that have a HealthComponent
 func _on_air_attack_area_entered(area: Area3D) -> void:
-	if area is HealthComponent:
-		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
-		area.attack(3, cR)
+	#if area is HealthComponent:
+		#var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
+		#area.apply_knockback(dir_vector * 20 + Vector3(0,6,0),false)
+		#area.attack(3, cR)
+	var collider = forward_raycast.get_collider()
+	if collider and applied_rotation_timer.is_stopped():
 		wall_jump()
 
 
