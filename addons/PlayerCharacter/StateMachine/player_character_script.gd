@@ -56,6 +56,7 @@ var can_wall_jump : bool = true
 @export_group("In air variables")
 @export var in_air_move_speed : Array[Curve]
 @export var in_air_accel : Array[Curve]
+@export var in_air_decel : Curve
 @export var hit_wall_cut_velocity : bool = false
 
 #gravity variables

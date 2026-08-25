@@ -53,7 +53,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_8rpwc"]
-_limits = [0.0, 6.56892, 0.0, 1.0]
+_limits = [0.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.644128, 3.04252), 0.0, 0.0, 0, 0, Vector2(1, 6.56892), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -170,7 +170,7 @@ walk_deccel = 10.0
 run_speed = 20.0
 run_accel = 5.0
 run_deccel = 6.5
-dash_speed = 18.0
+dash_speed = 30.0
 dash_duration = 0.2
 dash_accel = 12.0
 jump_height = 4.0
@@ -338,6 +338,7 @@ target_position = Vector3(0, 0, 3)
 collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
+collide_with_bodies = false
 script = ExtResource("19_qq7mp")
 
 [node name="LedgeGrabRaycast1" type="RayCast3D" parent="Raycasts"]
@@ -448,11 +449,11 @@ metadata/_custom_type_script = "uid://bem514aj86eyo"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34647262, 0)
 shape = SubResource("CylinderShape3D_khnxt")
 
-[node name="DialogueHUD" type="CanvasLayer" parent="FallingHitbox"]
+[node name="DialogueHUD" type="CanvasLayer" parent="."]
 layer = 2
 script = ExtResource("22_tsatr")
 
-[node name="DialogueBox" type="Control" parent="FallingHitbox/DialogueHUD"]
+[node name="DialogueBox" type="Control" parent="DialogueHUD"]
 visible = false
 layout_mode = 3
 anchor_left = 0.064
@@ -466,14 +467,14 @@ offset_bottom = -0.184021
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="FallingHitbox/DialogueHUD/DialogueBox"]
+[node name="ColorRect" type="ColorRect" parent="DialogueHUD/DialogueBox"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.12225237, 0.1222522, 0.12225223, 0.74509805)
 
-[node name="Label" type="Label" parent="FallingHitbox/DialogueHUD/DialogueBox/ColorRect"]
+[node name="Label" type="Label" parent="DialogueHUD/DialogueBox/ColorRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

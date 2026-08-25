@@ -26,7 +26,7 @@ func _ready():
 			# Connect just landed signal, only a few states will use it though so TODO nitpick, only connect relevant states?
 			child.just_landed.connect(_on_just_landed)
 			
-			if child is GroundAttackState:
+			if child is AttackState:
 				godot_plush_skin.wave_done.connect(child._on_animation_finished)
 
 	# Connect the dead state

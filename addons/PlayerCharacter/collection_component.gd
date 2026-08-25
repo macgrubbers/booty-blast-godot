@@ -31,6 +31,9 @@ func _on_body_entered(body:Node3D):
 		player_ref.new_size = player_ref.sizes.LARGE
 		player_ref.size_buff_timer.set_wait_time(body.duration)
 		body.collect()
+		
+	elif body is Key:
+		body.collect()
 
 func _on_area_entered(area:Area3D):
 	if area is Checkpoint:

@@ -64,7 +64,7 @@ func input_management():
 			transitioned.emit(self, "RagdollState")
 			
 	if Input.is_action_just_pressed("lmb"):
-		transitioned.emit(self, "GroundAttackState")
+		transitioned.emit(self, "AttackState")
 
 	if Input.is_action_just_pressed("v"):
 		if !cR.godot_plush_skin.ragdoll and cR.can_dash:

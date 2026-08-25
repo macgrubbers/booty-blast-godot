@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://biddgaxuwdbtj"]
+
+[ext_resource type="Script" uid="uid://d22v27sukeqoa" path="res://Scenes/Collectables/key.gd" id="1_7yc57"]
+[ext_resource type="PackedScene" uid="uid://1gxxeqhvxeov" path="res://Assets/key/scene.gltf" id="2_7yc57"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7yc57"]
+size = Vector3(0.13626099, 0.64798355, 2.1772919)
+
+[node name="Key" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 16
+gravity_scale = 0.0
+script = ExtResource("1_7yc57")
+metadata/_custom_type_script = "uid://dp2eb2jgxb0tp"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0.009963989, -0.08129737, 0.078755364)
+shape = SubResource("BoxShape3D_7yc57")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_7yc57")]
+transform = Transform3D(-1.3113416e-10, -0.003, 0, 0.0025980761, -1.1356552e-10, -0.0015, 0.0015, -6.556708e-11, 0.0025980761, 0, 0.36487508, -0.6869248)
