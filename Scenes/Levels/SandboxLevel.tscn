@@ -1,11 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://07f5hw5ewlgh"]
+[gd_scene load_steps=41 format=3 uid="uid://07f5hw5ewlgh"]
 
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_2ln86"]
 [ext_resource type="Script" uid="uid://cn8nxq5i774tu" path="res://Scenes/Levels/sandbox_level.gd" id="1_l0xhg"]
 [ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_6l74f"]
 [ext_resource type="PackedScene" uid="uid://bnjn82pm8puu5" path="res://Scenes/Structures/Interactable Structures/LaunchingPlatform.tscn" id="3_s27tv"]
 [ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="4_pauaf"]
-[ext_resource type="PackedScene" uid="uid://biddgaxuwdbtj" path="res://Scenes/Collectables/Key.tscn" id="5_d0jy3"]
+[ext_resource type="PackedScene" uid="uid://biddgaxuwdbtj" path="res://Scenes/Collectables/KeyCollectable.tscn" id="5_d0jy3"]
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="6_ca7po"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="7_6l74f"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="8_4tpjj"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="18_4tpjj"]
 [ext_resource type="PackedScene" uid="uid://22c1afgtxqyg" path="res://Assets/ladder/ladder.glb" id="18_6l74f"]
 [ext_resource type="PackedScene" uid="uid://bkquxrhccsube" path="res://Scenes/Props/SpikeBall.tscn" id="20_oebwi"]
+[ext_resource type="PackedScene" uid="uid://2vmybju5xq65" path="res://Scenes/Structures/Interactable Structures/Door.tscn" id="22_met4o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qrb30"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -425,3 +426,6 @@ transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
 
 [node name="Key" parent="." instance=ExtResource("5_d0jy3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.17638, 3.65694, 14.853044)
+
+[node name="Door" parent="." instance=ExtResource("22_met4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.067417, 3.007514, 2.6324368)

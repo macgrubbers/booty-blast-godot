@@ -32,7 +32,9 @@ func _on_body_entered(body:Node3D):
 		player_ref.size_buff_timer.set_wait_time(body.duration)
 		body.collect()
 		
-	elif body is Key:
+	elif body is KeyCollectable:
+		PlayerData.keys += body.value
+		just_collected.emit(body)
 		body.collect()
 
 func _on_area_entered(area:Area3D):

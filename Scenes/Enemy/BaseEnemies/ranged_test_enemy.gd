@@ -12,6 +12,7 @@ var knockback_vector : Vector3 = Vector3.ZERO
 @onready var blackboard : Blackboard = $EnemyBlackboard
 @onready var weapon = $VisualRoot/EnemyRangedWeapon
 @onready var visual_root = $VisualRoot
+@onready var visuals = $VisualRoot # TODO: replace with visual_root
 
 @onready var ragdoll = preload("res://Scenes/Enemy/EnemyComponents/Ragdoll_TestEnemy.tscn")
 

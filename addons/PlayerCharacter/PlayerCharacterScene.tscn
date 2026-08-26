@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=66 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
 [ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://addons/PlayerCharacter/Vfx/dust_mat.tres" id="4_j7qt1"]
 [ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://addons/Arts/Sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
-[ext_resource type="Script" uid="uid://ck50xmxl5f05s" path="res://addons/PlayerCharacter/air_attack_hitbox.gd" id="6_fdn82"]
 [ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://addons/Arts/Sounds/footstep_concrete_001.ogg" id="6_nlp36"]
 [ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://addons/Arts/Sounds/footstep_concrete_002.ogg" id="7_4283i"]
 [ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://addons/Arts/Sounds/jingles_SAX15.ogg" id="8_s241m"]
@@ -89,9 +88,6 @@ anim_offset_max = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_bw4i7"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_f3fy5"]
-radius = 1.5
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gw51"]
 transparency = 1
 albedo_color = Color(0.38431373, 0.5764706, 1, 0.5764706)
@@ -132,7 +128,7 @@ height = 2.05
 radius = 1.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
-radius = 3.0
+radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
 radius = 5.0
@@ -211,22 +207,6 @@ cast_shadow = 0
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_dhnoe")
 draw_pass_1 = SubResource("QuadMesh_bw4i7")
-
-[node name="AirAttackHitbox" type="Area3D" parent="VisualRoot" node_paths=PackedStringArray("shape_cast", "collision_shape")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9163444, 1.1887038)
-collision_layer = 0
-collision_mask = 1048580
-monitoring = false
-monitorable = false
-script = ExtResource("6_fdn82")
-shape_cast = NodePath("ShapeCast3D")
-collision_shape = NodePath("CollisionShape3D")
-metadata/_custom_type_script = "uid://bem514aj86eyo"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/AirAttackHitbox"]
-shape = SubResource("SphereShape3D_f3fy5")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/AirAttackHitbox"]
 
 [node name="Shield" type="MeshInstance3D" parent="VisualRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -398,7 +378,7 @@ shape = SubResource("SphereShape3D_fdn82")
 
 [node name="GroundAttackHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80160403, 1.0054677)
 collision_layer = 0
 collision_mask = 3145732
 monitoring = false
@@ -413,6 +393,7 @@ knockback_magnitude = 10.0
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12674916, -0.09222746)
 shape = SubResource("SphereShape3D_h8602")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
@@ -567,7 +548,7 @@ offset_top = 8.0
 offset_right = 113.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 30
-text = "monies:"
+text = "Monies:"
 
 [node name="GemLabel" type="Label" parent="HUD/CollectablesBar"]
 layout_mode = 0
@@ -576,7 +557,16 @@ offset_top = 49.0
 offset_right = 112.0
 offset_bottom = 91.0
 theme_override_font_sizes/font_size = 30
-text = "gems:"
+text = "Gems:"
+
+[node name="KeyLabel" type="Label" parent="HUD/CollectablesBar"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 93.0
+offset_right = 121.0
+offset_bottom = 135.0
+theme_override_font_sizes/font_size = 30
+text = "Keys:"
 
 [node name="Interact" type="Control" parent="HUD"]
 visible = false

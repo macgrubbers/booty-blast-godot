@@ -29,6 +29,8 @@ func _ready() -> void:
 	
 	# Update collectables
 	collectables_bar.update_moneys()
+	collectables_bar.update_gems()
+	collectables_bar.update_keys()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -72,3 +74,5 @@ func _on_collectable_update(body:Node3D):
 		collectables_bar.update_moneys()
 	elif body is GemCollectable:
 		collectables_bar.update_gems()
+	elif body is KeyCollectable:
+		collectables_bar.update_keys()

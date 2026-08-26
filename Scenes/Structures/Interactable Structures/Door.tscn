@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://2vmybju5xq65"]
+
+[ext_resource type="Script" uid="uid://dom1c3levnml4" path="res://Scenes/Structures/Interactable Structures/door.gd" id="1_iybuv"]
+[ext_resource type="PackedScene" uid="uid://b3hirskhek55" path="res://Assets/lock/scene.gltf" id="2_hwmwh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwmwh"]
+size = Vector3(4, 5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgj64"]
+albedo_color = Color(1, 0.48052883, 0.106473915, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iybuv"]
+material = SubResource("StandardMaterial3D_bgj64")
+size = Vector3(4, 5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bgj64"]
+size = Vector3(3.2217865, 4.2568703, 1)
+
+[sub_resource type="Animation" id="Animation_iybuv"]
+resource_name = "Open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hwmwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hwmwh"]
+_data = {
+&"Open": SubResource("Animation_iybuv"),
+&"RESET": SubResource("Animation_hwmwh")
+}
+
+[node name="Door" type="AnimatableBody3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_iybuv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+shape = SubResource("BoxShape3D_hwmwh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("BoxMesh_iybuv")
+skeleton = NodePath("../..")
+
+[node name="lock" parent="." instance=ExtResource("2_hwmwh")]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 2, -0.5459033, 0.15371418)
+
+[node name="DoorArea3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9727097, 0.03355217, -7.1054274e-15)
+shape = SubResource("BoxShape3D_bgj64")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hwmwh")
+}
