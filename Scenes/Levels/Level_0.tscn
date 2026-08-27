@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://bquwh18huorr0"]
+
+[ext_resource type="Script" uid="uid://dvos0ll0l7q3d" path="res://Scenes/Levels/level_0.gd" id="1_03ysy"]
+[ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_03ysy"]
+[ext_resource type="PackedScene" uid="uid://b7bqv84i0k5d" path="res://Scenes/Structures/SimpleTile.tscn" id="3_clgyd"]
+[ext_resource type="PackedScene" uid="uid://dk3nl28i063fm" path="res://Scenes/Props/CrateWood.tscn" id="4_fmbw1"]
+[ext_resource type="PackedScene" uid="uid://bkquxrhccsube" path="res://Scenes/Props/SpikeBall.tscn" id="5_15f3f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fmbw1"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_d8mrn"]
+sky_material = SubResource("ProceduralSkyMaterial_fmbw1")
+
+[sub_resource type="Environment" id="Environment_15f3f"]
+background_mode = 2
+sky = SubResource("Sky_d8mrn")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_fmbw1"]
+vertices = PackedVector3Array(-3.5455017, 1, -5.0667725, -3.5455017, 1, 3.4332275, 3.4544983, 1, 3.4332275, 3.4544983, 1, -5.0667725)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 1.5
+
+[node name="Level0" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
+script = ExtResource("1_03ysy")
+current_checkpoint = NodePath("Checkpoints/PlayerStartCheckpoint")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.8660254, -0.48296297, 0.12940957, 0, 0.25881907, 0.9659259, -0.50000006, 0.83651626, -0.22414389, 0, 295.70538, 224.74242)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_15f3f")
+
+[node name="Checkpoints" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4314489, 0)
+
+[node name="PlayerStartCheckpoint" parent="Checkpoints" instance=ExtResource("2_03ysy")]
+monitorable = false
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024490356, -0.036396027, -0.07893753)
+navigation_mesh = SubResource("NavigationMesh_fmbw1")
+
+[node name="SimpleTile" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+
+[node name="SimpleTile17" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.187009)
+
+[node name="SimpleTile6" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 20, 10)
+
+[node name="SimpleTile11" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 20, 10)
+
+[node name="SimpleTile12" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -26, 16.5, 10)
+
+[node name="SimpleTile13" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -33, 9.5, 10)
+
+[node name="SimpleTile14" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -40, 2.5, 10)
+
+[node name="SimpleTile15" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -48, -0.5, 10)
+
+[node name="SimpleTile16" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -58, -0.5, 10)
+
+[node name="SimpleTile2" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3, 5, 10)
+
+[node name="SimpleTile8" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 5, 15)
+
+[node name="SimpleTile9" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 15, 15)
+
+[node name="SimpleTile10" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 25, 15)
+
+[node name="SimpleTile4" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -3, 15, 10)
+
+[node name="SimpleTile3" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3, 5, 10)
+
+[node name="SimpleTile5" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3, 15, 10)
+
+[node name="SimpleTile7" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 3, 25, 10)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="CrateWood" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 1.5, 12.337)
+
+[node name="CrateWood2" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 1.5, 9.337)
+
+[node name="CrateWood3" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 1.5, 6.337)
+
+[node name="CrateWood4" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 4.5, 7.337)
+
+[node name="CrateWood5" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 4.5, 10.337)
+
+[node name="CrateWood6" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.289, 7.5, 8.337)
+
+[node name="SpikeBall" parent="Props" instance=ExtResource("5_15f3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.117286, 2.6847532, -4.317692)

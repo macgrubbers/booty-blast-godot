@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://bkquxrhccsube"]
+[gd_scene load_steps=11 format=4 uid="uid://bkquxrhccsube"]
 
 [ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_608a2"]
 [ext_resource type="Texture2D" uid="uid://dog8i86md6xa3" path="res://Assets/spike_ball/textures/Material_baseColor.png" id="2_hxalg"]
 [ext_resource type="Script" uid="uid://dsn2auctmpis7" path="res://Scenes/Props/spike_ball_hitbox.gd" id="3_m7rhd"]
+[ext_resource type="Script" uid="uid://b1t251ja36jx0" path="res://Scenes/Props/prop_health_component.gd" id="4_a32tn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uyx6"]
 resource_name = "Material"
@@ -49,11 +50,16 @@ radius = 2.1
 [sub_resource type="SphereShape3D" id="SphereShape3D_a32tn"]
 radius = 2.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_yq2rp"]
+radius = 2.2
+
 [node name="SpikeBall" type="RigidBody3D"]
 collision_layer = 4
-collision_mask = 7
-mass = 500.0
+collision_mask = 5
+mass = 5.0
 script = ExtResource("1_608a2")
+health = 100
+armor = 4
 metadata/_custom_type_script = "uid://ckrrw7gwljllw"
 
 [node name="Sketchfab_Scene" type="Node3D" parent="."]
@@ -87,3 +93,15 @@ metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseHitbox"]
 shape = SubResource("SphereShape3D_a32tn")
+
+[node name="PropHealthComponent" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_a32tn")
+max_health = 999
+defense_level = 3
+metadata/_custom_type_script = "uid://b1t251ja36jx0"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PropHealthComponent"]
+shape = SubResource("SphereShape3D_yq2rp")

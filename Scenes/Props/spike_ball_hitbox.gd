@@ -3,7 +3,7 @@ extends BaseHitbox
 
 func _on_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
-		print("Collide!")
+		print("Spike ball collide!")
 		#var collider = area.get_owner()
 		#var collider_velocity = collider.get_velocity()
 		var velocity:Vector3 = get_owner().get_linear_velocity()

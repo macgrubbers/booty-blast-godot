@@ -41,6 +41,20 @@ func verifications():
 	# for the attack area
 	attack_area.set_monitoring(true)
 	attack_area.set_monitorable(true)
+	
+	# Check wall jump if the attack worked
+	attack_area.connect("attack_successful", exit)
+	
+	# Check for overlapping areas on start
+	# TODO: maybe a signal is better here idk
+	var overlapping_bodies = attack_area.get_overlapping_bodies()
+	if overlapping_bodies:
+		attack_area._on_body_entered(overlapping_bodies[0])
+		
+	var overlapping_areas = attack_area.get_overlapping_areas()
+	if overlapping_areas:
+		attack_area._on_area_entered(overlapping_areas[0])
+	
 
 
 func physics_update(delta : float):
@@ -48,8 +62,8 @@ func physics_update(delta : float):
 	
 	
 
-	if cR.can_wall_jump:
-		check_if_wall_jump()
+	#if cR.can_wall_jump:
+		#check_if_wall_jump()
 
 # Check if we should wall jump 
 # TODO: use the hitbox to detect instead of a raycast?
@@ -75,5 +89,7 @@ func _on_animation_finished():
 	transitioned.emit(self, "IdleState")
 
 func exit():
+	check_if_wall_jump()
 	attack_area.set_monitoring(false)
 	attack_area.set_monitorable(false)
+	attack_area.disconnect("attack_successful", exit)

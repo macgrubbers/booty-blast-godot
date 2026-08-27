@@ -20,16 +20,20 @@ func setup_shape_cast():
 		shape_cast.enabled = false
 
 func _on_body_entered(body:Node3D):
-	calculate_knockback_dir()
-	if body.has_method("attack"):
-		body.attack(damage, knockback_dir * knockback_magnitude, global_collision_point)
+	attack_successful.emit()
 	return
+	#calculate_knockback_dir()
+	#if body.has_method("attack"):
+		#body.attack(damage, knockback_dir * knockback_magnitude, global_collision_point)
+	#return
 
 func _on_area_entered(area: Area3D) -> void:
 	if area is HealthComponent:
 		calculate_knockback_dir()
 		if !is_zero_approx(camera_shake_intensity):
 			camera_root.add_trauma(camera_shake_intensity)
+	else:
+		print(area)
 	super._on_area_entered(area)
 
 func calculate_knockback_dir():

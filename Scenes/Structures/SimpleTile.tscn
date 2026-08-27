@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7bqv84i0k5d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_puymi"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_01b8t"]
+load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tpjj"]
+diffuse_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_01b8t")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_4xr5o"]
+material = SubResource("StandardMaterial3D_4tpjj")
+size = Vector3(10, 1, 10)
+
+[node name="SimpleTile" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_puymi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4xr5o")

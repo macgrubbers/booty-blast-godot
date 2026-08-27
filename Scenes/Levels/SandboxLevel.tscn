@@ -27,12 +27,12 @@
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_d8mrn"]
+[sub_resource type="Sky" id="Sky_met4o"]
 sky_material = SubResource("ProceduralSkyMaterial_qrb30")
 
 [sub_resource type="Environment" id="Environment_s27tv"]
 background_mode = 2
-sky = SubResource("Sky_d8mrn")
+sky = SubResource("Sky_met4o")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -55,7 +55,7 @@ size = Vector3(100, 1, 100)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6l74f"]
 load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tpjj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6416"]
 diffuse_mode = 1
 albedo_texture = SubResource("CompressedTexture2D_6l74f")
 metallic_specular = 0.0
@@ -64,7 +64,7 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_oebwi"]
-material = SubResource("StandardMaterial3D_4tpjj")
+material = SubResource("StandardMaterial3D_g6416")
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kc1c0"]
@@ -429,3 +429,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.17638, 3.65694, 14.853044
 
 [node name="Door" parent="." instance=ExtResource("22_met4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.067417, 3.007514, 2.6324368)
+
+[node name="SpikeBall" parent="." instance=ExtResource("20_oebwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37789345, 2.6847522, 13.741976)
