@@ -11,6 +11,8 @@ size = Vector3(3, 3, 3)
 size = Vector3(3, 3, 3)
 
 [node name="CrateWood" type="RigidBody3D" groups=["Destructables"]]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_5h05k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

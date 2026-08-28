@@ -29,7 +29,8 @@ radius = 0.27978516
 height = 1.3447021
 
 [node name="DummyTestEnemy" type="CharacterBody3D" groups=["Enemies"]]
-collision_mask = 3
+collision_layer = 1024
+collision_mask = 1027
 script = ExtResource("1_2aieb")
 patrol_speed = 0.25
 

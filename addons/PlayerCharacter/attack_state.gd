@@ -12,6 +12,7 @@ var state_name : String = "Attack"
 
 @onready var dash_dir:Vector2
 
+
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference
 	cR = char_ref
@@ -37,13 +38,12 @@ func verifications():
 	cR.velocity.y = 0
 	cR.velocity.z = dash_dir.y * cR.dash_speed
 
-	
 	# for the attack area
 	attack_area.set_monitoring(true)
 	attack_area.set_monitorable(true)
 	
 	# Check wall jump if the attack worked
-	attack_area.connect("attack_successful", exit)
+	attack_area.connect("attack_successful", check_if_wall_jump)
 	
 	# Check for overlapping areas on start
 	# TODO: maybe a signal is better here idk
@@ -54,16 +54,11 @@ func verifications():
 	var overlapping_areas = attack_area.get_overlapping_areas()
 	if overlapping_areas:
 		attack_area._on_area_entered(overlapping_areas[0])
-	
 
 
 func physics_update(delta : float):
 	cR.gravity_apply(delta)
-	
-	
 
-	#if cR.can_wall_jump:
-		#check_if_wall_jump()
 
 # Check if we should wall jump 
 # TODO: use the hitbox to detect instead of a raycast?
@@ -71,6 +66,7 @@ func check_if_wall_jump():
 	var collider = forward_raycast.get_collider()
 	if collider and applied_rotation_timer.is_stopped():
 		wall_jump()
+
 
 # Wall jump off of wall or enemy
 # 	TODO: reflection angle is just y-rotation flipped 180
@@ -83,13 +79,15 @@ func wall_jump():
 	applied_rotation_timer.start()
 	transitioned.emit(self, "InairState")
 
+
 # Called when wave animation is complete
 #	TODO: remove toggle to check states
 func _on_animation_finished():
 	transitioned.emit(self, "IdleState")
 
+
 func exit():
-	check_if_wall_jump()
+	#check_if_wall_jump()
 	attack_area.set_monitoring(false)
 	attack_area.set_monitorable(false)
-	attack_area.disconnect("attack_successful", exit)
+	attack_area.disconnect("attack_successful", check_if_wall_jump)

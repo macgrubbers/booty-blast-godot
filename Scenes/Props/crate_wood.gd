@@ -11,4 +11,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_object_destroyed():
+	for i in range(10):
+		var new_debris:RigidBody3D = debris.instantiate()
+		var rand_vector = Vector3(randi_range(-10,10),
+									randi_range(-10,10),
+									randi_range(-10,10))
+		new_debris.set_global_transform(get_global_transform())
+		get_tree().current_scene.add_child(new_debris)
+		new_debris.apply_central_impulse(rand_vector)
+		new_debris.apply_torque_impulse(rand_vector)
+		
 	queue_free()

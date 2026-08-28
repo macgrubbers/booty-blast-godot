@@ -54,8 +54,7 @@ radius = 2.2
 radius = 2.2
 
 [node name="SpikeBall" type="RigidBody3D"]
-collision_layer = 4
-collision_mask = 5
+collision_layer = 0
 mass = 5.0
 script = ExtResource("1_608a2")
 health = 100
@@ -84,11 +83,12 @@ shape = SubResource("SphereShape3D_m7rhd")
 
 [node name="BaseHitbox" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 1572864
+collision_mask = 1572868
 monitorable = false
 script = ExtResource("3_m7rhd")
 knockback_magnitude = 20.0
 extra_vertical_knockback = Vector3(0, 5, 0)
+attack_level = 3
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseHitbox"]

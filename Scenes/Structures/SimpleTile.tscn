@@ -19,6 +19,7 @@ material = SubResource("StandardMaterial3D_4tpjj")
 size = Vector3(10, 1, 10)
 
 [node name="SimpleTile" type="StaticBody3D"]
+collision_layer = 5
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

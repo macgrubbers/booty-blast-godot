@@ -97,6 +97,9 @@ material = SubResource("StandardMaterial3D_5gw51")
 radius = 1.0
 height = 2.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
+radius = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
 random_pitch = 1.2
 streams_count = 3
@@ -126,9 +129,6 @@ height = 2.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fdn82"]
 radius = 1.1
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
-radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pi2tj"]
 radius = 5.0
@@ -213,6 +213,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
 mesh = SubResource("SphereMesh_fdn82")
 skeleton = NodePath("../../StateMachine/BlockState")
+
+[node name="GroundAttackHitbox" type="Area3D" parent="VisualRoot" node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1411849, 1.0054677)
+collision_layer = 0
+collision_mask = 3145733
+monitoring = false
+monitorable = false
+script = ExtResource("29_fdn82")
+camera_shake_intensity = 0.3
+shape_cast = NodePath("ShapeCast3D")
+collision_shape = NodePath("CollisionShape3D")
+camera_root = NodePath("../../OrbitView")
+damage = 3
+knockback_magnitude = 10.0
+metadata/_custom_type_script = "uid://bem514aj86eyo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/GroundAttackHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12674916, -0.09222746)
+shape = SubResource("SphereShape3D_h8602")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/GroundAttackHitbox"]
 
 [node name="AudioRoot" type="Node3D" parent="."]
 top_level = true
@@ -375,28 +397,6 @@ script = ExtResource("29_0r710")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_fdn82")
-
-[node name="GroundAttackHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1411849, 1.0054677)
-collision_layer = 0
-collision_mask = 3145733
-monitoring = false
-monitorable = false
-script = ExtResource("29_fdn82")
-camera_shake_intensity = 0.3
-shape_cast = NodePath("ShapeCast3D")
-collision_shape = NodePath("CollisionShape3D")
-camera_root = NodePath("../OrbitView")
-damage = 3
-knockback_magnitude = 10.0
-metadata/_custom_type_script = "uid://bem514aj86eyo"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundAttackHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12674916, -0.09222746)
-shape = SubResource("SphereShape3D_h8602")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="GroundAttackHitbox"]
 
 [node name="ButtSlamLandHitbox" type="Area3D" parent="." node_paths=PackedStringArray("shape_cast", "collision_shape", "camera_root")]
 collision_layer = 0
