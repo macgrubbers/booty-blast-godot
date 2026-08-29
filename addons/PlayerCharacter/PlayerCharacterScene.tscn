@@ -159,6 +159,7 @@ collision_mask = 1031
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+floor_max_angle = 0.61086524
 script = ExtResource("1_ms4x1")
 walk_speed = 10.0
 walk_accel = 5.0
