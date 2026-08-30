@@ -6,6 +6,7 @@ extends Area3D
 @onready var reflect_speed_multiplier:float = 3
 @export var attack_level:int = 1
 var target:Node3D
+var ignore_shooter:bool = true
 
 func setup(start_position:Vector3, target:Vector3):
 	set_global_position(start_position)
@@ -21,6 +22,10 @@ func return_to_sender():
 
 func _on_area_entered(area:Area3D)->void:
 	if area is HealthComponent:
+		if area.get_owner() == shooter and ignore_shooter:
+			return # Ignore the shooter
+		
+			
 		area.connect("attack_successful", cleanup)
 		area.attack(1,attack_level,self,direction*10 + Vector3(0,5,0))
 

@@ -66,7 +66,9 @@ func check_if_ledge():
 		
 		# Check if there's space for us to ledge grab up onto.
 		if !ledge_shapecast.is_colliding():
-			transitioned.emit(self, "LedgeGrabState")
+			pass
+			# TODO fix ledge grab
+			#transitioned.emit(self, "LedgeGrabState")
 
 func gravity_apply(delta : float):
 	if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta

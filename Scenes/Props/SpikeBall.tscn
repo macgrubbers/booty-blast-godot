@@ -45,24 +45,25 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_t4o0f")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m7rhd"]
-radius = 2.1
+radius = 4.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a32tn"]
-radius = 2.2
+radius = 4.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yq2rp"]
-radius = 2.2
+radius = 4.5
 
 [node name="SpikeBall" type="RigidBody3D"]
 collision_layer = 0
 mass = 5.0
+gravity_scale = 2.0
 script = ExtResource("1_608a2")
 health = 100
 armor = 4
 metadata/_custom_type_script = "uid://ckrrw7gwljllw"
 
 [node name="Sketchfab_Scene" type="Node3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="Sketchfab_model" type="Node3D" parent="Sketchfab_Scene"]
 transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, 0, 0, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://drjre5d2o6v1t"]
+[gd_scene load_steps=26 format=3 uid="uid://drjre5d2o6v1t"]
 
 [ext_resource type="Script" uid="uid://dlaqv4ulhm8bc" path="res://Scenes/Enemy/BaseEnemies/ranged_test_enemy.gd" id="1_x1oxd"]
 [ext_resource type="Script" uid="uid://cvm04xxkhc5eg" path="res://Scenes/Enemy/enemy_ranged_weapon.gd" id="2_2q5qt"]
@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://k6uvb55n6geb" path="res://Scenes/Enemy/ranged_attack_action.gd" id="18_2q5qt"]
 [ext_resource type="Script" uid="uid://bvpbgs22hxbgv" path="res://Scenes/Enemy/in_attack_range_condition.gd" id="18_fpphq"]
 [ext_resource type="Script" uid="uid://2qri6rrfv8ui" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="19_76rvy"]
-[ext_resource type="Script" uid="uid://cs4nggulhq2hy" path="res://Scenes/Enemy/pursue_action.gd" id="21_guhpx"]
 [ext_resource type="Script" uid="uid://ctyouy4ubb6k7" path="res://Scenes/Enemy/idle_action.gd" id="22_lalh0"]
 [ext_resource type="Script" uid="uid://cmkgjh7l2fs47" path="res://Scenes/Enemy/dead_action.gd" id="23_17c54"]
 
@@ -44,7 +43,7 @@ script = ExtResource("1_x1oxd")
 [node name="LilGooberVisuals" parent="VisualRoot" instance=ExtResource("2_pjq2v")]
 
 [node name="EnemyRangedWeapon" type="MeshInstance3D" parent="VisualRoot"]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0.38941598, 1.6388693, -0.3503912)
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0.042802095, 1.3819232, -0.08772057)
 mesh = SubResource("BoxMesh_glmiw")
 script = ExtResource("2_2q5qt")
 
@@ -148,9 +147,6 @@ script = ExtResource("18_2q5qt")
 
 [node name="Timer" type="Timer" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite/InAttackRangeReactiveSequence/CooldownDecorator/RangedAttackAction"]
 one_shot = true
-
-[node name="PursueAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite/SeePlayerReactiveSequence/SelectorReactiveComposite"]
-script = ExtResource("21_guhpx")
 
 [node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/IsAliveSequence/SelectorReactiveComposite"]
 script = ExtResource("22_lalh0")

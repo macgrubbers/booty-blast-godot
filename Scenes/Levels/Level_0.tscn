@@ -1,13 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bquwh18huorr0"]
+[gd_scene load_steps=19 format=3 uid="uid://bquwh18huorr0"]
 
 [ext_resource type="Script" uid="uid://dvos0ll0l7q3d" path="res://Scenes/Levels/level_0.gd" id="1_03ysy"]
 [ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_03ysy"]
 [ext_resource type="PackedScene" uid="uid://b7bqv84i0k5d" path="res://Scenes/Structures/SimpleTile.tscn" id="3_clgyd"]
-[ext_resource type="PackedScene" uid="uid://bmo8wh13m6rq5" path="res://Scenes/Structures/Interactable Structures/MovingPlatform.tscn" id="4_d8tld"]
+[ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="4_d8tld"]
 [ext_resource type="PackedScene" uid="uid://dk3nl28i063fm" path="res://Scenes/Props/CrateWood.tscn" id="4_fmbw1"]
-[ext_resource type="PackedScene" uid="uid://du8vpkhaa0s6h" path="res://Scenes/Structures/Interactable Structures/Button.tscn" id="4_ssf0w"]
+[ext_resource type="PackedScene" uid="uid://biygdyqsnd43a" path="res://Scenes/Structures/Deadly Structures/SpinnySword.tscn" id="5_10nac"]
 [ext_resource type="PackedScene" uid="uid://bkquxrhccsube" path="res://Scenes/Props/SpikeBall.tscn" id="5_15f3f"]
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="6_3qm25"]
+[ext_resource type="PackedScene" uid="uid://bqil3ejoinc13" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePlatform.tscn" id="7_d8tld"]
+[ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="8_u2fna"]
+[ext_resource type="PackedScene" uid="uid://2vmybju5xq65" path="res://Scenes/Structures/Interactable Structures/Door.tscn" id="11_olb28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fmbw1"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -23,21 +26,25 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_fmbw1"]
-vertices = PackedVector3Array(-61.5, 0.3609128, 6.5, -61.5, 0.3609128, 13.5, -44.5, 0.3609128, 13.5, -44.5, 0.3609128, 6.5, -21.5, 20.860912, 6.5, -21.5, 20.860912, 13.5, -4.5, 20.860912, 13.5, -4.5, 20.860912, 6.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5)]
+vertices = PackedVector3Array(-27.428574, 9.573311, 6.9198723, -53.928574, 0.32331085, 6.9198723, -53.928574, 0.32331085, 12.919872, -25.678574, 9.573311, 12.919872, -28.900795, 9.073311, 6.9198723, -39.206352, 2.8233109, 6.9198723, -43.623016, 0.57331085, 6.9198723, -43.52068, 0.57331085, 12.919872, -28.65226, 9.073311, 12.919872, -28.198174, 9.573311, 10.657448, -37.203453, 4.323311, 9.154743, -20.178574, 26.07331, -23.080128, -25.928574, 26.07331, -23.080128, -25.928574, 10.073311, 4.9198723, -20.178574, 9.573311, 7.4198723, -20.178574, 9.573311, 5.967491, -20.178574, 11.073311, 3.062729, -24.778572, 9.573311, 5.4198723, -61.178574, 0.32331085, 3.4198723, -55.178574, 0.32331085, 3.4198723, -55.178574, 0.32331085, -3.5801277, -61.178574, 0.32331085, -3.5801277, -55.178574, 0.32331085, 5.4198723, -61.178574, 0.32331085, 12.919872, -100.17857, -18.67669, 6.4198723, -100.17857, -18.67669, 13.669872, -82.92857, -18.67669, 13.669872, -82.92857, -18.67669, 6.4198723, -24.178574, 14.573311, 15.669872, -26.678574, 14.573311, 15.919872, -26.678574, 14.573311, 23.419872, -9.428574, 14.573311, 6.4198723, -17.178574, 14.573311, 6.4198723, -17.428574, 14.573311, 8.669872, -23.678574, 14.573311, 14.669872, -9.428574, 14.573311, 23.419872)
+polygons = [PackedInt32Array(8, 9, 3), PackedInt32Array(3, 9, 0), PackedInt32Array(0, 9, 4), PackedInt32Array(4, 10, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(6, 2, 1), PackedInt32Array(2, 6, 7), PackedInt32Array(7, 10, 8), PackedInt32Array(8, 10, 9), PackedInt32Array(9, 10, 4), PackedInt32Array(10, 7, 5), PackedInt32Array(14, 17, 15), PackedInt32Array(15, 17, 13), PackedInt32Array(15, 13, 16), PackedInt32Array(16, 13, 11), PackedInt32Array(11, 13, 12), PackedInt32Array(13, 17, 0), PackedInt32Array(0, 17, 14), PackedInt32Array(0, 14, 3), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(18, 19, 22), PackedInt32Array(1, 2, 22), PackedInt32Array(22, 2, 23), PackedInt32Array(22, 23, 18), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 30), PackedInt32Array(33, 32, 31), PackedInt32Array(28, 34, 30), PackedInt32Array(30, 34, 33), PackedInt32Array(30, 33, 31), PackedInt32Array(30, 31, 35)]
 agent_radius = 1.5
 
-[sub_resource type="Curve3D" id="Curve3D_ssf0w"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.4730301, -6.93006, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.045332, 4.777807, 0),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
-up_vector_enabled = false
+[sub_resource type="CylinderMesh" id="CylinderMesh_10nac"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45ott"]
+albedo_color = Color(0, 0.8180512, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_olb28"]
+top_radius = 4.0
+bottom_radius = 4.0
 
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
 script = ExtResource("1_03ysy")
-current_checkpoint = NodePath("Bowling/Checkpoint")
+current_checkpoint = NodePath("Checkpoint")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -48,161 +55,339 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_15f3f")
 
-[node name="Bowling" type="Node3D" parent="."]
-
-[node name="Checkpoints" type="Node3D" parent="Bowling"]
+[node name="Checkpoints" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4314489, 0)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Bowling"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024490356, -0.036396027, -0.07893753)
 navigation_mesh = SubResource("NavigationMesh_fmbw1")
 
-[node name="SimpleTile14" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile14" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.8660253, -0.49999997, 0, 0.49999997, 0.8660253, 0, 0, 0, 1, -38.99047, 2.0884638, 10)
 
-[node name="SimpleTile17" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile36" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.25, -8.1460335e-08, -0.8660254, -0.4330127, 9.738208e-08, -0.5, 6.2532756e-08, 1, -2.1855698e-08, -38.99047, 2.0884638, 15)
+
+[node name="SimpleTile37" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.25, -8.1460335e-08, -0.8660254, -0.4330127, 9.738208e-08, -0.5, 6.2532756e-08, 1, -2.1855698e-08, -31.99047, 6.088464, 15)
+
+[node name="SimpleTile38" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.25, -8.1460335e-08, -0.8660254, -0.4330127, 9.738208e-08, -0.5, 6.2532756e-08, 1, -2.1855698e-08, -31.99047, 6.088464, 5)
+
+[node name="SimpleTile39" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.25, -8.1460335e-08, -0.8660254, -0.4330127, 9.738208e-08, -0.5, 6.2532756e-08, 1, -2.1855698e-08, -38.99047, 2.0884638, 5)
+
+[node name="SimpleTile42" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.2596244e-22, -2.1855678e-08, -1, -0.5, 1.2506553e-07, 1.9411759e-23, 6.2532756e-08, 1, -2.18557e-08, -47.99047, 0.08846378, 5)
+
+[node name="SimpleTile43" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(6.2532756e-08, 1, 2.1855689e-08, -0.5, 1.2506553e-07, 3.8823518e-23, -2.7333937e-15, -2.185571e-08, 1, -52.99047, 0.08846378, 0)
+
+[node name="SimpleTile44" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.5, -0.5, 3.774895e-08, 0.8660253, -27.99047, 10.088464, -2)
+
+[node name="SimpleTile45" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.49999997, -0.49999997, 3.7748947e-08, 0.8660253, -27.99047, 14.088463, -8)
+
+[node name="SimpleTile46" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.49999997, -0.49999997, 3.7748947e-08, 0.8660253, -27.99047, 17.088463, -12)
+
+[node name="SimpleTile47" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660254, 6.53831e-08, -0.5, -0.5, 3.774895e-08, 0.8660254, -27.99047, 22.088463, -20)
+
+[node name="SimpleTile48" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.5, -0.5, 3.774895e-08, 0.8660253, -17.99047, 10.088464, -2)
+
+[node name="SimpleTile49" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.49999997, -0.49999997, 3.7748947e-08, 0.8660253, -17.99047, 14.088463, -8)
+
+[node name="SimpleTile50" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660253, 6.53831e-08, -0.49999997, -0.49999997, 3.7748947e-08, 0.8660253, -17.99047, 17.088463, -12)
+
+[node name="SimpleTile51" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(7.54979e-08, 1, 0, -0.8660254, 6.53831e-08, -0.5, -0.5, 3.774895e-08, 0.8660254, -17.99047, 22.088463, -20)
+
+[node name="SimpleTile17" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.8660253, -0.49999997, 0, 0.49999997, 0.8660253, 0, 0, 0, 1, -32, 6.088464, 10)
 
-[node name="SimpleTile23" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile23" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, -1.3027009e-15, -4.3711385e-08, 1, -2.9802322e-08, -0.9999999, -4.371139e-08, -23, 9.088464, 15)
 
-[node name="SimpleTile25" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile34" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.7071067, -0.7071067, -3.0908616e-08, -1.3027008e-15, -4.371138e-08, 1, -0.7071067, -0.7071067, -3.0908616e-08, -21, 9.088464, 11)
+
+[node name="SimpleTile25" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, 2.9802322e-08, 0.9999999, -3.5527137e-15, 1.0587912e-22, 3.5527137e-15, 1, -23, 13.581059, 20)
 
-[node name="SimpleTile26" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile71" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1.3909062e-08, 0.9999999, -4.371139e-08, -1.3027009e-15, -4.3711385e-08, -1, -0.9999999, -1.3909062e-08, 1.9106857e-15, -28, 13.5810585, 20)
+
+[node name="SimpleTile72" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -33, 18.581059, 20)
+
+[node name="SimpleTile73" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -43, 18.581059, 20)
+
+[node name="SimpleTile75" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -43, 18.581059, 0)
+
+[node name="SimpleTile81" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -0.9999999, -5.7620447e-08, 1.9106853e-15, 5.7620447e-08, -0.9999999, -3.5527137e-15, -43, 33.58106, -5)
+
+[node name="SimpleTile83" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -46, 26.581059, -5)
+
+[node name="SimpleTile84" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -41, 26.581059, -5)
+
+[node name="SimpleTile85" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.3, -0.5, -2.1855694e-08, 5.732055e-16, 2.1855694e-08, -0.5, -1.3113417e-08, -39.638615, 21.581059, -5)
+
+[node name="SimpleTile86" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.3, -0.5, -2.1855694e-08, 5.732055e-16, 2.1855694e-08, -0.5, -1.3113417e-08, -46.638615, 21.581059, -5)
+
+[node name="SimpleTile82" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -0.9999999, -5.7620447e-08, 1.9106853e-15, 5.7620447e-08, -0.9999999, -3.5527137e-15, -43, 43.58106, -5)
+
+[node name="SimpleTile77" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.14641115e-14, -4.371139e-08, 6, -3, -4.371139e-08, 1.146411e-14, 1.3113416e-07, -1, -2.6226832e-07, -78, 33.58106, -5)
+
+[node name="SimpleTile78" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.14641115e-14, -4.371139e-08, 7, -3, -4.371139e-08, 1.3374797e-14, 1.3113416e-07, -1, -3.059797e-07, -73, 33.58106, -55)
+
+[node name="SimpleTile79" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1.3113414e-07, 1, 5.9604645e-07, -2.9999998, -4.3711385e-08, 5.930155e-15, 2.842171e-14, -2.9802322e-08, 4.9999995, -38, 33.58106, -30)
+
+[node name="SimpleTile76" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-2.1855695e-07, -4.1606987e-15, 7, -6.954532e-08, 1, 2.4868999e-14, -5, -1.3909064e-08, -3.059797e-07, -73, 18.581059, -30)
+
+[node name="SimpleTile26" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, 2.9802322e-08, 0.9999999, -3.5527137e-15, 1.0587912e-22, 3.5527137e-15, 1, -13, 13.581059, 20)
 
-[node name="SimpleTile27" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile35" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.7071067, -2.1073426e-08, -0.70710677, 2.9802322e-08, 0.9999999, -3.5527137e-15, 0.7071067, -2.1073422e-08, 0.70710677, -17.371708, 13.581059, 14.63006)
+
+[node name="SimpleTile27" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, 2.9802322e-08, 0.9999999, -3.5527137e-15, 1.0587912e-22, 3.5527137e-15, 1, -13, 13.581059, 10)
 
-[node name="SimpleTile24" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile24" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-7.3513704e-08, -0.9999999, -4.3711385e-08, -1.3027008e-15, -4.371138e-08, 1, -0.9999999, 7.3513704e-08, 1.9106855e-15, -18, 9.088464, 10)
 
-[node name="SimpleTile19" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile33" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(4.516087e-15, 8.742276e-08, -1, -7.3513704e-08, -0.9999999, -8.742277e-08, -0.9999999, 7.3513704e-08, 1.9106853e-15, -23, 8.691379, 10)
+
+[node name="SimpleTile19" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-3.785517e-08, 2.1855692e-08, 1, 0.5, 0.8660253, 0, -0.8660253, 0.5, -4.371139e-08, -22.821348, 11.420499, 0.7240846)
 
-[node name="SimpleTile20" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile20" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-3.785517e-08, 2.1855692e-08, 1, 0.5, 0.8660253, 0, -0.8660253, 0.5, -4.371139e-08, -22.821348, 15.420499, -6.266386)
 
-[node name="SimpleTile21" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile21" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-3.785517e-08, 2.1855692e-08, 1, 0.5, 0.8660253, 0, -0.8660253, 0.5, -4.371139e-08, -22.821348, 19.4205, -13.266386)
 
-[node name="SimpleTile22" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile22" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-3.785517e-08, 2.1855692e-08, 1, 0.5, 0.8660253, 0, -0.8660253, 0.5, -4.371139e-08, -22.821348, 23.4205, -20.266386)
 
-[node name="SimpleTile15" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile54" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-3.785517e-08, 2.1855692e-08, 1, 0.5, 0.8660253, 0, -0.8660253, 0.5, -4.371139e-08, -22.821348, 27.4205, -27.266386)
+
+[node name="SimpleTile55" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 1, -8.940697e-08, 3.7855177e-08, 8.940697e-08, 1, -2.1855692e-08, -22.821348, 34.420498, -31.266384)
+
+[node name="SimpleTile61" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 1, -8.940697e-08, 3.7855177e-08, 8.940697e-08, 1, -2.1855692e-08, -22.821348, 44.420498, -31.266384)
+
+[node name="SimpleTile63" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 1, -8.940697e-08, 3.7855177e-08, 8.940697e-08, 1, -2.1855692e-08, -22.821348, 54.420498, -31.266384)
+
+[node name="SimpleTile56" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(8.940697e-08, 1, -6.556708e-08, 1, -8.940697e-08, 3.7855177e-08, 3.785517e-08, -6.5567086e-08, -1, -27.821348, 30.420498, -26.266384)
+
+[node name="SimpleTile58" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(8.940697e-08, 1, -6.556708e-08, 1, -8.940697e-08, 3.7855177e-08, 3.785517e-08, -6.5567086e-08, -1, -17.821348, 30.420498, -26.266384)
+
+[node name="SimpleTile62" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(8.940697e-08, 1, -6.556708e-08, 1, -8.940697e-08, 3.7855177e-08, 3.785517e-08, -6.5567086e-08, -1, -17.821348, 50.420498, -26.266384)
+
+[node name="SimpleTile64" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 4.5695575e-08, -3.7855173e-08, 4.5695582e-08, 1, -6.556708e-08, 3.785517e-08, -6.5567086e-08, -1, -12.821348, 55.420498, -26.266384)
+
+[node name="SimpleTile67" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 4.569557e-08, -4.5298744e-08, -1.509958e-07, 2.1855705e-08, 0.3, 4.5695575e-08, 1, -6.55671e-09, -12.821348, 55.420498, -21.266384)
+
+[node name="SimpleTile69" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-0.96592575, 3.8481858e-08, -0.077645764, -0.2588192, 3.2937876e-08, 0.28977776, 4.5695568e-08, 1, -6.55671e-09, -3.8213482, 56.420498, -21.266384)
+
+[node name="SimpleTile70" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-0.96592575, 3.8481858e-08, -0.077645764, -0.2588192, 3.2937876e-08, 0.28977776, 4.5695568e-08, 1, -6.55671e-09, -3.8213482, 56.420498, -31.266384)
+
+[node name="SimpleTile66" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-0.9659258, -0.258819, -1.959528e-08, -0.258819, 0.9659258, -7.313057e-08, 3.785517e-08, -6.5567086e-08, -1, -3.8213482, 56.420498, -26.266384)
+
+[node name="SimpleTile65" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 4.5695575e-08, -3.7855173e-08, 4.5695582e-08, 1, -6.556708e-08, 3.785517e-08, -6.5567086e-08, -1, -12.821348, 55.420498, -36.266384)
+
+[node name="SimpleTile59" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 4.5695575e-08, -3.7855173e-08, 4.5695582e-08, 1, -6.556708e-08, 3.785517e-08, -6.5567086e-08, -1, -12.821348, 35.420498, -26.266384)
+
+[node name="SimpleTile57" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(8.940697e-08, 1, -6.556708e-08, 1, -8.940697e-08, 3.7855177e-08, 3.785517e-08, -6.5567086e-08, -1, -27.821348, 40.420498, -26.266384)
+
+[node name="SimpleTile68" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(8.940697e-08, 1, -6.556708e-08, 1, -8.940697e-08, 3.7855177e-08, 3.785517e-08, -6.5567086e-08, -1, -27.821348, 60.420498, -26.266384)
+
+[node name="SimpleTile60" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 4.5695575e-08, -3.7855173e-08, 4.5695582e-08, 1, -6.556708e-08, 3.785517e-08, -6.5567086e-08, -1, -32.82135, 45.420498, -26.266384)
+
+[node name="SimpleTile15" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -48, -0.5, 10)
 
-[node name="SimpleTile16" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile16" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -58, -0.5, 10)
 
-[node name="SimpleTile18" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
+[node name="SimpleTile40" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.371138e-08, 0.99999994, 0, -0.99999994, -4.371139e-08, -58, 2.5, 15)
+
+[node name="SimpleTile41" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.371138e-08, 0.99999994, 0, -0.99999994, -4.371139e-08, -48, 2.5, 15)
+
+[node name="SimpleTile18" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -58, -0.5, 0)
 
-[node name="SimpleTile28" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 0.70710677, 0.7071067, 1.13133405e-08, -0.7071067, 0.70710677, -4.222196e-08, -22.726118, -2.0017147, 40.146214)
+[node name="SimpleTile52" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371138e-08, 0.9999999, 0, -0.9999999, -4.371138e-08, 0, 0, 0, 1, -63.40274, 4.5, 0)
 
-[node name="SimpleTile31" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 0.70710677, 0.7071067, 1.13133405e-08, -0.7071067, 0.70710677, -4.222196e-08, -22.726118, 3.9982853, 34.146214)
+[node name="SimpleTile53" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-4.371138e-08, 0.9999999, 0, -0.9999999, -4.371138e-08, 0, 0, 0, 1, -63.40274, 4.5, -10)
 
-[node name="SimpleTile32" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-3.7855173e-08, 2.1855696e-08, 1, 0.70710677, 0.7071067, 1.13133405e-08, -0.7071067, 0.70710677, -4.222196e-08, -22.726118, 9.998285, 28.146214)
+[node name="SimpleTile28" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.7071067, -0.70710677, -1.4894255e-09, 0.7071067, 0.70710665, 1.1313339e-08, -6.946557e-09, -9.052922e-09, 0.99999994, -77.97, -16.088226, 10.0156975)
 
-[node name="SimpleTile29" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-4.371138e-08, 0, 0.99999994, 0, 0.9999999, 0, -0.99999994, 0, -4.371139e-08, -22.726118, -5.5901785, 48.85478)
+[node name="SimpleTile31" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.7071067, -0.70710677, -1.4894255e-09, 0.7071067, 0.70710665, 1.1313339e-08, -6.946557e-09, -9.052922e-09, 0.99999994, -71.97, -10.088226, 10.0156975)
 
-[node name="SimpleTile30" parent="Bowling/NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-4.371138e-08, 0, 0.99999994, 0, 0.9999999, 0, -0.99999994, 0, -4.371139e-08, -22.726118, -5.5901785, 58.854786)
+[node name="SimpleTile32" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.7071067, -0.70710677, -1.4894255e-09, 0.7071067, 0.70710665, 1.1313339e-08, -6.946557e-09, -9.052922e-09, 0.99999994, -65.97, -4.088226, 10.0156975)
 
-[node name="Path3D" type="Path3D" parent="Bowling/NavigationRegion3D"]
-transform = Transform3D(2.1519246, -0.4574057, 0, 0.4574057, 2.1519246, 0, 0, 0, 4, -22.5, 9.2, 5.4)
-curve = SubResource("Curve3D_ssf0w")
+[node name="SimpleTile29" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 7.1054274e-15, 0, 0.9999999, -86.678566, -19.67669, 10.015696)
 
-[node name="MovingPlatform" parent="Bowling/NavigationRegion3D/Path3D" node_paths=PackedStringArray("toggle_forwards", "toggle_backwards") instance=ExtResource("4_d8tld")]
-transform = Transform3D(0.9999987, 0, 0, 0, 0.9999962, 0, 0, 0, 0.99999833, 0.046168365, 0.2110177, 0)
-progress = 7.3
-rotation_mode = 0
-loop = false
-tilt_enabled = false
-current_mode = 2
-toggle_forwards = NodePath("../../Button")
-toggle_backwards = NodePath("../../Button2")
+[node name="SimpleTile30" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 7.1054274e-15, 0, 0.9999999, -96.67857, -19.67669, 10.015696)
 
-[node name="Button" parent="Bowling/NavigationRegion3D" instance=ExtResource("4_ssf0w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.483989, 14.831059, 6.2123394)
+[node name="BaseDestructablePlatform" parent="NavigationRegion3D" instance=ExtResource("7_d8tld")]
+transform = Transform3D(0.2, 0, 0, 0, 5, 0, 0, 0, 5, -62.977795, 2.3304312, 12.339694)
 
-[node name="Button2" parent="Bowling/NavigationRegion3D" instance=ExtResource("4_ssf0w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3089905, 14.652297, 6.120141)
+[node name="BaseDestructablePlatform2" parent="NavigationRegion3D" instance=ExtResource("7_d8tld")]
+transform = Transform3D(0.2, 0, 0, 0, 5, 0, 0, 0, 5, -62.977795, 2.3304312, 7.339694)
 
-[node name="Props" type="Node3D" parent="Bowling"]
+[node name="BaseDestructablePlatform3" parent="NavigationRegion3D" instance=ExtResource("7_d8tld")]
+transform = Transform3D(0.2, 0, 0, 0, 5, 0, 0, 0, 5, -62.977795, 7.330431, 7.339694)
 
-[node name="CrateWood7" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -20.312628, -3.5901785, 62.062393)
+[node name="BaseDestructablePlatform4" parent="NavigationRegion3D" instance=ExtResource("7_d8tld")]
+transform = Transform3D(0.2, 0, 0, 0, 5, 0, 0, 0, 5, -62.977795, 7.330431, 12.339694)
 
-[node name="CrateWood8" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -23.312628, -3.5901785, 62.062393)
+[node name="RangedTestEnemy" parent="NavigationRegion3D" instance=ExtResource("4_d8tld")]
+transform = Transform3D(0.59693915, 0, 0.8022864, 0, 1, 0, -0.8022864, 0, 0.59693915, -21.35869, 15.1423645, 10.738749)
 
-[node name="CrateWood9" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.312628, -3.5901785, 62.062393)
+[node name="SpinnySword" parent="NavigationRegion3D" instance=ExtResource("5_10nac")]
+transform = Transform3D(0.99794704, -0.06404467, 0, 0.06404467, 0.99794704, 0, 0, 0, 1, -42.345764, 39.065197, 12.50501)
+spin_rate = 360.0
 
-[node name="CrateWood10" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25.312628, -0.5901785, 62.062393)
+[node name="SpinnySword2" parent="NavigationRegion3D" instance=ExtResource("5_10nac")]
+transform = Transform3D(0.55443776, 0.8322253, 0, -0.8322253, 0.55443776, 0, 0, 0, 1, -42.345764, 39.065197, 7.5050097)
+spin_rate = 360.0
 
-[node name="CrateWood11" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -22.312628, -0.5901785, 62.062393)
+[node name="Props" type="Node3D" parent="."]
 
-[node name="CrateWood12" parent="Bowling/Props" instance=ExtResource("4_fmbw1")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -24.312628, 2.4098215, 62.062393)
+[node name="CrateWood7" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -17.67669, 12.352697)
 
-[node name="SpikeBall" parent="Bowling/Props" instance=ExtResource("5_15f3f")]
-transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, -23.033749, 31.889282, -21.218225)
+[node name="CrateWood8" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -17.67669, 9.352697)
 
-[node name="Enemies" type="Node3D" parent="Bowling"]
+[node name="CrateWood9" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -17.67669, 6.3526974)
 
-[node name="DummyTestEnemy6" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.807714, -5.065264, 57.24495)
+[node name="CrateWood10" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -14.676691, 7.3526974)
 
-[node name="DummyTestEnemy7" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.807714, -5.065264, 57.24495)
+[node name="CrateWood11" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -14.676691, 10.352697)
 
-[node name="DummyTestEnemy8" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.807714, -5.065264, 57.24495)
+[node name="CrateWood12" parent="Props" instance=ExtResource("4_fmbw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -11.676691, 8.352697)
 
-[node name="DummyTestEnemy9" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.807714, -5.065264, 57.24495)
+[node name="Enemies" type="Node3D" parent="."]
 
-[node name="DummyTestEnemy17" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.807714, -5.065264, 57.24495)
+[node name="DummyTestEnemy6" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -95.15012, -19.151775, 11.857611)
 
-[node name="DummyTestEnemy21" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.284079, -5.065264, 56.24495)
+[node name="DummyTestEnemy7" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -95.15012, -19.151775, 10.857611)
 
-[node name="DummyTestEnemy22" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.284079, -5.065264, 56.24495)
+[node name="DummyTestEnemy8" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -95.15012, -19.151775, 9.857611)
 
-[node name="DummyTestEnemy23" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.284079, -5.065264, 56.24495)
+[node name="DummyTestEnemy9" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -95.15012, -19.151775, 8.857611)
 
-[node name="DummyTestEnemy24" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.284079, -5.065264, 56.24495)
+[node name="DummyTestEnemy17" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -95.15012, -19.151775, 7.8576107)
 
-[node name="DummyTestEnemy25" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.934908, -5.065264, 55.24495)
+[node name="DummyTestEnemy21" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -94.15012, -19.151775, 8.381247)
 
-[node name="DummyTestEnemy26" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.934908, -5.065264, 55.24495)
+[node name="DummyTestEnemy22" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -94.15012, -19.151775, 9.381247)
 
-[node name="DummyTestEnemy27" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.934908, -5.065264, 55.24495)
+[node name="DummyTestEnemy23" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -94.15012, -19.151775, 10.381247)
 
-[node name="DummyTestEnemy28" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.462118, -5.065264, 54.244953)
+[node name="DummyTestEnemy24" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -94.15012, -19.151775, 11.381247)
 
-[node name="DummyTestEnemy29" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.462118, -5.065264, 54.244953)
+[node name="DummyTestEnemy25" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -93.15012, -19.151775, 10.730421)
 
-[node name="DummyTestEnemy30" parent="Bowling/Enemies" instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.074095, -5.065264, 53.244953)
+[node name="DummyTestEnemy26" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -93.15012, -19.151775, 9.730421)
 
-[node name="Checkpoint" parent="Bowling" instance=ExtResource("2_03ysy")]
+[node name="DummyTestEnemy27" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -93.15012, -19.151775, 8.730421)
+
+[node name="DummyTestEnemy28" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -92.15013, -19.151775, 10.203207)
+
+[node name="DummyTestEnemy29" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -92.15013, -19.151775, 9.203207)
+
+[node name="DummyTestEnemy30" parent="Enemies" instance=ExtResource("6_3qm25")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -91.15013, -19.151775, 9.59123)
+
+[node name="Checkpoint" parent="." instance=ExtResource("2_03ysy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.69159, 1.3381895, 0.19086695)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6594691, 69.27466, -27.367407)
+mesh = SubResource("CylinderMesh_10nac")
+surface_material_override/0 = SubResource("StandardMaterial3D_45ott")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.615944, 0)
+mesh = SubResource("CylinderMesh_olb28")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_45ott")
+
+[node name="Spawner" parent="MeshInstance3D/MeshInstance3D2" node_paths=PackedStringArray("respawn_timer") instance=ExtResource("8_u2fna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43117523, 0)
+spawning_object = ExtResource("5_15f3f")
+objects_start_physicsable = true
+respawn_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="MeshInstance3D/MeshInstance3D2/Spawner"]
+wait_time = 8.0
+autostart = true
+
+[node name="Door" parent="." instance=ExtResource("11_olb28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.21082, 21.544662, -5.051257)

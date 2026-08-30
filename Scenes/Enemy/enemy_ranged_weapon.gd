@@ -10,6 +10,6 @@ func fire(target_pos:Vector3):
 	get_tree().current_scene.add_child(new_projectile)
 	new_projectile.speed = 30
 	new_projectile.setup(barrel.global_position, target_pos + Vector3(0,1,0))
-	new_projectile.shooter = self
+	new_projectile.shooter = owner
 	
 	

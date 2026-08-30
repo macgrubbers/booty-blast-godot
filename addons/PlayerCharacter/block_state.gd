@@ -37,44 +37,11 @@ func update(_delta : float):
 	pass
 	
 func physics_update(delta : float):
-	#check_if_floor()
-	
 	cR.gravity_apply(delta)
-	
-	#input_management()
 	
 	move(delta)
 	
-#func check_if_floor():
-	#if !cR.is_on_floor(): # and !cR.is_on_wall():
-		#if cR.velocity.y < 0.0:
-			#transitioned.emit(self, "InairState")
 
-	#if cR.is_on_floor():
-		#if cR.jump_buff_on:
-			##apply jump buffering
-			#cR.buffered_jump = true
-			#cR.jump_buff_on = false
-			#transitioned.emit(self, "JumpState")
-			
-#func input_management():
-	#if Input.is_action_pressed(cR.jumpAction) if cR.auto_jump else Input.is_action_just_pressed(cR.jumpAction) :
-		#transitioned.emit(self, "JumpState")
-		#
-	#if Input.is_action_just_pressed(cR.runAction):
-		#cR.walk_or_run = "RunState"
-		#transitioned.emit(self, "RunState")
-		#
-	#if Input.is_action_just_pressed("x"):
-		#if !cR.godot_plush_skin.ragdoll:
-			#transitioned.emit(self, "RagdollState")
-			#
-	#if Input.is_action_just_pressed("lmb"):
-		#transitioned.emit(self, "GroundAttackState")
-#
-	#if Input.is_action_just_pressed("v"):
-		#if !cR.godot_plush_skin.ragdoll and cR.can_dash:
-			#transitioned.emit(self, "DashState")
 		
 func move(delta : float):
 	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
@@ -110,6 +77,7 @@ func exit():
 # Handle block behvavior
 func block_attack(attacker:Node3D):
 	if attacker.is_in_group("Projectiles"):
+		attacker.ignore_shooter = false
 		attacker.return_to_sender()
 		return
 		
