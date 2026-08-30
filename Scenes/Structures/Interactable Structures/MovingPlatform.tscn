@@ -1,19 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmo8wh13m6rq5"]
 
-[ext_resource type="Script" uid="uid://1m1vfw6rei8h" path="res://Scenes/Structures/Interactable Structures/moving_platform.gd" id="1_8b1s6"]
+[ext_resource type="Script" uid="uid://xiv0baix0c6d" path="res://Scenes/Structures/Interactable Structures/moving_platform.gd" id="1_8b1s6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1kxk"]
 size = Vector3(5, 0.5, 5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k63f6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b1s6"]
 albedo_color = Color(0.59905916, 0.5990591, 7.70092e-07, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0ltmk"]
-material = SubResource("StandardMaterial3D_k63f6")
+material = SubResource("StandardMaterial3D_8b1s6")
 size = Vector3(5, 0.5, 5)
 
-[node name="PathFollow3D" type="PathFollow3D"]
+[node name="Path3D" type="Path3D"]
 script = ExtResource("1_8b1s6")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+rotation_mode = 0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathFollow3D"]
+remote_path = NodePath("../../MovingPlatform")
 
 [node name="MovingPlatform" type="AnimatableBody3D" parent="."]
 
@@ -23,3 +29,10 @@ shape = SubResource("BoxShape3D_c1kxk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatform"]
 mesh = SubResource("BoxMesh_0ltmk")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Label3D" type="Label3D" parent="MovingPlatform"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.27054548, 0)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "Moving Platform"
+font_size = 80

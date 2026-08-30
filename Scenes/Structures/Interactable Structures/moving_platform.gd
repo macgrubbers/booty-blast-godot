@@ -1,53 +1,51 @@
-extends PathFollow3D
+@tool
+class_name MovingPlatform extends Path3D
 
-enum move_mode{LOOP, TOGGLEABLE_LOOP, TOGGLEABLE_INCREMENT}
-@export var current_mode:move_mode
-@export var path:Path3D
-@export var current_point_index:int
+@export var travel_time := 1.0
+@export var loop_path := false
 
-@export_group("Toggleable Mode Options")
-@export var toggle_forwards:Node3D
-@export var toggle_backwards:Node3D
+@onready var follower:PathFollow3D = $PathFollow3D
 
-# Called when the node enters the scene tree for the first time.
+var point_index := 0
+var is_moving:bool = false
+var waypoint_ratios: Array[float] = []
+
+
 func _ready() -> void:
-	path = get_parent()
-	if (current_mode == move_mode.TOGGLEABLE_LOOP or 
-		current_mode == move_mode.TOGGLEABLE_INCREMENT):
-			setup_toggleable()
-
-
-# Setup movement for toggleable mode
-func setup_toggleable():
-	if toggle_forwards.has_signal("pressed"):
-		toggle_forwards.connect("pressed", _on_forwards_pressed)
-	
-	if toggle_backwards.has_signal("pressed"):
-		toggle_backwards.connect("pressed", _on_backwards_pressed)
-
-func _on_forwards_pressed():
-	print("Forwards pressed")
-	move_toggleable_increment(1)
-
-func _on_backwards_pressed():
-	print("Backwards pressed")
-	move_toggleable_increment(-1)
-
-func move_toggleable_increment(next_index_dir:int):
-	var curve: Curve3D = path.curve
-	var total_points: int = curve.point_count
-	
-	# Increment the index and wrap around if the path loops
-	var next_point_index = current_point_index + next_index_dir
-	if ((next_point_index <= 0) or
-		(next_point_index > total_points - 1)):
-		print ("Can't move!")
+	# One ratio per Curve3D control point: 0 = first, 1 = last.
+	var point_count := curve.point_count
+	if point_count < 2:
+		push_warning("MovingPlatform needs at least two Curve3D points.")
 		return
-	else:
-		current_point_index = next_point_index
 
-	# Get the distance along the path for the specific point index
-	var point_offset: float = curve.get_offset(current_point_index)
-	
-	# Update the PathFollow3D position instantly
-	progress = point_offset
+	for i in range(point_count):
+		waypoint_ratios.append(float(i) / float(point_count - 1))
+
+	follower.progress_ratio = waypoint_ratios[point_index]
+
+
+func activate() -> void:
+	if is_moving or waypoint_ratios.is_empty():
+		return
+
+	var next_index := point_index + 1
+
+	if next_index >= waypoint_ratios.size():
+		if not loop_path:
+			return
+		next_index = 0
+
+	is_moving = true
+
+	var tween := create_tween()
+	tween.tween_property(
+		follower,
+		"progress_ratio",
+		waypoint_ratios[next_index],
+		travel_time
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
+
+	point_index = next_index
+	is_moving = false

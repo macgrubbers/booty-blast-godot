@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cilmfuevw5fjn" path="res://Scenes/Structures/Destructable Structures/platform_health_component.gd" id="2_o713d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nvmqv"]
+size = Vector3(1, 0.1, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_28t77"]
 load_path = "res://.godot/imported/texture_07.png-48c4afb56cb99b4de59348ccf29c6abe.s3tc.ctex"
@@ -19,8 +20,10 @@ uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_haobg"]
 material = SubResource("StandardMaterial3D_o713d")
+size = Vector3(1, 0.1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oug87"]
+size = Vector3(1, 0.1, 1)
 
 [node name="BaseDestructablePlatform" type="StaticBody3D" groups=["Destructables"]]
 collision_layer = 4
@@ -41,3 +44,10 @@ metadata/_custom_type_script = "uid://b1t251ja36jx0"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlatformHealthComponent"]
 shape = SubResource("BoxShape3D_oug87")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.056804776, 0.27054548, 0)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "Destructable Platform"
+font_size = 15

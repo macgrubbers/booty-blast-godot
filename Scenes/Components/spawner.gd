@@ -24,7 +24,8 @@ func _ready() -> void:
 		if respawn_method == respawn_methods.ON_DEAD_OR_CONSUMED:
 			respawn_timer.set_one_shot(true) # override just in case we forget
 		if start_spawning_on_ready:
-			await ready
+			await get_tree().current_scene.ready
+			spawn()
 			toggle_spawning(true)
 
 
