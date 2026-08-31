@@ -456,7 +456,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.42286, 36.510708, -33.057
 collision_mask = 1048576
 monitorable = false
 applied_effect = SubResource("Resource_h3wrw")
-effect_duration = -1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1359787, -8.079681, 2.4518929)

@@ -101,3 +101,43 @@ func set_max_health(new_max:int):
 func _on_immunity_timer_timeout():
 	can_be_hurt = true
 	
+
+
+
+
+
+#####################################################
+# Status
+
+var active_effects: Array[StatusEffect] = []
+
+signal new_effect_applied(effect:String)
+signal effect_removed(effect:String)
+
+func _process(delta: float) -> void:
+	var expired_effects: Array[StatusEffect] = []
+
+	for effect in active_effects:
+		effect.update(delta)
+		if effect.is_expired:
+		# Using stack or list collection to track expired items safely
+			expired_effects.append(effect)
+			
+	for effect in expired_effects:
+		remove_status_effect(effect)
+		effect_removed.emit(effect.effect_name)
+
+func apply_status_effect(new_effect: StatusEffect) -> void:
+	# Check if effect already exists to refresh duration instead of stacking
+	for effect in active_effects:
+		if effect.get_script() == new_effect.get_script():
+			effect.time_elapsed = 0.0 # Refresh duration
+			return
+			
+	active_effects.append(new_effect)
+	new_effect.apply(owner)
+	new_effect_applied.emit(new_effect.effect_name)
+
+func remove_status_effect(effect: StatusEffect) -> void:
+	effect.remove()
+	active_effects.erase(effect)

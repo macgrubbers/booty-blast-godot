@@ -12,7 +12,16 @@ func _ready():
 	set_value("is_navigation_finished",true)
 	set_value("player_just_lost", false)
 	set_value("can_patrol", false)
+	set_value("is_dancing", false)
+	
+	
+	$"../HealthComponent".connect("new_effect_applied", _on_new_effect_applied)
+	$"../HealthComponent".connect("effect_removed", _on_effect_removed)
+	
+func _on_new_effect_applied(new_effect:String):
+	if new_effect == "Boogie":
+		set_value("is_dancing", true)
 
-	#for node in get_tree().current_scene.get_children():
-		#if node.is_in_group("Player"):
-			#set_value("player_ref", node)
+func _on_effect_removed(new_effect:String):
+	if new_effect == "Boogie":
+		set_value("is_dancing", false)

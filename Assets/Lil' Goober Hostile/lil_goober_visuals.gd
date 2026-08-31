@@ -19,6 +19,12 @@ func toggle_dance(opt:bool):
 		state_machine.travel("Dance")
 	else:
 		state_machine.stop()
+		
+func toggle_boogie(opt:bool):
+	if opt:
+		state_machine.travel("Boogie")
+	else:
+		state_machine.stop()
 
 func apply_impulse_to_ragdoll(amount:Vector3):
 	if bone_simulator.is_simulating_physics():
