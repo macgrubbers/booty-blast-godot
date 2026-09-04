@@ -2,6 +2,7 @@
 class_name DeadAction extends ActionLeaf
 
 @onready var health_component: HealthComponent = $"../../../HealthComponent"
+@onready var audio_root = $"../../../AudioRoot"
 
 func before_run(actor: Node, blackboard: Blackboard) -> void:
 	$"../../../VisualRoot/LilGooberVisuals".state_machine.stop()
@@ -15,6 +16,9 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	$"../../../HealthComponent/CollisionShape3D".disabled = true
 	$"../../../PerceptionComponent".monitoring = false
 	$"../../../PerceptionComponent".monitorable = false
+	
+	# play sound
+	audio_root.play_sound("death")
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.gravity_apply()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bquwh18huorr0"]
+[gd_scene load_steps=19 format=3 uid="uid://bquwh18huorr0"]
 
 [ext_resource type="Script" uid="uid://dvos0ll0l7q3d" path="res://Scenes/Levels/level_0.gd" id="1_03ysy"]
 [ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_03ysy"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="8_u2fna"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="11_45ott"]
 [ext_resource type="PackedScene" uid="uid://2vmybju5xq65" path="res://Scenes/Structures/Interactable Structures/Door.tscn" id="11_olb28"]
-[ext_resource type="PackedScene" uid="uid://cm3jbs5mx2voy" path="res://Scenes/Misc/AreaOfEffect.tscn" id="12_4tqej"]
-[ext_resource type="Script" uid="uid://bkcxaevmcgk7x" path="res://Scripts/StatusEffects/boogie.gd" id="13_omk35"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fmbw1"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -43,13 +41,6 @@ albedo_color = Color(0, 0.8180512, 0, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_olb28"]
 top_radius = 4.0
 bottom_radius = 4.0
-
-[sub_resource type="Resource" id="Resource_h3wrw"]
-script = ExtResource("13_omk35")
-metadata/_custom_type_script = "uid://bkcxaevmcgk7x"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pmlut"]
-size = Vector3(69.55809, 20.217834, 49.620216)
 
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
 script = ExtResource("1_03ysy")
@@ -140,38 +131,35 @@ transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999
 [node name="SimpleTile75" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -43, 18.581059, 0)
 
+[node name="SimpleTile76" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -43, 18.581059, -10)
+
+[node name="SimpleTile77" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1.3909062e-08, 0.9999999, -4.3711385e-08, -1.3027009e-15, -4.371138e-08, -1, -0.9999999, -1.3909062e-08, 1.9106855e-15, -48, 22.581059, -10)
+
+[node name="SimpleTile78" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1.3909062e-08, 0.9999999, -4.3711385e-08, -1.3027009e-15, -4.371138e-08, -1, -0.9999999, -1.3909062e-08, 1.9106855e-15, -38, 22.581059, -10)
+
 [node name="SimpleTile80" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -1.3909062e-08, 0.9999999, 3.5527137e-15, -0.9999999, -1.3909062e-08, 1.9106855e-15, -43, 18.581059, 10)
 
 [node name="SimpleTile81" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -0.9999999, -5.7620447e-08, 1.9106853e-15, 5.7620447e-08, -0.9999999, -3.5527137e-15, -43, 33.58106, -5)
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, 1.01331835e-07, -0.9999999, -3.5527137e-15, 0.9999999, 1.01331835e-07, -1.9106853e-15, -43, 27.581059, -10)
+
+[node name="SimpleTile82" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, 0.9999999, 1.4504323e-07, -1.9106853e-15, -1.4504323e-07, 0.9999999, 3.5527137e-15, -43, 22.581059, -15)
 
 [node name="SimpleTile83" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -46, 26.581059, -5)
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -45.624626, 26.581059, -5)
 
 [node name="SimpleTile84" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -41, 26.581059, -5)
+transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.5, -0.5, -2.1855694e-08, 9.553426e-16, 2.1855694e-08, -0.5, -2.1855694e-08, -40.6468, 26.581059, -5)
 
 [node name="SimpleTile85" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.3, -0.5, -2.1855694e-08, 5.732055e-16, 2.1855694e-08, -0.5, -1.3113417e-08, -39.638615, 21.581059, -5)
 
 [node name="SimpleTile86" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(1.9106853e-15, -2.1855694e-08, 0.3, -0.5, -2.1855694e-08, 5.732055e-16, 2.1855694e-08, -0.5, -1.3113417e-08, -46.638615, 21.581059, -5)
-
-[node name="SimpleTile82" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.9106853e-15, -3.5527137e-15, 1, -0.9999999, -5.7620447e-08, 1.9106853e-15, 5.7620447e-08, -0.9999999, -3.5527137e-15, -43, 43.58106, -5)
-
-[node name="SimpleTile77" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.14641115e-14, -4.371139e-08, 6, -3, -4.371139e-08, 1.146411e-14, 1.3113416e-07, -1, -2.6226832e-07, -78, 33.58106, -5)
-
-[node name="SimpleTile78" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(1.14641115e-14, -4.371139e-08, 7, -3, -4.371139e-08, 1.3374797e-14, 1.3113416e-07, -1, -3.059797e-07, -73, 33.58106, -55)
-
-[node name="SimpleTile79" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-1.3113414e-07, 1, 5.9604645e-07, -2.9999998, -4.3711385e-08, 5.930155e-15, 2.842171e-14, -2.9802322e-08, 4.9999995, -38, 33.58106, -30)
-
-[node name="SimpleTile76" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
-transform = Transform3D(-2.1855695e-07, -4.1606987e-15, 7, -6.954532e-08, 1, 2.4868999e-14, -5, -1.3909064e-08, -3.059797e-07, -73, 18.581059, -30)
 
 [node name="SimpleTile26" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, 2.9802322e-08, 0.9999999, -3.5527137e-15, 1.0587912e-22, 3.5527137e-15, 1, -13, 13.581059, 20)
@@ -415,7 +403,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -92.
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -91.15013, -19.151775, 9.59123)
 
 [node name="Checkpoint" parent="." instance=ExtResource("2_03ysy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.69159, 23.307487, -19.464256)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.840775, 23.307487, -1.151783)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.123439, 88.90763, -26.374846)
@@ -447,17 +435,3 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -42.
 
 [node name="TestEnemy2" parent="." instance=ExtResource("11_45ott")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.05597, 25.219137, -22.306686)
-
-[node name="DummyTestEnemy" parent="." instance=ExtResource("6_3qm25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.03532, 19.105974, -19.417141)
-
-[node name="AreaOfEffect" parent="." instance=ExtResource("12_4tqej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.42286, 36.510708, -33.05737)
-collision_mask = 1048576
-monitorable = false
-applied_effect = SubResource("Resource_h3wrw")
-effect_duration = -1.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1359787, -8.079681, 2.4518929)
-shape = SubResource("BoxShape3D_pmlut")

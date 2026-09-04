@@ -1,1 +1,0 @@
-class_name StatusComponent extends Node

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk1vkvpi3qivm"]
-
-[ext_resource type="Script" uid="uid://c61wqb6lwuql2" path="res://Scenes/Components/status_component.gd" id="1_fvi4s"]
-
-[node name="StatusComponent" type="Node"]
-script = ExtResource("1_fvi4s")
