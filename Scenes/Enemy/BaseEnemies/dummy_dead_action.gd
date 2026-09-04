@@ -3,6 +3,8 @@ class_name DummyDeadAction extends ActionLeaf
 
 @onready var health_component: HealthComponent = $"../../../HealthComponent"
 
+@onready var audio_root = $"../../../AudioRoot"
+
 func before_run(actor: Node, blackboard: Blackboard) -> void:
 	$"../../../VisualRoot/LilGooberVisuals".state_machine.stop()
 	$"../../../VisualRoot/LilGooberVisuals".bone_simulator.set_active(true)
@@ -12,6 +14,9 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	# disable collision shapes
 	$"../../../CollisionShape3D".disabled = true
 	$"../../../HealthComponent/CollisionShape3D".disabled = true
+
+	audio_root.play_sound("death",[0.7,1.2])
+
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.gravity_apply()

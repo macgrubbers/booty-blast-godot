@@ -25,7 +25,7 @@ signal attack_successful(attacker: Node3D)
 signal attack_unsuccessful(attacker: Node3D)
 signal hitstunned(duration:float)
 signal update_health(current_health:float)
-signal kill()
+signal dead()
 
 func _ready():
 	is_alive = true
@@ -66,12 +66,7 @@ func attack(amount : int,
 		emit_signal("hitstunned", hitstun_duration)
 
 	if current_health <= 0:
-		current_health = 0
-		is_alive = false
-		#get_parent().kill()
-		await get_tree().process_frame # TODO: added to let ragdolls be created after enemy death, maybe remove later
-		emit_signal("kill")
-		monitorable = false
+		kill()
 	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false, reset_velocity:bool = false):
@@ -102,6 +97,13 @@ func _on_immunity_timer_timeout():
 	can_be_hurt = true
 	
 
+func kill():
+	current_health = 0
+	is_alive = false
+	#get_parent().kill()
+	await get_tree().process_frame # TODO: added to let ragdolls be created after enemy death, maybe remove later
+	emit_signal("dead")
+	monitorable = false
 
 
 

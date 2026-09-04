@@ -19,7 +19,7 @@ func _ready() -> void:
 	visual_root.global_rotation = temp_rotation
 
 	if health_component:
-		health_component.connect("kill", _on_enemy_dead)
+		health_component.connect("dead", _on_enemy_dead)
 		#health_component.kill_timer.connect("timeout", _on_kill_timer_timeout)
 	
 	if path_follow:

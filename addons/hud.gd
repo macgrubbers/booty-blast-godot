@@ -21,7 +21,7 @@ extends CanvasLayer
 func _ready() -> void:
 	# Connect signals
 	cam_holder.connect("paused", on_game_paused)
-	health_component.connect("kill",on_player_died)
+	health_component.connect("dead",on_player_died)
 	health_component.connect("update_health", on_health_updated)
 	interact_raycast.connect("new_collider_found", _on_new_collider_found)
 	

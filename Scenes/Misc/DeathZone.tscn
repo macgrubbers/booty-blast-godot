@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgodheikavc7e"]
+
+[ext_resource type="Script" uid="uid://g2catqe77g3b" path="res://Scenes/Misc/death_zone.gd" id="1_vsc2u"]
+
+[node name="DeathZone" type="Area3D"]
+script = ExtResource("1_vsc2u")

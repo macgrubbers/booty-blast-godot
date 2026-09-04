@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c2sjmmkrjsvvv"]
+[gd_scene load_steps=40 format=3 uid="uid://c2sjmmkrjsvvv"]
 
 [ext_resource type="Script" uid="uid://b072daetmr4os" path="res://Scenes/Enemy/BaseEnemies/test_enemy.gd" id="1_2kq5l"]
 [ext_resource type="PackedScene" uid="uid://csdrdb6tdxta4" path="res://Assets/Lil' Goober Hostile/Lil Goober Visuals.tscn" id="2_mhhax"]
@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cm2py1w0idspm" path="res://Scenes/Components/HealthComponent.tscn" id="3_o1tme"]
 [ext_resource type="PackedScene" uid="uid://cpqt4r1mhvss1" path="res://Scenes/Components/PerceptionComponent.tscn" id="3_q84gq"]
 [ext_resource type="Script" uid="uid://de6v6dugsheog" path="res://Scenes/Components/test_enemy_health_component.gd" id="4_7tq7j"]
+[ext_resource type="Script" uid="uid://cyeub85a3jrsr" path="res://Sounds/sound_array.gd" id="4_6251s"]
+[ext_resource type="AudioStream" uid="uid://c572vugp4xhpm" path="res://Sounds/Goober/chatter01.wav" id="5_n70s7"]
+[ext_resource type="AudioStream" uid="uid://dvuhidtab38ce" path="res://Sounds/Goober/death.wav" id="6_n70s7"]
 [ext_resource type="Script" uid="uid://dj6rr58mc1x0h" path="res://Scenes/Enemy/BaseEnemies/sword_hitbox.gd" id="6_op6hw"]
+[ext_resource type="AudioStream" uid="uid://cscllm7p8y2qc" path="res://Sounds/Goober/chatter02.wav" id="7_4kh8c"]
+[ext_resource type="AudioStream" uid="uid://ciqygbhaer3k7" path="res://Sounds/Goober/chatter03.wav" id="8_8v4od"]
 [ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="10_8hsvt"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
@@ -27,6 +32,20 @@
 [ext_resource type="Script" uid="uid://d3lst3b6jnc7w" path="res://Scenes/Enemy/BaseEnemies/see_player_condition.gd" id="24_6251s"]
 [ext_resource type="Script" uid="uid://bg7cvh4u7bqf3" path="res://Scenes/Enemy/patrol_action.gd" id="25_pjybl"]
 [ext_resource type="Script" uid="uid://ccm5jmpu0b7md" path="res://Scenes/Enemy/can_patrol_action.gd" id="25_xdjo4"]
+
+[sub_resource type="Resource" id="Resource_6251s"]
+script = ExtResource("4_6251s")
+sound_array = Array[AudioStream]([ExtResource("6_n70s7")])
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
+
+[sub_resource type="Resource" id="Resource_bh4w8"]
+script = ExtResource("4_6251s")
+sound_array = Array[AudioStream]([ExtResource("5_n70s7"), ExtResource("7_4kh8c"), ExtResource("8_8v4od")])
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
+
+[sub_resource type="Resource" id="Resource_rqqvp"]
+script = ExtResource("4_6251s")
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psiqa"]
 height = 2.1396484
@@ -50,12 +69,18 @@ script = ExtResource("1_2kq5l")
 
 [node name="LilGooberVisuals" parent="VisualRoot" instance=ExtResource("2_mhhax")]
 
-[node name="AudioRoot" type="Node3D" parent="."]
+[node name="AudioRoot" type="Node3D" parent="." node_paths=PackedStringArray("audio_player")]
 script = ExtResource("3_mhhax")
+sound_library = Dictionary[String, ExtResource("4_6251s")]({
+"chatter": SubResource("Resource_bh4w8"),
+"death": SubResource("Resource_6251s"),
+"surprise": SubResource("Resource_rqqvp")
+})
+audio_player = NodePath("AudioStreamPlayer3D")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioRoot"]
-volume_db = 50.0
-unit_size = 30.0
+attenuation_model = 1
+volume_db = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9555664, 0)

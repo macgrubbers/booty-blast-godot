@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bquwh18huorr0"]
+[gd_scene load_steps=21 format=3 uid="uid://bquwh18huorr0"]
 
 [ext_resource type="Script" uid="uid://dvos0ll0l7q3d" path="res://Scenes/Levels/level_0.gd" id="1_03ysy"]
 [ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_03ysy"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="8_u2fna"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="11_45ott"]
 [ext_resource type="PackedScene" uid="uid://2vmybju5xq65" path="res://Scenes/Structures/Interactable Structures/Door.tscn" id="11_olb28"]
+[ext_resource type="PackedScene" uid="uid://bgodheikavc7e" path="res://Scenes/Misc/DeathZone.tscn" id="12_olb28"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fmbw1"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -41,6 +42,9 @@ albedo_color = Color(0, 0.8180512, 0, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_olb28"]
 top_radius = 4.0
 bottom_radius = 4.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olb28"]
+size = Vector3(355.35095, 5, 232.92523)
 
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
 script = ExtResource("1_03ysy")
@@ -403,7 +407,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -92.
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -91.15013, -19.151775, 9.59123)
 
 [node name="Checkpoint" parent="." instance=ExtResource("2_03ysy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.840775, 23.307487, -1.151783)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.44224, 3.2562265, -1.151783)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.123439, 88.90763, -26.374846)
@@ -434,4 +438,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.21082, 21.544662, -5.0512
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -42.915565, 19.13225, -1.3990364)
 
 [node name="TestEnemy2" parent="." instance=ExtResource("11_45ott")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.05597, 25.219137, -22.306686)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -41.720417, 1.8978636, 10.017256)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -27.113247, 61.213146, -25.760355)
+text = "idk maybe this wall can move 
+and give the ball another path
+to travel down or something"
+font_size = 80
+
+[node name="DeathZone" parent="." instance=ExtResource("12_olb28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.390057, -44.343796, 0)
+collision_layer = 0
+collision_mask = 1572868
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.528751, 0, -5.8475037)
+shape = SubResource("BoxShape3D_olb28")

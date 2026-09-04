@@ -30,7 +30,7 @@ func _ready():
 				godot_plush_skin.wave_done.connect(child._on_animation_finished)
 
 	# Connect the dead state
-	char_ref.get_node("HealthComponent").connect("kill", on_player_dead)
+	char_ref.get_node("HealthComponent").connect("dead", on_player_dead)
 			
 	#if initial state, transition to it
 	if initial_state:

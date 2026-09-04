@@ -22,7 +22,7 @@ func _ready() -> void:
 	actor = get_owner()
 	connect("area_entered", _on_area_entered)
 	connect("area_exited", _on_area_exited)
-	health_component.connect("kill", _on_player_died)
+	health_component.connect("dead", _on_player_died)
 
 
 func _on_area_entered(area:Area3D):

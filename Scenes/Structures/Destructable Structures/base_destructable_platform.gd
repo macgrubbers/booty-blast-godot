@@ -4,7 +4,7 @@ class_name BaseDestructablePlatform extends StaticBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	health_component.connect("kill", _on_object_destroyed)
+	health_component.connect("dead", _on_object_destroyed)
 	pass # Replace with function body.
 
 

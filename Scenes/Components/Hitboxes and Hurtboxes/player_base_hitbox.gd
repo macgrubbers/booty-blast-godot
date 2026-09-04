@@ -32,8 +32,6 @@ func _on_area_entered(area: Area3D) -> void:
 		calculate_knockback_dir()
 		if !is_zero_approx(camera_shake_intensity):
 			camera_root.add_trauma(camera_shake_intensity)
-	else:
-		print(area)
 	super._on_area_entered(area)
 
 func calculate_knockback_dir():

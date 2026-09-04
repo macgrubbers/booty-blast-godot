@@ -29,7 +29,7 @@ func _ready() -> void:
 
 
 	if health_component:
-		health_component.connect("kill", _on_enemy_dead)
+		health_component.connect("dead", _on_enemy_dead)
 	
 	if patrol_path:
 		blackboard.set_value("can_patrol", true)

@@ -98,7 +98,7 @@ radius = 1.0
 height = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h8602"]
-radius = 1.0
+radius = 0.7
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
 random_pitch = 1.2
@@ -232,7 +232,7 @@ knockback_magnitude = 10.0
 metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/GroundAttackHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12674916, -0.09222746)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10334957, -0.1873014)
 shape = SubResource("SphereShape3D_h8602")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/GroundAttackHitbox"]

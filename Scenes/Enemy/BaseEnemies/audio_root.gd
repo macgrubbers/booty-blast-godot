@@ -1,22 +1,20 @@
-extends Node3D
+class_name AudioRoot extends Node3D
 
-var sound_library : Dictionary = {
-	"chatter": [preload("res://Sounds/Goober/chatter01.wav"),
-				preload("res://Sounds/Goober/chatter02.wav"),
-				preload("res://Sounds/Goober/chatter03.wav")],
-	"surprise": [preload("res://Sounds/Goober/surprise.wav")],
-	"death": [preload("res://Sounds/Goober/death.wav")]
-	}
+@export var sound_library: Dictionary[String, SoundArray] = {}
 
-@onready var audio_player = $AudioStreamPlayer3D
+@export var audio_player:AudioStreamPlayer3D
 
-func play_sound(name:String):
+func play_sound(name:String, pitch_range:Array = [1.0,1.0]):
 	if sound_library.has(name):
-		var stream = sound_library[name]
-		if stream is AudioStream:
-			audio_player.stream = stream
-			audio_player.play()
-		else:
-			push_warning("Sound '" + name + "' is empty in the library.")
+		var stream:SoundArray = sound_library[name]
+		audio_player.stream = stream.pick_random()
+		audio_player.set_pitch_scale(randf_range(pitch_range[0], pitch_range[1]))
+		audio_player.play()
 	else:
 		push_error("Sound '" + name + "' does not exist in the library.")
+
+func is_playing():
+	return audio_player.is_playing()
+
+func stop():
+	audio_player.stop()

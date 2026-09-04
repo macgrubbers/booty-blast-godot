@@ -63,9 +63,10 @@ func physics_update(delta : float):
 # Check if we should wall jump 
 # TODO: use the hitbox to detect instead of a raycast?
 func check_if_wall_jump():
-	var collider = forward_raycast.get_collider()
-	if collider and applied_rotation_timer.is_stopped():
-		wall_jump()
+	wall_jump()
+	#var collider = forward_raycast.get_collider()
+	#if collider and applied_rotation_timer.is_stopped():
+		#wall_jump()
 
 
 # Wall jump off of wall or enemy

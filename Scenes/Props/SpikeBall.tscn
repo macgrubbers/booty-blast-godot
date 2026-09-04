@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://bkquxrhccsube"]
+[gd_scene load_steps=15 format=4 uid="uid://bkquxrhccsube"]
 
-[ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_608a2"]
+[ext_resource type="Script" uid="uid://b5wbdo3yqk6w3" path="res://Scenes/Props/spike_ball.gd" id="1_um12d"]
 [ext_resource type="Texture2D" uid="uid://dog8i86md6xa3" path="res://Assets/spike_ball/textures/Material_baseColor.png" id="2_hxalg"]
 [ext_resource type="Script" uid="uid://dsn2auctmpis7" path="res://Scenes/Props/spike_ball_hitbox.gd" id="3_m7rhd"]
 [ext_resource type="Script" uid="uid://b1t251ja36jx0" path="res://Scenes/Props/prop_health_component.gd" id="4_a32tn"]
+[ext_resource type="Script" uid="uid://xv74ibolcqn0" path="res://Scenes/Enemy/BaseEnemies/audio_root.gd" id="5_yq2rp"]
+[ext_resource type="Script" uid="uid://cyeub85a3jrsr" path="res://Sounds/sound_array.gd" id="6_um12d"]
+[ext_resource type="AudioStream" uid="uid://b75jxwsxnl0sf" path="res://Sounds/Props/boulder_roll.wav" id="7_yquvs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uyx6"]
 resource_name = "Material"
@@ -53,11 +56,16 @@ radius = 4.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_yq2rp"]
 radius = 4.5
 
+[sub_resource type="Resource" id="Resource_v4sbx"]
+script = ExtResource("6_um12d")
+sound_array = Array[AudioStream]([ExtResource("7_yquvs")])
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
+
 [node name="SpikeBall" type="RigidBody3D"]
 collision_layer = 0
 mass = 5.0
 gravity_scale = 2.0
-script = ExtResource("1_608a2")
+script = ExtResource("1_um12d")
 health = 100
 armor = 4
 metadata/_custom_type_script = "uid://ckrrw7gwljllw"
@@ -106,3 +114,20 @@ metadata/_custom_type_script = "uid://b1t251ja36jx0"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PropHealthComponent"]
 shape = SubResource("SphereShape3D_yq2rp")
+
+[node name="AudioRoot" type="Node3D" parent="." node_paths=PackedStringArray("audio_player")]
+script = ExtResource("5_yq2rp")
+sound_library = Dictionary[String, ExtResource("6_um12d")]({
+"roll": SubResource("Resource_v4sbx")
+})
+audio_player = NodePath("AudioStreamPlayer3D")
+metadata/_custom_type_script = "uid://xv74ibolcqn0"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioRoot"]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+top_level = true
+target_position = Vector3(0, -6.5, 0)
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5

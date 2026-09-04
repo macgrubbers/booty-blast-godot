@@ -18,7 +18,7 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	$"../../../PerceptionComponent".monitorable = false
 	
 	# play sound
-	audio_root.play_sound("death")
+	audio_root.play_sound("death",[0.7,1.2])
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	#actor.gravity_apply()
