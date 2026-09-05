@@ -1,5 +1,77 @@
-[gd_scene format=3 uid="uid://bu1q2cj8jfs5p"]
+[gd_scene load_steps=5 format=3 uid="uid://bu1q2cj8jfs5p"]
+
+[ext_resource type="Texture2D" uid="uid://dgf8wkoip3x8l" path="res://Assets/2D Art/goblina.png" id="1_2bs76"]
+[ext_resource type="Script" uid="uid://jvvl8j3eocnv" path="res://Scenes/Menus/level_selector.gd" id="1_hb6ql"]
+[ext_resource type="Texture2D" uid="uid://b02uhxidjd7sx" path="res://Assets/2D Art/sandbox.jpg" id="2_v0u6l"]
+[ext_resource type="Texture2D" uid="uid://w00yaorbdmou" path="res://Assets/2D Art/steelballrun.jpg" id="3_mhxpv"]
 
 [node name="LevelSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_hb6ql")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.37254903)
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 642.0
+texture = ExtResource("1_2bs76")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 103.0
+offset_right = 790.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 70
+text = "Pick a Level"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 279.0
+offset_right = 263.0
+offset_bottom = 342.0
+theme_override_font_sizes/font_size = 45
+text = "Sandbox"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 381.0
+offset_top = 268.0
+offset_right = 679.0
+offset_bottom = 331.0
+theme_override_font_sizes/font_size = 45
+text = "Steel Ball Run"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 348.0
+offset_right = 1067.0
+offset_bottom = 1348.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("2_v0u6l")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 335.0
+offset_right = 783.0
+offset_bottom = 932.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_mhxpv")
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 842.0
+offset_top = 438.0
+offset_right = 963.0
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit"

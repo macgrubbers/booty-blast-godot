@@ -4,9 +4,10 @@ class_name AudioRoot extends Node3D
 
 @export var audio_player:AudioStreamPlayer3D
 
-func play_sound(name:String, pitch_range:Array = [1.0,1.0]):
+func play_sound(name:String, pitch_range:Array = [1.0,1.0], volume:float = 0):
 	if sound_library.has(name):
 		var stream:SoundArray = sound_library[name]
+		audio_player.volume_db = volume
 		audio_player.stream = stream.pick_random()
 		audio_player.set_pitch_scale(randf_range(pitch_range[0], pitch_range[1]))
 		audio_player.play()

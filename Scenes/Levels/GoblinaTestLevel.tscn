@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://duh26g4yrluc"]
+[gd_scene load_steps=22 format=3 uid="uid://duh26g4yrluc"]
 
 [ext_resource type="Script" uid="uid://c82cckocoi1e8" path="res://Scenes/Levels/goblina_test_level.gd" id="1_35nj8"]
 [ext_resource type="Material" uid="uid://coy4nf1ts2u0q" path="res://addons/Arts/Materials/grid_mat.tres" id="1_okje8"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dqfx7d5xppmyn" path="res://Scenes/Collectables/HealthCollectable.tscn" id="10_w0wue"]
 [ext_resource type="PackedScene" uid="uid://bnjn82pm8puu5" path="res://Scenes/Structures/Interactable Structures/LaunchingPlatform.tscn" id="13_3taeo"]
 [ext_resource type="PackedScene" uid="uid://hnkl57lbc0un" path="res://Scenes/Structures/Deadly Structures/HurtGround.tscn" id="14_2v1ph"]
+[ext_resource type="PackedScene" uid="uid://bdyel6fmr2136" path="res://Scenes/Structures/Interactable Structures/FinishFlag.tscn" id="15_ydxbs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ey38f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -266,26 +267,21 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.1
 
 [node name="BaseDestructablePhysicsObject" parent="Props" instance=ExtResource("9_7fmjj")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 43.679165, 1.8553267, 133.08752)
-scale_override = Vector3(3, 3, 3)
 
 [node name="BaseDestructablePhysicsObject2" parent="Props" instance=ExtResource("9_7fmjj")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 34.17943, 2.2997627, 120.96785)
-scale_override = Vector3(3, 3, 3)
 
 [node name="BaseDestructablePhysicsObject4" parent="Props" instance=ExtResource("9_7fmjj")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 16.935694, 3.4216347, 124.56715)
-scale_override = Vector3(3, 3, 3)
 
 [node name="CoinCollectable65" parent="Props" instance=ExtResource("3_n6hmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.900894, 5.7148066, 148.42172)
 
 [node name="BaseDestructablePhysicsObject3" parent="Props" instance=ExtResource("9_7fmjj")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 43.679165, 4.978566, 133.08752)
-scale_override = Vector3(3, 3, 3)
 
 [node name="BaseDestructablePhysicsObject5" parent="Props" instance=ExtResource("9_7fmjj")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 43.679165, 8.090212, 133.08752)
-scale_override = Vector3(3, 3, 3)
 
 [node name="Collectables" type="Node3D" parent="."]
 
@@ -492,3 +488,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.504215, 0.12567139, 170.51
 
 [node name="HurtGround" parent="." instance=ExtResource("14_2v1ph")]
 transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 36.233925, -16.651142, 112.163506)
+
+[node name="FinishFlag" parent="." instance=ExtResource("15_ydxbs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.674244, 25.296309, 206.8937)

@@ -44,17 +44,23 @@ func verifications():
 	
 	# Check wall jump if the attack worked
 	attack_area.connect("attack_successful", check_if_wall_jump)
+	var collided = false
 	
 	# Check for overlapping areas on start
 	# TODO: maybe a signal is better here idk
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	if overlapping_bodies:
+		collided = true
 		attack_area._on_body_entered(overlapping_bodies[0])
 		
 	var overlapping_areas = attack_area.get_overlapping_areas()
 	if overlapping_areas:
+		collided = true
 		attack_area._on_area_entered(overlapping_areas[0])
-
+		
+	if collided:
+		attack_area.set_monitoring(false)
+		attack_area.set_monitorable(false)
 
 func physics_update(delta : float):
 	cR.gravity_apply(delta)

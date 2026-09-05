@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_level_select_pressed():
-	pass
+	get_tree().change_scene_to_file("res://Scenes/Menus/LevelSelector.tscn")
 
 
 func _on_quit_pressed():
