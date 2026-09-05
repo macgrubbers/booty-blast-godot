@@ -2,7 +2,7 @@ class_name BlockState extends State
 
 var state_name : String = "Block"
 
-@onready var block_timer: Timer = $Timer
+@onready var block_timer: Timer = %BlockTimer
 @onready var shield: MeshInstance3D = $"../../VisualRoot/Shield"
 @onready var health_component: HealthComponent
 var cR : CharacterBody3D

@@ -3,7 +3,7 @@ class_name StunnedState extends State
 var state_name : String = "Stunned"
 
 var cR : CharacterBody3D
-@onready var stun_timer : Timer = $StunTimer
+@onready var stun_timer : Timer = %StunTimer
 
 func enter(char_ref : CharacterBody3D):
 	#pass play char reference

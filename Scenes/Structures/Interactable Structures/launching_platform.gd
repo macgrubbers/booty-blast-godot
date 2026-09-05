@@ -18,6 +18,5 @@ func launch(body:HealthComponent,curr_state:State, prev_velocity:Vector3, collis
 	# Clamp collision normal velocity if it's too big
 	if new_normal_vel.length() > max_bounce_mag:
 		new_normal_vel = new_normal_vel.normalized() * max_bounce_mag
-	print(new_normal_vel.length())
 	
 	body.apply_knockback(tangental_vel + new_normal_vel, false, true)

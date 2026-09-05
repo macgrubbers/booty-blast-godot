@@ -232,7 +232,6 @@ transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.3420201, 0, -0.3420201, 0.9396
 
 [node name="StaticBody6" type="StaticBody3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 20, 0)
-collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad/StaticBody6"]
@@ -426,16 +425,13 @@ activating_node = NodePath("../SpinnyHammer")
 transform = Transform3D(1, 0, 0, 0, 2.9459374, 0, 0, 0, 1, 40, 0.5, 39.3)
 
 [node name="Key" parent="." instance=ExtResource("5_d0jy3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.322557, 3.65694, 9.332714)
+transform = Transform3D(0.5373731, 0, -0.84334457, 0, 1, 0, 0.84334457, 0, 0.5373731, 39.157455, 3.65694, 23.62312)
 
 [node name="Door" parent="." instance=ExtResource("22_met4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.305054, 3.007514, 2.6324368)
-
-[node name="SpikeBall" parent="." instance=ExtResource("20_oebwi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37789345, 2.6847522, 13.741976)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 40.82555, 3.007514, 17.983131)
 
 [node name="FinishFlag" parent="." instance=ExtResource("23_g6416")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.145489, 0.43784428, -25.086227)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.90756226, 0.43784428, 10.523838)
 
 [node name="Label3D2" type="Label3D" parent="FinishFlag"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34004402, 2.9363651, -0.4256096)

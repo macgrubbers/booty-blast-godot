@@ -6,9 +6,9 @@ var state_name : String = "ButtSlam"
 
 var cR : CharacterBody3D
 @onready var floor_raycast: RayCast3D = %FloorRaycast
-@onready var butt_slam_land_hitbox : Area3D = $"../../ButtSlamLandHitbox"
-@onready var falling_hitbox : Area3D = $"../../FallingHitbox"
-@onready var land_timer: Timer = $Timer
+@onready var butt_slam_land_hitbox : Area3D = %ButtSlamLandHitbox
+@onready var falling_hitbox : Area3D = %FallingHitbox
+@onready var land_timer: Timer = %LandingTimer
 @export var attack_damage:int = 3
 @export var attack_level:int = 1
 @export var knockback_magnitude:float = 15
@@ -22,6 +22,7 @@ func enter(char_ref : CharacterBody3D):
 func verifications():
 	land_timer.connect("timeout", _on_land_timer_timeout)
 	falling_hitbox.set_monitoring(true)
+	falling_hitbox.connect("area_entered", _on_area_entered)
 	cR.godot_plush_skin.set_state("butt_slam")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -96,27 +97,13 @@ func _on_land_timer_timeout():
 	else: 
 		transitioned.emit(self, "IdleState")
 
-# Signaled when falling hitbox is entered
-func _on_butt_slam_falling_hitbox_entered(area : Area3D):
+
+# Logic when butt slam hitbox is entered
+func _on_area_entered(area:Area3D):
 	if area is HealthComponent:
 		var dir_vector = cR.get_global_position().direction_to(area.get_global_position()).normalized()
-		area.attack(3,attack_level, cR, Vector3(0,-50,0))
-		
-		# apply knockback up to player if it's an enemy
-		if !area.get_owner().is_in_group("Destructables"):
-			cR.velocity.y = 0
-			cR.health_component.apply_knockback(Vector3(0,12,0),true)
-		
-		# Refresh jump as if landed
-		cR.floor_snap_length = 1.0
-		if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-		if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-		if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-		if cR.has_cut_jump: cR.has_cut_jump = false
-		
-		falling_hitbox.set_monitoring(false)
-		transitioned.emit(self, "InairState")
-
+		area.attack(3,attack_level, cR, Vector3(0,-20,0))
+	
 
 # Signaled when landing hitbox is entered
 func _on_butt_slam_landing_hitbox_entered(area : Area3D):

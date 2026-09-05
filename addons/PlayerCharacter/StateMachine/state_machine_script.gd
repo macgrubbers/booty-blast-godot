@@ -8,7 +8,7 @@ var curr_state_name  : String
 var states : Dictionary = {}
 
 @onready var char_ref : CharacterBody3D = $".."
-@onready var health_component : HealthComponent = $"../HealthComponent"
+@onready var health_component : HealthComponent = %HealthComponent
 @onready var godot_plush_skin : Node3D = %GodotPlushSkin
 @onready var ground_attack_area : Area3D = %GroundAttackHitbox
 @onready var falling_hitbox : Area3D = $"../FallingHitbox"
@@ -30,7 +30,7 @@ func _ready():
 				godot_plush_skin.wave_done.connect(child._on_animation_finished)
 
 	# Connect the dead state
-	char_ref.get_node("HealthComponent").connect("dead", on_player_dead)
+	health_component.connect("dead", on_player_dead)
 			
 	#if initial state, transition to it
 	if initial_state:

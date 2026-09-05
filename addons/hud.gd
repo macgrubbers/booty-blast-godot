@@ -9,12 +9,12 @@ extends CanvasLayer
 
 @onready var player_ref : CharacterBody3D = $".."
 @onready var cam_holder = $"../OrbitView"
-@onready var health_component = $"../HealthComponent"
+@onready var health_component = %HealthComponent
 @onready var interact_raycast = $"../Raycasts/InteractRaycast"
 
 @onready var info_screen = $InfoScreen
 
-@onready var collection_component = $"../CollectionComponent"
+@onready var collection_component = %CollectionComponent
 @onready var collectables_bar = $CollectablesBar
 
 

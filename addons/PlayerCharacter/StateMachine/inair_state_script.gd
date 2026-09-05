@@ -5,7 +5,7 @@ class_name InairState
 var state_name : String = "Inair"
 
 @onready var state_machine = $".."
-@onready var falling_hitbox:BaseHitbox = $"../../FallingHitbox"
+@onready var falling_hitbox:Area3D = %FallingHitbox
 @onready var ledge_raycast1: RayCast3D = $"../../Raycasts/LedgeGrabRaycast1"
 @onready var ledge_raycast2 : RayCast3D = $"../../Raycasts/LedgeGrabRaycast2"
 @onready var ledge_shapecast :ShapeCast3D = $"../../Raycasts/LedgeGrabRaycast3/LedgeGrabShapecast"
@@ -19,24 +19,21 @@ func enter(char_ref : CharacterBody3D):
 	health_component = cR.health_component
 	
 	verifications()
-	
+
+# Setup state
 func verifications():
 	ledge_raycast1.enabled = true
 	ledge_raycast2.enabled = true
 	falling_hitbox.monitoring = true
-	#falling_hitbox.connect("attack_successful", _on_falling_attack_successful)
+	falling_hitbox.connect("area_entered", _on_area_entered)
 	cR.godot_plush_skin.set_state("fall")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
 	# Camera locking
 	cR.cam_holder.use_cam_y_deadzone = true
-	#await get_tree().physics_frame
-	#if state_machine.prev_state is JumpState and cR.nb_jumps_in_air_allowed > 0:
-		#
-	#else:
-		#cR.cam_holder.use_cam_y_deadzone = false
-	
+
+
 func update(_delta : float):
 	pass
 	
@@ -50,15 +47,20 @@ func physics_update(delta : float):
 	
 	check_if_floor()
 	
-	check_if_ledge()
+	#check_if_ledge()
 	
 	move(delta)
-	
+
+# TODO: make sure this is right
+# Looks like it ticks cooldowns for jump and coyote jump
 func applies(delta : float):
 	if !cR.is_on_floor(): 
 		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
 		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
 
+
+# Ledge grab logic
+# TODO: Needs fixing
 func check_if_ledge():
 	if ledge_raycast1.is_colliding() and !ledge_raycast2.is_colliding():
 		# Check shapecast to see if we can fit above, helps with edges and corners
@@ -70,9 +72,12 @@ func check_if_ledge():
 			# TODO fix ledge grab
 			#transitioned.emit(self, "LedgeGrabState")
 
+# Apply gravity
 func gravity_apply(delta : float):
 	if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta
-		
+
+
+# Manage user input
 func input_management():
 	if Input.is_action_just_pressed(cR.jumpAction) :
 		#check if can jump buffer
@@ -106,7 +111,8 @@ func input_management():
 	if Input.is_action_just_pressed("x"):
 		if !cR.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
-		
+
+# Check landing logic
 func check_if_floor():
 	if cR.is_on_floor():
 		if cR.jump_buff_on: 
@@ -129,7 +135,8 @@ func check_if_floor():
 		if cR.hit_wall_cut_velocity:
 			cR.velocity.x = 0.0
 			cR.velocity.z = 0.0
-		
+
+# Movement logic
 func move(delta : float):
 	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
 		
@@ -145,7 +152,8 @@ func move(delta : float):
 		
 		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * in_air_move_speed_val, in_air_accel_val * delta)
 		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * in_air_move_speed_val, in_air_accel_val * delta)
-		
+
+
 func impact_audio_playing():
 	#audio played when play char touch the ground after being in air
 	#the volume is calculated based on the velocity pre ground hit, plus the fall gravity
@@ -153,18 +161,25 @@ func impact_audio_playing():
 	cR.impact_audio.volume_db = linear_to_db(remap(floor_impact_percent, 0.0, 1.0, 0.5, 2.0))
 	cR.impact_audio.play()
 
+
+# Logic for when the falling hitbox is entered
+func _on_area_entered(area:Area3D):
+	if area is HealthComponent:
+		#apply damage
+		area.attack(3, 1, owner, Vector3(0,-10,0))
+		# Bounce off target's head
+		cR.velocity.y = 0
+		health_component.apply_knockback(Vector3(0,10,0),false)
+		cR.floor_snap_length = 1.0
+		if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
+		if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
+		if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
+		if cR.has_cut_jump: cR.has_cut_jump = false
+
+
+# On exit state
 func exit():
-	ledge_raycast1.enabled = false
-	ledge_raycast2.enabled = false
+	#ledge_raycast1.enabled = false
+	#ledge_raycast2.enabled = false
 	falling_hitbox.monitoring = false
-	falling_hitbox.disconnect("attack_successful", _on_falling_attack_successful)
-
-
-func _on_falling_attack_successful():
-	cR.velocity.y = 0
-	health_component.apply_knockback(Vector3(0,10,0),false)
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
+	falling_hitbox.disconnect("area_entered", _on_area_entered)

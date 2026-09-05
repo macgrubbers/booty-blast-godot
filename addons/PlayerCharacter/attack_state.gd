@@ -6,7 +6,7 @@ var state_name : String = "Attack"
 @onready var attack_area : Area3D = %GroundAttackHitbox
 @onready var forward_raycast : RayCast3D = $"../../Raycasts/InteractRaycast"
 @onready var applied_rotation_timer : Timer = $"../../HealthComponent/AppliedRotationTimer"
-@onready var health_component : HealthComponent = $"../../HealthComponent"
+@onready var health_component : HealthComponent = %HealthComponent
 
 
 

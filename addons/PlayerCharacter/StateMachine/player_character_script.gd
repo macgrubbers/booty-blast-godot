@@ -32,7 +32,7 @@ var knockback_vector : Vector3
 @export var dash_speed : float
 @export var dash_duration : float
 @export var dash_accel : float
-@onready var dash_reset_timer:Timer = $DashResetTimer
+@onready var dash_reset_timer:Timer = %DashResetTimer
 
 @export_group("Jump variables")
 @export var jump_height : float
@@ -87,7 +87,7 @@ enum sizes {SMALL,LARGE}
 @onready var current_size:sizes
 @onready var new_size:sizes
 @onready var is_changing_size:bool
-@onready var size_buff_timer:Timer = $SizeBuffTimer
+@onready var size_buff_timer:Timer = %SizeBuffTimer
 
 signal just_got_big(duration:float)
 
@@ -106,8 +106,8 @@ signal just_got_big(duration:float)
 @onready var collision_shape_3d = %CollisionShape3D
 @onready var floor_check : RayCast3D = %FloorRaycast
 @onready var interact_raycast : RayCast3D = $Raycasts/InteractRaycast
-@onready var health_component = $HealthComponent
-@onready var collection_component = $CollectionComponent
+@onready var health_component = %HealthComponent
+@onready var collection_component = %CollectionComponent
 
 #particles variables
 @onready var movement_dust = %MovementDust
@@ -167,22 +167,19 @@ func modify_model_orientation(delta : float):
 	#manage the model rotation depending on the camera mode + char parameters
 	
 	var dir_target_angle : float
-	
-	##follow mode (model must follow the camera rotation)
-	##if the cam is in angled/aim mode
-	#if cam_holder.cam_aimed and follow_cam_pos_when_aimed and !godot_plush_skin.ragdoll:
-		##get cam rotation on the y axis (+ PI to invert half circle, and be sure that the model is correctly oriented)
-		#dir_target_angle = (cam_holder.cam.global_rotation.y) + PI
-		##rotate the model on the y axis
-		#visual_root.rotation.y = rotate_toward(visual_root.rotation.y, dir_target_angle, model_rot_speed * delta)
-	
+
 	#free mode (the model orientation is independant to the camera one)
 	if (!cam_holder.cam_aimed or !follow_cam_pos_when_aimed) and move_dir != Vector2.ZERO:
 		#get char move direction
 		dir_target_angle = -move_dir.orthogonal().angle()
-		#rotate the model on the y axis
-		visual_root.rotation.y = rotate_toward(visual_root.rotation.y, dir_target_angle, model_rot_speed * delta)
 		
+		#rotate the model on the y axis if moving
+		if abs(velocity.length()) > 1:
+			visual_root.rotation.y = rotate_toward(visual_root.rotation.y, dir_target_angle, model_rot_speed * delta)
+		else:
+			# Snap rotation if stationary
+			visual_root.rotation.y = dir_target_angle
+			
 func modify_physics_properties():
 	last_frame_position = position #get play char position every frame
 	last_frame_velocity = velocity #get play char velocity every frame

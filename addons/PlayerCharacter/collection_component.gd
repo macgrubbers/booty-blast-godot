@@ -1,7 +1,7 @@
 class_name CollectionComponent extends Area3D
 # Scans for collisions on layers 5 (collectables) and 9 (checkpoints)
 
-@onready var player_ref:CharacterBody3D = $".."
+@onready var player_ref:CharacterBody3D = $"../.."
 @onready var health_component: HealthComponent = $"../HealthComponent"
 
 signal just_collected(type:Area3D)
