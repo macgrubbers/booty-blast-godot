@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1amraix7lmej"]
+
+[ext_resource type="Texture2D" uid="uid://dgf8wkoip3x8l" path="res://Assets/2D Art/goblina.png" id="1_iia86"]
+[ext_resource type="Script" uid="uid://ct06olswwynv6" path="res://Scenes/Menus/congrats.gd" id="1_xc7rt"]
+
+[node name="Congrats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xc7rt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.37254903)
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 642.0
+texture = ExtResource("1_iia86")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.20004
+offset_top = 218.2756
+offset_right = -254.79993
+offset_bottom = -363.7244
+color = Color(0.59607846, 0.59607846, 0, 0.40392157)
+
+[node name="Label" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = -15.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[rainbow] CONGRATS U BEAT THE LEVEL"
+
+[node name="LevelSelect" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 482.0
+offset_top = 340.0
+offset_right = -472.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Level Select"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 487.0
+offset_top = 471.0
+offset_right = -467.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit"

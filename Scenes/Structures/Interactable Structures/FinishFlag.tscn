@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdyel6fmr2136"]
+
+[ext_resource type="PackedScene" uid="uid://d3ocyb0nq6qvp" path="res://Assets/checkered flag/scene.gltf" id="1_1x1vv"]
+[ext_resource type="Script" uid="uid://b6uj8sird6uyn" path="res://Scenes/Structures/Interactable Structures/finish_flag.gd" id="1_ml2i8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ml2i8"]
+height = 2.2719727
+radius = 0.9375
+
+[node name="FinishFlag" type="Area3D"]
+collision_layer = 256
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ml2i8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.089649, 0)
+shape = SubResource("CylinderShape3D_ml2i8")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_1x1vv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6349402, 0.031634092, 0)

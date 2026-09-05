@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj305dplu2x0r"]
+
+[ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_haiqu"]
+[ext_resource type="PackedScene" uid="uid://uop0672hpmr1" path="res://Assets/torch/scene.gltf" id="2_un0av"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hywob"]
+size = Vector3(0.12451172, 0.6335449, 0.1307373)
+
+[node name="Torch" type="RigidBody3D"]
+script = ExtResource("1_haiqu")
+metadata/_custom_type_script = "uid://ckrrw7gwljllw"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004638672, -0.0008544922, -0.00091552734)
+shape = SubResource("BoxShape3D_hywob")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_un0av")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25020143, 0)
+light_color = Color(1, 0.6156863, 0, 1)
+light_energy = 13.36
+omni_range = 20.0
+omni_attenuation = 0.3

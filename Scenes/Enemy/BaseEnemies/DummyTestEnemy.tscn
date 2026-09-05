@@ -27,14 +27,14 @@
 radius = 0.29003906
 height = 1.3183594
 
-[sub_resource type="Resource" id="Resource_6251s"]
-script = ExtResource("4_0k7nr")
-sound_array = Array[AudioStream]([ExtResource("5_6b6w8")])
-metadata/_custom_type_script = "uid://cyeub85a3jrsr"
-
 [sub_resource type="Resource" id="Resource_bh4w8"]
 script = ExtResource("4_0k7nr")
 sound_array = Array[AudioStream]([ExtResource("6_t84fl"), ExtResource("7_p7adt"), ExtResource("8_a5qrs")])
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
+
+[sub_resource type="Resource" id="Resource_6251s"]
+script = ExtResource("4_0k7nr")
+sound_array = Array[AudioStream]([ExtResource("5_6b6w8")])
 metadata/_custom_type_script = "uid://cyeub85a3jrsr"
 
 [sub_resource type="Resource" id="Resource_rqqvp"]

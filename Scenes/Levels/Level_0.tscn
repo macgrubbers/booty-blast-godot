@@ -1,27 +1,33 @@
-[gd_scene load_steps=21 format=3 uid="uid://bquwh18huorr0"]
+[gd_scene load_steps=27 format=3 uid="uid://bquwh18huorr0"]
 
 [ext_resource type="Script" uid="uid://dvos0ll0l7q3d" path="res://Scenes/Levels/level_0.gd" id="1_03ysy"]
 [ext_resource type="PackedScene" uid="uid://d3y4a6x2ioehl" path="res://Scenes/Structures/Interactable Structures/Checkpoint.tscn" id="2_03ysy"]
+[ext_resource type="Texture2D" uid="uid://cnlejcm5vy4ft" path="res://Assets/skybox/dragonsreach.jpeg" id="2_omk35"]
 [ext_resource type="PackedScene" uid="uid://b7bqv84i0k5d" path="res://Scenes/Structures/SimpleTile.tscn" id="3_clgyd"]
+[ext_resource type="PackedScene" uid="uid://bj305dplu2x0r" path="res://Scenes/Structures/Destructable Structures/Torch.tscn" id="3_h3wrw"]
 [ext_resource type="PackedScene" uid="uid://drjre5d2o6v1t" path="res://Scenes/Enemy/BaseEnemies/RangedTestEnemy.tscn" id="4_d8tld"]
 [ext_resource type="PackedScene" uid="uid://dk3nl28i063fm" path="res://Scenes/Props/CrateWood.tscn" id="4_fmbw1"]
 [ext_resource type="PackedScene" uid="uid://bkquxrhccsube" path="res://Scenes/Props/SpikeBall.tscn" id="5_15f3f"]
 [ext_resource type="PackedScene" uid="uid://br2g5rfbuher0" path="res://Scenes/Enemy/BaseEnemies/DummyTestEnemy.tscn" id="6_3qm25"]
 [ext_resource type="PackedScene" uid="uid://bqil3ejoinc13" path="res://Scenes/Structures/Destructable Structures/BaseDestructablePlatform.tscn" id="7_d8tld"]
+[ext_resource type="PackedScene" uid="uid://cebgpc41kiyaf" path="res://Scenes/Collectables/CoinCollectable.tscn" id="8_civ3f"]
 [ext_resource type="PackedScene" uid="uid://bu68npdmxcrsw" path="res://Scenes/Components/Spawner.tscn" id="8_u2fna"]
 [ext_resource type="PackedScene" uid="uid://c2sjmmkrjsvvv" path="res://Scenes/Enemy/BaseEnemies/TestEnemy.tscn" id="11_45ott"]
 [ext_resource type="PackedScene" uid="uid://2vmybju5xq65" path="res://Scenes/Structures/Interactable Structures/Door.tscn" id="11_olb28"]
 [ext_resource type="PackedScene" uid="uid://bgodheikavc7e" path="res://Scenes/Misc/DeathZone.tscn" id="12_olb28"]
+[ext_resource type="PackedScene" uid="uid://bdyel6fmr2136" path="res://Scenes/Structures/Interactable Structures/FinishFlag.tscn" id="13_4tqej"]
+[ext_resource type="PackedScene" uid="uid://biddgaxuwdbtj" path="res://Scenes/Collectables/KeyCollectable.tscn" id="16_pmlut"]
+[ext_resource type="PackedScene" uid="uid://bgx6pos0jcbht" path="res://Scenes/Props/Chest.tscn" id="18_55ow4"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fmbw1"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h3wrw"]
+panorama = ExtResource("2_omk35")
 
 [sub_resource type="Sky" id="Sky_d8mrn"]
-sky_material = SubResource("ProceduralSkyMaterial_fmbw1")
+sky_material = SubResource("PanoramaSkyMaterial_h3wrw")
 
 [sub_resource type="Environment" id="Environment_15f3f"]
 background_mode = 2
+background_energy_multiplier = 0.3
 sky = SubResource("Sky_d8mrn")
 tonemap_mode = 2
 glow_enabled = true
@@ -44,7 +50,7 @@ top_radius = 4.0
 bottom_radius = 4.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_olb28"]
-size = Vector3(355.35095, 5, 232.92523)
+size = Vector3(355.35095, 5, 470.78223)
 
 [node name="Level0" type="Node3D" node_paths=PackedStringArray("current_checkpoint")]
 script = ExtResource("1_03ysy")
@@ -54,6 +60,7 @@ current_checkpoint = NodePath("Checkpoint")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.8660254, -0.48296297, 0.12940957, 0, 0.25881907, 0.9659259, -0.50000006, 0.83651626, -0.22414389, 0, 295.70538, 224.74242)
+light_energy = 0.443
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
@@ -255,6 +262,9 @@ transform = Transform3D(-0.49999976, 3.9201824e-09, -0.2598077, -0.8660253, 5.05
 [node name="SimpleTile100" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-0.50000006, -0.8660253, 3.7855166e-08, -0.8660253, 0.50000006, -6.556707e-08, 3.785517e-08, -6.5567086e-08, -1, 12.178653, 68.601135, -26.266384)
 
+[node name="SimpleTile101" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
+transform = Transform3D(-1, 1.1920929e-07, -3.785518e-08, 1.1920929e-07, 1, -6.556708e-08, 3.785518e-08, -6.5567086e-08, -1, 19.42555, 72.614685, -26.266384)
+
 [node name="SimpleTile65" parent="NavigationRegion3D" instance=ExtResource("3_clgyd")]
 transform = Transform3D(-1, 4.5695575e-08, -3.7855173e-08, 4.5695582e-08, 1, -6.556708e-08, 3.785517e-08, -6.5567086e-08, -1, -12.821348, 55.420498, -36.266384)
 
@@ -359,6 +369,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -14.676691, 10.352
 [node name="CrateWood12" parent="Props" instance=ExtResource("4_fmbw1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.96757, -11.676691, 8.352697)
 
+[node name="Torch" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.950455, 2.9798007, 5.012417)
+
+[node name="Torch3" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.755787, 20.580946, 24.47115)
+
+[node name="Torch2" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.70728, 14.931027, 5.562129)
+
+[node name="Torch7" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.965164, 14.931027, 24.45347)
+
+[node name="Torch5" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -39.45982, 24.434319, -4.3722)
+
+[node name="Torch6" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -47.361313, 24.434319, -4.3722)
+
+[node name="Torch4" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87.89468, -7.9605236, 10.07943)
+freeze = true
+
+[node name="CoinCollectable" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.998158, 14.69482, 13.583709)
+
+[node name="CoinCollectable4" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -43.191223, 20.18644, 15.583709)
+
+[node name="CoinCollectable5" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(-1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, -1, -43.191223, 20.18644, 11.583709)
+
+[node name="CoinCollectable6" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(-0.5, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.5, -43.191223, 20.18644, 6.583709)
+
+[node name="CoinCollectable7" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(-0.5, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.5, -43.191223, 20.18644, 19.58371)
+
+[node name="CoinCollectable8" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, -39.191223, 20.18644, 19.58371)
+
+[node name="CoinCollectable9" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(-0.5, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.5, -34.191223, 20.18644, 19.58371)
+
+[node name="CoinCollectable2" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -20.807314, 14.69482, 11.228769)
+
+[node name="CoinCollectable3" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, -18.759186, 14.69482, 9.090874)
+
+[node name="Torch8" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -9.216234, 41.1688, -24.83862)
+
+[node name="Torch9" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -36.926933, 52.438625, -25.159325)
+
+[node name="Torch10" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.723438, 60.00448, -31.315332)
+
+[node name="Torch11" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.436134, 56.73801, -40.952003)
+freeze = true
+
+[node name="Torch12" parent="Props" instance=ExtResource("3_h3wrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.223509, 28.308718, -19.673351)
+
+[node name="Key" parent="Props" instance=ExtResource("16_pmlut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.87686, 59.238228, -38.146217)
+
+[node name="CoinCollectable10" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.085655, 47.226852, -25.914522)
+
+[node name="CoinCollectable12" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.085655, 50.226852, -25.914522)
+
+[node name="CoinCollectable11" parent="Props" instance=ExtResource("8_civ3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.085656, 40.226852, -25.914522)
+
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="DummyTestEnemy6" parent="Enemies" instance=ExtResource("6_3qm25")]
@@ -406,6 +493,12 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -92.
 [node name="DummyTestEnemy30" parent="Enemies" instance=ExtResource("6_3qm25")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -91.15013, -19.151775, 9.59123)
 
+[node name="TestEnemy" parent="Enemies" instance=ExtResource("11_45ott")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -42.915565, 19.13225, -1.3990364)
+
+[node name="TestEnemy2" parent="Enemies" instance=ExtResource("11_45ott")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -41.720417, 1.8978636, 10.017256)
+
 [node name="Checkpoint" parent="." instance=ExtResource("2_03ysy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.44224, 3.2562265, -1.151783)
 
@@ -434,12 +527,6 @@ autostart = true
 [node name="Door" parent="." instance=ExtResource("11_olb28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.21082, 21.544662, -5.051257)
 
-[node name="TestEnemy" parent="." instance=ExtResource("11_45ott")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -42.915565, 19.13225, -1.3990364)
-
-[node name="TestEnemy2" parent="." instance=ExtResource("11_45ott")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -41.720417, 1.8978636, 10.017256)
-
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -27.113247, 61.213146, -25.760355)
 text = "idk maybe this wall can move 
@@ -448,11 +535,17 @@ to travel down or something"
 font_size = 80
 
 [node name="DeathZone" parent="." instance=ExtResource("12_olb28")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.390057, -44.343796, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.390057, -84.0972, 0)
 collision_layer = 0
 collision_mask = 1572868
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.528751, 0, -5.8475037)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.528751, 0, -48.968117)
 shape = SubResource("BoxShape3D_olb28")
+
+[node name="FinishFlag" parent="." instance=ExtResource("13_4tqej")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -43.45471, 19.605549, -12.609668)
+
+[node name="Chest" parent="." instance=ExtResource("18_55ow4")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 22.41184, 73.96709, -26.448948)

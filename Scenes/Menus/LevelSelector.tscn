@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bu1q2cj8jfs5p"]
+
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 0

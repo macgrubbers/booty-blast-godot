@@ -6,6 +6,7 @@ class_name CollectionComponent extends Area3D
 
 signal just_collected(type:Area3D)
 signal checkpoint_reached(checkpoint:Area3D)
+signal finish_reached(level_id:String)
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -41,3 +42,7 @@ func _on_area_entered(area:Area3D):
 	if area is Checkpoint:
 		checkpoint_reached.emit(area)
 		
+	if area is FinishFlag:
+		finish_reached.emit(area.get_finish_message())
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().change_scene_to_file("res://Scenes/Menus/Congrats.tscn")
