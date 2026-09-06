@@ -7,6 +7,8 @@ var prev_state : State
 var curr_state_name  : String
 var states : Dictionary = {}
 
+var inactionable:bool = false # updated from HealthComponent
+
 @onready var char_ref : CharacterBody3D = $".."
 @onready var health_component : HealthComponent = %HealthComponent
 @onready var godot_plush_skin : Node3D = %GodotPlushSkin
@@ -15,8 +17,6 @@ var states : Dictionary = {}
 @onready var butt_slam_land_hitbox : Area3D = $"../ButtSlamLandHitbox"
 
 func _ready():
-	health_component.connect("hitstunned", _on_hitstunned)
-	
 	#get all the state childrens
 	for child in get_children():
 		if child is State:

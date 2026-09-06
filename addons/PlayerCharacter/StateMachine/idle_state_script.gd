@@ -34,9 +34,9 @@ func physics_update(delta : float):
 	
 	cR.gravity_apply(delta)
 	
-	input_management()
-	
-	move(delta)
+	if !cR.health_component.inactionable:
+		input_management()
+		move(delta)
 	
 func check_if_floor():
 	#manage the appliements and state transitions that needs to be sets/checked/performed

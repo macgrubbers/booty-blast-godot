@@ -26,6 +26,7 @@ func attack(amount : int,
 
 	if current_health <= 0:
 		kill()
+		dead.emit()
 	return
 
 func apply_knockback(amount:Vector3, start_timer:bool = false, reset_velocity:bool = false):

@@ -27,10 +27,10 @@ func physics_update(delta : float):
 	applies(delta)
 	
 	cR.gravity_apply(delta)
-	
-	input_management()
-	
-	check_if_floor()
+
+	if !cR.health_component.inactionable:
+		input_management()
+		check_if_floor()
 	
 	move(delta)
 	

@@ -43,13 +43,11 @@ func physics_update(delta : float):
 	if cR.velocity.y > 0 and cR.has_cut_jump: gravity_apply(delta)
 	else: cR.gravity_apply(delta)
 	
-	input_management()
-	
+	if !cR.health_component.inactionable:
+		input_management()
+		move(delta)
+
 	check_if_floor()
-	
-	#check_if_ledge()
-	
-	move(delta)
 
 # TODO: make sure this is right
 # Looks like it ticks cooldowns for jump and coyote jump

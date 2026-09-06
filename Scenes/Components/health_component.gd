@@ -9,6 +9,7 @@ var current_health : int
 # status
 @onready var is_alive = true
 @onready var can_be_hurt: bool = true
+@onready var inactionable:bool = false
 @export var armor_blocks_knockback:bool = false
 
 # immunity timers
@@ -133,7 +134,6 @@ func apply_status_effect(new_effect: StatusEffect) -> void:
 	# Check if effect already exists to refresh duration instead of stacking
 	for effect in active_effects:
 		if effect.get_script() == new_effect.get_script():
-			effect.time_elapsed = 0.0 # Refresh duration
 			return
 			
 	active_effects.append(new_effect)

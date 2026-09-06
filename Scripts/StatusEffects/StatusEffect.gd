@@ -1,7 +1,7 @@
 class_name StatusEffect extends Resource
 
 @export var effect_name: String = "Effect"
-@export var duration: float = 5.0 # -1 means lasts forever
+@export var duration: float = 0.0 # -1 means lasts forever
 @export var stackable: bool = false
 
 var time_remaining: float = 0.0
@@ -14,8 +14,10 @@ func apply(char: CharacterBody3D) -> void:
 
 func update(delta: float) -> void:
 	if duration < -0.5:
+		return
+	else:
 		time_remaining -= delta
-		if time_remaining >= 0:
+		if time_remaining <= 0:
 			is_expired = true
 
 func remove() -> void:

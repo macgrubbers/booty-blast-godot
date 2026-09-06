@@ -37,13 +37,10 @@ func physics_update(delta : float):
 	applies(delta)
 	
 	gravity_apply(delta)
-	
-	input_management()
-	
+
 	check_if_floor()
-	
-	#move(delta)
-	
+
+
 func applies(delta : float):
 	if !cR.is_on_floor(): 
 		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
@@ -52,9 +49,7 @@ func applies(delta : float):
 func gravity_apply(delta : float):
 	cR.velocity.y -= cR.fall_gravity * cR.butt_slam_gravity_multiplier * delta
 	# if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta
-		
-func input_management():
-	pass
+	
 
 # Checks if the player is on the floor
 # If true:

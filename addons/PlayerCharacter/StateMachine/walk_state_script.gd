@@ -34,10 +34,10 @@ func physics_update(delta : float):
 	check_if_floor()
 	
 	cR.gravity_apply(delta)
-	
-	input_management()
-	
-	move(delta)
+
+	if !cR.health_component.inactionable:
+		input_management()
+		move(delta)
 	
 func check_if_floor():
 	if !cR.is_on_floor() and !cR.is_on_wall():

@@ -66,6 +66,9 @@ func physics_update(_delta : float):
 	input_management()
 
 func input_management():
+	if cR.health_component.inactionable:
+		return
+
 	if Input.is_action_just_pressed(cR.jumpAction):
 		ledge_grab_raycast3.force_raycast_update()
 		var raycast3_intersect_pos = ledge_grab_raycast3.get_collision_point()

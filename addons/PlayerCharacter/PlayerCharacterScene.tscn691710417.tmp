@@ -1,10 +1,11 @@
-[gd_scene load_steps=65 format=3 uid="uid://bgkmxyw21pc1m"]
+[gd_scene load_steps=66 format=3 uid="uid://bgkmxyw21pc1m"]
 
 [ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
 [ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
 [ext_resource type="Script" uid="uid://kagtvveav2wq" path="res://addons/PlayerCharacter/visual_root.gd" id="2_or008"]
 [ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://addons/PlayerCharacter/OrbitControl/orbit_view.tscn" id="3_hcr6r"]
 [ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
+[ext_resource type="Script" uid="uid://bem514aj86eyo" path="res://Scenes/Components/Hitboxes and Hurtboxes/base_hitbox.gd" id="3_wl7ak"]
 [ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://addons/PlayerCharacter/Vfx/dust_mat.tres" id="4_j7qt1"]
 [ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://addons/Arts/Sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
 [ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://addons/Arts/Sounds/footstep_concrete_001.ogg" id="6_nlp36"]
@@ -205,10 +206,12 @@ script = ExtResource("2_or008")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3475122, 1.0054677)
 collision_layer = 0
-collision_mask = 3145735
+collision_mask = 3145733
 input_ray_pickable = false
 monitoring = false
 monitorable = false
+script = ExtResource("3_wl7ak")
+metadata/_custom_type_script = "uid://bem514aj86eyo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/Hitboxes/HipCheckHitbox"]
 shape = SubResource("SphereShape3D_h8602")
@@ -234,8 +237,7 @@ shape = SubResource("CylinderShape3D_khnxt")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="VisualRoot/Hitboxes/FallingHitbox"]
 enabled = false
-shape = SubResource("CylinderShape3D_khnxt")
-collision_mask = 0
+shape = SubResource("SphereShape3D_h8602")
 
 [node name="ButtSlamLandHitbox" type="Area3D" parent="VisualRoot/Hitboxes"]
 unique_name_in_owner = true
@@ -318,7 +320,7 @@ hit_from_inside = true
 debug_shape_custom_color = Color(0, 0.78361595, 3.85046e-07, 1)
 
 [node name="InteractRaycast" type="RayCast3D" parent="Raycasts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2053518, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71797085, 0)
 target_position = Vector3(0, 0, 3)
 collision_mask = 15
 hit_from_inside = true

@@ -3,7 +3,7 @@ extends State
 class_name RagdollState
 
 var state_name : String = "Ragdoll"
-@onready var health_component:HealthComponent = $"../../HealthComponent"
+@onready var health_component:HealthComponent = %HealthComponent
 @onready var godot_plush_skin = %GodotPlushSkin
 
 var cR : CharacterBody3D

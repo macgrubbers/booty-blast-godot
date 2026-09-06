@@ -36,6 +36,7 @@ func verifications():
 	attack_area.set_monitoring(true)
 	attack_area.connect("area_entered", _on_area_entered)
 	attack_area.connect("body_entered", _on_body_entered)
+	cR.godot_plush_skin.wave_done.connect(exit)
 	
 	# Check hitbox for initial overlaps
 	check_hitbox()
@@ -51,15 +52,15 @@ func check_hitbox():
 	var overlapping_bodies = attack_area.get_overlapping_bodies()
 	if overlapping_bodies:
 		collided = true
-		attack_area._on_body_entered(overlapping_bodies[0])
+		_on_body_entered(overlapping_bodies[0])
 		
 	var overlapping_areas = attack_area.get_overlapping_areas()
 	if overlapping_areas:
 		collided = true
-		attack_area._on_area_entered(overlapping_areas[0])
+		_on_area_entered(overlapping_areas[0])
 		
-	if collided:
-		attack_area.set_monitoring(false)
+	#if collided:
+		#attack_area.set_monitoring(false)
 
 
 # Update gravity
@@ -67,17 +68,11 @@ func physics_update(delta : float):
 	cR.gravity_apply(delta)
 
 
-# Check if we should wall jump 
-# TODO: use the hitbox to detect instead of a raycast?
-func check_if_wall_jump():
-	wall_jump()
-	#var collider = forward_raycast.get_collider()
-	#if collider and applied_rotation_timer.is_stopped():
-		#wall_jump()
-
-
 func _on_area_entered(area:Area3D):
-	var model_rotation = cR.visual_root.rotation.y # For knockback, may not be used
+	# For knockback, may not be used
+	var model_rotation = cR.visual_root.rotation.y 
+	var knockback_dir = Vector3(sin(model_rotation), 0, cos(model_rotation))
+	var attack_successful = false
 	# Check shapecast
 	attack_shapecast.force_shapecast_update()
 	var total_collisions = attack_shapecast.get_collision_count()
@@ -85,24 +80,44 @@ func _on_area_entered(area:Area3D):
 	for n in range(total_collisions):
 		var collider:Object = attack_shapecast.get_collider(n)
 		if collider is HealthComponent:
-			var knockback_dir = Vector3(sin(model_rotation), 0, cos(model_rotation))
 			var knockback_mag = 10
+			# TODO: Maybe knockback dir is different each time
 			collider.attack(3,1, owner, knockback_dir * knockback_mag)
+			attack_successful = true
+	
+	# If we hit something successfully, knockback ourselves!
+	if attack_successful:
+		var player_knockback_mag = 7
+		var extra_vertical_konockback = Vector3(0,13,0)
+		health_component.apply_knockback(-knockback_dir * player_knockback_mag + extra_vertical_konockback,
+		true, true)
+		transitioned.emit(self, "InairState")
+
 
 func _on_body_entered(body:Node3D):
-	pass
+	var model_rotation = cR.visual_root.rotation.y 
+	var knockback_dir = Vector3(sin(model_rotation), 0, cos(model_rotation))
+	var player_knockback_mag = 15
+	var extra_vertical_konockback = Vector3(0,15,0)
+	health_component.apply_knockback(-knockback_dir * player_knockback_mag + extra_vertical_konockback,
+	false, true)
+	cR.visual_root.rotation.y *= -1
+	var inactionable_status:InactionableStatusEffect = InactionableStatusEffect.new()
+	inactionable_status.duration = 0.3
+	health_component.apply_status_effect(inactionable_status)
+	transitioned.emit(self, "InairState")
 
 
 # Wall jump off of wall or enemy
 # 	TODO: reflection angle is just y-rotation flipped 180
-func wall_jump():
-	#cR.can_wall_jump = false
-	var model_rotation = cR.visual_root.rotation.y
-	cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
-	health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
-	cR.visual_root.rotation.y += PI
-	applied_rotation_timer.start()
-	transitioned.emit(self, "InairState")
+#func wall_jump():
+	##cR.can_wall_jump = false
+	#var model_rotation = cR.visual_root.rotation.y
+	#cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
+	#health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
+	#cR.visual_root.rotation.y += PI
+	#applied_rotation_timer.start()
+	#transitioned.emit(self, "InairState")
 
 
 # Called when wave animation is complete
@@ -114,4 +129,7 @@ func _on_animation_finished():
 func exit():
 	#check_if_wall_jump()
 	attack_area.set_monitoring(false)
-	attack_area.disconnect("attack_successful", check_if_wall_jump)
+	attack_area.disconnect("area_entered", _on_area_entered)
+	attack_area.disconnect("body_entered", _on_body_entered)
+	cR.godot_plush_skin.wave_done.disconnect(exit)
+	#attack_area.disconnect("attack_successful", check_if_wall_jump)

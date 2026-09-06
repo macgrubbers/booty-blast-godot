@@ -431,9 +431,12 @@ transform = Transform3D(0.5373731, 0, -0.84334457, 0, 1, 0, 0.84334457, 0, 0.537
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 40.82555, 3.007514, 17.983131)
 
 [node name="FinishFlag" parent="." instance=ExtResource("23_g6416")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.90756226, 0.43784428, 10.523838)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.90756226, 0.43784428, 27.080467)
 
 [node name="Label3D2" type="Label3D" parent="FinishFlag"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34004402, 2.9363651, -0.4256096)
 pixel_size = 0.015
 text = "Level Selector"
+
+[node name="DummyTestEnemy" parent="." instance=ExtResource("6_ca7po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27748966, 0.52491367, 8.643647)
