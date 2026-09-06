@@ -3,12 +3,11 @@ class_name AttackState extends State
 var state_name : String = "Attack"
 
 @onready var cR : CharacterBody3D
-@onready var attack_area : Area3D = %GroundAttackHitbox
+@onready var attack_area : Area3D = %HipCheckHitbox
+@onready var attack_shapecast:ShapeCast3D = %HipCheckHitbox/ShapeCast3D
 @onready var forward_raycast : RayCast3D = $"../../Raycasts/InteractRaycast"
 @onready var applied_rotation_timer : Timer = $"../../HealthComponent/AppliedRotationTimer"
 @onready var health_component : HealthComponent = %HealthComponent
-
-
 
 @onready var dash_dir:Vector2
 
@@ -21,29 +20,30 @@ func enter(char_ref : CharacterBody3D):
 
 
 func verifications():
-	#manage the appliements that need to be set at the start of the state
 	cR.godot_plush_skin.set_state("gr_attack")
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
-	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	
+	# Determine attack direciton
 	dash_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
 	if dash_dir.is_equal_approx(Vector2.ZERO):
 		dash_dir = Vector2(sin(cR.visual_root.rotation.y), cos(cR.visual_root.rotation.y))
 	
+	# Set dash velocity
 	cR.velocity.x = dash_dir.x * cR.dash_speed
 	cR.velocity.y = 0
 	cR.velocity.z = dash_dir.y * cR.dash_speed
 
-	# for the attack area
+	# Attack area signals and hitbox
 	attack_area.set_monitoring(true)
-	attack_area.set_monitorable(true)
+	attack_area.connect("area_entered", _on_area_entered)
+	attack_area.connect("body_entered", _on_body_entered)
 	
-	# Check wall jump if the attack worked
-	attack_area.connect("attack_successful", check_if_wall_jump)
+	# Check hitbox for initial overlaps
+	check_hitbox()
+
+
+# Manually check the hitboxes for overlaps
+# Used for initial node transition
+func check_hitbox():
 	var collided = false
 	
 	# Check for overlapping areas on start
@@ -60,8 +60,9 @@ func verifications():
 		
 	if collided:
 		attack_area.set_monitoring(false)
-		attack_area.set_monitorable(false)
 
+
+# Update gravity
 func physics_update(delta : float):
 	cR.gravity_apply(delta)
 
@@ -73,6 +74,23 @@ func check_if_wall_jump():
 	#var collider = forward_raycast.get_collider()
 	#if collider and applied_rotation_timer.is_stopped():
 		#wall_jump()
+
+
+func _on_area_entered(area:Area3D):
+	var model_rotation = cR.visual_root.rotation.y # For knockback, may not be used
+	# Check shapecast
+	attack_shapecast.force_shapecast_update()
+	var total_collisions = attack_shapecast.get_collision_count()
+	# TODO: could this ever be more than 1?
+	for n in range(total_collisions):
+		var collider:Object = attack_shapecast.get_collider(n)
+		if collider is HealthComponent:
+			var knockback_dir = Vector3(sin(model_rotation), 0, cos(model_rotation))
+			var knockback_mag = 10
+			collider.attack(3,1, owner, knockback_dir * knockback_mag)
+
+func _on_body_entered(body:Node3D):
+	pass
 
 
 # Wall jump off of wall or enemy
@@ -88,13 +106,12 @@ func wall_jump():
 
 
 # Called when wave animation is complete
-#	TODO: remove toggle to check states
+#	TODO: determine if it should be a ground or air state next
 func _on_animation_finished():
 	transitioned.emit(self, "IdleState")
 
-
+# Exit state
 func exit():
 	#check_if_wall_jump()
 	attack_area.set_monitoring(false)
-	attack_area.set_monitorable(false)
 	attack_area.disconnect("attack_successful", check_if_wall_jump)

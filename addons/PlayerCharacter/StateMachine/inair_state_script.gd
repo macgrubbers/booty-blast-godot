@@ -166,6 +166,7 @@ func impact_audio_playing():
 func _on_area_entered(area:Area3D):
 	if area is HealthComponent:
 		#apply damage
+		# TODO: replace magic numbers with variables, maybe stored in the parent class
 		area.attack(3, 1, owner, Vector3(0,-10,0))
 		# Bounce off target's head
 		cR.velocity.y = 0

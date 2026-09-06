@@ -5,7 +5,7 @@ class_name GroundAttackState
 var state_name : String = "GroundAttack"
 
 @onready var cR : CharacterBody3D
-@onready var ground_attack_area : Area3D = %GroundAttackHitbox
+@onready var ground_attack_area : Area3D = %HipCheckHitbox
 
 @onready var dash_dir:Vector2
 

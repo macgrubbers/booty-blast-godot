@@ -10,7 +10,7 @@ var states : Dictionary = {}
 @onready var char_ref : CharacterBody3D = $".."
 @onready var health_component : HealthComponent = %HealthComponent
 @onready var godot_plush_skin : Node3D = %GodotPlushSkin
-@onready var ground_attack_area : Area3D = %GroundAttackHitbox
+@onready var ground_attack_area : Area3D = %HipCheckHitbox
 @onready var falling_hitbox : Area3D = $"../FallingHitbox"
 @onready var butt_slam_land_hitbox : Area3D = $"../ButtSlamLandHitbox"
 
