@@ -16,9 +16,12 @@ func enter(char_ref : CharacterBody3D):
 func verifications():
 	cR.cam_holder.use_cam_y_deadzone = true
 	cR.godot_plush_skin.set_state("jump")
-	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
-	if cR.jump_cooldown < cR.jump_cooldown_ref: cR.jump_cooldown = cR.jump_cooldown_ref
-	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
+	if cR.floor_snap_length != 0.0:  
+		cR.floor_snap_length = 0.0
+	if cR.jump_cooldown[cR.current_size] < cR.jump_cooldown_ref: 
+		cR.jump_cooldown[cR.current_size] = cR.jump_cooldown_ref
+	if cR.movement_dust.emitting: 
+		cR.movement_dust.emitting = false
 	
 func update(_delta : float):
 	pass
@@ -36,8 +39,10 @@ func physics_update(delta : float):
 	
 func applies(delta : float):
 	if !cR.is_on_floor(): 
-		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
-		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
+		if cR.jump_cooldown[cR.current_size] > 0.0: 
+			cR.jump_cooldown[cR.current_size] -= delta
+		if cR.coyote_jump_cooldown[cR.current_size] > 0.0: 
+			cR.coyote_jump_cooldown[cR.current_size] -= delta
 		
 func input_management():
 	if Input.is_action_just_pressed(cR.jumpAction):
@@ -96,25 +101,25 @@ func jump():
 	#in air jump
 	if !cR.is_on_floor():
 		if cR.coyote_jump_on:
-			cR.jump_cooldown = cR.jump_cooldown_ref
-			cR.coyote_jump_cooldown = -1.0 #so that the character cannot immediately make another coyote jump
+			cR.jump_cooldown[cR.current_size] = cR.jump_cooldown_ref
+			cR.coyote_jump_cooldown[cR.current_size] = -1.0 #so that the character cannot immediately make another coyote jump
 			cR.coyote_jump_on = false
 			can_jump = true 
-		elif cR.nb_jumps_in_air_allowed > 0:
+		elif cR.nb_jumps_in_air_allowed[cR.current_size] > 0:
 			#cR.cam_holder.use_cam_y_deadzone = false
-			cR.nb_jumps_in_air_allowed -= 1
-			cR.jump_cooldown = cR.jump_cooldown_ref
+			cR.nb_jumps_in_air_allowed[cR.current_size] -= 1
+			cR.jump_cooldown[cR.current_size] = cR.jump_cooldown_ref
 			can_jump = true 
 			
 	#on floor jump
 	if cR.is_on_floor():
-		cR.jump_cooldown = cR.jump_cooldown_ref
+		cR.jump_cooldown[cR.current_size] = cR.jump_cooldown_ref
 		can_jump = true 
 		
 	#jump buffering
 	if cR.buffered_jump:
 		cR.buffered_jump = false
-		cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
+		cR.nb_jumps_in_air_allowed[cR.current_size] = cR.nb_jumps_in_air_allowed_ref
 		
 	#apply jump
 	if can_jump:

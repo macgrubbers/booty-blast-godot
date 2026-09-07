@@ -18,9 +18,12 @@ func verifications():
 	#manage the appliements that need to be set at the start of the state
 	cR.godot_plush_skin.set_state("idle")
 	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
+	if cR.jump_cooldown[cR.current_size] > 0.0: 
+		cR.jump_cooldown[cR.current_size] = -1.0
+	if cR.nb_jumps_in_air_allowed[cR.current_size] < cR.nb_jumps_in_air_allowed_ref:
+		cR.nb_jumps_in_air_allowed[cR.current_size] = cR.nb_jumps_in_air_allowed_ref
+	if cR.coyote_jump_cooldown[cR.current_size] < cR.coyote_jump_cooldown_ref:
+		cR.coyote_jump_cooldown[cR.current_size] = cR.coyote_jump_cooldown_ref
 	if cR.has_cut_jump: cR.has_cut_jump = false
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
 	

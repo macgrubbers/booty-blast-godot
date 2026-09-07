@@ -30,8 +30,8 @@ func verifications():
 	if dash_dir.is_equal_approx(Vector2.ZERO):
 		dash_dir = Vector2(sin(cR.visual_root.rotation.y), cos(cR.visual_root.rotation.y))
 	
-	cR.velocity.x = dash_dir.x * cR.dash_speed
-	cR.velocity.z = dash_dir.y * cR.dash_speed
+	cR.velocity.x = dash_dir.x * cR.dash_speed[cR.current_size]
+	cR.velocity.z = dash_dir.y * cR.dash_speed[cR.current_size]
 
 	
 	# for the attack area

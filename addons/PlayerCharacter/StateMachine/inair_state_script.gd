@@ -53,8 +53,10 @@ func physics_update(delta : float):
 # Looks like it ticks cooldowns for jump and coyote jump
 func applies(delta : float):
 	if !cR.is_on_floor(): 
-		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
-		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
+		if cR.jump_cooldown[cR.current_size] > 0.0: 
+			cR.jump_cooldown[cR.current_size] -= delta
+		if cR.coyote_jump_cooldown[cR.current_size] > 0.0: 
+			cR.coyote_jump_cooldown[cR.current_size] -= delta
 
 
 # Ledge grab logic
@@ -72,20 +74,22 @@ func check_if_ledge():
 
 # Apply gravity
 func gravity_apply(delta : float):
-	if cR.velocity.y >= 0.0: cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier * delta
+	if cR.velocity.y >= 0.0: 
+		cR.velocity.y -= cR.jump_gravity / cR.jump_cut_multiplier[cR.current_size] * delta
 
 
 # Manage user input
 func input_management():
 	if Input.is_action_just_pressed(cR.jumpAction) :
 		#check if can jump buffer
-		if cR.floor_check.is_colliding() and cR.last_frame_position.y > cR.position.y and cR.nb_jumps_in_air_allowed <= 0: cR.jump_buff_on = true
+		if cR.floor_check.is_colliding() and cR.last_frame_position.y > cR.position.y and cR.nb_jumps_in_air_allowed[cR.current_size] <= 0: 
+			cR.jump_buff_on = true
 		#check if can coyote jump
-		if cR.was_on_floor and cR.coyote_jump_cooldown > 0.0 and cR.last_frame_position.y > cR.position.y:
+		if cR.was_on_floor and cR.coyote_jump_cooldown[cR.current_size] > 0.0 and cR.last_frame_position.y > cR.position.y:
 			cR.coyote_jump_on = true
 			transitioned.emit(self, "JumpState")
 		# jump if we have the jumps for it
-		if cR.nb_jumps_in_air_allowed > 0:
+		if cR.nb_jumps_in_air_allowed[cR.current_size] > 0:
 			transitioned.emit(self, "JumpState")
 		
 	if Input.is_action_just_pressed("x"):
@@ -170,10 +174,14 @@ func _on_area_entered(area:Area3D):
 		cR.velocity.y = 0
 		health_component.apply_knockback(Vector3(0,10,0),false)
 		cR.floor_snap_length = 1.0
-		if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-		if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-		if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-		if cR.has_cut_jump: cR.has_cut_jump = false
+		if cR.jump_cooldown[cR.current_size] > 0.0: 
+			cR.jump_cooldown[cR.current_size] = -1.0
+		if cR.nb_jumps_in_air_allowed[cR.current_size] < cR.nb_jumps_in_air_allowed_ref: 
+			cR.nb_jumps_in_air_allowed[cR.current_size] = cR.nb_jumps_in_air_allowed_ref
+		if cR.coyote_jump_cooldown[cR.current_size] < cR.coyote_jump_cooldown_ref: 
+			cR.coyote_jump_cooldown[cR.current_size] = cR.coyote_jump_cooldown_ref
+		if cR.has_cut_jump: 
+			cR.has_cut_jump = false
 
 
 # On exit state

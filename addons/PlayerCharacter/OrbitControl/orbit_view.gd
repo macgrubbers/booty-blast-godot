@@ -80,16 +80,7 @@ func _input(event):
 			
 	#if mouse cursor is free, can't rotate cam
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
-	
-	# TODO: Remove or uncomment out!
-	#change cam mode (default, aim)
-	#if event.is_action_pressed("aim_cam"):
-		#cam_aimed = !cam_aimed
-		#
-	##change cam side when aimed (over left shoulder, or over right shoulder)
-	#if event.is_action_pressed("aim_cam_side"):
-		#aim_cam_pos_side = !aim_cam_pos_side
-		
+
 	#rotate cam according to the mouse
 	if event is InputEventMouseMotion: 
 		var viewport_transform: Transform2D = get_tree().root.get_final_transform()
@@ -128,16 +119,12 @@ func _physics_process(delta):
 		global_position = player_ragdoll.get_global_position() + camera_position_offset
 	#get pan direction
 	var joy_dir:Vector2 # = Input.get_vector("pan_left", "pan_right", "pan_up", "pan_down")
-	
-	#position the cam according to her mode (default, aim (with left or right side))
-	#if !cam_aimed: cam.position = Vector3(0.0, 0.0, zoom_val)
-	#else: cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, zoom_val)
-	
+
 	#rotate cam
 	rotate_from_vector(joy_dir * Vector2(1.0, 0.5) * pan_rotation_val * delta)
 	
 	#handle zoom
-	zoom_handling(delta)
+	#zoom_handling(delta)
 	
 	#handle shake
 	shake_handling(delta)
@@ -152,12 +139,9 @@ func rotate_from_vector(vector : Vector2):
 	#rotation.x -= vector.y
 	rotation = rotation.lerp(Vector3(rotation.x - vector.y, rotation.y - vector.x, 0), 0.4)
 	rotation.x = clamp(rotation.x, min_limit_x, max_limit_x)
-	
+
+# TODO: Zoom in camera option?
 func zoom_handling(delta : float):
-	#zoom in/out cam, and clamp zoom value between min and max zoom values
-	#zoom_val += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
-	#zoom_val = clamp(zoom_val, min_zoom_val, max_zoom_val)
-	spring_length += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
 	spring_length = clamp(spring_length, min_zoom_val, max_zoom_val)
 
 
@@ -192,3 +176,12 @@ func shake_camera() -> void:
 	# Apply local offset and rotation to the Camera3D node
 	cam.transform.origin += Vector3(offset_x, offset_y, offset_z)
 	cam.rotation.z = rot_z
+
+
+# Change the scale of the camera
+# Used when player goes big
+# TODO:
+func change_size(new_size:float, change_rate:float, delta):
+	var new_scale = scale.move_toward(Vector3(1,1,1) * new_size, 
+									change_rate * delta)
+	scale = new_scale

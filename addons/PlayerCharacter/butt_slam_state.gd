@@ -43,8 +43,10 @@ func physics_update(delta : float):
 
 func applies(delta : float):
 	if !cR.is_on_floor(): 
-		if cR.jump_cooldown > 0.0: cR.jump_cooldown -= delta
-		if cR.coyote_jump_cooldown > 0.0: cR.coyote_jump_cooldown -= delta
+		if cR.jump_cooldown[cR.current_size] > 0.0: 
+			cR.jump_cooldown[cR.current_size] -= delta
+		if cR.coyote_jump_cooldown[cR.current_size] > 0.0: 
+			cR.coyote_jump_cooldown[cR.current_size] -= delta
 
 func gravity_apply(delta : float):
 	cR.velocity.y -= cR.fall_gravity * cR.butt_slam_gravity_multiplier * delta

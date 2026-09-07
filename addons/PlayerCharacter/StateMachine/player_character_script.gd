@@ -13,56 +13,55 @@ var was_on_floor : bool = false
 var walk_or_run : String = "WalkState" #keep in memory if play char was walking or running before being in the air
 signal just_landed
 
-# Knockback
+# Status variables
 var knockback_vector : Vector3
 
+
 @export_group("Walk variables")
-@export var walk_speed : float
-@export var walk_accel : float
-@export var walk_deccel : float
+@export var walk_speed : Array[float]
+@export var walk_accel : Array[float]
+@export var walk_deccel : Array[float]
 
 @export_group("Run variables")
-@export var run_speed : float
-@export var run_accel : float
-@export var run_deccel : float
+@export var run_speed : Array[float]
+@export var run_accel : Array[float]
+@export var run_deccel : Array[float]
 @export var continious_run : bool = false #if true, doesn't need to keep run button on to run
 
 @export_group("Dash variables")
-@onready var can_dash : bool = true
-@export var dash_speed : float
-@export var dash_duration : float
-@export var dash_accel : float
-@onready var dash_reset_timer:Timer = %DashResetTimer
+var can_dash : bool = true
+@export var dash_speed : Array[float]
+@export var dash_duration : Array[float]
+@export var dash_accel : Array[float]
 
 @export_group("Jump variables")
-@export var jump_height : float
-@export var jump_time_to_peak : float
-@export var jump_time_to_descent : float
-@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.000
+@export var jump_height : Array[float]
+@export var jump_time_to_peak : Array[float]
+@export var jump_time_to_descent : Array[float]
+var jump_velocity : float
 var has_cut_jump : bool = false
-@export var jump_cut_multiplier : float
-@export var jump_cooldown : float
+@export var jump_cut_multiplier : Array[float]
+@export var jump_cooldown : Array[float]
 var jump_cooldown_ref : float 
-@export var nb_jumps_in_air_allowed : int 
+@export var nb_jumps_in_air_allowed : Array[int]
 var nb_jumps_in_air_allowed_ref : int
 var jump_buff_on : bool = false
 var buffered_jump : bool = false
-@export var coyote_jump_cooldown : float
+@export var coyote_jump_cooldown : Array[float]
 var coyote_jump_cooldown_ref : float
 var coyote_jump_on : bool = false
 @export var auto_jump : bool = false
-var can_wall_jump : bool = true
  
 @export_group("In air variables")
-@export var in_air_move_speed : Array[Curve]
-@export var in_air_accel : Array[Curve]
-@export var in_air_decel : Curve
+@export var in_air_move_speed : Array[Curve] # TODO: remove
+@export var in_air_accel : Array[Curve] # TODO: remove
+@export var in_air_decel : Curve 
 @export var hit_wall_cut_velocity : bool = false
 
 #gravity variables
-@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-@onready var butt_slam_gravity_multiplier : float = 2.5
+var jump_gravity : float
+var fall_gravity : float
+@export var butt_slam_gravity_multiplier : float = 2.5
 
 @export_group("Keybinding variables")
 @export var moveForwardAction : String = ""
@@ -73,23 +72,22 @@ var can_wall_jump : bool = true
 @export var jumpAction : String = ""
 
 @export_group("Model variables")
+@export var model_scale: Array[float]
+@export var size_transformation_rate:Array[float]
+@export var camera_scale: Array[float]
+@export var camera_size_transformation_rate:Array[float]
 @export var model_rot_speed : float
 @export var ragdoll_gravity : float
-@export var ragdoll_on_floor_only : bool = false
-@export var follow_cam_pos_when_aimed : bool = false
+@export var ragdoll_on_floor_only : bool = false # TODO: Remove
+@export var follow_cam_pos_when_aimed : bool = false # TODO: Remove
+
 
 # Size variables
-enum sizes {SMALL,LARGE}
-@export_group("Size Changing Variables")
-@export var small_size_scale: float = 1
-@export var large_size_scale: float = 4
-@export var transform_rate:float = 2
-@onready var current_size:sizes
+enum sizes {NORMAL,LARGE}
+@onready var current_size:sizes = sizes.NORMAL
 @onready var new_size:sizes
-@onready var is_changing_size:bool
-@onready var size_buff_timer:Timer = %SizeBuffTimer
+@onready var is_changing_size:bool = false
 
-signal just_got_big(duration:float)
 
 #references variables
 @onready var visual_root = %VisualRoot
@@ -115,15 +113,9 @@ signal just_got_big(duration:float)
 @onready var land_particles = preload("res://addons/PlayerCharacter/Vfx/land_particles.tscn")
 
 func _ready():
-	#set move variables, and value references
-	move_speed = walk_speed
-	move_accel = walk_accel
-	move_deccel = walk_deccel
-	
-	jump_cooldown_ref = jump_cooldown
-	nb_jumps_in_air_allowed_ref = nb_jumps_in_air_allowed
-	coyote_jump_cooldown_ref = coyote_jump_cooldown
-	
+	set_gravity_variables()
+	set_movement_variables()
+
 	#set char model audios effects
 	godot_plush_skin.footstep.connect(func(intensity : float = 1.0):
 		foot_step_audio.volume_db = linear_to_db(intensity)
@@ -132,9 +124,27 @@ func _ready():
 		
 	# rotate camera 180 cuz this annoys me greatly
 	$OrbitView.global_rotation.y += PI
-		
-	size_buff_timer.connect("timeout", _on_size_buff_timer_timeout)
-		
+
+# Calculate and set the jump gravity and fall gravity
+# Use this whenever player size changes
+func set_gravity_variables():
+	jump_velocity = ((2.0 * jump_height[current_size]) / jump_time_to_peak[current_size]) * -1.000
+	jump_gravity = ((-2.0 * jump_height[current_size]) / (pow(jump_time_to_peak[current_size],2))) * -1.0
+	fall_gravity = ((-2.0 * jump_height[current_size]) / (pow(jump_time_to_descent[current_size],2))) * -1.0
+
+
+# Calculate and set movement variables
+# Use this whenever player size changes
+func set_movement_variables():
+	move_speed = walk_speed[current_size]
+	move_accel = walk_accel[current_size]
+	move_deccel = walk_deccel[current_size]
+	
+	jump_cooldown_ref = jump_cooldown[current_size]
+	nb_jumps_in_air_allowed_ref = nb_jumps_in_air_allowed[current_size]
+	coyote_jump_cooldown_ref = coyote_jump_cooldown[current_size]
+
+
 func _process(delta: float):
 	#update_interact_raycast()
 	modify_model_orientation(delta)
@@ -157,9 +167,9 @@ func display_properties():
 	#display play char properties
 	debug_hud.display_curr_state(state_machine.curr_state_name)
 	debug_hud.display_velocity(velocity.length())
-	debug_hud.display_nb_jumps_in_air_allowed(nb_jumps_in_air_allowed)
+	debug_hud.display_nb_jumps_in_air_allowed(nb_jumps_in_air_allowed[current_size])
 	debug_hud.display_jump_buffer(jump_buff_on)
-	debug_hud.display_coyote_time(coyote_jump_cooldown)
+	debug_hud.display_coyote_time(coyote_jump_cooldown[current_size])
 	debug_hud.display_model_orientation(cam_holder.cam_aimed and follow_cam_pos_when_aimed)
 	debug_hud.display_camera_mode(cam_holder.cam_aimed)
 	
@@ -216,36 +226,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # Change the size of the player
+# Also changes the scale of the camera
 func change_size(delta):
-	# Determine size constant
-	var size_scale:float
-	if new_size == sizes.SMALL: size_scale = small_size_scale
-	else: size_scale = large_size_scale
-	
-	var new_scale = scale.move_toward(Vector3(1,1,1)*size_scale, transform_rate * delta)
+	var new_scale = scale.move_toward(Vector3(1,1,1) * model_scale[new_size], 
+									size_transformation_rate[new_size] * delta)
 	# Stop changing size if we're close enough
-	if scale.is_equal_approx(new_scale):
+	if scale.is_equal_approx(Vector3(1,1,1) * model_scale[new_size]):
 		current_size = new_size
+		set_gravity_variables()
+		set_movement_variables()
 		is_changing_size = false
-		if current_size == sizes.LARGE:
-			just_got_big.emit(size_buff_timer.get_wait_time())
-			size_buff_timer.start()
 	else:
 		scale = new_scale
-
-# TODO: make timer start immediate after no matter what
-func just_dashed():
-	can_dash = false
-	if !is_on_floor():
-		await just_landed
-
-	dash_reset_timer.wait_time = .75
-	dash_reset_timer.start()
-	await dash_reset_timer.timeout
-	can_dash = true
-	return
-
-func _on_size_buff_timer_timeout():
-	print("buff over")
-	new_size = sizes.SMALL
-	is_changing_size = true
+		$OrbitView.change_size(camera_scale[new_size] * .5, 
+								camera_size_transformation_rate[new_size] * .5, 
+								delta)

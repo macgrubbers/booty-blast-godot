@@ -13,15 +13,19 @@ func enter(char_ref : CharacterBody3D):
 	
 func verifications():
 	cR.godot_plush_skin.set_state("run")
-	cR.move_speed = cR.run_speed
-	cR.move_accel = cR.run_accel
-	cR.move_deccel = cR.run_deccel
+	cR.move_speed = cR.run_speed[cR.current_size]
+	cR.move_accel = cR.run_accel[cR.current_size]
+	cR.move_deccel = cR.run_deccel[cR.current_size]
 	
 	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
+	if cR.jump_cooldown[cR.current_size] > 0.0: 
+		cR.jump_cooldown[cR.current_size] = -1.0
+	if cR.nb_jumps_in_air_allowed[cR.current_size] < cR.nb_jumps_in_air_allowed_ref: 
+		cR.nb_jumps_in_air_allowed[cR.current_size] = cR.nb_jumps_in_air_allowed_ref
+	if cR.coyote_jump_cooldown[cR.current_size] < cR.coyote_jump_cooldown_ref: 
+		cR.coyote_jump_cooldown[cR.current_size] = cR.coyote_jump_cooldown_ref
+	if cR.has_cut_jump: 
+		cR.has_cut_jump = false
 	if !cR.movement_dust.emitting: cR.movement_dust.emitting = true
 	
 	cR.cam_holder.use_cam_y_deadzone = false

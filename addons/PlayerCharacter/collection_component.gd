@@ -28,10 +28,7 @@ func _on_body_entered(body:Node3D):
 		body.collect()
 	
 	elif body is BigBootyJuice:
-		health_component.apply_status_effect()
-		#player_ref.is_changing_size = true
-		#player_ref.new_size = player_ref.sizes.LARGE
-		#player_ref.size_buff_timer.set_wait_time(body.duration)
+		health_component.apply_status_effect(body.effect)
 		body.collect()
 		
 	elif body is KeyCollectable:

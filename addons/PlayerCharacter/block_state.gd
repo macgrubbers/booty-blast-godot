@@ -22,17 +22,10 @@ func verifications():
 	health_component.can_be_hurt = false
 	
 	cR.godot_plush_skin.set_state("tpose lmao")
-	cR.move_speed = cR.walk_speed
-	cR.move_accel = cR.walk_accel
-	cR.move_deccel = cR.walk_deccel
-	
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
-	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
-	
+	cR.move_speed = cR.walk_speed[cR.current_size]
+	cR.move_accel = cR.walk_accel[cR.current_size]
+	cR.move_deccel = cR.walk_deccel[cR.current_size]
+
 func update(_delta : float):
 	pass
 	

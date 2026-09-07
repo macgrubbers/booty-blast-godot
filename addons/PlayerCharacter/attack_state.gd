@@ -28,9 +28,9 @@ func verifications():
 		dash_dir = Vector2(sin(cR.visual_root.rotation.y), cos(cR.visual_root.rotation.y))
 	
 	# Set dash velocity
-	cR.velocity.x = dash_dir.x * cR.dash_speed
+	cR.velocity.x = dash_dir.x * cR.dash_speed[cR.current_size]
 	cR.velocity.y = 0
-	cR.velocity.z = dash_dir.y * cR.dash_speed
+	cR.velocity.z = dash_dir.y * cR.dash_speed[cR.current_size]
 
 	# Attack area signals and hitbox
 	attack_area.set_monitoring(true)
@@ -58,9 +58,6 @@ func check_hitbox():
 	if overlapping_areas:
 		collided = true
 		_on_area_entered(overlapping_areas[0])
-		
-	#if collided:
-		#attack_area.set_monitoring(false)
 
 
 # Update gravity
@@ -108,28 +105,19 @@ func _on_body_entered(body:Node3D):
 	transitioned.emit(self, "InairState")
 
 
-# Wall jump off of wall or enemy
-# 	TODO: reflection angle is just y-rotation flipped 180
-#func wall_jump():
-	##cR.can_wall_jump = false
-	#var model_rotation = cR.visual_root.rotation.y
-	#cR.velocity = Vector3.ZERO # TODO: Conserve momentum somehow?
-	#health_component.apply_knockback(-Vector3(sin(model_rotation), -1.5, cos(model_rotation)) * 10,false)
-	#cR.visual_root.rotation.y += PI
-	#applied_rotation_timer.start()
-	#transitioned.emit(self, "InairState")
-
-
 # Called when wave animation is complete
-#	TODO: determine if it should be a ground or air state next
 func _on_animation_finished():
-	transitioned.emit(self, "IdleState")
+	if cR.is_on_floor():
+		if cR.move_dir: 
+			transitioned.emit(self, cR.walk_or_run)
+		else: 
+			transitioned.emit(self, "IdleState")
+	else:
+		transitioned.emit(self, "InairState")
 
 # Exit state
 func exit():
-	#check_if_wall_jump()
 	attack_area.set_monitoring(false)
 	attack_area.disconnect("area_entered", _on_area_entered)
 	attack_area.disconnect("body_entered", _on_body_entered)
 	cR.godot_plush_skin.wave_done.disconnect(exit)
-	#attack_area.disconnect("attack_successful", check_if_wall_jump)
