@@ -440,3 +440,6 @@ text = "Level Selector"
 
 [node name="DummyTestEnemy" parent="." instance=ExtResource("6_ca7po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27748966, 0.52491367, 8.643647)
+
+[node name="BigBootyJuice" parent="." instance=ExtResource("10_d0jy3")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.31855202, 1.293473, 3.145158)

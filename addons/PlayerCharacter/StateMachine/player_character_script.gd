@@ -73,9 +73,9 @@ var fall_gravity : float
 
 @export_group("Model variables")
 @export var model_scale: Array[float]
-@export var size_transformation_rate:Array[float]
+@export var model_scale_rate:Array[float]
 @export var camera_scale: Array[float]
-@export var camera_size_transformation_rate:Array[float]
+@export var camera_scale_rate:Array[float]
 @export var model_rot_speed : float
 @export var ragdoll_gravity : float
 @export var ragdoll_on_floor_only : bool = false # TODO: Remove
@@ -102,10 +102,11 @@ enum sizes {NORMAL,LARGE}
 @onready var impact_audio = %ImpactAudio
 @onready var wave_audio = %WaveAudio
 @onready var collision_shape_3d = %CollisionShape3D
-@onready var floor_check : RayCast3D = %FloorRaycast
+@onready var floor_raycast : RayCast3D = %FloorRaycast
 @onready var interact_raycast : RayCast3D = $Raycasts/InteractRaycast
 @onready var health_component = %HealthComponent
 @onready var collection_component = %CollectionComponent
+@onready var bigify_hitbox:Area3D = %BigifyHitbox
 
 #particles variables
 @onready var movement_dust = %MovementDust
@@ -229,15 +230,16 @@ func _unhandled_input(event: InputEvent) -> void:
 # Also changes the scale of the camera
 func change_size(delta):
 	var new_scale = scale.move_toward(Vector3(1,1,1) * model_scale[new_size], 
-									size_transformation_rate[new_size] * delta)
+									model_scale_rate[new_size] * delta)
+	var new_camera_scale = cam_holder.scale.move_toward(Vector3(1,1,1) * camera_scale[new_size], 
+									camera_scale_rate[new_size] * delta)
 	# Stop changing size if we're close enough
-	if scale.is_equal_approx(Vector3(1,1,1) * model_scale[new_size]):
+	if (scale.is_equal_approx(Vector3(1,1,1) * model_scale[new_size]) and
+		cam_holder.scale.is_equal_approx(Vector3(1,1,1) * camera_scale[new_size])):
 		current_size = new_size
 		set_gravity_variables()
 		set_movement_variables()
 		is_changing_size = false
 	else:
 		scale = new_scale
-		$OrbitView.change_size(camera_scale[new_size] * .5, 
-								camera_size_transformation_rate[new_size] * .5, 
-								delta)
+		cam_holder.scale = new_camera_scale

@@ -82,7 +82,7 @@ func gravity_apply(delta : float):
 func input_management():
 	if Input.is_action_just_pressed(cR.jumpAction) :
 		#check if can jump buffer
-		if cR.floor_check.is_colliding() and cR.last_frame_position.y > cR.position.y and cR.nb_jumps_in_air_allowed[cR.current_size] <= 0: 
+		if cR.floor_raycast.is_colliding() and cR.last_frame_position.y > cR.position.y and cR.nb_jumps_in_air_allowed[cR.current_size] <= 0: 
 			cR.jump_buff_on = true
 		#check if can coyote jump
 		if cR.was_on_floor and cR.coyote_jump_cooldown[cR.current_size] > 0.0 and cR.last_frame_position.y > cR.position.y:
@@ -166,7 +166,7 @@ func impact_audio_playing():
 
 # Logic for when the falling hitbox is entered
 func _on_area_entered(area:Area3D):
-	if area is HealthComponent:
+	if area is HealthComponent and cR.velocity.y < 0:
 		#apply damage
 		# TODO: replace magic numbers with variables, maybe stored in the parent class
 		area.attack(3, 1, owner, Vector3(0,-10,0))

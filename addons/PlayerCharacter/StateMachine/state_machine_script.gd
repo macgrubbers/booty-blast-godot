@@ -9,7 +9,7 @@ var states : Dictionary = {}
 
 var inactionable:bool = false # updated from HealthComponent
 
-@onready var char_ref : CharacterBody3D = $".."
+@onready var player : CharacterBody3D = $".."
 @onready var health_component : HealthComponent = %HealthComponent
 @onready var godot_plush_skin : Node3D = %GodotPlushSkin
 @onready var ground_attack_area : Area3D = %HipCheckHitbox
@@ -24,7 +24,7 @@ func _ready():
 			child.transitioned.connect(on_state_child_transition)
 			
 			# Connect just landed signal, only a few states will use it though so TODO nitpick, only connect relevant states?
-			child.just_landed.connect(_on_just_landed)
+			#child.just_landed.connect(_on_just_landed)
 			
 			if child is AttackState:
 				godot_plush_skin.wave_done.connect(child._on_animation_finished)
@@ -35,10 +35,14 @@ func _ready():
 	#if initial state, transition to it
 	if initial_state:
 		await get_tree().create_timer(0.1).timeout
-		initial_state.enter(char_ref)
+		initial_state.enter(player)
 		prev_state = initial_state
 		curr_state = initial_state
 		curr_state_name = curr_state.state_name
+		
+	# Connect bigify hitbox, which all states will use
+	# TODO: check on startup, maybe have a transformation state
+	player.bigify_hitbox.connect("area_entered", _on_bigify_area_entered)
 
 func _process(delta : float):
 	if curr_state: curr_state.update(delta)
@@ -60,7 +64,7 @@ func on_state_child_transition(state : State, new_state_name : String, stun_amou
 	#enter the new state
 	if new_state is StunnedState:
 		new_state.stun_timer.set_wait_time(stun_amount)
-	new_state.enter(char_ref)
+	new_state.enter(player)
 	
 	prev_state = curr_state
 	curr_state = new_state
@@ -74,17 +78,23 @@ func _on_hitstunned(stun_duration:float):
 
 # Check if we should do anything special on landing
 # Liiiikke a JUMP PAD!!!!
-func _on_just_landed():
-	if char_ref.floor_check.is_colliding():
-		var collider = char_ref.floor_check.get_collider()
-		if collider is LaunchingPlatform:
-			char_ref.cam_holder.reset_trauma()
-			var collision_normal = char_ref.floor_check.get_collision_normal()
-			collider.launch(char_ref.health_component,
-							curr_state,
-							curr_state.prev_in_air_velocity,
-							collision_normal)
-			curr_state.transitioned.emit(curr_state,"InAirState")
-		
-		elif collider is PressurePlate:
-			collider.activate()
+#func _on_just_landed():
+	#if char_ref.floor_check.is_colliding():
+		#var collider = char_ref.floor_check.get_collider()
+		#if collider is LaunchingPlatform:
+			#char_ref.cam_holder.reset_trauma()
+			#var collision_normal = char_ref.floor_check.get_collision_normal()
+			#collider.launch(char_ref.health_component,
+							#curr_state,
+							#curr_state.prev_in_air_velocity,
+							#collision_normal)
+			#curr_state.transitioned.emit(curr_state,"InAirState")
+		#
+		#elif collider is PressurePlate:
+			#collider.activate()
+
+func _on_bigify_area_entered(area:Area3D):
+	if area is HealthComponent:
+		var knockback_dir = player.get_position().direction_to(area.get_owner().get_position())
+		var knockback_mag = player.get_velocity() * 3
+		area.attack(10,2, owner, knockback_dir * knockback_mag)

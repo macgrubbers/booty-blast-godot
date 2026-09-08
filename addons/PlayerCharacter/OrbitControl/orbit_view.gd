@@ -11,12 +11,12 @@ var active : bool = true : set = set_active
 var use_cam_y_deadzone = false
 var prev_use_cam_y_deadzone = false
 @export var cam_y_deadzone:float = 5
+var is_changing_size:bool = false
 
 @export_group("Camera shake variables")
 @export var shake_decay: float = 0.95          # How fast the shake fades out (0-1)
 @export var shake_max_roll: float = 0.1       # Maximum camera roll in radians
 @export var shake_max_offset: Vector3 = Vector3(1, 1, 1) # Max shake distance (X, Y, Z)
-
 var trauma: float = 0.0                 # Current shake intensity
 var trauma_power: float = 2.0           # Shape of the shake curve
 var noise: FastNoiseLite = FastNoiseLite.new()
@@ -176,12 +176,3 @@ func shake_camera() -> void:
 	# Apply local offset and rotation to the Camera3D node
 	cam.transform.origin += Vector3(offset_x, offset_y, offset_z)
 	cam.rotation.z = rot_z
-
-
-# Change the scale of the camera
-# Used when player goes big
-# TODO:
-func change_size(new_size:float, change_rate:float, delta):
-	var new_scale = scale.move_toward(Vector3(1,1,1) * new_size, 
-									change_rate * delta)
-	scale = new_scale

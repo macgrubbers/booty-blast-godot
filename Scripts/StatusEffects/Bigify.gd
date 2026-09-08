@@ -7,9 +7,11 @@ func _init(dur:int) -> void:
 
 func apply(char: CharacterBody3D) -> void:
 	super.apply(char)
+	target.bigify_hitbox.monitoring = true
 	target.is_changing_size = true
 	target.new_size = char.sizes.LARGE
 
 func remove() -> void:
+	target.bigify_hitbox.monitoring = false
 	target.is_changing_size = true
 	target.new_size = target.sizes.NORMAL
