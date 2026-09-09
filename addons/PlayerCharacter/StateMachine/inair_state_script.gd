@@ -80,7 +80,7 @@ func gravity_apply(delta : float):
 
 # Manage user input
 func input_management():
-	if Input.is_action_just_pressed(cR.jumpAction) :
+	if Input.is_action_just_pressed(cR.jumpAction):
 		#check if can jump buffer
 		if cR.floor_raycast.is_colliding() and cR.last_frame_position.y > cR.position.y and cR.nb_jumps_in_air_allowed[cR.current_size] <= 0: 
 			cR.jump_buff_on = true

@@ -42,7 +42,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fttgw")
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

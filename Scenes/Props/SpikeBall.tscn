@@ -57,17 +57,19 @@ radius = 4.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_yq2rp"]
 radius = 4.5
 
-[sub_resource type="Resource" id="Resource_v4sbx"]
-script = ExtResource("6_um12d")
-sound_array = Array[AudioStream]([ExtResource("7_yquvs")])
-metadata/_custom_type_script = "uid://cyeub85a3jrsr"
-
 [sub_resource type="Resource" id="Resource_mcqsh"]
 script = ExtResource("6_um12d")
 sound_array = Array[AudioStream]([ExtResource("8_yquvs")])
 metadata/_custom_type_script = "uid://cyeub85a3jrsr"
 
+[sub_resource type="Resource" id="Resource_v4sbx"]
+script = ExtResource("6_um12d")
+sound_array = Array[AudioStream]([ExtResource("7_yquvs")])
+metadata/_custom_type_script = "uid://cyeub85a3jrsr"
+
 [node name="SpikeBall" type="RigidBody3D"]
+collision_layer = 32
+collision_mask = 35
 mass = 5.0
 gravity_scale = 2.0
 script = ExtResource("1_um12d")
@@ -97,7 +99,7 @@ shape = SubResource("SphereShape3D_m7rhd")
 
 [node name="BaseHitbox" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 1572868
+collision_mask = 1583620
 monitorable = false
 script = ExtResource("3_m7rhd")
 knockback_magnitude = 20.0

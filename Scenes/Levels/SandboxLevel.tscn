@@ -140,7 +140,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 [node name="Floor" type="Node3D" parent="NavigationRegion3D"]
 
 [node name="StaticBody4" type="StaticBody3D" parent="NavigationRegion3D/Floor"]
-collision_layer = 159
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody4"]
@@ -204,7 +203,7 @@ collision_layer = 3
 
 [node name="StaticBody4" type="StaticBody3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 15, 0)
-collision_layer = 2
+collision_layer = 130
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad/StaticBody4"]
@@ -215,7 +214,7 @@ mesh = SubResource("BoxMesh_ossde")
 
 [node name="StaticBody5" type="StaticBody3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 15, 0)
-collision_layer = 2
+collision_layer = 130
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Test_WallJumpAndLaunchPad/StaticBody5"]
@@ -443,3 +442,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27748966, 0.52491367, 8.64
 
 [node name="BigBootyJuice" parent="." instance=ExtResource("10_d0jy3")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.31855202, 1.293473, 3.145158)
+
+[node name="SpikeBall" parent="." instance=ExtResource("20_oebwi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.464731, 4.905902, 3.822126)

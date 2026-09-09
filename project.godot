@@ -135,16 +135,21 @@ rmb={
 
 [layer_names]
 
+3d_physics/layer_1="World/Terrain"
 3d_physics/layer_2="Static Structures"
-3d_physics/layer_3="Destructable Structures"
-3d_physics/layer_4="Interactables"
+3d_physics/layer_3="Structures Health Component"
+3d_physics/layer_4="Interactable Areas"
 3d_physics/layer_5="Collectables"
-3d_physics/layer_8="Ragdolls"
-3d_physics/layer_9="Checkpoints"
-3d_physics/layer_11="Characters"
-3d_physics/layer_20="Player"
-3d_physics/layer_21="Enemies"
-3d_physics/layer_22="Projectiles"
+3d_physics/layer_6="Physicsables"
+3d_physics/layer_8="Wall Jumpable"
+3d_physics/layer_9="Player"
+3d_physics/layer_10="Player Health Component"
+3d_physics/layer_11="Enemy"
+3d_physics/layer_12="Enemy Health Component"
+3d_physics/layer_13="NPC"
+3d_physics/layer_14="NPC Health Component"
+3d_physics/layer_15="Projectiles"
+3d_physics/layer_16="Ragdolls"
 
 [physics]
 

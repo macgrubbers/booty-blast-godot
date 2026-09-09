@@ -96,5 +96,5 @@ func _on_hitstunned(stun_duration:float):
 func _on_bigify_area_entered(area:Area3D):
 	if area is HealthComponent:
 		var knockback_dir = player.get_position().direction_to(area.get_owner().get_position())
-		var knockback_mag = player.get_velocity() * 3
+		var knockback_mag = player.get_velocity()
 		area.attack(10,2, owner, knockback_dir * knockback_mag)
