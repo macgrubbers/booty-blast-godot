@@ -32,5 +32,5 @@ shader_parameter/gradient_sampler = SubResource("GradientTexture1D_7we1i")
 shader_parameter/height_fade = SubResource("CurveTexture_hyffm")
 shader_parameter/noise_scale = 0.2
 shader_parameter/edge = 0.1
-shader_parameter/smoothness = 0.5
+shader_parameter/smoothness = 0.0
 shader_parameter/energy = 1.0

@@ -112,6 +112,7 @@ enum sizes {NORMAL,LARGE}
 @onready var movement_dust = %MovementDust
 @onready var jump_particles = preload("res://addons/PlayerCharacter/Vfx/jump_particles.tscn")
 @onready var land_particles = preload("res://addons/PlayerCharacter/Vfx/land_particles.tscn")
+@onready var death_particles = preload("res://Scenes/Particles/GoreyDeath.tscn")
 
 func _ready():
 	set_gravity_variables()

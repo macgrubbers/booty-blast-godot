@@ -26,6 +26,8 @@ func verifications():
 	
 	godot_plush_skin.animation_tree.active = false
 	godot_plush_skin.apply_impulse_to_ragdoll(health_component.last_applied_knockback)
+	cR.particles_manager.display_particles(cR.death_particles, cR)
+	
 	
 func update(_delta : float):
 	check_if_ragdoll()

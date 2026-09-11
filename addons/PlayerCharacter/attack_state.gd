@@ -103,6 +103,9 @@ func _on_body_entered(body:Node3D):
 	inactionable_status.duration = 0.3
 	health_component.apply_status_effect(inactionable_status)
 	transitioned.emit(self, "InairState")
+	
+	if body.has_method("attack"):
+		body.attack()
 
 
 # Called when wave animation is complete

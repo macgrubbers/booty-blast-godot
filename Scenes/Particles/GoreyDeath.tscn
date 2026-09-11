@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0285txwy8p56"]
+
+[sub_resource type="Gradient" id="Gradient_inn1o"]
+colors = PackedColorArray(0, 0, 0.49019608, 1, 0.86822075, 0.9155848, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5okxi"]
+gradient = SubResource("Gradient_inn1o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xvrno"]
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 5.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -50, 0)
+color = Color(0.5678534, 0.649947, 1, 1)
+color_initial_ramp = SubResource("GradientTexture1D_5okxi")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctwi3"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_1t4ep"]
+material = SubResource("StandardMaterial3D_ctwi3")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="GoreyDeath" type="GPUParticles3D"]
+emitting = false
+amount = 1000
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_xvrno")
+draw_pass_1 = SubResource("BoxMesh_1t4ep")

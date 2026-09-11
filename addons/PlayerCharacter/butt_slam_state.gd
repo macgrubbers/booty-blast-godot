@@ -23,6 +23,7 @@ func verifications():
 	land_timer.connect("timeout", _on_land_timer_timeout)
 	falling_hitbox.set_monitoring(true)
 	falling_hitbox.connect("area_entered", _on_area_entered)
+	%ButtSlamLandHitbox.connect("body_entered",_on_butt_slam_hitbox_body_entered)
 	cR.godot_plush_skin.set_state("butt_slam")
 	if cR.floor_snap_length != 0.0:  cR.floor_snap_length = 0.0
 	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
@@ -112,8 +113,21 @@ func _on_butt_slam_landing_hitbox_entered(area : Area3D):
 					(knockback_dir_vector * knockback_magnitude) + extra_knockback_vec)
 
 
+
+func _on_butt_slam_hitbox_body_entered(body:Node3D):
+	if body is StaticBody3D:
+		if body.has_method("attack"):
+			body.attack()
+	if body is RigidBody3D:
+		var knockback_dir = cR.get_position().direction_to(body.get_position()) + Vector3(0,3,0)
+		var knockback_mag = 500 / (cR.get_position().distance_to(body.get_position()))
+		body.apply_impulse(knockback_dir * knockback_mag)
+
+
+
+
 func exit():
-	print("exit state")
+	%ButtSlamLandHitbox.connect("body_entered",_on_butt_slam_hitbox_body_entered)
 	falling_hitbox.set_monitoring(false)
 	butt_slam_land_hitbox.set_monitoring(false)
 	land_timer.stop()

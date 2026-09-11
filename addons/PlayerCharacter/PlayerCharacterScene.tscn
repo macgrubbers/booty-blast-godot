@@ -160,7 +160,7 @@ font_color = Color(0.6052743, 0.6052743, 0.6052743, 1)
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 256
-collision_mask = 5159
+collision_mask = 5127
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -215,7 +215,7 @@ script = ExtResource("2_or008")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3475122, 1.0054677)
 collision_layer = 0
-collision_mask = 10244
+collision_mask = 10242
 input_ray_pickable = false
 monitoring = false
 monitorable = false
@@ -251,7 +251,7 @@ collision_mask = 10244
 [node name="ButtSlamLandHitbox" type="Area3D" parent="VisualRoot/Hitboxes"]
 unique_name_in_owner = true
 collision_layer = 0
-collision_mask = 10244
+collision_mask = 10272
 input_ray_pickable = false
 monitoring = false
 monitorable = false
@@ -266,7 +266,7 @@ collision_mask = 10244
 [node name="BigifyHitbox" type="Area3D" parent="VisualRoot/Hitboxes"]
 unique_name_in_owner = true
 collision_layer = 0
-collision_mask = 10244
+collision_mask = 10274
 input_ray_pickable = false
 monitoring = false
 monitorable = false

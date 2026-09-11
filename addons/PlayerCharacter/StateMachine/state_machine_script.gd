@@ -43,6 +43,7 @@ func _ready():
 	# Connect bigify hitbox, which all states will use
 	# TODO: check on startup, maybe have a transformation state
 	player.bigify_hitbox.connect("area_entered", _on_bigify_area_entered)
+	player.bigify_hitbox.connect("body_entered", _on_bigify_body_entered)
 
 func _process(delta : float):
 	if curr_state: curr_state.update(delta)
@@ -98,3 +99,12 @@ func _on_bigify_area_entered(area:Area3D):
 		var knockback_dir = player.get_position().direction_to(area.get_owner().get_position())
 		var knockback_mag = player.get_velocity()
 		area.attack(10,2, owner, knockback_dir * knockback_mag)
+
+func _on_bigify_body_entered(body:Node3D):
+	if body is StaticBody3D:
+		if body.has_method("attack"):
+			body.attack()
+	if body is RigidBody3D:
+		var knockback_dir = player.get_position().direction_to(body.get_position())
+		var knockback_mag = player.get_velocity()
+		body.apply_impulse(knockback_dir * knockback_mag)
