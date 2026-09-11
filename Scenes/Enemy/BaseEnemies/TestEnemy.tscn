@@ -12,14 +12,14 @@
 [ext_resource type="Script" uid="uid://dj6rr58mc1x0h" path="res://Scenes/Enemy/BaseEnemies/sword_hitbox.gd" id="6_op6hw"]
 [ext_resource type="AudioStream" uid="uid://cscllm7p8y2qc" path="res://Sounds/Goober/chatter02.wav" id="7_4kh8c"]
 [ext_resource type="AudioStream" uid="uid://ciqygbhaer3k7" path="res://Sounds/Goober/chatter03.wav" id="8_8v4od"]
-[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_5wuto"]
 [ext_resource type="Script" uid="uid://dbnu0u6pmpnjj" path="res://Scenes/Enemy/enemy_blackboard.gd" id="10_8hsvt"]
-[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
-[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="12_o4n5j"]
-[ext_resource type="Script" uid="uid://dcojdhvj8qcw0" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="13_wtncq"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="11_dttib"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="12_o4n5j"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_reactive.gd" id="13_wtncq"]
 [ext_resource type="Script" uid="uid://brem0kkowevfx" path="res://Scenes/Enemy/is_dead_condition.gd" id="14_nn124"]
 [ext_resource type="Script" uid="uid://cmkgjh7l2fs47" path="res://Scenes/Enemy/dead_action.gd" id="17_8hsvt"]
-[ext_resource type="Script" uid="uid://cw22yurt5l74k" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="17_aqwe8"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="17_aqwe8"]
 [ext_resource type="Script" uid="uid://cs4nggulhq2hy" path="res://Scenes/Enemy/pursue_action.gd" id="17_bng0h"]
 [ext_resource type="Script" uid="uid://ctyouy4ubb6k7" path="res://Scenes/Enemy/idle_action.gd" id="17_pr2kt"]
 [ext_resource type="Script" uid="uid://bvpbgs22hxbgv" path="res://Scenes/Enemy/in_attack_range_condition.gd" id="18_wjm2s"]
@@ -95,7 +95,7 @@ debug_path_custom_point_size = 15.0
 
 [node name="PerceptionComponent" parent="." node_paths=PackedStringArray("blackboard", "health_component", "nav_agent") instance=ExtResource("3_q84gq")]
 collision_layer = 0
-collision_mask = 524288
+collision_mask = 512
 blackboard = NodePath("../EnemyBlackboard")
 health_component = NodePath("../HealthComponent")
 nav_agent = NodePath("../NavigationAgent3D")
@@ -105,7 +105,7 @@ shape = SubResource("SphereShape3D_q84gq")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("knockback_immunity_timer", "damage_immunity_timer") instance=ExtResource("3_o1tme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 1048576
+collision_layer = 2048
 script = ExtResource("4_7tq7j")
 knockback_immunity_timer = NodePath("KnockbackImmunityTimer")
 damage_immunity_timer = NodePath("DamageImmunityTimer")
@@ -124,7 +124,7 @@ wait_time = 2.0
 [node name="SwordHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.091784, 0)
 collision_layer = 0
-collision_mask = 524288
+collision_mask = 512
 monitoring = false
 monitorable = false
 script = ExtResource("6_op6hw")

@@ -105,7 +105,7 @@ func _on_body_entered(body:Node3D):
 	transitioned.emit(self, "InairState")
 	
 	if body.has_method("attack"):
-		body.attack()
+		body.attack(1, 3)
 
 
 # Called when wave animation is complete

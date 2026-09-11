@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuxgsfy6shs0a"]
-
-[ext_resource type="Script" uid="uid://ckrrw7gwljllw" path="res://Scenes/Structures/Destructable Structures/base_destructable_physics_object.gd" id="1_el2yp"]
-
-[node name="BaseDestructablePhysicsObject" type="RigidBody3D"]
-collision_layer = 6
-collision_mask = 2
-mass = 1.5
-script = ExtResource("1_el2yp")

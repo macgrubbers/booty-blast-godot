@@ -103,7 +103,7 @@ func _on_bigify_area_entered(area:Area3D):
 func _on_bigify_body_entered(body:Node3D):
 	if body is StaticBody3D:
 		if body.has_method("attack"):
-			body.attack()
+			body.attack(3, 3)
 	if body is RigidBody3D:
 		var knockback_dir = player.get_position().direction_to(body.get_position())
 		var knockback_mag = player.get_velocity()

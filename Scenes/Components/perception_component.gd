@@ -110,7 +110,7 @@ func check_los(player_pos:Vector3, actor_pos:Vector3):
 	var end = origin + dir_to_player * los_length + Vector3(0, 0.5, 0)
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_areas = true
-	query.set_collision_mask(1 << 0| 1 << 1 | 1 << 19)	# TODO: use the inspector for this
+	query.set_collision_mask(get_collision_mask())	# TODO: use the inspector for this
 	var los_result = space_state.intersect_ray(query)
 	
 	DebugDraw3D.draw_ray(origin, origin.direction_to(end), los_length, Color.CRIMSON)

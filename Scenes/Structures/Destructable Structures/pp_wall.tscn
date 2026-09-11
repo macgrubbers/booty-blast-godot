@@ -1,6 +1,6 @@
 [gd_scene load_steps=307 format=4 uid="uid://dxewl5q58dc5i"]
 
-[ext_resource type="Script" uid="uid://bs84l46bsdlc3" path="res://Scenes/Structures/Destructable Structures/pp_wall.gd" id="1_1dd4m"]
+[ext_resource type="Script" uid="uid://bs84l46bsdlc3" path="res://Scenes/Structures/Destructable Structures/DestructableRigidBody3D.gd" id="1_1dd4m"]
 [ext_resource type="Texture2D" uid="uid://bspanjh137yav" path="res://Assets/PP Wall/PP_Fracture_Wall_MultiObject_1771136979659608.png" id="1_udofr"]
 [ext_resource type="Texture2D" uid="uid://b7u1aw8auomq7" path="res://Assets/PP Wall/PP_Fracture_Wall_MultiObject_14547267296_e5ed3e8416_b.jpg" id="2_1dd4m"]
 
@@ -5719,7 +5719,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pdp43")
 
-[node name="Node3D" type="StaticBody3D"]
+[node name="PP Wall" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 35
 script = ExtResource("1_1dd4m")

@@ -10,6 +10,7 @@ func before_run(actor: Node, blackboard: Blackboard) -> void:
 	duration_timer.set_wait_time(duration)
 	duration_timer.start()
 	visual_root.toggle_dance(true)
+	actor.set_velocity(Vector3(0,0,0))
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	print(duration_timer.is_stopped())
