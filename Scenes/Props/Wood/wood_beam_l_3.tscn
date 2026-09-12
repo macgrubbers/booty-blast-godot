@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=4 uid="uid://ddqqdlg02sew7"]
+
+[ext_resource type="Texture2D" uid="uid://bqm54bi7qfyfi" path="res://Assets/wood_pack/textures/WoodPack_baseColor.png" id="1_b2em4"]
+[ext_resource type="Texture2D" uid="uid://2s7el0lh2ycq" path="res://Assets/wood_pack/textures/WoodPack_metallicRoughness.png" id="2_lefyl"]
+[ext_resource type="Texture2D" uid="uid://cq8bqephkr1at" path="res://Assets/wood_pack/textures/WoodPack_normal.png" id="3_34uty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4p2r"]
+resource_name = "WoodPack"
+albedo_texture = ExtResource("1_b2em4")
+metallic_texture = ExtResource("2_lefyl")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_lefyl")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_34uty")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tta1n"]
+_surfaces = [{
+"aabb": AABB(-0.09999943, -0.10000031, 0, 0.19999981, 0.20000046, 3.9999998),
+"format": 34896654337,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQABQADAAEAAAAFAAEABAADAAYABQAGAAMABwACAAQABwAAAAIABAAGAAcAAAAIAAUACQAHAAYABwAKAAAABwAJAAoAAAAKAAgACQAGAAsABQALAAYACgAJAAsABQAIAAsACgALAAgA"),
+"name": "WoodPack",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD+//9/AAAAAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAD/fwAA//8AAP9/AAD///7//38AAAAAAAD//wAA////////AAAAAP////8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hlwc6"]
+resource_name = "Sketchfab_Scene_WoodL3_WoodPack_0"
+_surfaces = [{
+"aabb": AABB(-0.09999943, -0.10000031, 0, 0.19999981, 0.20000046, 3.9999998),
+"attribute_data": PackedByteArray("DfAI9g3wCPZ2DnA/6Ql2P7HimXax4pl2mLJiP8007T4N8Jl2DfCZdnYOcD/NNO0+seII9rHiCPaYsmI/6Ql2P7HimXax4pl2mLJiP8007T4N8Jl2DfCZdnYOcD/NNO0+h7DsXoew7F4DiDA/2di9PuO9R2zjvUds5OM9P5mQ2D6HsEdsh7BHbAOIMD+ZkNg+473sXuO97F7i4z0/2di9PrHiCPax4gj2mLJiP+kJdj9V1Zl2VdWZdrhWVT/NNO0+seKZdrHimXaYsmI/zTTtPlXVCPZV1Qj2uFZVP+kJdj9V1Qj2VdUI9rhWVT/pCXY/+seZdvrHmXba+kc/zTTtPlXVmXZV1Zl2uFZVP8007T76xwj2+scI9tr6Rz/pCXY/af0w/Gn9MPxUan0/FjF8Pw3wwXwN8MF8dg5wPyaD+T5p/cF8af3BfFRqfT8ng/k+DfAw/A3wMPx2DnA/FjF8P2n9MPxp/TD8VGp9PxYxfD8N8DD8DfAw/HYOcD8WMXw/h7DsXoew7F4DiDA/2di9PuO9R2zjvUds5OM9P5mQ2D7jvexe473sXuLjPT/Z2L0+h7BHbIewR2wDiDA/mZDYPrHiCPax4gj2mLJiP+kJdj9V1Zl2VdWZdrhWVT/NNO0+VdUI9lXVCPa4VlU/6Ql2P7HimXax4pl2mLJiP8007T5V1Qj2VdUI9rhWVT/pCXY/+seZdvrHmXba+kc/zTTtPvrHCPb6xwj22vpHP+kJdj9V1Zl2VdWZdrhWVT/NNO0+"),
+"format": 34896654455,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAAAEAAMAAAAFAAQABgAHAAgABgAJAAcACgALAAwACgANAAsADgAPABAADgARAA8AEgATABQAEgAVABMAFgAUABMAFgATABcAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEA"),
+"material": SubResource("StandardMaterial3D_x4p2r"),
+"name": "WoodPack",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAD+//9/VNUAAAAAAACqKgAA//8AAKoqAAAAAP9/VNUAAAAA//9U1QAA/////1TVAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///7//3//PwAA//8AAP8//////wAA/z8AAP7//3//PwAAAAD/fwAA//8AAAAAAAAAAAAAAAAAAP//AAD/fwAA/////wAAqir//wAA/39U1f///v//f1TV//8AAAAAqir///////9U1f//AAD//1TVAAD//////7///wAA////vwAAAAD///+//////////7////7//3//vwAA//////+/AAD+//9//7//////////vwAAAAD/f/////8AAP///////wAA/3///wAAAAD/////VNVU1VTVVNVU1VTVVNVU1VTVVNVU1VTV/z//v/8//7//P/+//z//v////3////9/////f////3//v////7////+/////v///qiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoq/3//f/9//3//f/9//3//f////3////9/////f////3//f/8//3//P/9//z//f/8/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tta1n")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b2em4"]
+points = PackedVector3Array(-0.09999943, -0.10000031, 0, -0.09999943, 0.10000016, 0, 0.10000038, -0.10000031, 0, -0.09999943, -0.10000031, 3.9999998, 0.10000038, 0.10000016, 0, -0.09999943, 0.10000016, 3.9999998, 0.10000038, -0.10000031, 3.9999998, 0.10000038, 0.10000016, 3.9999998)
+
+[node name="WoodL3" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+collision_layer = 32
+collision_mask = 5411
+
+[node name="WoodL3_WoodPack_0" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_hlwc6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_b2em4")

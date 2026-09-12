@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=4 uid="uid://dq5xk2such03g"]
+
+[ext_resource type="Texture2D" uid="uid://bqm54bi7qfyfi" path="res://Assets/wood_pack/textures/WoodPack_baseColor.png" id="1_1d3vr"]
+[ext_resource type="Texture2D" uid="uid://2s7el0lh2ycq" path="res://Assets/wood_pack/textures/WoodPack_metallicRoughness.png" id="2_8hdi2"]
+[ext_resource type="Texture2D" uid="uid://cq8bqephkr1at" path="res://Assets/wood_pack/textures/WoodPack_normal.png" id="3_h4qws"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ceevp"]
+points = PackedVector3Array(-0.099999905, -0.100000076, 0, -0.099999905, 0.100000076, 0, 0.099999905, -0.100000076, 0, -0.099999905, -0.100000076, 4, 0.099999905, 0.100000076, 0, -0.099999905, 0.100000076, 4, 0.099999905, -0.100000076, 4, 0.099999905, 0.100000076, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4p2r"]
+resource_name = "WoodPack"
+albedo_texture = ExtResource("1_1d3vr")
+metallic_texture = ExtResource("2_8hdi2")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_8hdi2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_h4qws")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uqcix"]
+_surfaces = [{
+"aabb": AABB(-0.099999905, -0.100000076, 0, 0.19999981, 0.20000014, 4),
+"format": 34896654337,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAwABAAUAAAAFAAEABAADAAYAAwAFAAYAAgAEAAcAAgAHAAAABAAGAAcAAAAIAAUACQAHAAYACgAAAAcACgAHAAkAAAAKAAgACQAGAAsACwAGAAUACgAJAAsACwAFAAgACgALAAgA"),
+"name": "WoodPack",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD+//9/AAAAAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAD/fwAA//8AAP9/AAD///7//38AAAAAAAD//wAA////////AAAAAP////8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kld1t"]
+resource_name = "Sketchfab_Scene_WoodL2_WoodPack_0"
+_surfaces = [{
+"aabb": AABB(-0.099999905, -0.100000076, 0, 0.19999981, 0.20000014, 4),
+"attribute_data": PackedByteArray("n8OS9J/DkvSSoEM/1ZN0P0O2mXZDtpl2s0Q2P8007T6fw5l2n8OZdpKgQz/NNO0+Q7aS9EO2kvSzRDY/1ZN0P0O2mXZDtpl2s0Q2P8007T6fw5l2n8OZdpKgQz/NNO0+aZtTXmmbU15qahs/yKa8PsWormvFqK5rScYoP4de1z5pm65raZuua2tqGz+HXtc+xahTXsWoU15Jxig/yKa8PkO2MPxDtjD8s0Q2PxYxfD/oqDd+6Kg3ftXoKD9Ob/w+Q7Y3fkO2N36zRDY/Tm/8PuioMPzoqDD81egoPxYxfD9DtjD8Q7Yw/LNENj8WMXw/6Kgw/OioMPzV6Cg/FjF8P4ybMPyMmzD89YwbPxYxfD8wjjd+MI43fhgxDj9Ob/w+jJs3foybN372jBs/Tm/8PjCOMPwwjjD8FzEOPxYxfD/oqDD86Kgw/NToKD8WMXw/jJs3foybN373jBs/Tm/8PuioN37oqDd+1egoP05v/D6MmzD8jJsw/PaMGz8WMXw/aZtTXmmbU15qahs/yKa8PsWormvFqK5rScYoP4de1z7FqFNexahTXknGKD/Iprw+aZuua2mbrmtrahs/h17XPoybMPyMmzD89YwbPxYxfD8wjjd+MI43fhgxDj9Ob/w+MI4w/DCOMPwXMQ4/FjF8P4ybN36Mmzd+9owbP05v/D7oqDD86Kgw/NToKD8WMXw/jJs3foybN373jBs/Tm/8PoybMPyMmzD89owbPxYxfD/oqDd+6Kg3ftXoKD9Ob/w+"),
+"format": 34896654455,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAAAEAAMAAAAFAAQABgAHAAgABgAJAAcACgALAAwACgANAAsADgAMAAsADgALAA8AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEA"),
+"material": SubResource("StandardMaterial3D_x4p2r"),
+"name": "WoodPack",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAD+//9/VNUAAAAAAACqKgAA//8AAKoqAAAAAP9/VNUAAAAA//9U1QAA/////1TVAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD/////AACqKv//AAD/f1TV///+//9/VNX//wAAAACqKv///////1TV//8AAP//VNX//wAAAAD/PwAAAAD/f/8///8AAP9//z8AAAAAAAD/PwAA//8AAAAA///+//9/AAAAAP7//38AAP////8AAAAAAAD//////7///wAA////vwAAAAD///+//////////7///wAA////vwAAAAD/f/+/AAAAAP///7///wAA/3//vwAA///////////+//9//////////////wAA/v//f///VNVU1VTVVNVU1VTVVNVU1VTVVNVU1VTV/z//v/8//7//P/+//z//v6oqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKgAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+//3//f/9//3//f/9//3//fwAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_uqcix")
+
+[node name="WoodL2" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+collision_layer = 32
+collision_mask = 5411
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ceevp")
+
+[node name="WoodL2_WoodPack_0" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_kld1t")
+skeleton = NodePath("")
